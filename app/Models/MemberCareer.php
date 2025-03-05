@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MemberCareer extends Model
 {
-    //
+    protected $guarded = [];
 }

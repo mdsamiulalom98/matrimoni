@@ -84,6 +84,8 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('stock-check', [FrontendController::class, 'stock_check'])->name('stock_check');
     Route::get('/payment-success', [FrontEndController::class, 'payment_success'])->name('payment_success');
     Route::get('/payment-cancel', [FrontEndController::class, 'payment_cancel'])->name('payment_cancel');
+    Route::get('member/register', [FrontendController::class, 'register'])->name('member.register');
+    Route::get('member/login', [FrontendController::class, 'login'])->name('member.login');
     Route::post('/member/register-post', [MemberController::class, 'register'])->name('member_register');
     Route::get('/member/verify', [MemberController::class, 'memberVerifyForm'])->name('verify_form');
 });
@@ -111,9 +113,7 @@ Route::group(['prefix' => 'customer', 'namespace' => 'Frontend', 'middleware' =>
 });
 // member normal routes
 Route::group(['prefix' => 'member', 'namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {
-    Route::get('/login', [MemberController::class, 'login'])->name('member.login');
     Route::post('/signin', [MemberController::class, 'signin'])->name('member.signin');
-    Route::get('/register', [MemberController::class, 'register'])->name('member.register');
     Route::post('/store', [MemberController::class, 'store'])->name('member.store');
     Route::get('/verify', [MemberController::class, 'verify'])->name('member.verify');
     Route::post('/verify-account', [MemberController::class, 'account_verify'])->name('member.account.verify');

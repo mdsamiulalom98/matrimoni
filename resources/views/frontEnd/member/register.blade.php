@@ -39,7 +39,15 @@
                         <!--    @enderror-->
                         <!--</div>-->
                         <!-- col-end -->
-
+                        <div class="form-group mb-4">
+                            <label for="password"> Password * </label>
+                            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Choose a password " name="password" value="{{ old('password') }}" required>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <!-- col-end -->
                         <button class="submit-btn mt-4">Submit</button>
                          <div class="register-now no-account">
@@ -61,25 +69,9 @@
                     <h2>Create a New Profile</h2>
                     <p class="info-warning"><strong>Caution!</strong> Please fill in all required fields (marked with *).</p>
 
-                    <form action="{{ route('member.updateprofile') }}" name="editForm" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('member_register') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Basic Information -->
-                        @isset($memberInfo)
-                            <input type="hidden" name="memberinfo" value="{{ $memberInfo->id }}" />
-                        @endisset
-                        @isset($memberCareer)
-                            <input type="hidden" name="membercareer" value="{{ $memberCareer->id }}" />
-                        @endisset
-                        @isset($memberEducation)
-                            <input type="hidden" name="membereducation" value="{{ $memberEducation->id }}" />
-                        @endisset
-                        @isset($memberLocation)
-                            <input type="hidden" name="memberlocation" value="{{ $memberLocation->id }}" />
-                        @endisset
-                        @isset($memberImage)
-                            <input type="hidden" name="memberimage" value="{{ $memberImage->id }}" />
-                        @endisset
-
                         <fieldset>
                             <legend>Basic Information</legend>
                             <div class="form-group">
@@ -96,16 +88,18 @@
                             </div>
                             <div class="form-group">
                                 <label>Candidate First Name *</label>
-                                <input type="text" name="name" value="{{ $member->name }}" placeholder="Full Name"
-                                    required>
+                                <input type="text" name="first_name" placeholder="First Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Candidate Last Name *</label>
+                                <input type="text" name="last_name" placeholder="Last Name" required>
                             </div>
                             <div class="form-group">
                                 <label>Community / Religion *</label>
                                 <select name="religion_id">
                                     <option value="">Select Religion</option>
                                     @foreach ($religions as $religion)
-                                        <option {{ $memberInfo->religion_id == $religion->id ? 'selected' : '' }}
-                                            value="{{ $religion->id }}">{{ $religion->title }}</option>
+                                        <option value="{{ $religion->id }}">{{ $religion->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -119,15 +113,13 @@
                                             $looplimit = $currentYear - 18;
                                         @endphp
                                         @for ($i = $looplimit; $i >= 1920; $i--)
-                                            <option value="{{ $i }}">{{ $i }}</option>
+                                            <option @if ($i < 10) value="0{{ $i }}" @else value="{{ $i }}" @endif>{{ $i }}</option>
                                         @endfor
                                     </select>
                                     <select name="month">
                                         <option value="">Month</option>
                                         @foreach ($months as $month)
-                                            <option
-                                                @if ($month->id < 10) value="0{{ $month->id }}" @else value="{{ $month->id }}" @endif
-                                                value="{{ $month->month }}">{{ $month->title }}</option>
+                                            <option value="{{ $month->month }}">{{ $month->title }}</option>
                                         @endforeach
                                     </select>
                                     <select name="day">
@@ -146,8 +138,7 @@
                                 <select name="education_id">
                                     <option value="">Select Education</option>
                                     @foreach ($educations as $education)
-                                        <option {{ $memberEducation->education_id == $education->id ? 'selected' : '' }}
-                                            value="{{ $education->id }}">{{ $education->title }}</option>
+                                        <option value="{{ $education->id }}">{{ $education->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -156,8 +147,7 @@
                                 <select name="profession_id">
                                     <option value="">Select Profession</option>
                                     @foreach ($professions as $profession)
-                                        <option {{ $memberCareer->profession_id == $profession->id ? 'selected' : '' }}
-                                            value="{{ $profession->id }}">{{ $profession->title }}</option>
+                                        <option value="{{ $profession->id }}">{{ $profession->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -170,8 +160,7 @@
                                 <label>Country *</label>
                                 <select name="country_id">
                                     @foreach ($countries as $country)
-                                        <option {{ $memberInfo->country_id == $country->id ? 'selected' : '' }}
-                                            value="{{ $country->id }}">{{ $country->title }}</option>
+                                        <option value="{{ $country->id }}">{{ $country->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -180,8 +169,7 @@
                                 <select name="present_division">
                                     <option value="">Select Division</option>
                                     @foreach ($divisions as $division)
-                                        <option {{ $memberLocation->present_division == $division->id ? 'selected' : '' }}
-                                            value="{{ $division->id }}">{{ $division->title }}</option>
+                                        <option value="{{ $division->id }}">{{ $division->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -190,8 +178,7 @@
                                 <select name="present_district">
                                     <option value="">Select District</option>
                                     @foreach ($districts as $district)
-                                        <option {{ $memberLocation->present_district == $district->id ? 'selected' : '' }}
-                                            value="{{ $district->id }}">{{ $district->title }}</option>
+                                        <option value="{{ $district->id }}">{{ $district->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -200,23 +187,20 @@
                                 <select name="present_upazila">
                                     <option value="">Select Upazila</option>
                                     @foreach ($upazilas as $upazila)
-                                        <option {{ $memberLocation->present_upazila == $upazila->id ? 'selected' : '' }}
-                                            value="{{ $upazila->id }}">{{ $upazila->title }}</option>
+                                        <option value="{{ $upazila->id }}">{{ $upazila->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Village / Area *</label>
-                                <input type="text" value="{{ $memberLocation->present_area }}" name="present_area"
-                                    placeholder="Enter area name" required>
+                                <input type="text" name="present_area" placeholder="Enter area name" required>
                             </div>
                             <div class="form-group">
                                 <label>Residency Status *</label>
                                 <select name="residency_id">
                                     <option value="">Select Residency</option>
                                     @foreach ($countries as $country)
-                                        <option {{ $memberInfo->residency_id == $country->id ? 'selected' : '' }}
-                                            value="{{ $country->id }}">{{ $country->title }}</option>
+                                        <option value="{{ $country->id }}">{{ $country->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -227,21 +211,30 @@
                             <legend>Account Information</legend>
                             <div class="form-group">
                                 <label>Email Address *</label>
-                                <input name="email" type="email" value="{{ $member->email }}"
-                                    placeholder="Email address" required>
+                                <input name="email" type="email" placeholder="Email address" required>
                             </div>
-
+                            <div class="form-group">
+                                <label>Confirm Email Address *</label>
+                                <input name="confirm_email" type="email" placeholder="Confirm email address" required>
+                            </div>
                             <div class="form-group">
                                 <label>Candidate Phone Number *</label>
-                                <input name="phone" type="tel" value="{{ $member->phone }}"
-                                    placeholder="Phone number" required>
+                                <input name="phone" type="tel" placeholder="Phone number" required>
                             </div>
                             <div class="form-group">
                                 <label>Guardian Phone Number *</label>
-                                <input name="guardian_phone" value="{{ $memberInfo->guardian_phone }}" type="tel"
-                                    placeholder="Guardian phone number" required>
+                                <input name="guardian_phone" type="tel" placeholder="Guardian phone number" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password *</label>
+                                <input name="password" type="password" placeholder="Enter password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password *</label>
+                                <input name="confirm_password" type="password" placeholder="Confirm password" required>
                             </div>
                         </fieldset>
+
                         <fieldset>
                             <div class="">
                                 <p class="max-image-text">Upload your 3 Photos</p>
@@ -334,16 +327,5 @@
         $("#image_three").change(function() {
             previewImage(this, "#preview_three");
         });
-    </script>
-    <script type="text/javascript">
-        @php
-            $day = date('d', strtotime($memberInfo->dob));
-            $month = date('m', strtotime($memberInfo->dob));
-            $year = date('Y', strtotime($memberInfo->dob));
-        @endphp
-
-        document.forms['editForm'].elements['day'].value = "{{ $day }}";
-        document.forms['editForm'].elements['month'].value = "{{ $month }}";
-        document.forms['editForm'].elements['year'].value = "{{ $year }}";
     </script>
 @endpush

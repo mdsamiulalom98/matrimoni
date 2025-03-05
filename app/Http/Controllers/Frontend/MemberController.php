@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Intervention\Image\Facades\Image;
 use App\Models\Member;
 use App\Models\MemberInfo;
 use App\Models\MemberCareer;
 use App\Models\MemberEducation;
 use App\Models\MemberLocation;
+use App\Models\MemberImage;
 use App\Models\Monthname;
 use App\Models\Education;
 use App\Models\Religion;
@@ -26,10 +28,16 @@ use DateTime;
 
 class MemberController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('member', ['except' => ['register', 'signin']]);
+    }
     public function account()
     {
         return view('frontEnd.member.account');
     }
+
     public function register(Request $request)
     {
         $memberPhone = Member::where('phone', $request->phone)->first();
@@ -38,34 +46,34 @@ class MemberController extends Controller
             return redirect()->back();
         }
 
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'password' => 'required',
-            'confirm_password' => 'required',
-            'email' => 'required',
-            'confirm_email' => 'required',
-            'present_upazila' => 'required',
-            'present_area' => 'required',
-            'present_district' => 'required',
-            'present_division' => 'required',
-            'description' => 'required',
-            'residency_id' => 'required',
-            'religion_id' => 'required',
-            'profession_id' => 'required',
-            'gender' => 'required',
-            'inch' => 'required',
-            'feet' => 'required',
-            'year' => 'required',
-            'month' => 'required',
-            'day' => 'required',
-            'country_id' => 'required',
-            'image_one' => 'required',
-            'image_two' => 'required',
-            'image_three' => 'required',
-            'phone' => 'required|unique:members|digits:11',
-            'guardian_phone' => 'required',
-        ]);
+        // $request->validate([
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'password' => 'required',
+        //     'confirm_password' => 'required',
+        //     'email' => 'required',
+        //     'confirm_email' => 'required',
+        //     'present_upazila' => 'required',
+        //     'present_area' => 'required',
+        //     'present_district' => 'required',
+        //     'present_division' => 'required',
+        //     'description' => 'required',
+        //     'residency_id' => 'required',
+        //     'religion_id' => 'required',
+        //     'profession_id' => 'required',
+        //     'gender' => 'required',
+        //     'inch' => 'required',
+        //     'feet' => 'required',
+        //     'year' => 'required',
+        //     'month' => 'required',
+        //     'day' => 'required',
+        //     'country_id' => 'required',
+        //     'image_one' => 'required',
+        //     'image_two' => 'required',
+        //     'image_three' => 'required',
+        //     'phone' => 'required|unique:members|digits:11',
+        //     'guardian_phone' => 'required',
+        // ]);
         $verifyToken = rand(1111, 9999);
         $full_name = $request->first_name . ' ' . $request->last_name;
         $store_data = new Member();
@@ -103,6 +111,7 @@ class MemberController extends Controller
         $store_info->residency_id = $request->residency_id;
         $store_info->country_id = $request->country_id;
         $store_info->religion_id = $request->religion_id;
+        $store_info->guardian_phone = $request->guardian_phone;
         $store_info->dob = $dateofbirth;
         $store_info->age = $age;
         $store_info->save();
@@ -127,6 +136,71 @@ class MemberController extends Controller
         $store_location->present_area = $request->present_area;
         $store_location->save();
 
+        // member image information
+
+        // image with intervention
+        $image = $request->file('image_one');
+        $name = time() . '-' . $image->getClientOriginalName();
+        $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+        $name = strtolower(preg_replace('/\s+/', '-', $name));
+        $uploadpath = 'public/uploads/member/';
+        $imageUrl = $uploadpath . $name;
+        $img = Image::make($image->getRealPath());
+        $img->encode('webp', 90);
+        $width = 300;
+        $height = 300;
+
+        $img->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
+        $img->save($imageUrl);
+
+        // image with intervention
+        $image2 = $request->file('image_two');
+        $name2 = time() . '-' . $image2->getClientOriginalName();
+        $name2 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name2);
+        $name2 = strtolower(preg_replace('/\s+/', '-', $name2));
+        $uploadpath2 = 'public/uploads/member/';
+        $imageUrl2 = $uploadpath2 . $name2;
+        $img2 = Image::make($image2->getRealPath());
+        $img2->encode('webp', 90);
+        $width2 = 300;
+        $height2 = 300;
+        $img2->resize($width2, $height2, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $img2->resizeCanvas($width2, $height2, 'center', false, '#ffffff');
+        $img2->save($imageUrl2);
+
+
+        // image with intervention
+        $image3 = $request->file('image_three');
+        $name3 = time() . '-' . $image3->getClientOriginalName();
+        $name3 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name3);
+        $name3 = strtolower(preg_replace('/\s+/', '-', $name3));
+        $uploadpath3 = 'public/uploads/member/';
+        $imageUrl3 = $uploadpath3 . $name3;
+        $img3 = Image::make($image3->getRealPath());
+        $img3->encode('webp', 90);
+        $width3 = 300;
+        $height3 = 300;
+        $img3->resize($width3, $height3, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $img3->resizeCanvas($width3, $height3, 'center', false, '#ffffff');
+        $img3->save($imageUrl3);
+
+        $store_memberimage = new MemberImage();
+        $store_memberimage->member_id = $store_data->id;
+        $store_memberimage->image_one = $imageUrl;
+        $store_memberimage->image_two = $imageUrl2;
+        $store_memberimage->image_three = $imageUrl3;
+        $store_memberimage->save();
+
         // member id put
         Session::put('initpassword', $request->password);
         Session::put('phoneverify', $request->phone);
@@ -137,10 +211,9 @@ class MemberController extends Controller
         Toastr::success('Your account has been registered');
         return redirect()->back();
     }
-    public function login()
-    {
-        return view('frontEnd.member.login');
-    }
+
+
+
 
     public function signin(Request $request)
     {
@@ -238,6 +311,7 @@ class MemberController extends Controller
         $memberCareer = MemberCareer::where('member_id', $member->id)->first();
         $memberEducation = MemberEducation::where('member_id', $member->id)->first();
         $memberLocation = MemberLocation::where('member_id', $member->id)->first();
+        $memberImage = MemberImage::where('member_id', $member->id)->first();
         $months = Monthname::all();
         $religions = Religion::where('status', 1)->get();
         $educations = Education::where('status', 1)->get();
@@ -246,56 +320,47 @@ class MemberController extends Controller
         $divisions = Division::where('status', 1)->get();
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
-        return view('frontEnd.member.editprofile', compact('member', 'memberInfo', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas', 'memberInfo', 'memberCareer', 'memberEducation', 'memberLocation'));
+        return view('frontEnd.member.editprofile', compact('member', 'memberInfo', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas', 'memberInfo', 'memberCareer', 'memberEducation', 'memberLocation', 'memberImage'));
     }
 
     public function updateProfile(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'password' => 'required',
-            'confirm_password' => 'required',
-            'email' => 'required',
-            'confirm_email' => 'required',
-            'present_upazila' => 'required',
-            'present_area' => 'required',
-            'present_district' => 'required',
-            'present_division' => 'required',
-            'description' => 'required',
-            'residency_id' => 'required',
-            'religion_id' => 'required',
-            'profession_id' => 'required',
-            'gender' => 'required',
-            'inch' => 'required',
-            'feet' => 'required',
-            'year' => 'required',
-            'month' => 'required',
-            'day' => 'required',
-            'country_id' => 'required',
-            'image_one' => 'required',
-            'image_two' => 'required',
-            'image_three' => 'required',
-            'phone' => 'required|unique:members|digits:11',
-            'guardian_phone' => 'required',
-        ]);
+        // return $request->all();
+        // $request->validate([
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'password' => 'required',
+        //     'confirm_password' => 'required',
+        //     'email' => 'required',
+        //     'confirm_email' => 'required',
+        //     'present_upazila' => 'required',
+        //     'present_area' => 'required',
+        //     'present_district' => 'required',
+        //     'present_division' => 'required',
+        //     'description' => 'required',
+        //     'residency_id' => 'required',
+        //     'religion_id' => 'required',
+        //     'profession_id' => 'required',
+        //     'gender' => 'required',
+        //     'inch' => 'required',
+        //     'feet' => 'required',
+        //     'year' => 'required',
+        //     'month' => 'required',
+        //     'day' => 'required',
+        //     'country_id' => 'required',
+        //     'image_one' => 'required',
+        //     'image_two' => 'required',
+        //     'image_three' => 'required',
+        //     'phone' => 'required|unique:members|digits:11',
+        //     'guardian_phone' => 'required',
+        // ]);
         $memberId = Auth::guard('member')->user()->id;
+
         $memberInfo = Member::where('id', $memberId)->first();
-        $verifyToken = rand(1111, 9999);
-        $full_name = $request->first_name . ' ' . $request->last_name;
-        $store_data = new Member();
-        $store_data->name = $full_name;
-        $store_data->member_id = Str::random(16);
-        $store_data->phone = $request->phone;
-        $store_data->gender = $request->gender;
-        $store_data->verifyToken = $verifyToken;
-        $store_data->status = 0;
-        $store_data->publish = 0;
-        $store_data->premium = 0;
-        $store_data->premium_date = 0;
-        $store_data->password = bcrypt(request('password'));
-        $store_data->save();
-        $memberId = $store_data->id;
+        $memberInfo->name = $request->name;
+        $memberInfo->phone = $request->phone;
+        $memberInfo->email = $request->email;
+        $memberInfo->save();
 
         $bdate = $request->day;
         $bmonth = $request->month;
@@ -313,36 +378,137 @@ class MemberController extends Controller
         $age = $ageInterval->y;
 
         // basic information
-        $store_info = new MemberInfo();
-        $store_info->member_id = $memberId;
-        $store_info->residency_id = $request->residency_id;
-        $store_info->country_id = $request->country_id;
-        $store_info->religion_id = $request->religion_id;
-        $store_info->dob = $dateofbirth;
-        $store_info->age = $age;
-        $store_info->save();
+        if (!empty($request->memberinfo) && is_numeric($request->memberinfo)) {
+            $update_memberinfo = MemberInfo::find($request->memberinfo);
+        } else {
+            $update_memberinfo = new MemberInfo();
+        }
+        $update_memberinfo->member_id = $memberId;
+        $update_memberinfo->residency_id = $request->residency_id;
+        $update_memberinfo->country_id = $request->country_id;
+        $update_memberinfo->religion_id = $request->religion_id;
+        $update_memberinfo->guardian_phone = $request->guardian_phone;
+        $update_memberinfo->dob = $dateofbirth;
+        $update_memberinfo->age = $age;
+        $update_memberinfo->save();
 
         // eduction and career information
-        $store_career = new MemberCareer();
-        $store_career->member_id = $memberId;
-        $store_career->profession_id = $request->profession_id;
-        $store_career->save();
+        if (!empty($request->membercareer) && is_numeric($request->membercareer)) {
+            $update_membercareer = MemberCareer::find($request->membercareer);
+        } else {
+            $update_membercareer = new MemberCareer();
+        }
+        $update_membercareer->member_id = $memberId;
+        $update_membercareer->profession_id = $request->profession_id;
+        $update_membercareer->save();
 
-        $store_education = new MemberEducation();
-        $store_education->member_id = $memberId;
-        $store_education->education_id = $request->education_id;
-        $store_education->save();
+        if (!empty($request->membereducation) && is_numeric($request->membereducation)) {
+            $update_membereducation = MemberEducation::find($request->membereducation);
+        } else {
+            $update_membereducation = new MemberEducation();
+        }
+        $update_membereducation->member_id = $memberId;
+        $update_membereducation->education_id = $request->education_id;
+        $update_membereducation->save();
 
         // member image information
-        $store_location = new MemberLocation();
-        $store_location->member_id = $memberId;
-        $store_location->present_district = $request->present_district;
-        $store_location->present_upazila = $request->present_upazila;
-        $store_location->present_division = $request->present_division;
-        $store_location->present_area = $request->present_area;
-        $store_location->save();
+        if (!empty($request->memberlocation) && is_numeric($request->memberlocation)) {
+            $update_memberlocation = MemberLocation::find($request->memberlocation);
+        } else {
+            $update_memberlocation = new MemberLocation();
+        }
+        $update_memberlocation->member_id = $memberId;
+        $update_memberlocation->present_district = $request->present_district;
+        $update_memberlocation->present_upazila = $request->present_upazila;
+        $update_memberlocation->present_division = $request->present_division;
+        $update_memberlocation->present_area = $request->present_area;
+        $update_memberlocation->save();
 
-        Session::forget('admin_login');
+        if (!empty($request->memberimage) && is_numeric($request->memberimage)) {
+            $update_memberimage = MemberImage::find($request->memberimage);
+            // return $update_memberimage;
+        } else {
+            $update_memberimage = new MemberImage();
+        }
+        // member image information
+        $image = $request->file('image_one');
+        if ($image) {
+            // image with intervention
+            $image = $request->file('image_one');
+            $name = time() . '-' . $image->getClientOriginalName();
+            $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+            $name = strtolower(preg_replace('/\s+/', '-', $name));
+            $uploadpath = 'public/uploads/member/';
+            $imageUrl = $uploadpath . $name;
+            $img = Image::make($image->getRealPath());
+            $img->encode('webp', 90);
+            $width = 300;
+            $height = 300;
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
+            $img->save($imageUrl);
+        } else {
+            $imageUrl = $update_memberimage->image_one;
+        }
+
+        // member image information
+        $image2 = $request->file('image_two');
+        if ($image2) {
+            // image with intervention
+            $image2 = $request->file('image_two');
+            $name2 = time() . '-' . $image2->getClientOriginalName();
+            $name2 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name2);
+            $name2 = strtolower(preg_replace('/\s+/', '-', $name2));
+            $uploadpath2 = 'public/uploads/member/';
+            $imageUrl2 = $uploadpath2 . $name2;
+            $img2 = Image::make($image2->getRealPath());
+            $img2->encode('webp', 90);
+            $width2 = 300;
+            $height2 = 300;
+            $img2->resize($width2, $height2, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img2->resizeCanvas($width2, $height2, 'center', false, '#ffffff');
+            $img2->save($imageUrl2);
+        } else {
+            $imageUrl2 = $update_memberimage->image_two;
+        }
+
+        // member image information
+        $image3 = $request->file('image_three');
+        if ($image3) {
+            // image with intervention
+            $image3 = $request->file('image_three');
+            $name3 = time() . '-' . $image3->getClientOriginalName();
+            $name3 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name3);
+            $name3 = strtolower(preg_replace('/\s+/', '-', $name3));
+            $uploadpath3 = 'public/uploads/member/';
+            $imageUrl3 = $uploadpath3 . $name3;
+            $img3 = Image::make($image3->getRealPath());
+            $img3->encode('webp', 90);
+            $width3 = 300;
+            $height3 = 300;
+            $img3->resize($width3, $height3, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img3->resizeCanvas($width3, $height3, 'center', false, '#ffffff');
+            $img3->save($imageUrl3);
+        } else {
+            $imageUrl3 = $update_memberimage->image_three;
+        }
+
+        $update_memberimage->member_id = $memberId;
+        $update_memberimage->image_one = $imageUrl;
+        $update_memberimage->image_two = $imageUrl2;
+        $update_memberimage->image_three = $imageUrl3;
+        // return $update_memberimage;
+        $update_memberimage->save();
+
         Toastr::success('আপনার সংশোধন সফল হয়েছে');
         return redirect()->route('member.editprofile');
     }

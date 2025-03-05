@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MemberLocation extends Model
 {
-    //
+    protected $guarded = [];
 }

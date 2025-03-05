@@ -38,37 +38,39 @@ use DB;
 use Log;
 class FrontendController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $sliders = Banner::where(['status' => 1, 'category_id' => 1])
             ->select('id', 'image', 'link')
             ->get();
 
         $sliderrightads = Banner::where(['status' => 1, 'category_id' => 2])
-        ->select('id', 'image', 'link')
-        ->limit(2)
-        ->get();
+            ->select('id', 'image', 'link')
+            ->limit(2)
+            ->get();
 
         $hotdeal_top = Product::where(['status' => 1, 'topsale' => 1])
-        ->orderBy('id', 'DESC')
-        ->select('id', 'name', 'slug', 'new_price', 'old_price', 'type','category_id')
-        ->withCount('variable')
-        ->limit(12)
-        ->get();
+            ->orderBy('id', 'DESC')
+            ->select('id', 'name', 'slug', 'new_price', 'old_price', 'type', 'category_id')
+            ->withCount('variable')
+            ->limit(12)
+            ->get();
 
         $homecategory = Category::where(['front_view' => 1, 'status' => 1])
-        ->select('id','name','slug','front_view','status')
-        ->orderBy('id', 'ASC')
-        ->get();
+            ->select('id', 'name', 'slug', 'front_view', 'status')
+            ->orderBy('id', 'ASC')
+            ->get();
 
         $brands = Brand::where(['status' => 1])
-        ->orderBy('id', 'ASC')
-        ->get();
+            ->orderBy('id', 'ASC')
+            ->get();
 
-        return view('frontEnd.layouts.pages.index', compact('sliders', 'hotdeal_top', 'homecategory','sliderrightads','brands'));
+        return view('frontEnd.layouts.pages.index', compact('sliders', 'hotdeal_top', 'homecategory', 'sliderrightads', 'brands'));
     }
 
-    public function category($slug, Request $request){
+    public function category($slug, Request $request)
+    {
 
         $category = Category::where(['slug' => $slug, 'status' => 1])->first();
         $products = Product::where(['status' => 1, 'category_id' => $category->id])
@@ -115,7 +117,7 @@ class FrontendController extends Controller
         }
 
         $products = $products->paginate(30)->withQueryString();
-        
+
         return view('frontEnd.layouts.pages.subcategory', compact('subcategory', 'products'));
     }
 
@@ -146,48 +148,53 @@ class FrontendController extends Controller
         return view('frontEnd.layouts.pages.childcategory', compact('childcategory', 'products'));
     }
 
-    public function members(){
+    public function members()
+    {
         $products = Product::where(['status' => 1])->limit(10)->get();
-          
+
         return view('frontEnd.layouts.pages.members', compact('products'));
     }
 
-    public function packages(){
+    public function packages()
+    {
         $products = Product::where(['status' => 1])->limit(10)->get();
-          
+
         return view('frontEnd.layouts.pages.packages', compact('products'));
     }
-    public function joinAgent(){
+    public function joinAgent()
+    {
         $products = Product::where(['status' => 1])->limit(10)->get();
-          
+
         return view('frontEnd.layouts.pages.agentform', compact('products'));
     }
-    public function aboutUs(){ 
+    public function aboutUs()
+    {
         return view('frontEnd.layouts.pages.about');
     }
 
 
-    public function bestdeals(Request $request){
+    public function bestdeals(Request $request)
+    {
 
         $products = Product::where(['status' => 1, 'topsale' => 1])
-        ->orderBy('id', 'DESC')
-        ->select('id', 'name', 'slug', 'new_price', 'old_price', 'type')
-        ->withCount('variable');
+            ->orderBy('id', 'DESC')
+            ->select('id', 'name', 'slug', 'new_price', 'old_price', 'type')
+            ->withCount('variable');
 
         if ($request->sort == 1) {
-        $products = $products->orderBy('created_at', 'desc');
-            } elseif ($request->sort == 2) {
-                $products = $products->orderBy('created_at', 'asc');
-            } elseif ($request->sort == 3) {
-                $products = $products->orderBy('new_price', 'desc');
-            } elseif ($request->sort == 4) {
-                $products = $products->orderBy('new_price', 'asc');
-            } elseif ($request->sort == 5) {
-                $products = $products->orderBy('name', 'asc');
-            } elseif ($request->sort == 6) {
-                $products = $products->orderBy('name', 'desc');
-            } else {
-                $products = $products->latest();
+            $products = $products->orderBy('created_at', 'desc');
+        } elseif ($request->sort == 2) {
+            $products = $products->orderBy('created_at', 'asc');
+        } elseif ($request->sort == 3) {
+            $products = $products->orderBy('new_price', 'desc');
+        } elseif ($request->sort == 4) {
+            $products = $products->orderBy('new_price', 'asc');
+        } elseif ($request->sort == 5) {
+            $products = $products->orderBy('name', 'asc');
+        } elseif ($request->sort == 6) {
+            $products = $products->orderBy('name', 'desc');
+        } else {
+            $products = $products->latest();
         }
         $products = $products->paginate(30)->withQueryString();
 
@@ -195,7 +202,8 @@ class FrontendController extends Controller
     }
 
 
-    public function details($slug){
+    public function details($slug)
+    {
 
         $details = Product::where(['slug' => $slug, 'status' => 1])
             ->with('image', 'images', 'category', 'subcategory', 'childcategory')
@@ -279,17 +287,17 @@ class FrontendController extends Controller
         $keyword = $request->keyword;
         return view('frontEnd.layouts.pages.search', compact('products', 'keyword'));
     }
-    
-    
+
+
     public function shipping_charge(Request $request)
     {
         if ($request->id == NULL) {
             Session::put('shipping', 0);
         } else {
-           $shipping = ShippingCharge::where(['id' => $request->id])->first();
+            $shipping = ShippingCharge::where(['id' => $request->id])->first();
             Session::put('shipping', $shipping->amount);
         }
-        if($request->campaign == 1){
+        if ($request->campaign == 1) {
             $data = Cart::instance('shopping')->content();
             return view('frontEnd.layouts.ajax.cart_camp', compact('data'));
         }
@@ -312,7 +320,8 @@ class FrontendController extends Controller
         $areas = District::where(['district' => $request->id])->pluck('area_name', 'id');
         return response()->json($areas);
     }
-    public function campaign($slug, Request $request){
+    public function campaign($slug, Request $request)
+    {
 
         $campaign = Campaign::where('slug', $slug)->with('images')->first();
         $product = Product::select('id', 'name', 'slug', 'new_price', 'old_price', 'purchase_price', 'type', 'stock')->where(['id' => $campaign->product_id])->first();
@@ -365,9 +374,9 @@ class FrontendController extends Controller
         $shippingcharge = ShippingCharge::where('status', 1)->get();
         $select_charge = ShippingCharge::where('status', 1)->first();
         Session::put('shipping', $select_charge->amount);
-        return view('frontEnd.layouts.pages.campaign.campaign'.$campaign->template, compact('campaign', 'productsizes', 'productcolors', 'shippingcharge', 'old_price', 'new_price'));
-  
-       
+        return view('frontEnd.layouts.pages.campaign.campaign' . $campaign->template, compact('campaign', 'productsizes', 'productcolors', 'shippingcharge', 'old_price', 'new_price'));
+
+
     }
     public function campaign_stock(Request $request)
     {
@@ -476,16 +485,32 @@ class FrontendController extends Controller
     }
 
 
-        
 
-        // DB::listen(function ($query) {
-        //     Log::channel('test_log')->info('===== started db query ========================================');
-        //     Log::channel('test_log')->info(json_encode([
-        //         'sql' => $query->sql,
-        //         'time' => $query->time . ' ms',
-        //         'bindings' => $query->bindings,
-        //         'connection' => $query->connection,
-        //         'connectionName' => $query->connectionName,
-        //     ]));
-        // });
+
+    // DB::listen(function ($query) {
+    //     Log::channel('test_log')->info('===== started db query ========================================');
+    //     Log::channel('test_log')->info(json_encode([
+    //         'sql' => $query->sql,
+    //         'time' => $query->time . ' ms',
+    //         'bindings' => $query->bindings,
+    //         'connection' => $query->connection,
+    //         'connectionName' => $query->connectionName,
+    //     ]));
+    // });
+    public function login()
+    {
+        return view('frontEnd.member.login');
+    }
+    public function register()
+    {
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        return view('frontEnd.member.register', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    }
 }

@@ -52,7 +52,7 @@
 
                         <div class="register-now text-center mt-4">
                             <p>Don't Have An Account?
-                                <a href="{{ route('member.register') }}" class="text-primary">
+                                <a href="{{ url('member/register') }}" class="text-primary">
                                     <i data-feather="edit-3"></i> Register Now
                                 </a>
                             </p>
