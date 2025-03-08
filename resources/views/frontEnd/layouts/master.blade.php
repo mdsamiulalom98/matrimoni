@@ -25,12 +25,13 @@
         <script src="{{asset('public/frontEnd/js/jquery-3.7.1.min.js')}}"></script>
         @foreach($pixels as $pixel)
         <!-- Facebook Pixel Code -->
-
+    
         <noscript>
             <img height="1" width="1" style="display: none;" src="https://www.facebook.com/tr?id={{{$pixel->code}}}&ev=PageView&noscript=1" />
         </noscript>
         @endforeach
     </head>
+    
     <body class="gotop">
         <div  class="coupon-section alert alert-dismissible fade show" >
             <div class="container">
@@ -44,7 +45,7 @@
                                 <li><a href="#"><i class="fa-brands fa-whatsapp"></i> 017xxxxxxxxxx</a></li>
                               </ul>
                            </div>
-
+                          
                         </div>
                     </div>
                     <div class="col-sm-7">
@@ -71,6 +72,7 @@
                     <li><a href="{{route('home')}}">home</a></li>
                     <li><a href="{{route('members')}}">Members</a></li>
                     <li><a href="{{route('packages')}}">Package</a></li>
+                    <li><a href="{{route('packages')}}">Appointment</a></li>
                     <li><a href="{{route('aboutUs')}}">About Us</a></li>
                     <li><a href="{{route('contact')}}">Contact Us</a></li>
                 </ul>
@@ -82,22 +84,32 @@
                 <div class="mobile-logo">
                     <div class="menu-bar">
                         <a class="toggle">
-                            <i class="fa-solid fa-bars"></i>
+                            {{-- <i class="fa-solid fa-bars"></i> --}}
+                            <img src="{{ asset('public/frontEnd/images/menu_icon.png') }}" alt="">
                         </a>
                     </div>
                     <div class="menu-logo">
-                        <a href="{{route('home')}}"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" /></a>
-                        {{-- <a href="{{route('home')}}"><img src="{{asset($generalsetting->dark_logo)}}" alt="" /></a> --}}
+                        <img src="{{ asset('public/frontEnd/images/site-logo.png') }}" alt="">
+                        {{-- <div class="mobile_header_search">
+                            <div class="search_bar">
+                                <button type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <input type="text" placeholder="Find Your Favorite Bride and Groom....">
+                            </div>
+                            
+                        </div> --}}
                     </div>
-                    <!--<div class="menu-bag">-->
-                    <!--    <a href="{{route('customer.checkout')}}" class="margin-shopping">-->
-                    <!--        <i class="fa-solid fa-cart-shopping"></i>-->
-                    <!--        <span class="mobilecart-qty">{{Cart::instance('shopping')->count()}}</span>-->
-                    <!--    </a>-->
-                    <!--</div>-->
+                  
+                    <div class="menu-bag">
+                       <a href="#" class="margin-shopping">
+                        <i class="fa-regular fa-bell"></i>
+                            <span class="mobilecart-qty">5</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-
+            
 
             <!-- main header start -->
             <div class="main-header">
@@ -115,13 +127,14 @@
                                             <li><a href="{{route('home')}}">home</a></li>
                                             <li><a href="{{route('members')}}">Members</a></li>
                                             <li><a href="{{route('packages')}}">Package</a></li>
+                                            <li><a href="{{route('packages')}}">Appointment</a></li>
                                             <li><a href="{{route('aboutUs')}}">About Us</a></li>
                                             <li><a href="{{route('contact')}}">Contact Us</a></li>
                                         </ul>
                                     </div>
                                     <div class="header_righ">
                                         {{-- <a class="btn_comm" href="#"><i class="fa-solid fa-user"></i> Registration now</a> --}}
-                                        <a class="btn_comm2" href="{{route('member.login')}}"><i class="fa-solid fa-user"></i> Login now</a>
+                                        <a class="btn_comm2" href="{{route('customer.login')}}"><i class="fa-solid fa-user"></i> Login now</a>
                                         <a class="btn_comm" href="{{route('joinAgent')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a>
                                     </div>
                                 </div>
@@ -131,7 +144,7 @@
                 </div>
                 <!-- logo area end -->
 
-
+                
                 <!-- menu area end -->
             </div>
             <!-- main-header end -->
@@ -247,15 +260,16 @@
         <script>
             new WOW().init();
         </script>
+        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
         <script src="{{asset('public/backEnd/')}}/assets/js/toastr.min.js"></script>
         {!! Toastr::message() !!} @stack('script')
-
+       
         <!-- cart js start -->
-
+       
         </script>
         <!-- cart js end -->
         <script>

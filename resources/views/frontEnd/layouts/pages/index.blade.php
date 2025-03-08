@@ -37,488 +37,188 @@
             </div>
         </div>
         <div class="filter-container">
-
             <div class="filter-group">
-
-
                 <div class="filter_field_grid">
-                    <div class="form-group">
-                        <select class="filter-select">
-                            <option>Select Religion</option>
-                            <option>Islam</option>
-                            <option>Hindu</option>
-                            <option>Christian</option>
-                            <option>Buddhist</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <div class="age-range">
-                            <input type="number" class="age-input" value="22">
-                            <span style="color: #fff">to</span>
-                            <input type="number" class="age-input" value="27">
+                    <div class="filter_item_box">
+                        <div class="form-group">
+                            <select class="filter-select">
+                                <option>Select Religion</option>
+                                <option>Islam</option>
+                                <option>Hindu</option>
+                                <option>Christian</option>
+                                <option>Buddhist</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="age-range">
+                                <input type="number" class="age-input" value="22">
+                                <span style="color: #fff">to</span>
+                                <input type="number" class="age-input" value="27">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <select class="filter-select">
-                            <option>Select Living Country</option>
-                            <option>Bangladesh</option>
-                            <option>USA</option>
-                            <option>UK</option>
-                            <option>Canada</option>
-                            <option>Australia</option>
-                        </select>
+
+                    <div class="filter_item_box">
+                        <div class="form-group">
+                            <select class="filter-select">
+                                <option>Select Living Country</option>
+                                <option>Bangladesh</option>
+                                <option>USA</option>
+                                <option>UK</option>
+                                <option>Canada</option>
+                                <option>Australia</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="filter-select">
+                                <option>Select Profession</option>
+                                <option>Teacher</option>
+                                <option>Doctor</option>
+                                <option>House wife</option>
+                                <option>Canada</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <select class="filter-select">
-                            <option>Select Profession</option>
-                            <option>Teacher</option>
-                            <option>Doctor</option>
-                            <option>House wife</option>
-                            <option>Canada</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="filter_item_box">
                     <button class="lets-begin-btn">Let's Begin</button>
                 </div>
             </div>
         </div>
+
     </section>
 
+
+    <section class="mobile_banner">
+        <img src="{{asset('frontEnd/images/heart-1024x923.png')}}" alt="">
+        <div class="banner_bg" style="background: url('{{ asset($sliderrightads->image) }}') no-repeat center center; background-size: cover; height:450px">
+            <h2>Bangladeshi Most Trusted And Secure Matrimonial platform</h2>
+        </div>
+
+        <section class="search-section">
+           
+            <div class="container">
+              <div class="search-box">
+                <div class="search-toggle">
+                  <button class="toggle-btn active" id="brideBtn">Bride</button>
+                  <button class="toggle-btn" id="groomBtn">Groom</button>
+                </div>
+                <form>
+                  <div class="form-group">
+                    <div class="mobile_filter_flex">
+                       <div class="m_filter_left">
+                        <label>Age</label>
+                        <div class="age-box">
+                          <select>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                          </select>
+                          <span>to</span>
+                          <select>
+                            <option>35</option>
+                            <option>40</option>
+                            <option>45</option>
+                          </select>
+                        </div>
+                       </div>
+                       <div class="m_filter_right">
+                        <label>Religion</label>
+                        <select>
+                          <option>- Any -</option>
+                          <option>Islam</option>
+                          <option>Hindu</option>
+                          <option>Christian</option>
+                        </select>
+                       </div>
+                    </div>
+                  </div>
+                 
+                  <button class="search-btn">Search Partner</button>
+                </form>
+              </div>
+            </div>
+          </section>
+    </section>
     
-{{-- <section class="registration_process">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="process_btn">
-                    <div class="register_btn_section">
-                        <a href="{{ route('customer.register') }}" class="register_btn">
-                            Create an Online Account
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="process_btn">
-                    <div class="register_btn_section">
-                        <a href="{{ route('customer.register') }}" class="register_btn">
-                            Create an Ofline Account
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
 
-<section class="how-it-works">
-    <div class="container">
-        <h2 style="padding: 0; color:#08b962" class="section_title">How It Works?</h2>
-        <div class="steps-wrapper">
-            <div class="step-box">
-                <div class="step-icon">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                </div>
-                <h3>Sign Up</h3>
-                <p>Create your free profile by filling up your personal details and upload your photo.</p>
-            </div>
-            <div class="step-box">
-                <div class="step-icon">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <h3>Connect</h3>
-                <p>Search & Connect with genuine profiles based on your preferences.</p>
-            </div>
-            <div class="step-box">
-                <div class="step-icon">
-                    <i class="fa-solid fa-file-video"></i>
-                </div>
-                <h3>Interact</h3>
-                <p>Start interacting with your matches through our secure communication system.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="process_btn">
-                    <div class="register_btn_section">
-                        <a href="{{ route('customer.register') }}" class="register_btn">
-                            Create an Online Account
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="process_btn">
-                    <div class="register_btn_section">
-                        <a href="{{ route('customer.register') }}" class="register_btn">
-                            Create an Ofline Account
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-    <section class="free_facility_section section-padding">
+    <section>
         <div class="container">
-            <div class="facility_heading">
-                <h2>Why Choose Us?</h2>
-                <p>"If you are unable to find your perfect life partner or can't afford to marry,
-                    <strong>We are here to help you with a kind heart."</strong>
-                </p>
-                <p>Your happiness is our responsibility ❤️</p>
-            </div>
 
-            <div class="facility_items">
-                <div class="facility_card">
-                    <i class="fas fa-phone"></i>
-                    <h3>Trusted Matrimony Platform</h3>
-                    <p>Get in touch with our support team and explain your situation.</p>
-                </div>
-
-                <div class="facility_card">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <h3>100% Verified Profiles</h3>
-                    <p>Your profile will be approved for free if your request is genuine.</p>
-                </div>
-
-                <div class="facility_card">
-                    <i class="fas fa-user-check"></i>
-                    <h3>Privacy & Security Assured</h3>
-                    <p>Connect with suitable matches without any charges.</p>
-                </div>
-
-                <div class="facility_card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Personalized Matchmaking Assistance</h3>
-                    <p>We provide direct email support for those who can't afford our services.</p>
-                </div>
-
-                <div class="facility_card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Dedicated Customer Support</h3>
-                    <p>We provide direct email support for those who can't afford our services.</p>
-                </div>
-
-            </div>
-
-            <div class="facility_contact">
-                <a href="contact" class="btn_facility">Apply for Free Service</a>
-            </div>
-        </div>
-    </section>
-
-    {{-- <section class="free_facility_section section-padding">
-        <div class="container">
-            <div class="facility_heading">
-                <h2>Free Facilities for Poor People</h2>
-                <p>"If you are unable to find your perfect life partner or can't afford to marry,
-                    <strong>We are here to help you with a kind heart."</strong>
-                </p>
-                <p>Your happiness is our responsibility ❤️</p>
-            </div>
-
-            <div class="facility_items">
-                <div class="facility_card">
-                    <i class="fas fa-phone"></i>
-                    <h3>Talk to Support</h3>
-                    <p>Get in touch with our support team and explain your situation.</p>
-                </div>
-
-                <div class="facility_card">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <h3>Free Profile Approval</h3>
-                    <p>Your profile will be approved for free if your request is genuine.</p>
-                </div>
-
-                <div class="facility_card">
-                    <i class="fas fa-user-check"></i>
-                    <h3>Unlimited Contact Access</h3>
-                    <p>Connect with suitable matches without any charges.</p>
-                </div>
-
-                <div class="facility_card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Direct Email Support</h3>
-                    <p>We provide direct email support for those who can't afford our services.</p>
-                </div>
-            </div>
-
-            <div class="facility_contact">
-                <a href="contact" class="btn_facility">Apply for Free Service</a>
-            </div>
-        </div>
-    </section> --}}
-
-    <section class="client_success_story section-padding">
-        <div class="container">
-            <h2 class="section_title">Matrimony Success Stories</h2>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="sucess_storyslider owl-carousel">
-                        @foreach ($sliders as $key => $value)
-                            <div class="story-item">
-                                <div class="story-img">
-                                    <img src="{{ asset($value->image) }}" alt="Groom">
-                                </div>
-                                <div class="story-content">
-                                    <p>"We are truly grateful to Matrimony for connecting us together."</p>
-                                    <h4>Hasan & Rima</h4>
+            <div class="free_registration_section">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="free_reg_left wow fadeInLeft">
+                            <div class="process_btn">
+                                <h5 class="register_slogan">আপনার গোপনীয়তা সুরক্ষিত রেখে পাত্র/পাত্রী খুজতে নিচের লিংকে
+                                    ক্লিক করুন।</h5>
+                                <div class="register_btn_section">
+                                    <a href="{{ route('customer.register') }}">
+                                        Create an Online Profile Register Free
+                                    </a>
+                                    {{-- <a href="{{ route('customer.register') }}" class="animationBtn2">
+                                        Create an Online Profile Register Free
+                                    </a> --}}
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="free_reg_right wow fadeInRight">
+                            <div class="process_btn">
+                                <h5 style="color:#000" class="register_slogan">আপনার গোপনীয়তা সুরক্ষিত রেখে,অনলাইনে নিজের
+                                    প্রোফাইল না দেখিয়ে পাত্র/পাত্রী খুজতে নিচের লিংকে ক্লিক করুন।</h5>
+                                <div class="register_btn_section">
+                                    <a href="{{ route('customer.register') }}">
+                                        Create an Ofline Profile Register Free
+                                    </a>
+                                    {{-- <a href="{{ route('customer.register') }}" class="animationBtn3">
+                                        Create an Ofline Profile Register Free
+                                    </a> --}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    {{--========== why choose us section ==========--}}
-
-    <section class="why-choose-us section-padding">
+    <section class="how-it-works">
         <div class="container">
-            <div class="why-choose-wrapper">
-                <div class="image-part">
-                    <img src="{{ asset('public/frontEnd/images/whychoose.png') }}" alt="Why Choose Us" />
-                </div>
-                <div class="whychoos_point">
-                    <h2 class="section_title">Why Choose Us?</h2>
-                    <ul>
-                        <li><i class="icon">✔</i> Trusted Matrimony Platform</li>
-                        <li><i class="icon">✔</i> 100% Verified Profiles</li>
-                        <li><i class="icon">✔</i> Privacy & Security Assured</li>
-                        <li><i class="icon">✔</i> Personalized Matchmaking Assistance</li>
-                        <li><i class="icon">✔</i> Seamless Communication Features</li>
-                        <li><i class="icon">✔</i> Dedicated Customer Support</li>
-                    </ul>
-                </div>
-            </div>
+         <h2 class="section_title title_pd">How It Works?</h2>
+             <div class="steps-wrapper">
+                 <div class="step-box  wow fadeOut" data-wow-duration="1.2s" data-wow-delay="0.2s">
+                     <div class="step-icon">
+                         <i class="fa-solid fa-right-to-bracket"></i>
+                     </div>
+                     <h3>Register</h3>
+                     <p>Register to our website, fill up your profile completely, and put a beautiful image on your profile.</p>
+                 </div>
+                 <div class="step-box  wow fadeOutUp" data-wow-duration="1.3s" data-wow-delay="0.4s">
+                     <div class="step-icon">
+                         <i class="fa-solid fa-user"></i>
+                     </div>
+                     <h3>Find Your Partner</h3>
+                     <p>Search your interests that you like. You'll also be recommended users based on your preferences.</p>
+                 </div>
+                 <div class="step-box  wow fadeOutUp" data-wow-duration="1.4s" data-wow-delay="0.6s">
+                     <div class="step-icon">
+                         <i class="fa-solid fa-file-video"></i>
+                     </div>
+                     <h3>Connect</h3>
+                     <p>Add friends, approach them, and chat with them. Be sure to share your audio, photo, and video too.</p>
+                 </div>
+             </div>
+             </div>
+
+             <div class="howit_works_btn">
+                <a href="">Let's Start</a>
+             </div>
         </div>
-    </section>
-
-    <section class="safety-security-tips">
-        <div class="container">
-            <h2 class="section_title">Safety & Security Tips</h2>
-            <div class="security-wrapper">
-                <div class="security-step">
-                    <div class="icon">
-                        <img src="{{ asset('public/frontEnd/images/lock.png') }}" alt="Lock Profile">
-                    </div>
-                    <h3>Lock Your Profile</h3>
-                    <p>Use the **Profile Lock** feature to hide your personal information from unauthorized users.</p>
-                </div>
-    
-                <div class="security-step">
-                    <div class="icon">
-                        <img src="{{ asset('public/frontEnd/images/chat.png') }}" alt="Chat Carefully">
-                    </div>
-                    <h3>Don't Share Personal Information</h3>
-                    <p>Never share your **Phone Number, Address, or Bank Details** without your permission.</p>
-                </div>
-    
-                <div class="security-step">
-                    <div class="icon">
-                        <img src="{{ asset('public/frontEnd/images/report.png') }}" alt="Report Users">
-                    </div>
-                    <h3>Report Suspicious Profiles</h3>
-                    <p>If you find any **fake profile** or suspicious user, report them to our support team.</p>
-                </div>
-    
-                <div class="security-step">
-                    <div class="icon">
-                        <img src="{{ asset('public/frontEnd/images/verify.png') }}" alt="Verified Profiles">
-                    </div>
-                    <h3>Connect with Verified Profiles</h3>
-                    <p>Only communicate with **100% Verified Profiles** for better safety.</p>
-                </div>
-    
-                <div class="security-step">
-                    <div class="icon">
-                        <img src="{{ asset('public/frontEnd/images/meet.png') }}" alt="Meet Safely">
-                    </div>
-                    <h3>Meet in Public Places</h3>
-                    <p>Always arrange your first meeting in a **Public Place** to ensure your safety.</p>
-                </div>
-    
-                <div class="security-step">
-                    <div class="icon">
-                        <img src="{{ asset('public/frontEnd/images/privacy.png') }}" alt="Privacy Control">
-                    </div>
-                    <h3>Privacy Control Settings</h3>
-                    <p>Use our **Privacy Settings** to control who can see your profile and photos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-
-    {{-- <section class="security-tips">
-        <div class="container">
-            <h2>Safety & Security tips</h2>
-            <p><strong>Follow these tips to stay safe in your matchmaking journey</strong></p>
-            <p>
-                Explore Matrimony.com's Safe Matrimony initiative. Beware of online matrimonial frauds; Be cautious
-                during your journey. Find more details below.
-            </p>
-
-            <h3>How to stay safe</h3>
-
-            <div class="security-cards">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="images/icon-1.png" alt="Safe Public Meeting">
-                    </div>
-                    <p>Meet an interested member only in a safe public place. Inform your family/friends about the meeting
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-image">
-                        <img src="https://imgs.bharatmatrimony.com/webapp-assets/revamp-images/newsafety2.png"
-                            alt="OTP Security">
-                    </div>
-                    <p>Never share your OTP, account password, or account details with anyone</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-image">
-                        <img src="images/icon-3.png" alt="Unknown Numbers">
-                    </div>
-                    <p>Beware of members who call you from different numbers and don't give you a proper contact no</p>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-<section class="why-choose-us section-padding">
-    <div class="container">
-        <div class="why-choose-wrapper">
-            <div class="whychoos_point">
-                <h2 style="color: #08b962" class="section_title">How to Create an account?</h2>
-                <ul>
-                    <li><i class="icon">✅</i> Visit Registration Page</li>
-                    <li><i class="icon">✅</i> Fill Basic Information</li>
-                    <li><i class="icon">✅</i> Verify Your Account</li>
-                    <li><i class="icon">✅</i> Complete Profile</li>
-                    <li><i class="icon">✅</i> Profile Locking</li>
-                    <li><i class="icon">✅</i> Seamless Communication Features</li>
-                </ul>
-            </div>
-            <div class="image-part">
-                <img src="{{ asset('public/frontEnd/images/create_pro.webp') }}" alt="Why Choose Us" />
-            </div>
-        </div>
-        <div class="cta-section">
-            <div class="register_btn_section">
-                <a href="{{ route('customer.register') }}" class="register_btn">
-                    Registration Now
-                </a>
-            </div>
-            <p class="support-text">Need help? <a href="#">Chat with our support team</a></p>
-        </div>
-    </div>
-</section>
-
-
-    <section class="pricing-section">
-        <div class="pricing-container">
-            <h2 style="padding: 0" class="section_title">Find Your Perfect Match</h2>
-            <p class="section-subtitle">Start your journey with our flexible membership options</p>
-
-            <div class="pricing-grid">
-                <!-- Free Plan -->
-                <div class="pricing-card free-plan">
-                    <div class="plan-header">
-                        <h3>Starter Plan</h3>
-                        <div class="price">FREE<span class="duration">forever</span></div>
-                    </div>
-                    <ul class="features-list">
-                        <li><i class="fas fa-search"></i> Unlimited Profile Search</li>
-                        <li><i class="fas fa-heart"></i> Basic Match Suggestions</li>
-                        <li><i class="fas fa-image"></i> Photo Gallery Access</li>
-                        <li><i class="fas fa-comment"></i> Limited Messaging</li>
-                    </ul>
-                    <button class="plan-cta">Get Started</button>
-                </div>
-
-                <!-- Premium Plan -->
-                <div class="pricing-card premium-plan">
-                    <div class="plan-badge">Most Popular</div>
-                    <div class="plan-header">
-                        <h3>Premium Connection</h3>
-                        <div class="price">$29<span class="duration">/month</span></div>
-                    </div>
-                    <ul class="features-list">
-                        <li><i class="fas fa-bolt"></i> Advanced Match Algorithm</li>
-                        <li><i class="fas fa-lock-open"></i> Full Profile Access</li>
-                        <li><i class="fas fa-video"></i> Video Chat Feature</li>
-                        <li><i class="fas fa-star"></i> Priority Listing</li>
-                        <li><i class="fas fa-shield-alt"></i> Enhanced Privacy</li>
-                    </ul>
-                    <button class="plan-cta">Upgrade Now</button>
-                </div>
-
-                <!-- VIP Plan -->
-                <div class="pricing-card vip-plan">
-                    <div class="plan-header">
-                        <h3>VIP Experience</h3>
-                        <div class="price">$99<span class="duration">/month</span></div>
-                    </div>
-                    <ul class="features-list">
-                        <li><i class="fas fa-gem"></i> Personal Matchmaker</li>
-                        <li><i class="fas fa-check-double"></i> Verified Profiles Only</li>
-                        <li><i class="fas fa-concierge-bell"></i> 24/7 Priority Support</li>
-                        <li><i class="fas fa-gift"></i> Exclusive Event Access</li>
-                        <li><i class="fas fa-plane"></i> Date Planning Service</li>
-                    </ul>
-                    <button class="plan-cta">Go Premium</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-padding">
-        <h2 style="padding:0" class="section_title">Membership</h2>
-        <p style="text-align:center;">Primarily it's free to search any profiles. <strong>Upgrade</strong> for customized search and better connection.
-        </p>
-
-        <div class="plans">
-            <div class="plan free">
-                <h2>FREE</h2>
-                <ul>
-                    <li><i>✔</i> Search Profiles</li>
-                    <li><i>✔</i> Shortlist & Send Interest</li>
-                    <li><i>✔</i> Photo Album</li>
-                    <li><i>✖</i> Chat & Messaging</li>
-                    <li><i>✖</i> View contacts of members you like</li>
-                    <li><i>✖</i> Priority customer support</li>
-                    <li><i>✖</i> Profile Boost</li>
-                </ul>
-                <button>Free Register</button>
-            </div>
-
-            <div class="plan paid">
-                <h2>PAID</h2>
-                <ul>
-                    <li><i>✔</i> Search Profiles</li>
-                    <li><i>✔</i> Shortlist & Send Interest</li>
-                    <li><i>✔</i> Photo Album</li>
-                    <li><i>✔</i> Chat & Messaging</li>
-                    <li><i>✔</i> View contacts of members you like</li>
-                    <li><i>✔</i> Priority customer support</li>
-                    <li><i>✔</i> Profile Boost</li>
-                </ul>
-                <button>Browse Plan</button>
-            </div>
-        </div>
-    </section>
-
-
-    <div class="register_btn_section">
-        <a href="{{ route('customer.register') }}" class="register_btn">
-            Registration Now
-        </a>
-    </div>
+     </section>
+ 
 
 
     <div class="footer-gap"></div>
@@ -532,7 +232,7 @@
             $(".main_slider").owlCarousel({
                 items: 1,
                 loop: true,
-                dots: false,
+                dots: true,
                 autoplay: true,
                 nav: true,
                 autoplayHoverPause: false,
@@ -598,4 +298,16 @@
             });
         });
     </script>
+
+    <script>
+  document.getElementById('brideBtn').addEventListener('click', function () {
+    this.classList.add('active');
+    document.getElementById('groomBtn').classList.remove('active');
+  });
+
+  document.getElementById('groomBtn').addEventListener('click', function () {
+    this.classList.add('active');
+    document.getElementById('brideBtn').classList.remove('active');
+  });
+</script>
 @endpush

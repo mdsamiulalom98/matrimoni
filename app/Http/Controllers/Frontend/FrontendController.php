@@ -45,10 +45,10 @@ class FrontendController extends Controller
             ->select('id', 'image', 'link')
             ->get();
 
-        $sliderrightads = Banner::where(['status' => 1, 'category_id' => 2])
-            ->select('id', 'image', 'link')
-            ->limit(2)
-            ->get();
+        $sliderrightads = Banner::where(['status' => 1, 'category_id' => 1])
+        ->select('id', 'image', 'link')
+        ->limit(1)
+        ->first();
 
         $hotdeal_top = Product::where(['status' => 1, 'topsale' => 1])
             ->orderBy('id', 'DESC')
