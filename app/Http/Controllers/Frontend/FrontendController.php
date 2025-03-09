@@ -33,6 +33,7 @@ use App\Models\Profession;
 use App\Models\Country;
 use App\Models\Division;
 use App\Models\Upazila;
+use App\Models\Member;
 use Cache;
 use DB;
 use Log;
@@ -150,9 +151,9 @@ class FrontendController extends Controller
 
     public function members()
     {
-        $products = Product::where(['status' => 1])->limit(10)->get();
+        $members = Member::where(['publish' => 1])->limit(10)->get();
 
-        return view('frontEnd.layouts.pages.members', compact('products'));
+        return view('frontEnd.layouts.pages.members', compact('members'));
     }
 
     public function packages()

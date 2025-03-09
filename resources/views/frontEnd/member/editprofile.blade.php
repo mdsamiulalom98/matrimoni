@@ -243,7 +243,12 @@
                             </div>
                         </fieldset>
                         <fieldset>
-                            <div class="">
+                            <div class="position-relative">
+                                <div class="profile-lock-toggle">
+                                    <input type="checkbox" name="profile_lock" id="lock_profile" {{ $member->profile_lock == 1 ? 'checked' : '' }} value="1" />
+                                    <label for="lock_profile"></label>
+                                    <p>Lock Your Account</p>
+                                </div>
                                 <p class="max-image-text">Upload your 3 Photos</p>
                                 <div class="register-image-wrapper">
                                     <div class="addphoto-flex" id="editPhotos">
@@ -298,11 +303,11 @@
                             <!-- ./ col -->
                         </fieldset>
 
-                        <div class="form-group terms">
+                        {{-- <div class="form-group terms">
                             <input type="checkbox" required>
                             <label>I affirm that I have read and agreed to the <a href="#">Privacy Policy</a> and <a
                                     href="#">Terms & Conditions</a>.</label>
-                        </div>
+                        </div> --}}
 
                         <button type="submit" class="submit-btn">Submit</button>
                     </form>

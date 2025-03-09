@@ -55,7 +55,6 @@ class MemberManageController extends Controller
         $inactive = Member::find($request->hidden_id);
         $inactive->status = 0;
         $inactive->publish = 0;
-        $inactive->deactivate = 1;
         $inactive->save();
         Toastr::success('Success', 'Data inactive successfully');
         return redirect()->back();
@@ -65,7 +64,6 @@ class MemberManageController extends Controller
         $active = Member::find($request->hidden_id);
         $active->publish = 1;
         $active->status = 1;
-        $active->deactivate = 0;
         $active->save();
         Toastr::success('Success', 'Data active successfully');
         return redirect()->back();

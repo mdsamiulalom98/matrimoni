@@ -113,7 +113,9 @@
                                             $looplimit = $currentYear - 18;
                                         @endphp
                                         @for ($i = $looplimit; $i >= 1920; $i--)
-                                            <option @if ($i < 10) value="0{{ $i }}" @else value="{{ $i }}" @endif>{{ $i }}</option>
+                                            <option
+                                                @if ($i < 10) value="0{{ $i }}" @else value="{{ $i }}" @endif>
+                                                {{ $i }}</option>
                                         @endfor
                                     </select>
                                     <select name="month">
@@ -236,7 +238,12 @@
                         </fieldset>
 
                         <fieldset>
-                            <div class="">
+                            <div class="position-relative">
+                                <div class="profile-lock-toggle">
+                                    <input type="checkbox" name="profile_lock" id="lock_profile" value="1" />
+                                    <label for="lock_profile"></label>
+                                    <p>Lock Your Account</p>
+                                </div>
                                 <p class="max-image-text">Upload your 3 Photos</p>
                                 <div class="register-image-wrapper">
                                     <div class="addphoto-flex" id="editPhotos">

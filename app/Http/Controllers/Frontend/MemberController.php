@@ -86,6 +86,7 @@ class MemberController extends Controller
         $store_data->publish = 0;
         $store_data->premium = 0;
         $store_data->premium_date = 0;
+        $store_data->profile_lock = $request->profile_lock ?? 0;
         $store_data->password = bcrypt(request('password'));
         $store_data->save();
         $memberId = $store_data->id;
@@ -360,6 +361,7 @@ class MemberController extends Controller
         $memberInfo->name = $request->name;
         $memberInfo->phone = $request->phone;
         $memberInfo->email = $request->email;
+        $memberInfo->profile_lock = $request->profile_lock ?? 0;
         $memberInfo->save();
 
         $bdate = $request->day;
