@@ -308,11 +308,52 @@ class MemberController extends Controller
     public function editProfile()
     {
         $member = Member::findOrFail(Auth::guard('member')->user()->id);
-        $memberInfo = MemberInfo::where('member_id', $member->id)->first();
-        $memberCareer = MemberCareer::where('member_id', $member->id)->first();
-        $memberEducation = MemberEducation::where('member_id', $member->id)->first();
-        $memberLocation = MemberLocation::where('member_id', $member->id)->first();
-        $memberImage = MemberImage::where('member_id', $member->id)->first();
+        $memberInfo = MemberInfo::firstOrCreate(
+            ['member_id' => $member->id],
+            [
+                'member_id' => $member->id,
+                'residency_id' => 1,
+                'country_id' => 1,
+                'religion_id' => 1,
+                'guardian_phone' => '01',
+                'dob' => '1990-01-01',
+                'age' => 30
+            ]
+        );
+        $memberCareer = MemberCareer::firstOrCreate(
+            ['member_id' => $member->id],
+            [
+                'member_id' => $member->id,
+                'profession_id' => 1
+            ]
+        );
+        $memberEducation = MemberEducation::firstOrCreate(
+            ['member_id' => $member->id],
+            [
+                'member_id' => $member->id,
+                'education_id' => 1
+            ]
+        );
+        $memberLocation = MemberLocation::firstOrCreate(
+            ['member_id' => $member->id],
+            [
+                'member_id' => $member->id,
+                'present_district' => 1,
+                'present_upazila' => 1,
+                'present_division' => 1,
+                'present_area' => ''
+            ]
+        );
+        $memberImage = MemberImage::firstOrCreate(
+            ['member_id' => $member->id],
+            [
+                'member_id' => $member->id,
+                'image_one' => 'public/uploads/member/default.webp',
+                'image_two' => 'public/uploads/member/default.webp',
+                'image_three' => 'public/uploads/member/default.webp'
+            ]
+        );
+
         $months = Monthname::all();
         $religions = Religion::where('status', 1)->get();
         $educations = Education::where('status', 1)->get();

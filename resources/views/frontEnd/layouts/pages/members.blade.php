@@ -3,104 +3,6 @@
 
 @section('content')
 
-{{-- <section class="filter_section">
-    <div class="container">
-        <div class="filter-container">
-            <h2 class="header-text">Most Trusted Matrimony Service For NRIs in Bangladesh</h2>
-
-            <div class="filter-group">
-                <div class="gender-buttons">
-                    <div class="gender-btn">Women</div>
-                    <div class="gender-btn">Men</div>
-                </div>
-
-                <div class="filter-group">
-                    <div class="age-range">
-                        <input type="number" class="age-input" value="22">
-                        <span>to</span>
-                        <input type="number" class="age-input" value="27">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-4">
-                        <select class="filter-select">
-                            <option>Select Religion</option>
-                            <option>Islam</option>
-                            <option>Hindu</option>
-                            <option>Christian</option>
-                            <option>Buddhist</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <select class="filter-select">
-                            <option>Select Living Country</option>
-                            <option>Bangladesh</option>
-                            <option>USA</option>
-                            <option>UK</option>
-                            <option>Canada</option>
-                            <option>Australia</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <select class="filter-select">
-                            <option>Select Profession</option>
-                            <option>Teacher</option>
-                            <option>Doctor</option>
-                            <option>House wife</option>
-                            <option>Canada</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-4">
-                        <select class="filter-select">
-                            <option>Select Religion</option>
-                            <option>Islam</option>
-                            <option>Hindu</option>
-                            <option>Christian</option>
-                            <option>Buddhist</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <select class="filter-select">
-                            <option>Select Living Country</option>
-                            <option>Bangladesh</option>
-                            <option>USA</option>
-                            <option>UK</option>
-                            <option>Canada</option>
-                            <option>Australia</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <select class="filter-select">
-                            <option>Select Profession</option>
-                            <option>Teacher</option>
-                            <option>Doctor</option>
-                            <option>House wife</option>
-                            <option>Canada</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="lets-begin-btn">Let's Begin</button>
-
-            <div class="features">
-                <div class="feature-item">
-                    <h3>Best Matches</h3>
-                </div>
-                <div class="feature-item">
-                    <h3>Verified Profiles</h3>
-                </div>
-                <div class="feature-item">
-                    <h3>Fully Secured</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
-
 
 <section class="member_section section-padding">
     <div class="container">
@@ -132,6 +34,250 @@
     </div>
 </section>
 
+
+<!-- Popup 1: Basic Information -->
+<div id="popup1" class="popup-container">
+    <div class="popup">
+        <span class="close-btn" onclick="closePopup(1)">&times;</span>
+        <fieldset>
+            <h2>Basic Information</h2>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Profile Created By *</label>
+                        <select>
+                            <option>Select One</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Looking For *</label>
+                        <select>
+                            <option>Select One</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Community / Religion *</label>
+                        <select name="religion_id">
+                            <option value="">Select Religion</option>
+                            @foreach ($religions as $religion)
+                                <option value="{{ $religion->id }}">{{ $religion->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Profession *</label>
+                        <select name="profession_id">
+                            <option value="">Select Profession</option>
+                            @foreach ($professions as $profession)
+                                <option value="{{ $profession->id }}">{{ $profession->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Candidate First Name *</label>
+                        <input type="text" name="first_name" placeholder="First Name" required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Candidate Last Name *</label>
+                        <input type="text" name="last_name" placeholder="Last Name" required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Date of Birth *</label>
+                        <div class="dob-group">
+                            <select name="year">
+                                <option value="">Year</option>
+                                @php
+                                    $currentYear = date('Y');
+                                    $looplimit = $currentYear - 18;
+                                @endphp
+                                @for ($i = $looplimit; $i >= 1920; $i--)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                            <select name="month">
+                                <option value="">Month</option>
+                                @foreach ($months as $month)
+                                    <option value="{{ $month->month }}">{{ $month->title }}</option>
+                                @endforeach
+                            </select>
+                            <select name="day">
+                                <option value="">Day</option>
+                                @for ($i = 1; $i <= 31; $i++)
+                                    <option
+                                        @if ($i < 10) value="0{{ $i }}" @else value="{{ $i }}" @endif
+                                        value="{{ $i }}">
+                                        {{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Education *</label>
+                        <select name="education_id">
+                            <option value="">Select Education</option>
+                            @foreach ($educations as $education)
+                                <option value="{{ $education->id }}">{{ $education->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <button onclick="nextPopup(1, 2)">Next</button>
+    </div>
+</div>
+
+<!-- Popup 2: Educational Qualification -->
+<div id="popup2" class="popup-container">
+    <div class="popup">
+        <span class="close-btn" onclick="closePopup(2)">&times;</span>
+        <!-- Present Location -->
+        <fieldset>
+            <div class="row">
+                <h2>Present Location</h2>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Country *</label>
+                        <select name="country_id">
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Present Division *</label>
+                        <select name="present_division">
+                            <option value="">Select Division</option>
+                            @foreach ($divisions as $division)
+                                <option value="{{ $division->id }}">{{ $division->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Present District *</label>
+                        <select name="present_district">
+                            <option value="">Select District</option>
+                            @foreach ($districts as $district)
+                                <option value="{{ $district->id }}">{{ $district->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Present Upazila *</label>
+                        <select name="present_upazila">
+                            <option value="">Select Upazila</option>
+                            @foreach ($upazilas as $upazila)
+                                <option value="{{ $upazila->id }}">{{ $upazila->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Village / Area *</label>
+                        <input type="text" name="present_area" placeholder="Enter area name" required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Residency Status *</label>
+                        <select name="residency_id">
+                            <option value="">Select Residency</option>
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <button onclick="nextPopup(2, 3)">Next</button>
+        <button onclick="prevPopup(2, 1)">Back</button>
+    </div>
+</div>
+
+<!-- Popup 3: Present Address & Nationality -->
+<div id="popup3" class="popup-container">
+    <div class="popup">
+        <span class="close-btn" onclick="closePopup(3)">&times;</span>
+        <fieldset>
+            <div class="row">
+                <h2>Account Information</h2>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input name="email" type="email" placeholder="Email address" required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Confirm Email Address *</label>
+                        <input name="confirm_email" type="email" placeholder="Confirm email address"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Candidate Phone Number *</label>
+                        <input name="phone" type="tel" placeholder="Phone number" required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Guardian Phone Number *</label>
+                        <input name="guardian_phone" type="tel" placeholder="Guardian phone number"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input name="password" type="password" placeholder="Enter password" required>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Confirm Password *</label>
+                        <input name="confirm_password" type="password" placeholder="Confirm password"
+                            required>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <button onclick="prevPopup(3, 2)">Back</button>
+        <button onclick="submitForm()">Register</button>
+    </div>
+</div>
 @endsection
 
 @push('scrip')

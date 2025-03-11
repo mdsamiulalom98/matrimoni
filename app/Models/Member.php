@@ -9,7 +9,7 @@ class Member extends Authenticatable
 {
     protected $guard = 'member';
     protected $guarded = [];
-
+    
     public function memberinfo()
     {
         return $this->hasOne(MemberInfo::class, 'member_id');

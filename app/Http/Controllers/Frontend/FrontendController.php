@@ -66,8 +66,20 @@ class FrontendController extends Controller
         $brands = Brand::where(['status' => 1])
             ->orderBy('id', 'ASC')
             ->get();
+            
+            
+         
 
-        return view('frontEnd.layouts.pages.index', compact('sliders', 'hotdeal_top', 'homecategory', 'sliderrightads', 'brands'));
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        return view('frontEnd.layouts.pages.index', compact('sliders', 'hotdeal_top', 'homecategory', 'sliderrightads', 'brands', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    
     }
 
     public function category($slug, Request $request)
@@ -149,11 +161,40 @@ class FrontendController extends Controller
         return view('frontEnd.layouts.pages.childcategory', compact('childcategory', 'products'));
     }
 
-    public function members()
+    public function members(Request $request)
     {
-        $members = Member::where(['publish' => 1])->limit(10)->get();
+        $members = Member::where(['publish' => 1]);
+        if ($request->from && $request->to) {
+            $members = $members->whereHas('memberinfo', function ($query) use ($request) {
+                $query->whereBetween('age', [$request->from, $request->to]);
+            });
+        }
+        if ($request->religion_id) {
+            $members = $members->whereHas('memberinfo', function ($query) use ($request) {
+                $query->where('religion_id', $request->religion_id);
+            });
+        }
+        if ($request->country_id) {
+            $members = $members->whereHas('memberinfo', function ($query) use ($request) {
+                $query->where('country_id', $request->country_id);
+            });
+        }
+        if ($request->profession_id) {
+            $members = $members->whereHas('membercareer', function ($query) use ($request) {
+                $query->where('profession_id', $request->profession_id);
+            });
+        }
+        $members = $members->limit(18)->get();
 
-        return view('frontEnd.layouts.pages.members', compact('members'));
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        return view('frontEnd.layouts.pages.members', compact('members', 'months','religions','educations','professions','countries','divisions','districts','upazilas'));
     }
 
     public function packages()
@@ -502,7 +543,7 @@ class FrontendController extends Controller
     {
         return view('frontEnd.member.login');
     }
-    public function register()
+   public function register_online()
     {
         $months = Monthname::all();
         $religions = Religion::where('status', 1)->get();
@@ -512,6 +553,19 @@ class FrontendController extends Controller
         $divisions = Division::where('status', 1)->get();
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
-        return view('frontEnd.member.register', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+        return view('frontEnd.member.registerOnline', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    }
+    
+    public function register_ofline()
+    {
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        return view('frontEnd.member.registerOfline', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
     }
 }

@@ -25,7 +25,17 @@
         <script src="{{asset('public/frontEnd/js/jquery-3.7.1.min.js')}}"></script>
         @foreach($pixels as $pixel)
         <!-- Facebook Pixel Code -->
-    
+     <script>
+        (function(w,d,s,l,i){
+            w[l]=w[l]||[];
+            w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+            var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5SNPBGHB');
+    </script>
         <noscript>
             <img height="1" width="1" style="display: none;" src="https://www.facebook.com/tr?id={{{$pixel->code}}}&ev=PageView&noscript=1" />
         </noscript>
@@ -101,11 +111,15 @@
                         </div> --}}
                     </div>
                   
-                    <div class="menu-bag">
+                     <div class="menu-bag">
+                        <a href="{{route('member.login')}}">
+                            <i id="m_login" class="fa-regular fa-user"></i>
+                        </a>
                        <a href="#" class="margin-shopping">
                         <i class="fa-regular fa-bell"></i>
                             <span class="mobilecart-qty">5</span>
                         </a>
+                       
                     </div>
                 </div>
             </div>
@@ -134,7 +148,7 @@
                                     </div>
                                     <div class="header_righ">
                                         {{-- <a class="btn_comm" href="#"><i class="fa-solid fa-user"></i> Registration now</a> --}}
-                                        <a class="btn_comm2" href="{{route('customer.login')}}"><i class="fa-solid fa-user"></i> Login now</a>
+                                        <a class="btn_comm2" href="{{route('member.login')}}"><i class="fa-solid fa-user"></i> Login now</a>
                                         <a class="btn_comm" href="{{route('joinAgent')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a>
                                     </div>
                                 </div>
@@ -183,10 +197,10 @@
                         <div class="col-sm-2">
                             <div class="footer-menu">
                                 <ul>
-                                    <li class="title"><a>Customer Link</a></li>
-                                    <li><a href="{{route('customer.register')}}">Register</a></li>
-                                    <li><a href="{{route('customer.login')}}">Login</a></li>
-                                    <li><a href="{{route('customer.forgot.password')}}">Forgot Password?</a></li>
+                                    <li class="title"><a>Member Link</a></li>
+                                    <li><a href="{{route('member.register')}}">Register</a></li>
+                                    <li><a href="{{route('member.login')}}">Login</a></li>
+                                    <li><a href="{{route('member.forgot.password')}}">Forgot Password?</a></li>
                                     <li><a href="{{route('contact')}}">Contact</a></li>
                                 </ul>
                             </div>
@@ -472,10 +486,16 @@
         <script src="{{ asset('public/frontEnd/js/owl.carousel.min.js') }}"></script>
 
         <!-- Google Tag Manager (noscript) -->
-        @foreach($gtm_code as $gtm)
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{$gtm->code}}" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
+        <!--@foreach($gtm_code as $gtm)-->
+        <!--<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{$gtm->code}}" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>-->
         <!-- End Google Tag Manager (noscript) -->
-        @endforeach
+        <!--@endforeach-->
+        
+             <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SNPBGHB"
+                height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
 
         <script>
             function copyCouponCode() {
@@ -488,6 +508,35 @@
                 document.execCommand("copy");
                 document.body.removeChild(tempInput);
                 toastr.success('Coupon Code copied successfully!');
+            }
+        </script>
+         <script>
+            // Automatically open the first popup when the page loads
+            window.onload = function () {
+                document.getElementById("popup1").style.display = "flex";
+            };
+        
+            // Close Popup
+            function closePopup(step) {
+                document.getElementById("popup" + step).style.display = "none";
+            }
+        
+            // Next Popup
+            function nextPopup(current, next) {
+                document.getElementById("popup" + current).style.display = "none";
+                document.getElementById("popup" + next).style.display = "flex";
+            }
+        
+            // Previous Popup
+            function prevPopup(current, prev) {
+                document.getElementById("popup" + current).style.display = "none";
+                document.getElementById("popup" + prev).style.display = "flex";
+            }
+        
+            // Submit Form
+            function submitForm() {
+                alert("Registration Successful!");
+                closePopup(3);
             }
         </script>
     </body>
