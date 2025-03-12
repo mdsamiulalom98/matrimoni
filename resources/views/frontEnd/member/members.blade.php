@@ -65,15 +65,14 @@
 
                                 <!--</div>-->
                                 <h6 class="my-1" style="text-align: start;font-size:14px;font-weight:bold">Profile Created By *</h6>
-                                <div class="toggle-group" id="profileGroup">
-                                    <div class="toggle-btn" data-value="1">Myself</div>
-                                    <div class="toggle-btn" data-value="2">Parent</div>
-                                    <div class="toggle-btn" data-value="3">Guardian</div>
-                                    <div class="toggle-btn" data-value="4">Relatives</div>
-                                    <div class="toggle-btn" data-value="5">Friend</div>
-                                    <div class="toggle-btn" data-value="6">Others</div>
-                                </div>
-                                <input type="hidden" name="profile_created_by" id="selectedProfile">
+                                 <div class="toggle-group" id="profileGroup">
+                                <div class="toggle-btn" data-value="1">Myself</div>
+                                <div class="toggle-btn" data-value="2">Parent</div>
+                                <div class="toggle-btn" data-value="3">Guardian</div>
+                                <div class="toggle-btn" data-value="4">Relatives</div>
+                                <div class="toggle-btn" data-value="5">Friend</div>
+                                <div class="toggle-btn" data-value="6">Others</div>
+                            </div>
                             </div>
                             <div class="col-sm-12">
                                 <!--<div class="form-group">-->
@@ -87,10 +86,9 @@
                                 <!--</div>-->
                                 <h6 class="my-1" style="text-align: start;font-size:14px;font-weight:bold">Looking For *</h6>
                                 <div class="toggle-group" id="lookingForGroup">
-                                    <div class="toggle-btn" data-value="1">Bride</div>
-                                    <div class="toggle-btn" data-value="2">Groom</div>
+                                    <div class="toggle-btn" data-value="bride">Bride</div>
+                                    <div class="toggle-btn" data-value="groom">Groom</div>
                                 </div>
-                                <input type="hidden" name="looking_for" id="selectedLookingFor">
                             </div>
                             <div class="col-sm-12">
                                 {{-- <div class="form-group">
@@ -401,23 +399,36 @@
     </script>
 
 <script>
-    document.querySelectorAll(".toggle-group").forEach(group => {
-        group.addEventListener("click", function(event) {
-            let btn = event.target;
-            if (!btn.classList.contains("toggle-btn")) return;
-
-            // Remove active class from all buttons in this group
+    document.querySelectorAll(".toggle-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            let group = this.parentElement;
             group.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("active"));
-
-            // Add active class to clicked button
-            btn.classList.add("active");
-
-            // Find the associated hidden input and update its value
-            let inputField = group.nextElementSibling;
-            if (inputField) {
-                inputField.value = btn.getAttribute("data-value");
-            }
+            this.classList.add("active");
         });
     });
+
+    btn.addEventListener("click", function() {
+            let group = this.parentElement;
+            group.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            // Store the selected religion ID in the hidden input field
+            document.getElementById("selectedReligion").value = this.getAttribute("data-value");
+        });
+
+    function submitSelection() {
+        let profileCreatedBy = document.querySelector("#profileGroup .active");
+        let lookingFor = document.querySelector("#lookingForGroup .active");
+
+        if (!profileCreatedBy || !lookingFor) {
+            alert("Please select both options!");
+            return;
+        }
+
+        let profileValue = profileCreatedBy.getAttribute("data-value");
+        let lookingForValue = lookingFor.getAttribute("data-value");
+
+        alert(`Profile Created By: ${profileValue}\nLooking For: ${lookingForValue}`);
+    }
 </script>
 @endpush

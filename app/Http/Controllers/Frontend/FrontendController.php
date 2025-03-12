@@ -185,6 +185,7 @@ class FrontendController extends Controller
             });
         }
         $members = $members->limit(18)->get();
+        // return $members;
 
         $months = Monthname::all();
         $religions = Religion::where('status', 1)->get();

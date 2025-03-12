@@ -45,6 +45,8 @@ class MemberController extends Controller
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
+        
+        // return $request->all();
 
         // $request->validate([
         //     'first_name' => 'required',
@@ -115,6 +117,8 @@ class MemberController extends Controller
         $store_info->guardian_phone = $request->guardian_phone;
         $store_info->dob = $dateofbirth;
         $store_info->age = $age;
+        $store_info->looking_for = $request->looking_for;
+        $store_info->profile_created_by = $request->profile_created_by;
         $store_info->save();
 
         // eduction and career information
@@ -138,62 +142,69 @@ class MemberController extends Controller
         $store_location->save();
 
         // member image information
-
+        $imageUrl = 'public/uploads/member/default.webp';
+        $imageUrl2 = 'public/uploads/member/default.webp';
+        $imageUrl3 = 'public/uploads/member/default.webp';
         // image with intervention
         $image = $request->file('image_one');
-        $name = time() . '-' . $image->getClientOriginalName();
-        $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
-        $name = strtolower(preg_replace('/\s+/', '-', $name));
-        $uploadpath = 'public/uploads/member/';
-        $imageUrl = $uploadpath . $name;
-        $img = Image::make($image->getRealPath());
-        $img->encode('webp', 90);
-        $width = 300;
-        $height = 300;
+        if ($image) {
+            $name = time() . '-' . $image->getClientOriginalName();
+            $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+            $name = strtolower(preg_replace('/\s+/', '-', $name));
+            $uploadpath = 'public/uploads/member/';
+            $imageUrl = $uploadpath . $name;
+            $img = Image::make($image->getRealPath());
+            $img->encode('webp', 90);
+            $width = 300;
+            $height = 300;
 
-        $img->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-        $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
-        $img->save($imageUrl);
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
+            $img->save($imageUrl);
+        }
 
         // image with intervention
         $image2 = $request->file('image_two');
-        $name2 = time() . '-' . $image2->getClientOriginalName();
-        $name2 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name2);
-        $name2 = strtolower(preg_replace('/\s+/', '-', $name2));
-        $uploadpath2 = 'public/uploads/member/';
-        $imageUrl2 = $uploadpath2 . $name2;
-        $img2 = Image::make($image2->getRealPath());
-        $img2->encode('webp', 90);
-        $width2 = 300;
-        $height2 = 300;
-        $img2->resize($width2, $height2, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-        $img2->resizeCanvas($width2, $height2, 'center', false, '#ffffff');
-        $img2->save($imageUrl2);
-
+        if ($image2) {
+            $name2 = time() . '-' . $image2->getClientOriginalName();
+            $name2 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name2);
+            $name2 = strtolower(preg_replace('/\s+/', '-', $name2));
+            $uploadpath2 = 'public/uploads/member/';
+            $imageUrl2 = $uploadpath2 . $name2;
+            $img2 = Image::make($image2->getRealPath());
+            $img2->encode('webp', 90);
+            $width2 = 300;
+            $height2 = 300;
+            $img2->resize($width2, $height2, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img2->resizeCanvas($width2, $height2, 'center', false, '#ffffff');
+            $img2->save($imageUrl2);
+        }
 
         // image with intervention
         $image3 = $request->file('image_three');
-        $name3 = time() . '-' . $image3->getClientOriginalName();
-        $name3 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name3);
-        $name3 = strtolower(preg_replace('/\s+/', '-', $name3));
-        $uploadpath3 = 'public/uploads/member/';
-        $imageUrl3 = $uploadpath3 . $name3;
-        $img3 = Image::make($image3->getRealPath());
-        $img3->encode('webp', 90);
-        $width3 = 300;
-        $height3 = 300;
-        $img3->resize($width3, $height3, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-        $img3->resizeCanvas($width3, $height3, 'center', false, '#ffffff');
-        $img3->save($imageUrl3);
+        if ($image3) {
+            $name3 = time() . '-' . $image3->getClientOriginalName();
+            $name3 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name3);
+            $name3 = strtolower(preg_replace('/\s+/', '-', $name3));
+            $uploadpath3 = 'public/uploads/member/';
+            $imageUrl3 = $uploadpath3 . $name3;
+            $img3 = Image::make($image3->getRealPath());
+            $img3->encode('webp', 90);
+            $width3 = 300;
+            $height3 = 300;
+            $img3->resize($width3, $height3, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img3->resizeCanvas($width3, $height3, 'center', false, '#ffffff');
+            $img3->save($imageUrl3);
+        }
 
         $store_memberimage = new MemberImage();
         $store_memberimage->member_id = $store_data->id;
@@ -209,6 +220,7 @@ class MemberController extends Controller
 
         // Toastr::success('মোবাইল নাম্বারে কোড (ওটিপি)পাঠানো হয়েছে');
         // return redirect()->route('verify_form');
+        Auth::guard('member')->loginUsingId($memberId);
         Toastr::success('Your account has been registered');
         return redirect()->back();
     }

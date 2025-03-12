@@ -41,7 +41,7 @@
         </noscript>
         @endforeach
     </head>
-    
+
     <body class="gotop">
         <div  class="coupon-section alert alert-dismissible fade show" >
             <div class="container">
@@ -55,7 +55,7 @@
                                 <li><a href="#"><i class="fa-brands fa-whatsapp"></i> 017xxxxxxxxxx</a></li>
                               </ul>
                            </div>
-                          
+
                         </div>
                     </div>
                     <div class="col-sm-7">
@@ -107,10 +107,10 @@
                                 </button>
                                 <input type="text" placeholder="Find Your Favorite Bride and Groom....">
                             </div>
-                            
+
                         </div> --}}
                     </div>
-                  
+
                      <div class="menu-bag">
                         <a href="{{route('member.login')}}">
                             <i id="m_login" class="fa-regular fa-user"></i>
@@ -119,11 +119,11 @@
                         <i class="fa-regular fa-bell"></i>
                             <span class="mobilecart-qty">5</span>
                         </a>
-                       
+
                     </div>
                 </div>
             </div>
-            
+
 
             <!-- main header start -->
             <div class="main-header">
@@ -158,7 +158,7 @@
                 </div>
                 <!-- logo area end -->
 
-                
+
                 <!-- menu area end -->
             </div>
             <!-- main-header end -->
@@ -274,17 +274,16 @@
         <script>
             new WOW().init();
         </script>
-        
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
         <script src="{{asset('public/backEnd/')}}/assets/js/toastr.min.js"></script>
-        {!! Toastr::message() !!} @stack('script')
-       
+        {!! Toastr::message() !!}
+        @stack('script')
+
         <!-- cart js start -->
-       
-        </script>
         <!-- cart js end -->
         <script>
             $(".search_click").on("keyup change", function () {
@@ -490,7 +489,7 @@
         <!--<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{$gtm->code}}" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>-->
         <!-- End Google Tag Manager (noscript) -->
         <!--@endforeach-->
-        
+
              <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SNPBGHB"
                 height="0" width="0" style="display:none;visibility:hidden">
@@ -515,29 +514,25 @@
             window.onload = function () {
                 document.getElementById("popup1").style.display = "flex";
             };
-        
+
             // Close Popup
             function closePopup(step) {
                 document.getElementById("popup" + step).style.display = "none";
             }
-        
+
             // Next Popup
             function nextPopup(current, next) {
                 document.getElementById("popup" + current).style.display = "none";
                 document.getElementById("popup" + next).style.display = "flex";
             }
-        
+
             // Previous Popup
             function prevPopup(current, prev) {
                 document.getElementById("popup" + current).style.display = "none";
                 document.getElementById("popup" + prev).style.display = "flex";
             }
-        
-            // Submit Form
-            function submitForm() {
-                alert("Registration Successful!");
-                closePopup(3);
-            }
+
+
         </script>
     </body>
 </html>

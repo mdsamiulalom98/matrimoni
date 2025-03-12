@@ -1227,7 +1227,7 @@ h2.why_choose_title {
 }
 .step-box {
     /* background: #fff; */
-    padding: 22px;
+    padding: 5px 14px;
     border-radius: 15px;
     transition: 0.4s;
     text-align: center;
@@ -1255,13 +1255,13 @@ h2.why_choose_title {
 
 .appointmetn_area {
     background: #ff636a;
-    padding: 26px 37px;
+    padding: 12px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 3px;
     flex-direction: column;
-    margin-top: 40px;
+    margin-top: 41px;
 }
 .appointment_section h3 {
     color: #fff;
