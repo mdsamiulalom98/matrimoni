@@ -421,5 +421,13 @@ class AgentController extends Controller
         $members = Member::where('agent_id', Auth::guard('agent')->user()->id)->get();
         return view('frontEnd.agent.members', compact('members'));
     }
+
+
+    public function logout(Request $request)
+    {
+        Auth::guard('agent')->logout();
+        Toastr::success('You are logout successfully', 'success!');
+        return redirect()->route('agent.login');
+    }
 }
 

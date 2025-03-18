@@ -284,6 +284,26 @@
                             </div>
                         </li>
                         <!-- nav items -->
+                        <li>
+                            <a href="#sidebar-agents" data-bs-toggle="collapse">
+                                <i data-feather="user"></i>
+                                <span> Agent </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebar-agents">
+                                <ul class="nav-second-level">
+
+                                    <li>
+                                        <a href="{{ route('agents.index') }}">
+                                            <i data-feather="minus"></i>
+                                            Agents
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- nav items -->
 
                         <!-- nav items -->
                         <li>

@@ -42,6 +42,7 @@ use App\Http\Controllers\Admin\TagManagerController;
 use App\Http\Controllers\Admin\CouponCodeController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\MemberManageController;
+use App\Http\Controllers\Admin\AgentManageController;
 
 Auth::routes();
 
@@ -330,10 +331,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('review/destroy', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
     // district routes
-    Route::get('district/manage', [DistrictController::class,'index'])->name('districts.index');
-    Route::get('district/{id}/edit', [DistrictController::class,'edit'])->name('districts.edit');
-    Route::post('district/update', [DistrictController::class,'update'])->name('districts.update');
-    Route::post('district/charge-update', [DistrictController::class,'district_charge'])->name('districts.charge');
+    Route::get('district/manage', [DistrictController::class, 'index'])->name('districts.index');
+    Route::get('district/{id}/edit', [DistrictController::class, 'edit'])->name('districts.edit');
+    Route::post('district/update', [DistrictController::class, 'update'])->name('districts.update');
+    Route::post('district/charge-update', [DistrictController::class, 'district_charge'])->name('districts.charge');
 
     // member manage routes
     Route::get('member/manage', [MemberManageController::class, 'index'])->name('members.index');
@@ -343,4 +344,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('member/inactive', [MemberManageController::class, 'inactive'])->name('members.inactive');
     Route::post('member/active', [MemberManageController::class, 'active'])->name('members.active');
     Route::post('member/adminlog', [MemberManageController::class, 'adminlog'])->name('members.adminlog');
+
+    // agent manage routes
+    Route::get('agent/manage', [AgentManageController::class, 'index'])->name('agents.index');
+    Route::get('agent/{id}/edit', [AgentManageController::class, 'edit'])->name('agents.edit');
+    Route::get('agent/profile', [AgentManageController::class, 'profile'])->name('agents.profile');
+    Route::post('agent/update', [AgentManageController::class, 'update'])->name('agents.update');
+    Route::post('agent/inactive', [AgentManageController::class, 'inactive'])->name('agents.inactive');
+    Route::post('agent/active', [AgentManageController::class, 'active'])->name('agents.active');
+    Route::post('agent/adminlog', [AgentManageController::class, 'adminlog'])->name('agents.adminlog');
 });
