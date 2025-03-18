@@ -133,8 +133,8 @@
                             <div class="col-sm-12">
                                 <div class="logo-header">
                                     <div class="main-logo">
-                                        <a href="{{route('home')}}"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" /></a>
-                                        {{-- <a href="{{route('home')}}"><img src="{{asset($generalsetting->dark_logo)}}" alt="" /></a> --}}
+                                        {{-- <a href="{{route('home')}}"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" /></a> --}}
+                                        <a href="{{route('home')}}"><img src="{{asset($generalsetting->dark_logo)}}" alt="" /></a>
                                     </div>
                                     <div class="menu_area">
                                         <ul>
@@ -174,8 +174,8 @@
                         <div class="col-sm-4">
                             <div class="footer-about">
                                 <a href="{{route('home')}}">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" />
-                                    {{-- <img src="{{asset($generalsetting->dark_logo)}}" alt="" /> --}}
+                                    {{-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" /> --}}
+                                    <img src="{{asset($generalsetting->dark_logo)}}" alt="" />
                                 </a>
                                 <p>{{$contact->address}}</p>
                                 <p><a href="tel:{{$contact->hotline}}" class="footer-hotlint">{{$contact->hotline}}</a></p>

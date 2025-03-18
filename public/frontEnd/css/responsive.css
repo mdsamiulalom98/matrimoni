@@ -841,19 +841,40 @@
     border-radius: 0px;
 }
 .toggle-btn {
-    padding: 5px 15px;
-    border: none;
-    background: #FF6367;
-    color: #fff;
+    background: #fcefef;
+    padding: 3px 7px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: 0.3s;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    font-size: 12px;
+    border: 1px solid grey;
+}
+
+.search-section .toggle-btn {
+    background: #fcefef;
+    padding: 3px 7px;
+    transition: 0.3s;
+    border: 2px solid transparent;
     border-radius: 0px;
+    font-size: 15px;
     width: 100%;
 }
+
+
+.search-section .toggle-btn.active {
+    background: #FF6367;
+    color: #fff;
+    border: none;
+}
+
   .toggle-btn.active {
-    background: #fff;
-    color: #e81a4c;
-    border: 1px solid #e81a4c;
-  }
+    background: #FF6367;
+    color: #fff;
+    border: 1px solid #fd99b1;
+}
+
   .form-group {
     margin-bottom: 20px;
     text-align: left;
@@ -1120,6 +1141,10 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 7px;
+}
+
+.custome_container {
+    padding: 0px 0px;
 }
 
 .package-container {

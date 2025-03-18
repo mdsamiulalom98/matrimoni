@@ -245,37 +245,15 @@ class FrontendController extends Controller
     }
 
 
-    public function details($slug)
+    public function details($id)
     {
 
-        $details = Product::where(['slug' => $slug, 'status' => 1])
-            ->with('image', 'images', 'category', 'subcategory', 'childcategory')
-            ->withCount('variable')
+        $details = Member::where(['id' => $id, 'status' => 1])
             ->firstOrFail();
-
-        $products = Product::where(['category_id' => $details->category_id, 'status' => 1])
-            ->with('image')
-            ->select('id', 'name', 'slug', 'status', 'category_id', 'new_price', 'old_price', 'type')
-            ->withCount('variable')
-            ->get();
-
-        $shippingcharge = ShippingCharge::where('status', 1)->get();
-        $reviews = Review::where('product_id', $details->id)->get();
-
-        $productcolors = ProductVariable::where('product_id', $details->id)->where('stock', '>', 0)
-            ->whereNotNull('color')
-            ->select('color')
-            ->distinct()
-            ->get();
-
-        $productsizes = ProductVariable::where('product_id', $details->id)->where('stock', '>', 0)
-            ->whereNotNull('size')
-            ->select('size')
-            ->distinct()
-            ->get();
-
-        return view('frontEnd.layouts.pages.details', compact('details', 'products', 'shippingcharge', 'productcolors', 'productsizes', 'reviews'));
+            // return $details;
+        return view('frontEnd.layouts.pages.details', compact('details'));
     }
+    
     public function stock_check(Request $request)
     {
         $product = ProductVariable::where(['product_id' => $request->id, 'color' => $request->color, 'size' => $request->size])->first();
@@ -543,6 +521,10 @@ class FrontendController extends Controller
     public function login()
     {
         return view('frontEnd.member.login');
+    }
+    public function agent_login()
+    {
+        return view('frontEnd.agent.login');
     }
    public function register_online()
     {

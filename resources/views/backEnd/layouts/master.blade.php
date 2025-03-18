@@ -169,16 +169,6 @@
                             target="_blank"> <span class="btn btn-success waves-effect waves-light  rounded-pill"> <i
                                     data-feather="airplay"></i> Visit Site</span> </a>
                     </li>
-                    <li class="dropdown d-none d-xl-block">
-                        <a class="nav-link dropdown-toggle waves-effect waves-light " href=""> <span
-                                class="btn btn-primary waves-effect waves-light  rounded-pill"> <i
-                                    data-feather="shopping-cart"></i> POS</span> </a>
-                    </li>
-                    <li class="dropdown d-none d-xl-block">
-                        <a class="nav-link dropdown-toggle waves-effect waves-light " href=""> <span
-                                class="btn btn-pink waves-effect waves-light  rounded-pill"> <i
-                                    data-feather="layout"></i> Landing Page</span> </a>
-                    </li>
                 </ul>
                 <div class="clearfix"></div>
             </div>

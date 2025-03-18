@@ -39,8 +39,8 @@ body[data-leftbar-size="condensed"] .content-page {
     padding: 0 !important;
     width: 260px;
     -webkit-box-shadow: 0 0 21px 0 rgba(89,102,122,0.1);
-    box-shadow: 0 0 21px 0 rgba(89,102,122,0.1);
-    background: linear-gradient(-45deg, #0da487, #009289, #ffa53b);
+    /* box-shadow: 0 0 21px 0 rgba(89,102,122,0.1); */
+    background: #000000;
     background-size: 400% 400%;
     -webkit-animation: gradient 15s ease infinite;
     animation: gradient 15s ease infinite;

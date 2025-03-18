@@ -5,6 +5,77 @@
 
 
     <section class="member_section section-padding">
+        <div class="custome_container">
+            <div class="member_gird">
+                @foreach ($members as $key => $value)
+                <div class="post-container">
+                    <div class="post-header-flex">
+                        <div class="post-header">
+                            {{-- <i class="fa-solid fa-user profile-pic"></i> --}}
+                            <img class="profile-pic" src="{{ asset($value->memberimage->image_one ?? '') }}" alt="">
+                            <div>
+                                <h3 class="member_name">{{ $value->name }}</h3>
+                                <div class="post-time">
+                                    <span>Published</span>
+                                    <p>15-10-14</p>
+                                </div>
+                                {{-- <div class="post-time">3h · 🔵</div> --}}
+                            </div>
+                        </div>
+                        <div class="three_dot">
+                            <i class="fa-solid fa-ellipsis-h "></i>
+                        </div>
+                    </div>
+            
+                    @if ($value->profile_lock == 1)
+                        <div class="member_image d-flex justify-content-center align-items-center">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    @else
+                        <div class="member_image">
+                            <a href="{{route('details',$value->id)}}">
+                                <img src="{{ asset($value->memberimage->image_one ?? '') }}" alt="Member Image">
+                            </a>
+                            <div class="post-caption">
+                                <p class="member_id">ID: {{ $value->member_id }}</p>
+                                <p class="member_age">Age: {{ $value->memberinfo->age ?? '' }} years old</p>
+                                <p class="member_qualification">Qualification: {{ $value->membercareer->profession->title ?? '' }}</p>
+                            </div>
+                        </div>
+                    @endif
+            
+                    <div class="post-footer">
+                        <a href="#">
+                            <span>
+                                <i class="fa-solid fa-hand-holding-hand"></i>
+                                <p>Proposel</p>
+                            </span>
+                        </a>
+                        <a href="#">
+                            <span>
+                                <i class="fa-solid fa-message"></i>
+                                <p>Message</p>
+                            </span>
+                        </a>
+                        <a href="#">
+                            <span>
+                                <i class="fa-solid fa-phone-volume"></i>
+                                <p>Contact</p>
+                            </span>
+                        </a>
+                        <a href="#">
+                            <span>
+                                <i style="color: red" class="fa-solid fa-heart"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- <section class="member_section section-padding">
         <div class="container">
             <div class="member_gird">
                 @foreach ($members as $key => $value)
@@ -33,7 +104,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
 
     @if (!(Auth::guard('member')->check()))
         <form action="{{ route('member_register') }}" method="POST" enctype="multipart/form-data">
@@ -42,28 +113,13 @@
             <div id="popup1" class="popup-container">
                 <div class="popup">
                     <fieldset>
+                        <div class="pop_up_head_icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
                         <h2>Basic Information</h2>
                         <div class="row">
                           
                             <div class="col-sm-12">
-                                <!--<div class="form-group">-->
-                                <!--    <label>Profile Created By *</label>-->
-                                <!--   <div class="toggle_flex">-->
-                                <!--    <label class="register-radio-label" for="myself"><input id="myself" type="radio"-->
-                                <!--            name="profile_created_by" value="1"> Myself</label><br>-->
-                                <!--    <label class="register-radio-label" for="parent"><input id="parent" type="radio"-->
-                                <!--            name="profile_created_by" value="2"> Parent</label><br>-->
-                                <!--    <label class="register-radio-label" for="guardian"><input id="guardian" type="radio"-->
-                                <!--            name="profile_created_by" value="3"> Guardian</label><br>-->
-                                <!--    <label class="register-radio-label" for="relatives"><input id="relatives" type="radio"-->
-                                <!--            name="profile_created_by" value="4"> Relatives</label><br>-->
-                                <!--    <label class="register-radio-label" for="friend"><input id="friend" type="radio"-->
-                                <!--            name="profile_created_by" value="5"> Friend</label><br>-->
-                                <!--    <label class="register-radio-label" for="others"><input id="others" type="radio"-->
-                                <!--            name="profile_created_by" value="6"> Others</label>-->
-                                <!--   </div>-->
-
-                                <!--</div>-->
                                 <h6 class="my-1" style="text-align: start;font-size:14px;font-weight:bold">Profile Created By *</h6>
                                 <div class="toggle-group" id="profileGroup">
                                     <div class="toggle-btn" data-value="1">Myself</div>
@@ -76,15 +132,7 @@
                                 <input type="hidden" name="profile_created_by" id="selectedProfile">
                             </div>
                             <div class="col-sm-12">
-                                <!--<div class="form-group">-->
-                                <!--    <label>Looking For *</label>-->
-                                <!--    <div class="toggle_flex">-->
-                                <!--    <label class="register-radio-label" for="bride"><input id="bride" type="radio"-->
-                                <!--            name="looking_for" value="1"> Bride</label><br>-->
-                                <!--    <label class="register-radio-label" for="groom"><input id="groom" type="radio"-->
-                                <!--            name="looking_for" value="2"> Groom</label><br>-->
-                                <!--</div>-->
-                                <!--</div>-->
+                               
                                 <h6 class="my-1" style="text-align: start;font-size:14px;font-weight:bold">Looking For *</h6>
                                 <div class="toggle-group" id="lookingForGroup">
                                     <div class="toggle-btn" data-value="1">Bride</div>
@@ -185,17 +233,21 @@
                         </div>
                     </fieldset>
                     <button type="button" onclick="nextPopup(1, 2)">Next</button>
-                    <span class="close-btn" onclick="closePopup(1)">&times;</span>
+                    <span class="close-btn" onclick="closePopup(1)"><i class="fa-solid fa-arrow-left"></i></span>
+                    {{-- <span class="close-btn" onclick="closePopup(1)">&times;</span> --}}
                 </div>
             </div>
 
             <!-- Popup 2: Educational Qualification -->
             <div id="popup2" class="popup-container">
                 <div class="popup">
-                    <span class="close-btn" onclick="closePopup(2)">&times;</span>
+                    <span class="close-btn" onclick="closePopup(2)"><i class="fa-solid fa-arrow-left"></i></span>
                     <!-- Present Location -->
                     <fieldset>
                         <div class="row">
+                            <div class="pop_up_head_icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
                             <h2>Present Location</h2>
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -268,9 +320,12 @@
             <!-- Popup 3: Present Address & Nationality -->
             <div id="popup3" class="popup-container">
                 <div class="popup">
-                    <span class="close-btn" onclick="closePopup(3)">&times;</span>
+                    <span class="close-btn" onclick="closePopup(3)"><i class="fa-solid fa-arrow-left"></i></span>
                     <fieldset>
                         <div class="row">
+                            <div class="pop_up_head_icon">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </div>
                             <h2>Account Information</h2>
                             <div class="col-sm-12">
                                 <div class="form-group">

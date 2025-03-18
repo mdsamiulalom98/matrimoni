@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShoppingController;
 use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Frontend\MemberController;
+use App\Http\Controllers\Frontend\AgentController;
 use App\Http\Controllers\Frontend\BkashController;
 use App\Http\Controllers\Frontend\ShurjopayControllers;
 use App\Http\Controllers\Admin\RoleController;
@@ -68,6 +69,7 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('subcategory/{subcategory}', [FrontendController::class, 'subcategory'])->name('subcategory');
     Route::get('products/{slug}', [FrontendController::class, 'products'])->name('products');
     Route::get('members', [FrontendController::class, 'members'])->name('members');
+    Route::get('details/{id}', [FrontendController::class, 'details'])->name('details');
     Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
     Route::get('about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
 
@@ -89,6 +91,8 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('/payment-cancel', [FrontEndController::class, 'payment_cancel'])->name('payment_cancel');
     Route::get('member/register', [FrontendController::class, 'register'])->name('member.register');
     Route::get('member/login', [FrontendController::class, 'login'])->name('member.login');
+    Route::get('agent/login', [FrontendController::class, 'agent_login'])->name('agent.login');
+    Route::get('agent/register', [FrontendController::class, 'agent_register'])->name('agent.register');
     Route::post('/member/register-post', [MemberController::class, 'register'])->name('member_register');
     Route::get('/member/verify', [MemberController::class, 'memberVerifyForm'])->name('verify_form');
 });
@@ -141,6 +145,40 @@ Route::group(['prefix' => 'customer', 'namespace' => 'Frontend', 'middleware' =>
     // Route::post('/profile-update', [CustomerController::class, 'profile_update'])->name('customer.profile_update');
     // Route::get('/change-password', [CustomerController::class, 'change_pass'])->name('customer.change_pass');
     // Route::post('/password-update', [CustomerController::class, 'password_update'])->name('customer.password_update');
+});
+
+// agent normal routes
+Route::group(['prefix' => 'agent', 'namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {
+    Route::post('/signin', [AgentController::class, 'signin'])->name('agent.signin');
+    Route::post('/store', [AgentController::class, 'store'])->name('agent.store');
+    Route::get('/verify', [AgentController::class, 'verify'])->name('agent.verify');
+    Route::post('/verify-account', [AgentController::class, 'account_verify'])->name('agent.account.verify');
+    Route::post('/resend-otp', [AgentController::class, 'resendotp'])->name('agent.resendotp');
+    Route::post('/logout', [AgentController::class, 'logout'])->name('agent.logout');
+    Route::post('/post/review', [AgentController::class, 'review'])->name('agent.review');
+    Route::get('/forgot-password', [AgentController::class, 'forgot_password'])->name('agent.forgot.password');
+    Route::post('/forgot-verify', [AgentController::class, 'forgot_verify'])->name('agent.forgot.verify');
+    Route::get('/forgot-password/reset', [AgentController::class, 'forgot_reset'])->name('agent.forgot.reset');
+    Route::post('/forgot-password/store', [AgentController::class, 'forgot_store'])->name('agent.forgot.store');
+    Route::post('/forgot-password/resendotp', [AgentController::class, 'forgot_resend'])->name('agent.forgot.resendotp');
+});
+
+// customer auth
+Route::group(['prefix' => 'agent', 'namespace' => 'Frontend', 'middleware' => ['agent', 'ipcheck', 'check_refer']], function () {
+    Route::get('/account', [AgentController::class, 'account'])->name('agent.account');
+    Route::get('/orders', [AgentController::class, 'orders'])->name('agent.orders');
+    Route::get('/invoice', [AgentController::class, 'invoice'])->name('agent.invoice');
+    Route::get('/invoice/order-note', [AgentController::class, 'order_note'])->name('agent.order_note');
+    Route::get('/profile-edit', [AgentController::class, 'profile_edit'])->name('agent.profile_edit');
+    Route::post('/profile-update', [AgentController::class, 'profile_update'])->name('agent.profile_update');
+    Route::get('/change-password', [AgentController::class, 'change_pass'])->name('agent.change_pass');
+    Route::post('/password-update', [AgentController::class, 'password_update'])->name('agent.password_update');
+
+    Route::get('/member-create', [AgentController::class, 'member_create'])->name('agent.member_create');
+    Route::post('/member-store', [AgentController::class, 'member_store'])->name('agent.member_store');
+    Route::get('/member-edit/{id}', [AgentController::class, 'member_edit'])->name('agent.member_edit');
+    Route::post('/member-update', [AgentController::class, 'member_update'])->name('agent.member_update');
+    Route::get('/my-members', [AgentController::class, 'my_members'])->name('agent.my_members');
 });
 
 Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {

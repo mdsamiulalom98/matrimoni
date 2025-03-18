@@ -11,7 +11,7 @@
         </div>
 
         <div class="agent_form">
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('agent.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form_group">
                     <label>Full Name *</label>
@@ -37,8 +37,8 @@
                     <label>Agent Type *</label>
                     <select name="agent_type" required>
                         <option value="">Select Agent Type</option>
-                        <option value="City Agent">City Agent</option>
-                        <option value="Village Agent">Village Agent</option>
+                        <option value="1">City Agent</option>
+                        <option value="2">Village Agent</option>
                     </select>
                 </div>
 
