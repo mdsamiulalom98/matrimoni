@@ -861,7 +861,15 @@
     font-size: 15px;
     width: 100%;
 }
-
+button.form_close {
+    background: red;
+    color: white;
+    width: 26px;
+    position: absolute;
+    right: 10px;
+    top: 24px;
+    border-radius: 3px;
+}
 
 .search-section .toggle-btn.active {
     background: #FF6367;

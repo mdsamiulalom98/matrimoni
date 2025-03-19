@@ -265,6 +265,23 @@ class FrontendController extends Controller
         ];
         return response()->json($response);
     }
+    
+
+
+    public function agentAC()
+    {
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        return view('frontEnd.layouts.pages.agentac', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    }
+
+
     public function quickview(Request $request)
     {
         $data['data'] = Product::where(['id' => $request->id, 'status' => 1])->with('images')->withCount('reviews')->first();
