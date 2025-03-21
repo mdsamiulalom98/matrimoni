@@ -34,10 +34,21 @@ class AgentController extends Controller
     }
     public function account()
     {
-        return view('frontEnd.agent.account');
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        if (Auth::guard('agent')->user()->agent_id == null) {
+            $agent = Agent::find(Auth::guard('agent')->user()->id);
+            $agent->agent_id = Str::random(6);
+            $agent->save();
+        }
+        return view('frontEnd.agent.account', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
     }
-
-
 
     public function store(Request $request)
     {
@@ -47,7 +58,30 @@ class AgentController extends Controller
             'password' => 'required|min:6'
         ]);
 
+        $imageUrl = 'public/uploads/agent/default.webp';
+
+        $image = $request->file('nid_image');
+        if ($image) {
+            $name = time() . '-' . $image->getClientOriginalName();
+            $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+            $name = strtolower(preg_replace('/\s+/', '-', $name));
+            $uploadpath = 'public/uploads/agent/';
+            $imageUrl = $uploadpath . $name;
+            $img = Image::make($image->getRealPath());
+            $img->encode('webp', 90);
+            $width = 300;
+            $height = 300;
+
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
+            $img->save($imageUrl);
+        }
+
         $store = new Agent();
+        $store->agent_id = Str::random(6);
         $store->name = $request->name;
         $store->phone = $request->phone;
         $store->email = $request->email;
@@ -56,15 +90,13 @@ class AgentController extends Controller
         $store->verifyToken = rand(1111, 9999);
         $store->agent_type = $request->agent_type;
         $store->nid_passport = $request->nid_passport;
-        $store->nid_image = $request->nid_image;
-        $store->status = 'active';
+        $store->nid_image = $imageUrl;
+        $store->status = 'pending';
         $store->save();
 
         Toastr::success('Success', 'Account Create Successfully');
         return redirect()->route('agent.login');
     }
-
-
 
     public function signin(Request $request)
     {
@@ -76,23 +108,23 @@ class AgentController extends Controller
 
         if ($agentCheck) {
             if ($agentCheck->status != 'active') {
-                Toastr::success('আপনার অ্যাকাউন্ট স্থগিত করা হয়েছে');
+                Toastr::success('Your account has been suspended.');
                 Session::put('phoneverify', $agentCheck->phone);
 
-                return redirect()->route('agent.account');
+                return redirect()->back();
             } else {
                 $credentials = ['phone' => $request->phone, 'password' => $request->password];
                 if (Auth::guard('agent')->attempt($credentials)) {
-                    Toastr::success('আপনি লগিন সফল হয়েছে');
+                    Toastr::success('You have successfully logged in.');
 
                     return redirect()->route('agent.account');
                 } else {
-                    Toastr::error('ভুল পাসওয়ার্ড !');
+                    Toastr::error('Wrong password !');
                     return redirect()->back();
                 }
             }
         } else {
-            Toastr::error('আপনার কোন একাউন্ট নেই');
+            Toastr::error('You do not have an account.');
             return redirect()->back();
         }
     }
@@ -110,7 +142,7 @@ class AgentController extends Controller
 
         $verified = Agent::where('phoneNumber', $request->phoneNumber)->first();
         if (!$verified) {
-            Toastr::error('আপনার ফোন নম্বর আমাদের ডাটাবেসে নেই');
+            Toastr::error('Your phone number is not in our database.');
             return redirect()->back();
         } else {
             $verifyToken = rand(1111, 9999);
@@ -166,7 +198,7 @@ class AgentController extends Controller
         $image = $request->file('image');
         if ($image) {
             // image with intervention
-            $name =  time() . '-' . $image->getClientOriginalName();
+            $name = time() . '-' . $image->getClientOriginalName();
             $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
             $name = strtolower(Str::slug($name));
             $uploadpath = 'public/uploads/agent/';
@@ -181,13 +213,13 @@ class AgentController extends Controller
             $imageUrl = $update_data->image;
         }
 
-        $update_data->name        =   $request->name;
-        $update_data->phone       =   $request->phone;
-        $update_data->email       =   $request->email;
-        $update_data->address     =   $request->address;
-        $update_data->district    =   $request->district;
-        $update_data->area        =   $request->area;
-        $update_data->image       =   $imageUrl;
+        $update_data->name = $request->name;
+        $update_data->phone = $request->phone;
+        $update_data->email = $request->email;
+        $update_data->address = $request->address;
+        $update_data->district = $request->district;
+        $update_data->area = $request->area;
+        $update_data->image = $imageUrl;
         $update_data->save();
 
         Toastr::success('Your profile update successfully', 'Success!');
@@ -238,7 +270,8 @@ class AgentController extends Controller
         return view('frontEnd.agent.member.create', compact('religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas', 'months'));
     }
 
-    public function member_store(Request $request) {
+    public function member_store(Request $request)
+    {
         $memberPhone = Member::where('phone', $request->phone)->first();
         if ($memberPhone) {
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
@@ -417,11 +450,12 @@ class AgentController extends Controller
         return redirect()->route('agent.account');
     }
 
-    public function my_members() {
+    public function my_members()
+    {
         $members = Member::where('agent_id', Auth::guard('agent')->user()->id)->get();
         return view('frontEnd.agent.members', compact('members'));
     }
-    
+
     public function logout(Request $request)
     {
         Auth::guard('agent')->logout();

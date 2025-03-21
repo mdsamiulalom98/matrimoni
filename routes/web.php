@@ -81,7 +81,6 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('search', [FrontendController::class, 'search'])->name('search');
     Route::get('site/contact-us', [FrontendController::class, 'contact'])->name('contact');
     Route::get('join-agent', [FrontendController::class, 'joinAgent'])->name('joinAgent');
-    Route::get('agent-account', [FrontendController::class, 'agentAC'])->name('agentAC');
     Route::get('/page/{slug}', [FrontendController::class, 'page'])->name('page');
     Route::get('districts', [FrontendController::class, 'districts'])->name('districts');
     Route::get('/coupon', [FrontendController::class, 'coupon_show'])->name('coupon.view');
@@ -347,7 +346,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('member/inactive', [MemberManageController::class, 'inactive'])->name('members.inactive');
     Route::post('member/active', [MemberManageController::class, 'active'])->name('members.active');
     Route::post('member/adminlog', [MemberManageController::class, 'adminlog'])->name('members.adminlog');
-    
+
     // agent manage routes
     Route::get('agent/manage', [AgentManageController::class, 'index'])->name('agents.index');
     Route::get('agent/{id}/edit', [AgentManageController::class, 'edit'])->name('agents.edit');
