@@ -1,10 +1,12 @@
-<div class="customer-auth">
-    <div class="customer-img">
-        <img src="{{ asset(Auth::guard('member')->user()->image) }}" alt="">
+<div class="member-profile-auth">
+    <div class="member-profile-img">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOEe4abTSZtWFesy2WMuo7DHc1QM-LHZTwi_ROMfctGd_2dh7TY_Pb_hrFvZOPEvNTA_Q&usqp=CAU" alt="">
+        {{-- <img src="{{ asset(Auth::guard('member')->user()->image) }}" alt=""> --}}
     </div>
-    <div class="customer-name">
+    <div class="member-profile-name">
         <p><small>Hello</small></p>
-        <p>{{ Auth::guard('member')->user()->name }}</p>
+        <p>Md Ujjal Islam</p>
+        {{-- <p>{{ Auth::guard('member')->user()->name }}</p> --}}
     </div>
 </div>
 <div class="sidebar-menu">

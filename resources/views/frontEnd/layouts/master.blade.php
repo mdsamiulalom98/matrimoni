@@ -149,7 +149,7 @@
                                     <div class="header_righ">
                                         {{-- <a class="btn_comm" href="#"><i class="fa-solid fa-user"></i> Registration now</a> --}}
                                         <a class="btn_comm2" href="{{route('member.login')}}"><i class="fa-solid fa-user"></i> Login now</a>
-                                        <a class="btn_comm" href="{{route('agent.account')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a>
+                                        <a class="btn_comm" href="{{route('agentAC')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a>
                                         {{-- <a class="btn_comm" href="{{route('joinAgent')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a> --}}
                                     </div>
                                 </div>

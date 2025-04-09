@@ -66,9 +66,9 @@ class FrontendController extends Controller
         $brands = Brand::where(['status' => 1])
             ->orderBy('id', 'ASC')
             ->get();
-
-
-
+            
+            
+         
 
         $months = Monthname::all();
         $religions = Religion::where('status', 1)->get();
@@ -79,7 +79,7 @@ class FrontendController extends Controller
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
         return view('frontEnd.layouts.pages.index', compact('sliders', 'hotdeal_top', 'homecategory', 'sliderrightads', 'brands', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
-
+    
     }
 
     public function category($slug, Request $request)
@@ -253,7 +253,7 @@ class FrontendController extends Controller
             // return $details;
         return view('frontEnd.layouts.pages.details', compact('details'));
     }
-
+    
     public function stock_check(Request $request)
     {
         $product = ProductVariable::where(['product_id' => $request->id, 'color' => $request->color, 'size' => $request->size])->first();
@@ -265,6 +265,22 @@ class FrontendController extends Controller
         ];
         return response()->json($response);
     }
+    
+
+
+    public function agentAC()
+    {
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        return view('frontEnd.layouts.pages.agentac', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    }
+
 
     public function quickview(Request $request)
     {
@@ -539,7 +555,7 @@ class FrontendController extends Controller
         $upazilas = Upazila::where('status', 1)->get();
         return view('frontEnd.member.registerOnline', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
     }
-
+    
     public function register_ofline()
     {
         $months = Monthname::all();

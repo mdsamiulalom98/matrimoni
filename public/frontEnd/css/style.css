@@ -1466,6 +1466,67 @@ legend {
         transform: translateY(10px);
     }
 }
+.member-profile-sidebar {
+    background: #ffffff;
+    padding: 27px 13px;
+    box-shadow: 0px 2px 2px 2px #dbdbdbed;
+    border-radius: 3px;
+    margin-right: 13px;
+}
+.form-label {
+    margin-bottom: .5rem;
+    font-size: 15px;
+    font-family: emoji;
+}
+.member-profile-img {
+    display: flex;
+    justify-content: center;
+}
+.member-profile-img img {
+    height: 100%;
+    width: 146px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.member-profile-name {
+    text-align: center;
+    margin: 15px 0;
+}
+/* button#home-tab {
+    border-bottom: 2px solid #ff636a;
+    border-radius: 0px !important;
+} */
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    border-bottom: 2px solid #ff636a;
+    border-radius: 0px !important;
+}
+.nav-link {
+
+    color: #000;
+}
+.filtercontainer {
+    background: #fff;
+    padding: 8px 18px;
+}
+
+.sidebar-menu {}
+.sidebar-menu ul{}
+.sidebar-menu ul li {
+    display: block;
+    padding: 6px 6px;
+    background: #ff636a05;
+    margin: 1px 0;
+    border-radius: 3px;
+}
+
+.sidebar-menu ul li:hover {
+    background: #ff636a;
+    color: #fff;
+}
+
+.sidebar-menu ul li a{}
 
 
 
@@ -1488,21 +1549,143 @@ legend {
     padding: 15px;
 }
 
+
+.profile-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background: white;
+}
+.profile-header {
+    background: #ff636a;
+    padding: 20px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+.profile-section {
+    text-align: center;
+    padding: 20px;
+}
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ddd;
+    display: inline-block;
+}
+.profile-info {
+    margin-top: 10px;
+}
+.progress-bar {
+    background: #ddd;
+    height: 5px;
+    margin-top: 10px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+.progress {
+    background: green;
+    width: 30%;
+    height: 100%;
+}
+.menu {
+    padding: 20px;
+}
+.menu-item {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+.menu-item i {
+    margin-right: 10px;
+    color: #555;
+}
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+.bottom-nav a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+}
+.bottom-nav i {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
 .member_container:hover {
     box-shadow: 0 0 8px 0px rgb(0 0 0 / 13%);
 }
 
 .member_image {
     width: 100%;
-    height: 324px;
+    height: 400px;
     object-fit: cover;
     position: relative;
+}
+
+.discount_box {
+    background: #8080804a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 11px;
+}
+a.boost_btn {
+    background: #0052ff;
+    padding: 4px 9px;
+    border-radius: 35px;
+    color: white;
+    font-size: 13px;
+}
+p.discount_pkg {
+    background: #0052ff;
+    padding: 4px 9px;
+    border-radius: 35px;
+    color: white;
+    font-size: 13px;
+}
+.dflex_p {
+    display: flex;
+    align-items: center;
+    gap: 2px;
 }
 
 .member_info {
     padding: 5px 10px 10px 10px;
 }
-
+.member_info_flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+}
+.member_info_flex i {
+    color: #0006ff;
+    font-size: 11px;
+}
+.veri_text {
+    font-size: 10px;
+    color: green;
+    font-weight: 700;
+}
+.member_post_flex {
+    display: flex;
+    gap: 10px;
+}
 .member_name {
     font-size: 19px;
     font-weight: 600;
@@ -1513,16 +1696,19 @@ legend {
 
 .member_id {
     margin-bottom: 4px;
-    font-size: 16px;
-    color: white;
+    font-size: 12px;
+    color: #756b6b;
+    font-weight: 700;
 }
 
 .member_age, .member_qualification {
     margin-bottom: 4px;
-    font-size: 17px;
-    color: white;
+    font-size: 12px;
+    color: #000;
     font-family: emoji;
     line-height: 18px;
+    display: flex;
+    gap: 5px;
 }
 
 /* ==================================== */
@@ -1540,7 +1726,6 @@ legend {
 
 .post-header {
     display: flex;
-    align-items: center;
     padding: 10px;
 }
 
@@ -1593,15 +1778,16 @@ legend {
 
 
 .post-caption {
-    background: #b2b2b282;
+    background: #ffffff;
     color: white;
     padding: 10px;
     text-align: center;
     font-size: 16px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), #08080861);
+    background-image: linear-gradient(rgb(255 255 255), #f9f9f961);
     position: absolute;
     bottom: 0px;
     width: 100%;
+    box-shadow: 0px -27px 20px 18px #fefefefa;
 }
 
 /* .search-box {
@@ -1677,7 +1863,7 @@ legend {
     background: #ff636a;
 }
 
-/* ========== Customer css ========== */
+/* ========== member-profile css ========== */
 
 .auth-section {
     padding: 75px 0;
@@ -1685,6 +1871,14 @@ legend {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+
+.toggle-btnsss {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    cursor: pointer;
 }
 
 
