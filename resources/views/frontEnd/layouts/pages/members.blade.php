@@ -30,7 +30,7 @@
                                 <div class="filtercontainer">
                                     <form action="{{ route('members') }}" method="GET">
                                             <h4 class="mb-3">🔍 Find Your Perfect Match</h4>
-                                            
+
                                            <div class="row">
                                             <div class="col-sm-4 mb-0">
                                                 <label for="country" class="form-label">Country</label>
@@ -42,7 +42,7 @@
                                                     <option value="Bangladesh">Bangladesh</option>
                                                 </select>
                                             </div>
-                                            
+
                                             <div class="col-sm-4 mb-0">
                                                 <label for="religion" class="form-label">Religion</label>
                                                 <select id="religion" class="form-select">
@@ -53,7 +53,7 @@
                                                     <option value="Buddhism">Buddhism</option>
                                                 </select>
                                             </div>
-                                            
+
                                             <div class="col-sm-4 mb-0">
                                                 <label for="gender" class="form-label">Bride/Groom</label>
                                                 <select id="gender" class="form-select">
@@ -63,7 +63,7 @@
                                                 </select>
                                             </div>
                                            </div>
-                                            
+
                                            <div class="row">
                                             <div class="col-sm-4 mb-0">
                                                 <label for="age" class="form-label">Age Range</label>
@@ -75,7 +75,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-sm-4 mb-0">
                                                 <label for="marital_status" class="form-label">Marital Status</label>
                                                 <select id="marital_status" class="form-select">
@@ -85,13 +85,13 @@
                                                     <option value="Widowed">Widowed</option>
                                                 </select>
                                             </div>
-                                            
+
                                             <div class="col-sm-4 mb-0">
                                                 <label for="education" class="form-label">Education</label>
                                                 <input type="text" id="education" class="form-control" placeholder="Enter Education">
                                             </div>
                                            </div>
-                                            
+
                                            <div class="row">
                                                 <div class="col-sm-6 mb-0">
                                                     <label for="profession" class="form-label">Profession</label>
@@ -102,9 +102,9 @@
                                                     <input type="text" id="complexsion" class="form-control" placeholder="Enter complexsion">
                                                 </div>
                                            </div>
-                                            
+
                                             <button type="submit" class="submit-btn">Search</button>
-                                        
+
                                     </form>
                                 </div>
                             </div>
@@ -179,68 +179,73 @@
 
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active mt-3" id="my-match" role="tabpanel" aria-labelledby="my-match-tab">
+                
                 <div class="find_member">
                     <div class="filtercontainer">
-                        <form action="{{ route('members') }}" method="GET">
-                            <div class="search-box">
-                                <h6 style="color:#fff">Looking for</h6>
-                                <div class="search-toggle">
-                                    <button class="toggle-btn active" id="brideBtn">Bride</button>
-                                    <button class="toggle-btn" id="groomBtn">Groom</button>
+                        <form action="#" method="GET">
+                            <div class="searchbox">
+                                <h6 class="title">Looking for</h6>
+                                
+                                <div class="gender_selection">
+                                    <button type="button" class="gender-btn active" data-gender="bride">Bride</button>
+                                    <button type="button" class="gender-btn" data-gender="groom">Groom</button>
+                                    <input type="hidden" name="gender" id="selectedGender" value="bride">
                                 </div>
-                                <form>
-                                    <div class="form-group">
-                                        <div class="mobile_filter_flex">
-                                            <div class="m_filter_left">
-                                                <label>Age</label>
-                                                <div class="age-box">
-                                                    <select>
-                                                        <option>18</option>
-                                                        <option>19</option>
-                                                        <option>20</option>
-                                                    </select>
-                                                    <span>to</span>
-                                                    <select>
-                                                        <option>35</option>
-                                                        <option>40</option>
-                                                        <option>45</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="m_filter_right">
-                                                <label>Religion</label>
-                                                <select>
-                                                    <option>- Any -</option>
-                                                    <option>Islam</option>
-                                                    <option>Hindu</option>
-                                                    <option>Christian</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    <div class="age-box">
+                                        <select name="age_min">
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                        </select>
+                                        <span>to</span>
+                                        <select name="age_max">
+                                            <option>35</option>
+                                            <option>40</option>
+                                            <option>45</option>
+                                        </select>
                                     </div>
-            
-                                    <button class="search-btn">Search Partner</button>
-                                </form>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label>Religion</label>
+                                    <select name="religion">
+                                        <option>- Any -</option>
+                                        <option>Islam</option>
+                                        <option>Hindu</option>
+                                        <option>Christian</option>
+                                    </select>
+                                </div>
+                
+                                <button type="submit" class="search-btn">Search Partner</button>
                             </div>
                         </form>
                     </div>
                 </div>
+                
             </div>
 
             <div class="tab-pane fade mt-3" id="view-profile" role="tabpanel" aria-labelledby="view-profile-tab">
                 <div class="profile-container">
-                    <div class="profile-header">PROFILE</div>
+                    {{-- <div class="profile-header">PROFILE</div> --}}
                     <div class="profile-section">
-                        <div class="profile-img"></div>
+                        <div class="profile-img">
+                            {{-- <img src="{{ asset(Auth::guard('member')->user()->image ?? '') }}" alt=""> --}}
+                            <i class="fa-solid fa-user-nurse"></i>
+                        </div>
+
                         <div class="profile-info">
                             <h3>Tania Akter</h3>
                             <p>BGD3604528</p>
                             <p>Membership - Free <a href="#" style="color: blue;">Upgrade Now</a></p>
+                            <div class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                            <p>Your profile score 30%</p>
                         </div>
-                        <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
-                        <p>Your profile score 30%</p>
+                       
                     </div>
                     <div class="menu">
                         <div class="menu-item"><i class="fas fa-users"></i> Matches</div>
@@ -253,13 +258,13 @@
                         <div class="menu-item"><i class="fas fa-sms"></i> SMS History</div>
                     </div>
                 </div>
-                <div class="bottom-nav">
+                {{-- <div class="bottom-nav">
                     <a href="#"><i class="fas fa-home"></i> Home</a>
                     <a href="#"><i class="fas fa-search"></i> Search</a>
                     <a href="#"><i class="fas fa-envelope"></i> Mailbox</a>
                     <a href="#"><i class="fas fa-crown"></i> Upgrade</a>
                     <a href="#"><i class="fas fa-user"></i> Profile</a>
-                </div>
+                </div> --}}
             </div>
 
             <div class="tab-pane fade mt-3" id="view-not-contact" role="tabpanel" aria-labelledby="view-not-contact-tab">
@@ -297,7 +302,7 @@
                             <i class="fa-solid fa-ellipsis-h "></i>
                         </div>
                     </div>
-            
+
                     @if ($value->profile_lock == 1)
                         <div class="member_image d-flex justify-content-center align-items-center">
                             <i class="fa fa-user"></i>
@@ -322,7 +327,7 @@
                                         Profession :
                                         <p style="color: red"> {{ $value->membercareer->profession->title ?? '' }}</p>
                                     </span>
-                                    
+
                                 </dive>
                                 <dive class="member_post_flex">
                                     <span class="member_age">
@@ -337,7 +342,7 @@
                                         Living :
                                         <p style="color: red">Dhaka</p>
                                     </span>
-                                    
+
                                 </dive>
                                 <dive class="member_post_flex">
                                     <span class="member_age">
@@ -352,7 +357,7 @@
                                         complexion :
                                         <p style="color: red">fair</p>
                                     </span>
-                                    
+
                                 </dive>
                                 <div class="discount_box">
                                     <p>75% Off Package</p>
@@ -364,7 +369,7 @@
                             </div>
                         </div>
                     @endif
-            
+
                     <div class="post-footer">
                         <a href="#">
                             <span>
@@ -438,7 +443,7 @@
                     </div>
                     <h2>Basic Information</h2>
                     <div class="row">
-                      
+
                         <div class="col-sm-12">
                             <h6 class="my-1" style="text-align: start;font-size:14px;font-weight:bold">Profile Created By *</h6>
                             <div class="toggle-group" id="profileGroup">
@@ -452,7 +457,7 @@
                             <input type="hidden" name="profile_created_by" id="selectedProfile">
                         </div>
                         <div class="col-sm-12">
-                           
+
                             <h6 class="my-1" style="text-align: start;font-size:14px;font-weight:bold">Looking For *</h6>
                             <div class="toggle-group" id="lookingForGroup">
                                 <div class="toggle-btn" data-value="1">Bride</div>
@@ -725,7 +730,7 @@
         </div>
     </form>
 @endif
-    
+
 @endsection
 
 @push('script')
