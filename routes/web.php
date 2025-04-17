@@ -74,7 +74,6 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
     Route::get('about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
 
-
     Route::get('member/register-online', [FrontendController::class, 'register_online'])->name('member.registerOnline');
     Route::get('member/register-ofline', [FrontendController::class, 'register_ofline'])->name('member.registerOfline');
     Route::get('livesearch', [FrontendController::class, 'livesearch'])->name('livesearch');
@@ -93,7 +92,6 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('member/register', [FrontendController::class, 'register'])->name('member.register');
     Route::get('member/login', [FrontendController::class, 'login'])->name('member.login');
     Route::get('agent/login', [FrontendController::class, 'agent_login'])->name('agent.login');
-
 
     Route::get('agent/register', [FrontendController::class, 'agent_register'])->name('agent.register');
     Route::post('/member/register-post', [MemberController::class, 'register'])->name('member_register');
@@ -346,7 +344,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('member/inactive', [MemberManageController::class, 'inactive'])->name('members.inactive');
     Route::post('member/active', [MemberManageController::class, 'active'])->name('members.active');
     Route::post('member/adminlog', [MemberManageController::class, 'adminlog'])->name('members.adminlog');
-    
+
     // agent manage routes
     Route::get('agent/manage', [AgentManageController::class, 'index'])->name('agents.index');
     Route::get('agent/{id}/edit', [AgentManageController::class, 'edit'])->name('agents.edit');

@@ -41,15 +41,14 @@ class FrontendController extends Controller
 {
     public function index()
     {
-
         $sliders = Banner::where(['status' => 1, 'category_id' => 1])
             ->select('id', 'image', 'link')
             ->get();
 
         $sliderrightads = Banner::where(['status' => 1, 'category_id' => 1])
-        ->select('id', 'image', 'link')
-        ->limit(1)
-        ->first();
+            ->select('id', 'image', 'link')
+            ->limit(1)
+            ->first();
 
         $hotdeal_top = Product::where(['status' => 1, 'topsale' => 1])
             ->orderBy('id', 'DESC')
@@ -66,9 +65,6 @@ class FrontendController extends Controller
         $brands = Brand::where(['status' => 1])
             ->orderBy('id', 'ASC')
             ->get();
-
-
-
 
         $months = Monthname::all();
         $religions = Religion::where('status', 1)->get();
@@ -164,26 +160,33 @@ class FrontendController extends Controller
     public function members(Request $request)
     {
         $members = Member::where(['publish' => 1]);
-        if ($request->from && $request->to) {
+        if ($request->age_min && $request->age_max) {
             $members = $members->whereHas('memberinfo', function ($query) use ($request) {
-                $query->whereBetween('age', [$request->from, $request->to]);
+                $query->whereBetween('age', [$request->age_min, $request->age_max]);
             });
         }
-        if ($request->religion_id) {
+        if ($request->religion) {
             $members = $members->whereHas('memberinfo', function ($query) use ($request) {
-                $query->where('religion_id', $request->religion_id);
+                $query->where('religion_id', $request->religion);
             });
         }
-        if ($request->country_id) {
-            $members = $members->whereHas('memberinfo', function ($query) use ($request) {
-                $query->where('country_id', $request->country_id);
+        if ($request->gender) {
+            $members = $members->where(function($query) use ($request) {
+                switch ($request->gender) {
+                    case 'bride':
+                        $query->where('gender', 2);
+                        break;
+                    case 'groom':
+                        $query->where('gender', 1);
+                        break;
+                    default:
+                        // Handle unexpected gender values if needed
+                        break;
+                }
             });
         }
-        if ($request->profession_id) {
-            $members = $members->whereHas('membercareer', function ($query) use ($request) {
-                $query->where('profession_id', $request->profession_id);
-            });
-        }
+
+
         $members = $members->limit(18)->get();
         // return $members;
 
@@ -195,7 +198,7 @@ class FrontendController extends Controller
         $divisions = Division::where('status', 1)->get();
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
-        return view('frontEnd.layouts.pages.members', compact('members', 'months','religions','educations','professions','countries','divisions','districts','upazilas'));
+        return view('frontEnd.layouts.pages.members', compact('members', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
     }
 
     public function packages()
@@ -250,7 +253,7 @@ class FrontendController extends Controller
 
         $details = Member::where(['id' => $id, 'status' => 1])
             ->firstOrFail();
-            // return $details;
+        // return $details;
         return view('frontEnd.layouts.pages.details', compact('details'));
     }
 
@@ -527,7 +530,7 @@ class FrontendController extends Controller
     {
         return view('frontEnd.agent.login');
     }
-   public function register_online()
+    public function register_online()
     {
         $months = Monthname::all();
         $religions = Religion::where('status', 1)->get();
