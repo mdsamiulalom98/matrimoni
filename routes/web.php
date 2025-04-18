@@ -70,6 +70,7 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('subcategory/{subcategory}', [FrontendController::class, 'subcategory'])->name('subcategory');
     Route::get('products/{slug}', [FrontendController::class, 'products'])->name('products');
     Route::get('members', [FrontendController::class, 'members'])->name('members');
+    Route::get('recently-views', [FrontendController::class, 'recentlyViews'])->name('recentlyViews');
     Route::get('details/{id}', [FrontendController::class, 'details'])->name('details');
     Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
     Route::get('about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');

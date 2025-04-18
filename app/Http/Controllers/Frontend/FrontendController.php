@@ -80,7 +80,6 @@ class FrontendController extends Controller
 
     public function category($slug, Request $request)
     {
-
         $category = Category::where(['slug' => $slug, 'status' => 1])->first();
         $products = Product::where(['status' => 1, 'category_id' => $category->id])
             ->select('id', 'name', 'slug', 'new_price', 'old_price', 'type', 'category_id')->withCount('variable');
@@ -160,6 +159,9 @@ class FrontendController extends Controller
     public function members(Request $request)
     {
         $members = Member::where(['publish' => 1]);
+        if (Auth::guard('member')->check()) {
+            $members = $members->where('id', '!=', Auth::guard('member')->user()->id);
+        }
         if ($request->age_min && $request->age_max) {
             $members = $members->whereHas('memberinfo', function ($query) use ($request) {
                 $query->whereBetween('age', [$request->age_min, $request->age_max]);
@@ -170,8 +172,13 @@ class FrontendController extends Controller
                 $query->where('religion_id', $request->religion);
             });
         }
+        if ($request->district) {
+            $members = $members->whereHas('memberlocation', function ($query) use ($request) {
+                $query->where('present_district', $request->district);
+            });
+        }
         if ($request->gender) {
-            $members = $members->where(function($query) use ($request) {
+            $members = $members->where(function ($query) use ($request) {
                 switch ($request->gender) {
                     case 'bride':
                         $query->where('gender', 2);
@@ -253,7 +260,13 @@ class FrontendController extends Controller
 
         $details = Member::where(['id' => $id, 'status' => 1])
             ->firstOrFail();
-        // return $details;
+
+        $memberId = $details->id;
+        $memberIds = Session::get('memberIds', []);
+        if (!in_array($memberId, $memberIds)) {
+            $memberIds[] = $memberId;
+            Session::put('memberIds', $memberIds);
+        }
         return view('frontEnd.layouts.pages.details', compact('details'));
     }
 
@@ -554,5 +567,12 @@ class FrontendController extends Controller
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
         return view('frontEnd.member.registerOfline', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    }
+    public function recentlyViews()
+    {
+        $memberIds = Session::get('memberIds', []);
+        $members = Member::whereIn('id', $memberIds)->where('publish', 1)->orderBy('id', 'desc')->get();
+        // return $recentlyViews;
+        return view('frontEnd.layouts.pages.recentlyViews', compact('members'));
     }
 }

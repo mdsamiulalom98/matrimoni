@@ -162,20 +162,23 @@
 
     <section class="member-profile-section section-padding">
         <div class="container">
+            @php
+                $member = Auth::guard('member')->check() ? Auth::guard('member')->user() : null;
+            @endphp
+
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="my-match-tab" data-bs-toggle="tab" data-bs-target="#my-match"
                         type="button" role="tab" aria-controls="my-match" aria-selected="true">My Match</button>
                 </li>
-                    <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="nearby-match-tab" data-bs-toggle="tab" data-bs-target="#nearby-match"
-                        type="button" role="tab" aria-controls="nearby-match" aria-selected="false">Near by
-                        Match</button>
+                <li class="nav-item" role="presentation">
+                    <a href="{{ route('members', ['district' => $member->memberlocation->present_district ?? '']) }}"
+                        class="nav-link">Near by
+                        Match</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="view-not-contact-tab" data-bs-toggle="tab"
-                        data-bs-target="#view-not-contact" type="button" role="tab" aria-controls="view-not-contact"
-                        aria-selected="false">View Not Contact</button>
+                    <a href="{{ route('recentlyViews') }}" class="nav-link">View Not
+                        Contact</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="view-profile-tab" data-bs-toggle="tab" data-bs-target="#view-profile"
