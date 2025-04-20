@@ -1724,6 +1724,7 @@ label {
 .menu {
     padding: 0px 20px 20px 20px;
 }
+
 .menu-item {
     padding: 10px;
     display: flex;
@@ -3729,6 +3730,7 @@ p.max-image-text {
     color: #333;
     font-weight: 700;
 }
+
 .profile-info p {
     font-size: 16px;
     color: #666;
@@ -3760,6 +3762,10 @@ p.max-image-text {
     display: flex;
     float: inline-end;
     margin: 0 6px 0 0;
+}
+.popup-container button[disabled] {
+    background: #ccc;
+    cursor: not-allowed;
 }
 
 .popup-container {
@@ -4175,4 +4181,10 @@ button.search-btn {
     background-color: #ff636a;
     color: #fff;
     border-color: #ff636a;
+}
+
+.title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
