@@ -209,6 +209,9 @@ Route::group(['namespace' => 'frontEnd', 'prefix' => 'member', 'middleware' => [
 
     Route::get('/partner-expectation-edit', [MemberController::class, 'partnerExpectationEdit'])->name('member.partnerexpedit');
     Route::post('/partner-expectation-update', [MemberController::class, 'partnerExpectationUpdate'])->name('member.partnerexpupdate');
+    Route::post('friend-request/send', [MemberController::class, 'sendRequest'])->name('member.proposal.send');
+    Route::post('friend-request/respond', [MemberController::class, 'respondToRequest'])->name('member.proposal.respond');
+    Route::get('friend-request/{id}', [MemberController::class, 'request_view'])->name('member.request.view');
 
     Route::get('wishlist', [MemberController::class, 'wishlist'])->name('member.wishlist');
 });

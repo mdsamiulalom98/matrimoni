@@ -24,11 +24,11 @@ use App\Models\Country;
 use App\Models\Division;
 use App\Models\District;
 use App\Models\Upazila;
+use App\Models\ProposalRequest;
 use DateTime;
 
 class MemberController extends Controller
 {
-
     function __construct()
     {
         $this->middleware('member', ['except' => ['register', 'signin']]);
@@ -45,7 +45,7 @@ class MemberController extends Controller
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
-        
+
         // return $request->all();
 
         // $request->validate([
@@ -597,5 +597,68 @@ class MemberController extends Controller
             Toastr::error('আপনার ভেরিফিকেশন কোড ভুল হয়েছে।');
             return redirect()->back();
         }
+    }
+
+    public function sendRequest(Request $request)
+    {
+        $sender_id = Auth::guard('member')->user()->id;
+        $receiver_id = $request->receiver_id;
+        // Prevent sending request to self
+        if ($sender_id == $receiver_id) {
+            Toastr::error('You cannot send request to yourself.', 'Sorry');
+            return redirect()->back();
+        }
+
+        // Check if request already exists
+        $existing = ProposalRequest::where(function ($query) use ($sender_id, $receiver_id) {
+            $query->where('sender_id', $sender_id)->where('receiver_id', $receiver_id);
+        })->orWhere(function ($query) use ($sender_id, $receiver_id) {
+            $query->where('sender_id', $receiver_id)->where('receiver_id', $sender_id);
+        })->first();
+
+        if ($existing) {
+            Toastr::error('Proposal request already exists.', 'Sorry');
+            return redirect()->back();
+        }
+
+        ProposalRequest::create([
+            'sender_id' => $sender_id,
+            'receiver_id' => $receiver_id,
+            'status' => 'pending',
+        ]);
+
+        Toastr::success('Proposal request sent.', 'Success');
+        return redirect()->back();
+    }
+
+    public function respondToRequest(Request $request)
+    {
+        // return $request->all();
+        $request_id = $request->id;
+        $request->status;
+        $friendRequest = ProposalRequest::findOrFail($request_id);
+
+        // Only receiver can respond
+        if ($friendRequest->receiver_id != Auth::guard('member')->user()->id) {
+            Toastr::success('Unauthorized.');
+            return redirect()->back();
+        }
+
+        $status = $request->input('status'); // accepted or declined
+
+        if ($status == 'Deny') {
+            $approveStatus = 'declined';
+        } else if ($status == 'Accept') {
+            $approveStatus = 'accepted';
+        }
+        // return $approveStatus;
+        $friendRequest->update(['status' => $approveStatus]);
+        Toastr::success('Friend request ' . $status);
+        return redirect()->back();
+    }
+
+    public function request_view($id)
+    {
+        return view('frontEnd.layouts.pages.requestpage', compact('id'));
     }
 }

@@ -383,12 +383,16 @@
                         @endif
 
                         <div class="post-footer">
-                            <a href="#">
+                            <a href="#" onclick="document.getElementById('proposalForm').submit(); return false;">
                                 <span>
                                     <i class="fa-solid fa-hand-holding-hand"></i>
                                     <p>Proposel</p>
                                 </span>
                             </a>
+                            <form id="proposalForm" method="POST"
+                                action="{{ route('member.proposal.send', ['receiver_id' => $value->id]) }}">
+                                @csrf
+                            </form>
                             <a href="#">
                                 <span>
                                     <i class="fa-solid fa-message"></i>
@@ -397,8 +401,29 @@
                             </a>
                             <a href="#">
                                 <span>
+                                    <i class="fa-solid fa-message"></i>
+                                    <p>Message</p>
+                                </span>
+                            </a>
+                            @php
+                                $sender_id = Auth::guard('member')->user()->id;
+                                $receiver_id = $value->id;
+                                $findRequest = \App\Models\ProposalRequest::where(function ($query) use (
+                                    $sender_id,
+                                    $receiver_id,
+                                ) {
+                                    $query->where('sender_id', $sender_id)->where('receiver_id', $receiver_id);
+                                })->first();
+                                $requestStatus = $findRequest->status ?? '';
+                            @endphp
+                            <a href="#">
+                                <span>
                                     <i class="fa-solid fa-phone-volume"></i>
-                                    <p>Contact</p>
+                                    @if ($requestStatus == 'accepted')
+                                        <p>{{ $value->phone }}</p>
+                                    @else
+                                        <p>Contact {{ $requestStatus }}</p>
+                                    @endif
                                 </span>
                             </a>
                             <a href="#">

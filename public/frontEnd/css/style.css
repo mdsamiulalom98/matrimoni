@@ -3763,6 +3763,7 @@ p.max-image-text {
     float: inline-end;
     margin: 0 6px 0 0;
 }
+
 .popup-container button[disabled] {
     background: #ccc;
     cursor: not-allowed;
@@ -4187,4 +4188,50 @@ button.search-btn {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+.proposal-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.proposal-card h2 {
+    margin-bottom: 10px;
+}
+
+.proposal-card p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-accept {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-deny {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.proposal-page-wrapper  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
