@@ -3,189 +3,106 @@
 
 @section('content')
 
-    {{-- <section class="member-profile-section section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="member-profile-sidebar">
-                    @include('frontEnd.member.sidebar')
+  
+@php 
+    $memberInfo = Auth::guard('member')->user();
+@endphp
+    <section class="user_profile_section">
+        <div class="profile-container">
+                        <!--<div class="profile-header">PROFILE</div>-->
+                        <div class="profile-section">
+                            <div class="profile-img">
+                                <img src="{{ asset($memberInfo->memberimage->image_one ?? '') }}" alt="">
+                                <!--<i class="fa-solid fa-user-nurse"></i>-->
+                            </div>
+
+                            <div class="profile-info">
+                                <div class = "member_menu_flex">
+                                    <h3>{{ $memberInfo->name }}</h3>
+                                    <div class= "profile_menubar toggle2">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </div>
+                                </div>
+                                <p>{{ $memberInfo->member_id }}</p>
+                                <p>Membership - Free <a href="#" style="color: blue;">Upgrade Now</a></p>
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <p>Your profile score 30%</p>
+                            </div>
+
+                        </div>
+                        <div class="menu">
+                            <div class="menu-item"><i class="fas fa-users"></i> Matches</div>
+                            <div class="menu-item"><i class="fas fa-envelope"></i> Mailbox</div>
+                            <div class="menu-item"><i class="fas fa-calendar-alt"></i> Daily Matches</div>
+                            <div class="menu-item"><i class="fas fa-comments"></i> Chat</div>
+                            <div class="menu-item"><i class="fas fa-user-edit"></i> Edit Profile</div>
+                            <div class="menu-item"><i class="fas fa-user-cog"></i> Edit Partner Preference</div>
+                            <div class="menu-item"><i class="fas fa-history"></i> Contact History</div>
+                            <div class="menu-item"><i class="fas fa-sms"></i> SMS History</div>
+                        </div>
+                    </div>
+    </section>
+    
+    <div class="profile-popup">
+            <div class="mobile-menu-logo">
+                <div class="logo-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" />
+                    {{-- <img src="{{asset($generalsetting->dark_logo)}}" alt="" /> --}}
+                </div>
+                <div class="profile-popup-close">
+                    <i class="fa fa-times"></i>
                 </div>
             </div>
-            <div class="col-sm-8">
-                <div class="member-profile-header">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Quick Search</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Quick Filter</button>
-                        </li>
-                      </ul>
-                      <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active mt-3" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="find_member">
-                                <div class="filtercontainer">
-                                    <form action="{{ route('members') }}" method="GET">
-                                            <h4 class="mb-3">🔍 Find Your Perfect Match</h4>
-
-                                           <div class="row">
-                                            <div class="col-sm-4 mb-0">
-                                                <label for="country" class="form-label">Country</label>
-                                                <select id="country" class="form-select">
-                                                    <option value="">Select Country</option>
-                                                    <option value="USA">USA</option>
-                                                    <option value="UK">UK</option>
-                                                    <option value="India">India</option>
-                                                    <option value="Bangladesh">Bangladesh</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 mb-0">
-                                                <label for="religion" class="form-label">Religion</label>
-                                                <select id="religion" class="form-select">
-                                                    <option value="">Select Religion</option>
-                                                    <option value="Islam">Islam</option>
-                                                    <option value="Hinduism">Hinduism</option>
-                                                    <option value="Christianity">Christianity</option>
-                                                    <option value="Buddhism">Buddhism</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 mb-0">
-                                                <label for="gender" class="form-label">Bride/Groom</label>
-                                                <select id="gender" class="form-select">
-                                                    <option value="">Select</option>
-                                                    <option value="Bride">Bride</option>
-                                                    <option value="Groom">Groom</option>
-                                                </select>
-                                            </div>
-                                           </div>
-
-                                           <div class="row">
-                                            <div class="col-sm-4 mb-0">
-                                                <label for="age" class="form-label">Age Range</label>
-                                                <div class="form-group">
-                                                    <div class="age-range">
-                                                        <input type="number" name="from" class="ageinput" value="22">
-                                                        <span style="color: #000">to</span>
-                                                        <input type="number" name="to" class="ageinput" value="27">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4 mb-0">
-                                                <label for="marital_status" class="form-label">Marital Status</label>
-                                                <select id="marital_status" class="form-select">
-                                                    <option value="">Select</option>
-                                                    <option value="Single">Single</option>
-                                                    <option value="Divorced">Divorced</option>
-                                                    <option value="Widowed">Widowed</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 mb-0">
-                                                <label for="education" class="form-label">Education</label>
-                                                <input type="text" id="education" class="form-control" placeholder="Enter Education">
-                                            </div>
-                                           </div>
-
-                                           <div class="row">
-                                                <div class="col-sm-6 mb-0">
-                                                    <label for="profession" class="form-label">Profession</label>
-                                                    <input type="text" id="profession" class="form-control" placeholder="Enter Profession">
-                                                </div>
-                                                <div class="col-sm-6 mb-0">
-                                                    <label for="complexsion" class="form-label">Complexsion</label>
-                                                    <input type="text" id="complexsion" class="form-control" placeholder="Enter complexsion">
-                                                </div>
-                                           </div>
-
-                                            <button type="submit" class="submit-btn">Search</button>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade mt-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="member-profile-content">
-                                <h5 class="account-title">My Account</h5>
-                                <table class="table">
-                                    @php
-                                        $customer = \App\Models\Member::find(Auth::guard('member')->user()->id);
-                                    @endphp
-                                    <tbody>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>{{ $customer->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Phone</td>
-                                            <td>{{ $customer->phone }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email</td>
-                                            <td>{{ $customer->email }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address</td>
-                                            <td>{{ $customer->address }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Disctrict</td>
-                                            <td>{{ $customer->district }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Area</td>
-                                            <td>{{ $customer->cust_area ? $customer->cust_area->area_name : '' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Image</td>
-                                            <td><img src="{{ asset($customer->image) }}" alt="" class="backend_img"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade mt-3" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-
-                            There need to something
-                        </div>
-                      </div>
-                </div>
+            <div class="mobilemenu-bottom">
+                <ul>
+                    <li><a href="{{route('home')}}">home</a></li>
+                    <li><a href="{{route('members')}}">Members</a></li>
+                    <li><a href="{{route('packages')}}">Package</a></li>
+                    <li><a href="{{route('packages')}}">Appointment</a></li>
+                    <li><a href="{{route('aboutUs')}}">About Us</a></li>
+                    <li><a href="{{route('contact')}}">Contact Us</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-</section> --}}
 
-    <section class="member-profile-section section-padding">
+    <section class="member-profile-section">
         <div class="container">
             @php
                 $member = Auth::guard('member')->check() ? Auth::guard('member')->user() : null;
             @endphp
 
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="my-match-tab" data-bs-toggle="tab" data-bs-target="#my-match"
-                        type="button" role="tab" aria-controls="my-match" aria-selected="true">My Match</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="{{ route('members', ['district' => $member->memberlocation->present_district ?? '']) }}"
-                        class="nav-link">Near by
-                        Match</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="{{ route('recentlyViews') }}" class="nav-link">View Not
-                        Contact</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="view-profile-tab" data-bs-toggle="tab" data-bs-target="#view-profile"
-                        type="button" role="tab" aria-controls="view-profile" aria-selected="false">View My
-                        Profile</button>
-                </li>
-            </ul>
+            <div class="tab_button">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="my-match-tab" data-bs-toggle="tab" data-bs-target="#my-match"
+                            type="button" role="tab" aria-controls="my-match" aria-selected="true">My Match</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="{{ route('members', ['district' => $member->memberlocation->present_district ?? '']) }}"
+                            class="nav-link">Near by
+                            Match</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="{{ route('recentlyViews') }}" class="nav-link">View Not
+                            Contact</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="view-profile-tab" data-bs-toggle="tab" data-bs-target="#view-profile"
+                            type="button" role="tab" aria-controls="view-profile" aria-selected="false">View My
+                            Profile</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="view-profile-tab" href="{{ route('favorites') }}"
+                            >Favourite</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" id="view-profile-tab" href="{{ route('proposals') }}"
+                            >Proposal</a>
+                    </li>
+               </ul>
+            </div>
 
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active mt-3" id="my-match" role="tabpanel" aria-labelledby="my-match-tab">
@@ -195,13 +112,11 @@
                             <form action="#" method="GET">
                                 <div class="searchbox">
                                     <h6 class="title">Looking for</h6>
-
                                     <div class="gender_selection">
                                         <button type="button" class="gender-btn active" data-gender="bride">Bride</button>
                                         <button type="button" class="gender-btn" data-gender="groom">Groom</button>
                                         <input type="hidden" name="gender" id="selectedGender" value="bride">
                                     </div>
-
                                     <div class="form-group">
                                         <label>Age</label>
                                         <div class="age-box">
@@ -238,43 +153,8 @@
                 </div>
 
                 <div class="tab-pane fade mt-3" id="view-profile" role="tabpanel" aria-labelledby="view-profile-tab">
-                    <div class="profile-container">
-                        {{-- <div class="profile-header">PROFILE</div> --}}
-                        <div class="profile-section">
-                            <div class="profile-img">
-                                {{-- <img src="{{ asset(Auth::guard('member')->user()->image ?? '') }}" alt=""> --}}
-                                <i class="fa-solid fa-user-nurse"></i>
-                            </div>
-
-                            <div class="profile-info">
-                                <h3>Tania Akter</h3>
-                                <p>BGD3604528</p>
-                                <p>Membership - Free <a href="#" style="color: blue;">Upgrade Now</a></p>
-                                <div class="progress-bar">
-                                    <div class="progress"></div>
-                                </div>
-                                <p>Your profile score 30%</p>
-                            </div>
-
-                        </div>
-                        <div class="menu">
-                            <div class="menu-item"><i class="fas fa-users"></i> Matches</div>
-                            <div class="menu-item"><i class="fas fa-envelope"></i> Mailbox</div>
-                            <div class="menu-item"><i class="fas fa-calendar-alt"></i> Daily Matches</div>
-                            <div class="menu-item"><i class="fas fa-comments"></i> Chat</div>
-                            <div class="menu-item"><i class="fas fa-user-edit"></i> Edit Profile</div>
-                            <div class="menu-item"><i class="fas fa-user-cog"></i> Edit Partner Preference</div>
-                            <div class="menu-item"><i class="fas fa-history"></i> Contact History</div>
-                            <div class="menu-item"><i class="fas fa-sms"></i> SMS History</div>
-                        </div>
-                    </div>
-                    {{-- <div class="bottom-nav">
-                    <a href="#"><i class="fas fa-home"></i> Home</a>
-                    <a href="#"><i class="fas fa-search"></i> Search</a>
-                    <a href="#"><i class="fas fa-envelope"></i> Mailbox</a>
-                    <a href="#"><i class="fas fa-crown"></i> Upgrade</a>
-                    <a href="#"><i class="fas fa-user"></i> Profile</a>
-                </div> --}}
+                    
+                   <h1>Who Visited My Profile</h1>
                 </div>
 
                 <div class="tab-pane fade mt-3" id="view-not-contact" role="tabpanel"
@@ -287,16 +167,17 @@
 
 
 
-    <section class="member_section section-padding">
+    <section class="member_section">
         <div class="custome_container">
             <div class="member_gird">
                 @foreach ($members as $key => $value)
                     <div class="post-container">
                         <div class="post-header-flex">
                             <div class="post-header">
-                                {{-- <i class="fa-solid fa-user profile-pic"></i> --}}
-                                <img class="profile-pic" src="{{ asset($value->memberimage->image_one ?? '') }}"
-                                    alt="">
+                                <div class="profile-pic">
+                                    <img src="{{ asset($value->memberimage->image_one ?? '') }}" alt="">
+                                     <div class = "active_dot"></div>
+                                </div>
                                 <div>
                                     <div class="member_info_flex">
                                         <h3 class="member_name">{{ $value->name }}</h3>
@@ -383,13 +264,13 @@
                         @endif
 
                         <div class="post-footer">
-                            <a href="#" onclick="document.getElementById('proposalForm').submit(); return false;">
+                            <a href="#" onclick="document.getElementById('proposalForm{{ $key }}').submit(); return false;">
                                 <span>
                                     <i class="fa-solid fa-hand-holding-hand"></i>
                                     <p>Proposel</p>
                                 </span>
                             </a>
-                            <form id="proposalForm" method="POST"
+                            <form id="proposalForm{{ $key }}" method="POST"
                                 action="{{ route('member.proposal.send', ['receiver_id' => $value->id]) }}">
                                 @csrf
                             </form>
@@ -406,15 +287,18 @@
                                 </span>
                             </a>
                             @php
-                                $sender_id = Auth::guard('member')->user()->id;
-                                $receiver_id = $value->id;
-                                $findRequest = \App\Models\ProposalRequest::where(function ($query) use (
-                                    $sender_id,
-                                    $receiver_id,
-                                ) {
-                                    $query->where('sender_id', $sender_id)->where('receiver_id', $receiver_id);
-                                })->first();
-                                $requestStatus = $findRequest->status ?? '';
+                                $requestStatus = '';
+                                if (Auth::guard('member')->check()) {
+                                    $sender_id = Auth::guard('member')->user()->id;
+                                    $receiver_id = $value->id;
+                                    $findRequest = \App\Models\ProposalRequest::where(function ($query) use (
+                                        $sender_id,
+                                        $receiver_id,
+                                    ) {
+                                        $query->where('sender_id', $sender_id)->where('receiver_id', $receiver_id);
+                                    })->first();
+                                    $requestStatus = $findRequest->status ?? '';
+                                }
                             @endphp
                             <a href="#">
                                 <span>
@@ -426,11 +310,15 @@
                                     @endif
                                 </span>
                             </a>
-                            <a href="#">
+                            <a href="#" onclick="document.getElementById('favoriteForm{{ $key }}').submit(); return false;">
                                 <span>
                                     <i style="color: red" class="fa-solid fa-heart"></i>
                                 </span>
                             </a>
+                            <form id="favoriteForm{{ $key }}" method="POST"
+                                action="{{ route('member.favorite.send', ['favorite_id' => $value->id]) }}">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 @endforeach
@@ -780,6 +668,26 @@
 @endsection
 
 @push('script')
+
+    <script>
+            $(".toggle2").on("click", function () {
+                $("#page-overlay").show();
+                $(".profile-popup").addClass("active");
+            });
+
+            $("#page-overlay").on("click", function () {
+                $("#page-overlay").hide();
+                $(".profile-popup").removeClass("active");
+                $(".feature-products").removeClass("active");
+            });
+
+            $(".profile-popup-close").on("click", function () {
+                $("#page-overlay").hide();
+                $(".profile-popup").removeClass("active");
+            });
+
+        </script>
+
     <script>
         // Gender selection functionality
         const genderButtons = document.querySelectorAll('.gender-btn');

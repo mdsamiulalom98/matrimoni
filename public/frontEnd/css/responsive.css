@@ -605,9 +605,10 @@
         color: #080808 !important;
     }
 
-   .menu-logo img {
-        height: 50px;
-        margin-top: -3px;
+    .menu-logo img {
+        height: 44px;
+        margin-top: 0px;
+        margin-right: 24px;
     }
     .dimage_item {
         height: 275px;
@@ -656,6 +657,10 @@
         top: -10px;
         right: 0;
     }
+    
+    .member_menu_flex .profile_menubar {
+       display: block; 
+    }
 
     .menu-bag .margin-shopping span i.fa-solid.fa-bag-shopping {
         font-size: 22px;
@@ -667,12 +672,15 @@
         justify-content: flex-end;
         margin-right: 1px;
     }
+
+    
     i#m_login {
         margin: -4px 2px -9px 0px;
     }
     .menu-bag i {
-        font-size: 21px;
+        font-size: 19px;
         color: #ff5a60 !important;
+        padding: 0 3px;
     }
 
     .menu-bag ul li a {
@@ -1158,6 +1166,31 @@ button.form_close {
 .member-profile-section .nav-link {
     padding: 4px 5px !important;
     font-size: 12px !important;
+}
+
+.profile-img {
+    width: 90px;
+    height: 95px;
+    border-radius: 50%;
+    background: #ddd;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.profile-section {
+    text-align: center;
+    padding: 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+.profile-info h3 {
+    font-size: 18px;
+    color: #333;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
 }
 
 .package-container {

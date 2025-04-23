@@ -34,9 +34,12 @@ use App\Models\Country;
 use App\Models\Division;
 use App\Models\Upazila;
 use App\Models\Member;
+use App\Models\FavoriteMember;
+use App\Models\ProposalRequest;
 use Cache;
 use DB;
 use Log;
+
 class FrontendController extends Controller
 {
     public function index()
@@ -574,5 +577,36 @@ class FrontendController extends Controller
         $members = Member::whereIn('id', $memberIds)->where('publish', 1)->orderBy('id', 'desc')->get();
         // return $recentlyViews;
         return view('frontEnd.layouts.pages.recentlyViews', compact('members'));
+    }
+    
+    public function favorites() {
+        $favorites = FavoriteMember::where('member_id', Auth::guard('member')->user()->id)
+            ->pluck('favorite_id')
+            ->toArray();
+
+        $members = Member::where(['publish' => 1])->whereIn('id', $favorites);
+        if (Auth::guard('member')->check()) {
+            $members = $members->where('id', '!=', Auth::guard('member')->user()->id);
+        }
+
+        $members = $members->limit(18)->get();
+        // return $members;
+        
+        return view('frontEnd.layouts.pages.favorite', compact('members'));
+    
+    }    
+    public function proposals() {
+        $proposals = ProposalRequest::where('sender_id', Auth::guard('member')->user()->id)
+            ->pluck('receiver_id')
+            ->toArray();
+        $members = Member::where(['publish' => 1])->whereIn('id', $proposals);
+        if (Auth::guard('member')->check()) {
+            $members = $members->where('id', '!=', Auth::guard('member')->user()->id);
+        }
+
+        $members = $members->limit(18)->get();
+        // return $members;
+        
+        return view('frontEnd.layouts.pages.proposal', compact('members'));
     }
 }

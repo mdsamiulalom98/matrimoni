@@ -25,6 +25,7 @@ use App\Models\Division;
 use App\Models\District;
 use App\Models\Upazila;
 use App\Models\ProposalRequest;
+use App\Models\FavoriteMember;
 use DateTime;
 
 class MemberController extends Controller
@@ -45,7 +46,7 @@ class MemberController extends Controller
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
-
+        
         // return $request->all();
 
         // $request->validate([
@@ -241,7 +242,7 @@ class MemberController extends Controller
                 Toastr::success('আপনার অ্যাকাউন্ট স্থগিত করা হয়েছে');
                 Session::put('phoneverify', $memberCheck->phone);
 
-                return redirect()->route('member.account');
+                return redirect()->route('members');
             } else {
                 $credentials = ['phone' => $request->phone, 'password' => $request->password];
                 if (Auth::guard('member')->attempt($credentials)) {
@@ -249,7 +250,7 @@ class MemberController extends Controller
                     if (Cart::instance('wishlist')->count() > 0) {
                         return redirect()->route('wishlist');
                     }
-                    return redirect()->route('member.account');
+                    return redirect()->route('members');
                 } else {
                     Toastr::error('ভুল পাসওয়ার্ড !');
                     return redirect()->back();
@@ -598,6 +599,8 @@ class MemberController extends Controller
             return redirect()->back();
         }
     }
+    
+    
 
     public function sendRequest(Request $request)
     {
@@ -661,4 +664,41 @@ class MemberController extends Controller
     {
         return view('frontEnd.layouts.pages.requestpage', compact('id'));
     }
+    
+    public function favorite_send(Request $request)
+    {
+        $member_id = Auth::guard('member')->user()->id;
+        $favorite_id = $request->favorite_id;
+        // return $favorite_id;
+        // Prevent sending request to self
+        if ($member_id == $favorite_id) {
+            Toastr::error('You cannot send request to yourself.', 'Sorry');
+            return redirect()->back();
+        }
+
+        // Check if request already exists
+        $existing = FavoriteMember::where('member_id', $member_id)
+            ->where('favorite_id', $favorite_id)
+            ->first();
+
+        if ($existing) {
+            Toastr::error('Favorite request already exists.', 'Sorry');
+            return redirect()->back();
+        }
+
+        FavoriteMember::create([
+            'member_id' => $member_id,
+            'favorite_id' => $favorite_id,
+        ]);
+
+        Toastr::success('Proposal request sent.', 'Success');
+        return redirect()->back();
+    }
+    
+    public function logout()
+    {
+        Auth::guard('member')->logout();
+        return redirect()->route('member.login');
+    }
+    
 }

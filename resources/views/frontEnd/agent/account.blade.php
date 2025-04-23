@@ -8,19 +8,19 @@
             <div class="profile_image">
                 <img  src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D" alt="Profile Photo" class="profile-photo">
             </div>
-            <div class="profile-header">
-                <div class="profile-info">
+            <div class="agent-profile-header">
+                <div class="agent-profile-info">
                     <h2 style="color: #fff" >{{ Auth::guard('agent')->user()->name }}</h2>
                     <p>Agent Id : {{ Auth::guard('agent')->user()->agent_id }}</p>
-                    <p>ID: AGT-12345</p>
+                    <p>My Blance : 2585Tk</p>
                 </div>
             </div>
-            {{-- <nav class="sidebar-nav">
-                <a href="#">Dashboard</a>
-                <a href="#">Members</a>
-                <a href="#">Reports</a>
-                <a href="#">Settings</a>
-            </nav> --}}
+             <nav class="sidebar-nav">
+                <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="#"><i class="fa-solid fa-person-breastfeeding"></i>My Members</a>
+                <a href="#"><i class="fa-solid fa-pen-to-square"></i> Profile edit</a>
+                <a href="#"><i class="fa-solid fa-lock"></i> Password Change</a>
+            </nav>
         </div>
 
         <!-- Main Content -->

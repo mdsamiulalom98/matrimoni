@@ -54,6 +54,12 @@ Route::get('/cc', function () {
     return "Cleared!";
 });
 
+Route::get('/model', function () {
+    Artisan::call('make:model FavoriteMember -m');
+    return "Model Created";
+});
+
+
 Route::get('/migrate', function () {
     Artisan::call('migrate');
     return "Migrated!";
@@ -70,6 +76,8 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('subcategory/{subcategory}', [FrontendController::class, 'subcategory'])->name('subcategory');
     Route::get('products/{slug}', [FrontendController::class, 'products'])->name('products');
     Route::get('members', [FrontendController::class, 'members'])->name('members');
+    Route::get('favorite-members', [FrontendController::class, 'favorites'])->name('favorites');
+    Route::get('proposal-members', [FrontendController::class, 'proposals'])->name('proposals');
     Route::get('recently-views', [FrontendController::class, 'recentlyViews'])->name('recentlyViews');
     Route::get('details/{id}', [FrontendController::class, 'details'])->name('details');
     Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
@@ -212,6 +220,7 @@ Route::group(['namespace' => 'frontEnd', 'prefix' => 'member', 'middleware' => [
     Route::post('friend-request/send', [MemberController::class, 'sendRequest'])->name('member.proposal.send');
     Route::post('friend-request/respond', [MemberController::class, 'respondToRequest'])->name('member.proposal.respond');
     Route::get('friend-request/{id}', [MemberController::class, 'request_view'])->name('member.request.view');
+    Route::post('favorite-store', [MemberController::class, 'favorite_send'])->name('member.favorite.send');
 
     Route::get('wishlist', [MemberController::class, 'wishlist'])->name('member.wishlist');
 });

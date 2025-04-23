@@ -1362,6 +1362,14 @@ legend {
     color: #FF0000;
 }
 
+.member_menu_flex .profile_menubar {
+   /*display: none; */
+}
+.member_menu_flex {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* .section_title {
     font-size: 36px;
     font-weight: 700;
@@ -1642,6 +1650,11 @@ label {
 
 
 /* ================ Member Css ============ */
+
+.member_section {
+    padding: 20px 0;
+}
+
 .member_gird {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -1870,6 +1883,7 @@ p.discount_pkg {
 .post-header {
     display: flex;
     padding: 10px;
+    position: relative;
 }
 
 .profile-pic {
@@ -1883,6 +1897,19 @@ p.discount_pkg {
     align-items: center;
     font-size: 27px;
     color: #ff636a;
+    /*position: relative;*/
+    overflow: hidden;
+}
+
+.active_dot {
+    position: absolute;
+    height: 12px;
+    width: 13px;
+    background-color: #0bbf13;
+    border-radius: 50px;
+    bottom: 16px;
+    left: 37px;
+    border: 2px solid #fff;
 }
 
 .post-header-flex {
@@ -2015,6 +2042,10 @@ p.discount_pkg {
 }
 
 /* ========== member-profile css ========== */
+
+.user_profile_section {
+    margin-bottom: 35px;
+}
 
 .auth-section {
     padding: 75px 0;
@@ -2474,6 +2505,37 @@ select {
     font-size: 18px;
     margin-bottom: 40px;
     color: #555;
+}
+
+.agent-profile-header {
+    background: #444444;
+    padding: 5px 0;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    margin-top: 20px;
+    padding-bottom: 16px;
+}
+
+.agent-profile-info {
+    margin-top: 10px;
+    text-align: start;
+}
+
+.agent-profile-info h2 {
+    margin: 0px !important;
+    padding-bottom: 10px;
+}
+
+.agent-profile-info p {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 2px;
 }
 
 .agent_form {
@@ -3763,7 +3825,6 @@ p.max-image-text {
     float: inline-end;
     margin: 0 6px 0 0;
 }
-
 .popup-container button[disabled] {
     background: #ccc;
     cursor: not-allowed;
@@ -3934,6 +3995,7 @@ button:hover {
     display: block;
     transition: 0.3s;
     border-radius: 5px;
+    text-align: start;
 }
 
 .sidebar-nav a:hover {
@@ -3973,7 +4035,10 @@ button:hover {
     font-size: 14px;
     color: #0f0f0f;
     text-align: start;
+    padding: 0;
+    margin: 0;
 }
+
 
 /* Stats Cards */
 .profile-stats {
@@ -4233,5 +4298,5 @@ button.search-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
 }
+

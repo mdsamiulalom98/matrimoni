@@ -112,8 +112,12 @@
                     </div>
 
                      <div class="menu-bag">
+                        <a href="#">
+                            <!--<i id="m_login" class="fab fa-facebook-messenger"></i>-->
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
                         <a href="{{route('member.login')}}">
-                            <i id="m_login" class="fa-regular fa-user"></i>
+                            <i id="m_login" class="fab fa-facebook-messenger"></i>
                         </a>
                        <a href="#" class="margin-shopping">
                         <i class="fa-regular fa-bell"></i>
