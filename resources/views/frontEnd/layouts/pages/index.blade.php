@@ -139,6 +139,46 @@
             </div>
         </section>
     </section>
+    
+    
+<section class="section_d"></section>
+  <section class = "home_login">
+      <div class="container">
+    <div class="top-bar">
+      <span class="close"></span>
+      <span class="help">Up To 70% Discount if Verified After Profile Completed</span>
+    </div>
+<form action="{{ route('user.login') }}" method="POST">
+    @csrf
+    <div class="login-box">
+          <div class="input-group">
+            <input type="text" name="phone" placeholder="Email Address / Phone Number" required>
+            <span class="icon"></span>
+          </div>
+    
+          <div class="input-group">
+            <input type="password" name="password" placeholder="Password" required>
+            <span class="icon eye"><i class="fa-regular fa-eye"></i></span>
+          </div>
+    
+          <div class="forgot">
+            <a href="#">Forgot Password?</a>
+          </div>
+          <div class="form_group">
+            <div class="">
+              <span style="color:#000; font-weight:700; padding:3px 0px" class="join_agree">  <input type="checkbox" name="is_agent"> Are You Agent?</span>
+            </div>
+          </div>
+    
+            <button type="submit" class="signin">Sign In</button>
+            <div class="divider">Or</div>
+          <div class="signup-text">
+            Don't have an account? <a href="#">Sign Up</a>
+          </div>
+        </div>
+</form>
+      </div>
+  </section>
 
 
     <section class="free_registration_section">
@@ -155,8 +195,7 @@
                                 <h5 class="register_slogan">আপনার গোপনীয়তা সুরক্ষিত রেখে পাত্র/পাত্রী খুজতে নিচের লিংকে
                                     ক্লিক করুন।</h5>
                                 <div class="register_btn_section">
-                                    {{-- <a href="{{ route('member.registerOnline') }}"> --}}
-                                    <a href="{{ route('members') }}">
+                                    <a href="{{ route('member.register') }}">
                                         Register Free<i class="fa-solid fa-arrow-right-long"></i>
                                     </a>
                                 </div>
@@ -175,7 +214,7 @@
                                     প্রোফাইল না দেখিয়ে পাত্র/পাত্রী খুজতে নিচের লিংকে ক্লিক করুন।</h5>
                                 <div class="register_btn_section">
                                     {{-- <a href="{{ route('member.registerOfline') }}"> --}}
-                                    <a href="{{ route('members') }}">
+                                    <a href="{{ route('member.register') }}">
                                         Register Free<i class="fa-solid fa-arrow-right-long"></i>
                                     </a>
                                 </div>
@@ -187,8 +226,30 @@
         </div>
     </section>
 
+    <section class="appointment_section">
+        <div class="container">
+            <div class="appointmetn_area">
+                <h3>Meet For Free To Get Any Marriage Related Advice.</h3>
+                <span>
+                    <a href="#">Book Appointment</a>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </span>
+            </div>
+        </div>
+        </div>
+    </section>
+
     <section class="how-it-works section-padding">
         <div class="container">
+            <h2 class="how-works-slogan title_pd">Join Our Affiliate Program Now</h2>
+            <p class="how-works-slogan2">Create your agent account to earn money</p>
+            <div class="register_btn_section how-works-regfree">
+                <a href="{{ route('joinAgent') }}">
+                    Register Free <i class="fa-solid fa-arrow-right-long"></i>
+                </a>
+            </div>
+            <a href="{{route('affiliate.policy')}}">Read More <i class="fa-solid fa-chevron-right"></i></a>
+            <section class="section_d sec_d_top"></section>
             <h2 class="section_title title_pd">How It Works?</h2>
             <div class="steps-wrapper">
                 <div class="step-box  wow fadeInLeft" data-wow-duration="1.2s" data-wow-delay="0.2s">
@@ -222,19 +283,7 @@
         </div>
         </div>
     </section>
-
-    <section class="appointment_section">
-        <div class="container">
-            <div class="appointmetn_area">
-                <h3>Meet for free to get any marriage related advice.</h3>
-                <span>
-                    <a href="#">Book Appointment</a>
-                    <i class="fa-solid fa-arrow-right-long"></i>
-                </span>
-            </div>
-        </div>
-        </div>
-    </section>
+    
 
     <section class="client_success_story section-padding">
         <div class="container">
@@ -459,4 +508,5 @@
             document.getElementById('brideBtn').classList.remove('active');
         });
     </script>
+
 @endpush

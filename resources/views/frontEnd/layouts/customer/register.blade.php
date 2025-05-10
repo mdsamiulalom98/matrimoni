@@ -113,7 +113,9 @@
                                             $looplimit = $currentYear - 18;
                                         @endphp
                                         @for ($i = $looplimit; $i >= 1920; $i--)
-                                            <option value="{{ $i }}">{{ $i }}</option>
+                                            <option
+                                                @if ($i < 10) value="0{{ $i }}" @else value="{{ $i }}" @endif>
+                                                {{ $i }}</option>
                                         @endfor
                                     </select>
                                     <select name="month">
@@ -236,7 +238,12 @@
                         </fieldset>
 
                         <fieldset>
-                            <div class="">
+                            <div class="position-relative">
+                                <div class="profile-lock-toggle">
+                                    <input type="checkbox" name="profile_lock" id="lock_profile" value="1" />
+                                    <label for="lock_profile"></label>
+                                    <p>Lock Your Account</p>
+                                </div>
                                 <p class="max-image-text">Upload your 3 Photos</p>
                                 <div class="register-image-wrapper">
                                     <div class="addphoto-flex" id="editPhotos">
@@ -307,4 +314,25 @@
 @push('script')
     <script src="{{ asset('public/frontEnd/') }}/js/parsley.min.js"></script>
     <script src="{{ asset('public/frontEnd/') }}/js/form-validation.init.js"></script>
+    <script>
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $(previewId).attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#image_one").change(function() {
+            previewImage(this, "#preview_one");
+        });
+        $("#image_two").change(function() {
+            previewImage(this, "#preview_two");
+        });
+        $("#image_three").change(function() {
+            previewImage(this, "#preview_three");
+        });
+    </script>
 @endpush

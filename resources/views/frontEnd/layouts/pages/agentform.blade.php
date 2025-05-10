@@ -29,16 +29,7 @@
                     <div class="form_group">
                         <label>Address *</label>
                         <input type="text" name="address" placeholder="Enter Your Address" required>
-                    </div>
-
-                    <div class="form_group">
-                        <label>Agent Type *</label>
-                        <select name="agent_type" required>
-                            <option value="">Select Agent Type</option>
-                            <option value="1">City Agent</option>
-                            <option value="2">Village Agent</option>
-                        </select>
-                    </div>
+                    </div> 
 
                     <div class="form_group">
                         <label>NID / Passport Number *</label>
@@ -56,8 +47,9 @@
                     </div>
 
                     <div class="form_group">
-                        <input type="checkbox" required>
-                        <label>I agree to the <a href="#">Terms & Conditions</a></label>
+                      <div class="">
+                        <span style="color:green" class="join_agree">  <input type="checkbox" required> I agree to the <a style="color:green" href="#">Terms & Conditions</a></span>
+                      </div>
                     </div>
 
                     <button type="submit" class="agent_btn">Join Now</button>

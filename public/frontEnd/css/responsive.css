@@ -206,9 +206,7 @@
         color: #3333339e;
         padding-top: 8px;
     }
-    .menu-bag i {
-        color: #3333339e; 
-    }
+
     
     .search_bar input {
         width: 100%;
@@ -564,7 +562,7 @@
 
     .mobile-header {
         display: block;
-        background-color: #ff63671c;
+        background-color: #fff;
         height: 61px;
         padding-top: 5px;
     }
@@ -606,9 +604,9 @@
     }
 
     .menu-logo img {
-        height: 44px;
-        margin-top: 0px;
-        margin-right: 24px;
+        height: 40px;
+        margin-top: 1px;
+        margin-right: 46px;
     }
     .dimage_item {
         height: 275px;
@@ -673,14 +671,15 @@
         margin-right: 1px;
     }
 
-    
-    i#m_login {
-        margin: -4px 2px -9px 0px;
-    }
+
     .menu-bag i {
-        font-size: 19px;
-        color: #ff5a60 !important;
-        padding: 0 3px;
+        font-size: 16px;
+        color: #000 !important;
+        background: #ddd;
+        border-radius: 50px;
+        padding: 6px 7px;
+        text-align: center;
+        margin-left: 7px;
     }
 
     .menu-bag ul li a {
@@ -731,6 +730,13 @@
     .section-title h3 {
         font-size: 14px;
         font-weight: 600;
+    }
+
+    .how-works-slogan {
+        font-family: auto;
+        font-weight: 600;
+        color: #5b5b5b;
+        padding-top: 2px;
     }
     .category-title h3 {
         font-size: 14px;
@@ -795,7 +801,7 @@
     .mobile_banner h2 {
         color: #ffffff;
         position: absolute;
-        bottom: 249px;
+        bottom: 286px;
         font-size: 23px;
         font-weight: 800;
         line-height: 24px;
@@ -850,7 +856,7 @@
 }
 .toggle-btn {
     background: #fcefef;
-    padding: 3px 7px;
+    padding: 4px 12px;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
@@ -858,6 +864,8 @@
     border-radius: 50px;
     font-size: 12px;
     border: 1px solid grey;
+    margin: 3px 0;
+    margin-left: 11px;
 }
 
 .search-section .toggle-btn {
@@ -891,10 +899,10 @@ button.form_close {
     border: 1px solid #fd99b1;
 }
 
-  .form-group {
-    margin-bottom: 20px;
-    text-align: left;
-  }
+  /*.form-group {*/
+    /*margin-bottom: 20px;*/
+  /*  text-align: left;*/
+  /*}*/
   .age-box {
     display: flex;
     gap: 10px;
@@ -1131,9 +1139,7 @@ button.form_close {
     padding-top: 10px;
     flex-wrap: wrap;
 }
-.form-group {
-    margin-bottom: 0.5rem;
-}
+
 .mobile_filter_flex .form-group input, .form-group select {
     width: 100% !important;
     padding: 7px;
@@ -1184,6 +1190,7 @@ button.form_close {
     align-items: center;
     justify-content: center;
     gap: 25px;
+    margin-top:0px;
 }
 .profile-info h3 {
     font-size: 18px;
@@ -1234,11 +1241,15 @@ h2.why_choose_title {
 
 .free_registration_section {
     text-align: center;
-    /* padding: 20px 0px; */
-    /* border: 1px solid #ddd; */
+    /* padding: 20px 0px;
+    border: 1px solid #ddd; */
     margin-top: 0px;
     overflow: hidden;
-    padding: 15px 0;
+    padding: 9px 0;
+}
+.section_d {
+    background: #fff;
+    height: 11px;
 }
 .free_registration_section::after {
     content: "";
@@ -1323,6 +1334,17 @@ h2.why_choose_title {
     text-align: center;
 }
 
+.popup-container {
+    display: none;
+    position: fixed;
+    top: -95px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
 
 .appointmetn_area {
     background: #ff636a;
@@ -1332,7 +1354,13 @@ h2.why_choose_title {
     align-items: center;
     border-radius: 3px;
     flex-direction: column;
-    margin-top: 41px;
+}
+
+.appointment_section {
+    text-align: center;
+    background: #fff;
+    margin-bottom: 8px;
+    padding: 10px;
 }
 .appointment_section h3 {
     color: #fff;
@@ -1354,6 +1382,143 @@ h2.why_choose_title {
     color: #ff5a60;
 }
 
+
+section.home_login {
+    margin-top: 8px;
+    padding-bottom: 16px;
+}
+
+.top-bar {
+    padding-bottom: 16px;
+    font-size: 15px;
+    padding-top: 13px;
+}
+
+span.help {
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+    letter-spacing: -1px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 19px;
+}
+.divider {
+    text-align: center;
+    margin: -2px 0;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.signup-text {
+    text-align: center;
+    font-size: 14px;
+    margin-top: -7px;
+}
+
+.signup-text a {
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+.register_genter_info .card i {
+    font-size: 16px;
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+    color: #095d2d;
+    padding: 6px 8px;
+}
+.notification_list {
+    padding: 0px 13px;
+}
+
+.commitments_head {
+    padding: 5px 0px;
+}
+.commitments_head h2 {
+    font-size: 19px;
+    text-align: center;
+    text-transform: capitalize;
+    line-height: 26.5px;
+}
+
+section.register_content {
+    margin-top: 0px;
+}
+.reference {
+    text-align: right;
+    font-style: italic;
+    color: #7f8c8d;
+    border-top: 1px solid #ecf0f1;
+    padding-top: 7px;
+    font-size: 0.95rem;
+    margin-top: -13px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 7px;
+}
+.agreement_box {
+    width: 472px;
+    background: #efefef;
+    padding: 11px;
+    box-shadow: 0px 0px 0px 0.5px #868686bd;
+}
+
+
+
+.agreement_box .form-group label {
+    font-size: 12px;
+}
+
+.register_genter_info .card {
+    width: 100%;
+    padding: 10px;
+}
+
+.verse-content {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #34495e;
+    text-align: justify;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 0px;
+}
+.quran-container {
+    background: #fbfbfb;
+    padding: 15px 17px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+.arabic-title i {
+    border: 1.5px solid #62a9a6;
+    padding: 11px;
+    border-radius: 8px;
+    color: #095d2d;
+}
+.decorative-border {
+    position: absolute;
+    background: #095d2d;
+    width: 50px;
+    height: 6px;
+    top: 79px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1px;
+}
+.arabic-title {
+    font-family: 'Lateef', serif;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1rem;
+}
 
 
 

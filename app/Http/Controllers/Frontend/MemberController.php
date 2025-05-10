@@ -26,6 +26,7 @@ use App\Models\District;
 use App\Models\Upazila;
 use App\Models\ProposalRequest;
 use App\Models\FavoriteMember;
+use App\Models\Agent;
 use DateTime;
 
 class MemberController extends Controller
@@ -89,7 +90,7 @@ class MemberController extends Controller
         $store_data->publish = 0;
         $store_data->premium = 0;
         $store_data->premium_date = 0;
-        $store_data->profile_lock = $request->profile_lock ?? 0;
+        $store_data->profile_lock = $request->profile_lock ?? 'only-me';
         $store_data->password = bcrypt(request('password'));
         $store_data->save();
         $memberId = $store_data->id;
@@ -226,25 +227,24 @@ class MemberController extends Controller
         return redirect()->back();
     }
 
-
-
-
     public function signin(Request $request)
     {
         $request->validate([
             'phone' => 'required|digits:11',
             'password' => 'required',
         ]);
-        $memberCheck = Member::where('phone', $request->phone)->first();
+        
+        $user = Member::where('phone', $request->phone)->first();
 
-        if ($memberCheck) {
-            if ($memberCheck->status != 1) {
+        if ($user) {
+            if ($user->status != 1) {
                 Toastr::success('আপনার অ্যাকাউন্ট স্থগিত করা হয়েছে');
-                Session::put('phoneverify', $memberCheck->phone);
+                Session::put('phoneverify', $user->phone);
 
                 return redirect()->route('members');
             } else {
                 $credentials = ['phone' => $request->phone, 'password' => $request->password];
+                
                 if (Auth::guard('member')->attempt($credentials)) {
                     Toastr::success('আপনি লগিন সফল হয়েছে');
                     if (Cart::instance('wishlist')->count() > 0) {

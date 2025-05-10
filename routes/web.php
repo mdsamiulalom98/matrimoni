@@ -1,48 +1,48 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\Frontend\ShurjopayControllers;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShoppingController;
 use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Frontend\MemberController;
 use App\Http\Controllers\Frontend\AgentController;
 use App\Http\Controllers\Frontend\BkashController;
-use App\Http\Controllers\Frontend\ShurjopayControllers;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\SubcategoryController;
-use App\Http\Controllers\Admin\ChildcategoryController;
-use App\Http\Controllers\Admin\OrderStatusController;
 use App\Http\Controllers\Admin\ExpenseCategoriesController;
-use App\Http\Controllers\Admin\ExpenseController;
-use App\Http\Controllers\Admin\PixelsController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ApiIntegrationController;
 use App\Http\Controllers\Admin\GeneralSettingController;
-use App\Http\Controllers\Admin\SocialMediaController;
-use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\BannerCategoryController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\CreatePageController;
-use App\Http\Controllers\Admin\CampaignController;
-use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\CustomerManageController;
 use App\Http\Controllers\Admin\ShippingChargeController;
-use App\Http\Controllers\Admin\ColorController;
-use App\Http\Controllers\Admin\SizeController;
-use App\Http\Controllers\Admin\TagManagerController;
-use App\Http\Controllers\Admin\CouponCodeController;
-use App\Http\Controllers\Admin\DistrictController;
+use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Admin\MemberManageController;
 use App\Http\Controllers\Admin\AgentManageController;
+use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\OrderStatusController;
+use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\TagManagerController;
+use App\Http\Controllers\Admin\CouponCodeController;
+use App\Http\Controllers\Admin\CreatePageController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CampaignController;
+use App\Http\Controllers\Admin\DistrictController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\PixelsController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SizeController;
 
 Auth::routes();
 
@@ -55,7 +55,7 @@ Route::get('/cc', function () {
 });
 
 Route::get('/model', function () {
-    Artisan::call('make:model FavoriteMember -m');
+    Artisan::call('make:model Appointment -m');
     return "Model Created";
 });
 
@@ -79,6 +79,7 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('favorite-members', [FrontendController::class, 'favorites'])->name('favorites');
     Route::get('proposal-members', [FrontendController::class, 'proposals'])->name('proposals');
     Route::get('recently-views', [FrontendController::class, 'recentlyViews'])->name('recentlyViews');
+    Route::get('my-profile-views', [FrontendController::class, 'myProfileViews'])->name('myProfileViews');
     Route::get('details/{id}', [FrontendController::class, 'details'])->name('details');
     Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
     Route::get('about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
@@ -105,6 +106,12 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('agent/register', [FrontendController::class, 'agent_register'])->name('agent.register');
     Route::post('/member/register-post', [MemberController::class, 'register'])->name('member_register');
     Route::get('/member/verify', [MemberController::class, 'memberVerifyForm'])->name('verify_form');
+    Route::get('/member/search', [FrontendController::class, 'searchMember'])->name('searchMember');
+    Route::get('/affiliate/policy', [FrontendController::class, 'affiliate_policy'])->name('affiliate.policy');
+    Route::get('/notification', [FrontendController::class, 'notification'])->name('notification');
+    Route::get('/get-appointment', [FrontendController::class, 'getAppointment'])->name('getappointment');
+    Route::post('/store-appointment', [FrontendController::class, 'storeAppointment'])->name('appointment.store');
+    Route::post('/user-login', [FrontendController::class, 'user_login'])->name('user.login');
 });
 
 Route::group(['prefix' => 'customer', 'namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {

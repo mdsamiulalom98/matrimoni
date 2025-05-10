@@ -20,8 +20,8 @@
         <!-- toastr css -->
         <link rel="stylesheet" href="{{asset('public/backEnd/')}}/assets/css/toastr.min.css" />
         <link rel="stylesheet" href="{{asset('public/frontEnd/css/wsit-menu.css')}}" />
-        <link rel="stylesheet" href="{{asset('public/frontEnd/css/style.css?v=1.0.1')}}" />
-        <link rel="stylesheet" href="{{asset('public/frontEnd/css/responsive.css?v=1.0.1')}}" />
+        <link rel="stylesheet" href="{{asset('public/frontEnd/css/style.css?v=1.0.3')}}" />
+        <link rel="stylesheet" href="{{asset('public/frontEnd/css/responsive.css?v=1.0.2')}}" />
         <script src="{{asset('public/frontEnd/js/jquery-3.7.1.min.js')}}"></script>
         @foreach($pixels as $pixel)
         <!-- Facebook Pixel Code -->
@@ -82,7 +82,7 @@
                     <li><a href="{{route('home')}}">home</a></li>
                     <li><a href="{{route('members')}}">Members</a></li>
                     <li><a href="{{route('packages')}}">Package</a></li>
-                    <li><a href="{{route('packages')}}">Appointment</a></li>
+                    <li><a href="{{route('getappointment')}}">Appointment</a></li>
                     <li><a href="{{route('aboutUs')}}">About Us</a></li>
                     <li><a href="{{route('contact')}}">Contact Us</a></li>
                 </ul>
@@ -112,14 +112,14 @@
                     </div>
 
                      <div class="menu-bag">
-                        <a href="#">
+                        <a href="{{route('searchMember')}}">
                             <!--<i id="m_login" class="fab fa-facebook-messenger"></i>-->
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </a>
                         <a href="{{route('member.login')}}">
                             <i id="m_login" class="fab fa-facebook-messenger"></i>
                         </a>
-                       <a href="#" class="margin-shopping">
+                       <a href="{{route('notification')}}" class="margin-shopping">
                         <i class="fa-regular fa-bell"></i>
                             <span class="mobilecart-qty">5</span>
                         </a>
@@ -137,7 +137,6 @@
                             <div class="col-sm-12">
                                 <div class="logo-header">
                                     <div class="main-logo">
-                                        {{-- <a href="{{route('home')}}"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" /></a> --}}
                                         <a href="{{route('home')}}"><img src="{{asset($generalsetting->dark_logo)}}" alt="" /></a>
                                     </div>
                                     <div class="menu_area">
@@ -145,28 +144,21 @@
                                             <li><a href="{{route('home')}}">home</a></li>
                                             <li><a href="{{route('members')}}">Members</a></li>
                                             <li><a href="{{route('packages')}}">Package</a></li>
-                                            <li><a href="{{route('packages')}}">Appointment</a></li>
+                                            <li><a href="{{route('getappointment')}}">Appointment</a></li>
                                             <li><a href="{{route('aboutUs')}}">About Us</a></li>
                                             <li><a href="{{route('contact')}}">Contact Us</a></li>
                                         </ul>
                                     </div>
                                     <div class="header_righ">
-                                        {{-- <a class="btn_comm" href="#"><i class="fa-solid fa-user"></i> Registration now</a> --}}
                                         <a class="btn_comm2" href="{{route('member.login')}}"><i class="fa-solid fa-user"></i> Login now</a>
                                         <a class="btn_comm" href="{{route('agent.account')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a>
-                                        {{-- <a class="btn_comm" href="{{route('joinAgent')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- logo area end -->
-
-
-                <!-- menu area end -->
             </div>
-            <!-- main-header end -->
         </header>
         <div id="content">
             @yield('content')

@@ -36,6 +36,8 @@ use App\Models\Upazila;
 use App\Models\Member;
 use App\Models\FavoriteMember;
 use App\Models\ProposalRequest;
+use App\Models\MemberView;
+use App\Models\Appointment;
 use Cache;
 use DB;
 use Log;
@@ -159,6 +161,37 @@ class FrontendController extends Controller
         return view('frontEnd.layouts.pages.childcategory', compact('childcategory', 'products'));
     }
 
+    public function searchMember() {
+        return view('frontEnd.layouts.pages.search');
+    }
+
+    public function affiliate_policy() {
+        return view('frontEnd.layouts.pages.affiliate_policy');
+    }
+
+    public function notification() {
+        return view('frontEnd.layouts.pages.notification');
+    }
+
+    public function getAppointment() {
+        return view('frontEnd.layouts.pages.appointment');
+    }
+    
+    public function storeAppointment(Request $request) {
+        $store                     = new Appointment();
+        $store->name               = $request->name;
+        $store->phone              = $request->phone;
+        $store->email              = $request->email;
+        $store->preferred_date     = $request->date;
+        $store->preferred_time     = $request->time;
+        $store->message            = $request->message;
+        $store->address            = $request->address;
+        $store->status             = 'pending';
+        $store->save();
+        Toastr::success('Appointment Stored Successfully');
+        return redirect()->back();
+    }
+
     public function members(Request $request)
     {
         $members = Member::where(['publish' => 1]);
@@ -228,7 +261,6 @@ class FrontendController extends Controller
         return view('frontEnd.layouts.pages.about');
     }
 
-
     public function bestdeals(Request $request)
     {
 
@@ -260,39 +292,31 @@ class FrontendController extends Controller
 
     public function details($id)
     {
-
         $details = Member::where(['id' => $id, 'status' => 1])
             ->firstOrFail();
 
-        $memberId = $details->id;
+        $memberId = Auth::guard('member')->user()->id;
         $memberIds = Session::get('memberIds', []);
         if (!in_array($memberId, $memberIds)) {
             $memberIds[] = $memberId;
             Session::put('memberIds', $memberIds);
         }
+        // Check if the view already exists
+        $alreadyViewed = MemberView::where('member_id', $memberId)->where('view_id', $id)->exists();
+    
+        if (!$alreadyViewed) {
+            // Store new view
+            MemberView::create([
+                'member_id' => $memberId,
+                'view_id' => $id,
+            ]);
+        }
         return view('frontEnd.layouts.pages.details', compact('details'));
     }
 
-    public function stock_check(Request $request)
-    {
-        $product = ProductVariable::where(['product_id' => $request->id, 'color' => $request->color, 'size' => $request->size])->first();
+    
 
-        $status = $product ? true : false;
-        $response = [
-            'status' => $status,
-            'product' => $product
-        ];
-        return response()->json($response);
-    }
-
-    public function quickview(Request $request)
-    {
-        $data['data'] = Product::where(['id' => $request->id, 'status' => 1])->with('images')->withCount('reviews')->first();
-        $data = view('frontEnd.layouts.ajax.quickview', $data)->render();
-        if ($data != '') {
-            echo $data;
-        }
-    }
+  
     public function livesearch(Request $request)
     {
         $products = Product::select('id', 'name', 'slug', 'new_price', 'old_price', 'type')
@@ -419,36 +443,7 @@ class FrontendController extends Controller
 
 
     }
-    public function campaign_stock(Request $request)
-    {
-        $product = Product::select('id', 'name', 'slug', 'new_price', 'old_price', 'purchase_price', 'type', 'stock')->where(['id' => $request->id])->first();
-
-        $variable = ProductVariable::where(['product_id' => $request->id, 'color' => $request->color, 'size' => $request->size])->first();
-        $qty = 1;
-        $status = $variable ? true : false;
-
-        if ($status == true) {
-            Cart::instance('shopping')->destroy();
-            Cart::instance('shopping')->add([
-                'id' => $product->id,
-                'name' => $product->name,
-                'qty' => $qty,
-                'weight' => 1,
-                'price' => $variable->new_price,
-                'options' => [
-                    'slug' => $product->slug,
-                    'image' => $product->image->image,
-                    'old_price' => $variable->new_price,
-                    'purchase_price' => $variable->purchase_price,
-                    'product_size' => $request->size,
-                    'product_color' => $request->color,
-                    'type' => $product->type
-                ],
-            ]);
-        }
-        $data = Cart::instance('shopping')->content();
-        return response()->json($status);
-    }
+    
 
     public function payment_success(Request $request)
     {
@@ -542,6 +537,20 @@ class FrontendController extends Controller
     {
         return view('frontEnd.member.login');
     }
+
+    public function register()
+    {
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        return view('frontEnd.member.register',compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    }
+
     public function agent_login()
     {
         return view('frontEnd.agent.login');
@@ -573,10 +582,19 @@ class FrontendController extends Controller
     }
     public function recentlyViews()
     {
-        $memberIds = Session::get('memberIds', []);
+        $memberId = Auth::guard('member')->user()->id;
+        $memberIds = MemberView::where('member_id', $memberId)->pluck('view_id')->toArray();
         $members = Member::whereIn('id', $memberIds)->where('publish', 1)->orderBy('id', 'desc')->get();
-        // return $recentlyViews;
+        // return $members;
         return view('frontEnd.layouts.pages.recentlyViews', compact('members'));
+    }
+    public function myProfileViews()
+    {
+        $memberId = Auth::guard('member')->user()->id;
+        $memberIds = MemberView::where('view_id', $memberId)->pluck('view_id')->toArray();
+        $members = Member::whereIn('id', $memberIds)->where('publish', 1)->orderBy('id', 'desc')->get();
+        // return $members;
+        return view('frontEnd.layouts.pages.myProfileViews', compact('members'));
     }
     
     public function favorites() {
@@ -609,4 +627,43 @@ class FrontendController extends Controller
         
         return view('frontEnd.layouts.pages.proposal', compact('members'));
     }
+    public function user_login(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|digits:11',
+            'password' => 'required',
+        ]);
+        $isAgent = $request->has('is_agent'); // Checkbox check
+
+        $guard = $isAgent ? 'agent' : 'member';
+        $model = $isAgent ? \App\Models\Agent::class : \App\Models\Member::class;
+        $user = $model::where('phone', $request->phone)->first();
+
+        if ($user) {
+            if ($user->status != 1) {
+                Toastr::success('আপনার অ্যাকাউন্ট স্থগিত করা হয়েছে');
+                Session::put('phoneverify', $user->phone);
+                $redirectRoute = $isAgent ? 'agent.account' : 'members';
+                return redirect()->route($redirectRoute);
+            } else {
+                $credentials = ['phone' => $request->phone, 'password' => $request->password];
+                
+                if (Auth::guard($guard)->attempt($credentials)) {
+                    Toastr::success('আপনি লগিন সফল হয়েছে');
+                    if (Cart::instance('wishlist')->count() > 0) {
+                        return redirect()->route('wishlist');
+                    }
+                    $redirectRoute = $isAgent ? 'agent.account' : 'members';
+                    return redirect()->route($redirectRoute);
+                } else {
+                    Toastr::error('ভুল পাসওয়ার্ড !');
+                    return redirect()->back();
+                }
+            }
+        } else {
+            Toastr::error('আপনার কোন একাউন্ট নেই');
+            return redirect()->back();
+        }
+    }
+    
 }
