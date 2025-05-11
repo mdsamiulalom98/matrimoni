@@ -35,7 +35,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Education Qualification ( শিক্ষাগত যোগ্যতা )*</label>
-                <input type="text" id="education_qua" name="education_qua" placeholder="Education Qualification"
+                <input type="text" id="education_qualification" name="education_qualification" placeholder="Education Qualification"
                     required>
             </div>
         </div>
@@ -61,7 +61,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Profession ( পেশা )? *</label>
-                <select name="marital_status" id="marital_status" required>
+                <select name="profession" id="profession" required>
                     <option value="">Select</option>
                     <option value="yes">Unmarried </option>
                     <option value="no">Married</option>
