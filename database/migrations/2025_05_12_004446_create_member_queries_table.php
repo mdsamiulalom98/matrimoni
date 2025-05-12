@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('member_queries', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('member_id')->index();
             $table->string('gender');
             $table->string('regular_salah')->nullable();
             $table->string('have_beard')->nullable();

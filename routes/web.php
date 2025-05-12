@@ -105,6 +105,7 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
 
     Route::get('agent/register', [FrontendController::class, 'agent_register'])->name('agent.register');
     Route::post('/member/register-post', [MemberController::class, 'register'])->name('member_register');
+    Route::post('/member/query-store', [MemberController::class, 'query_store'])->name('member_query');
     Route::get('/member/verify', [MemberController::class, 'memberVerifyForm'])->name('verify_form');
     Route::get('/member/search', [FrontendController::class, 'searchMember'])->name('searchMember');
     Route::get('/affiliate/policy', [FrontendController::class, 'affiliate_policy'])->name('affiliate.policy');

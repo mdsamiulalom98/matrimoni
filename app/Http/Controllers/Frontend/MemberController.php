@@ -27,13 +27,14 @@ use App\Models\Upazila;
 use App\Models\ProposalRequest;
 use App\Models\FavoriteMember;
 use App\Models\Agent;
+use App\Models\MemberQuery;
 use DateTime;
 
 class MemberController extends Controller
 {
     function __construct()
     {
-        $this->middleware('member', ['except' => ['register', 'signin']]);
+        $this->middleware('member', ['except' => ['register', 'signin', 'query_store']]);
     }
     public function account()
     {
@@ -47,7 +48,7 @@ class MemberController extends Controller
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
-        
+
         // return $request->all();
 
         // $request->validate([
@@ -227,13 +228,26 @@ class MemberController extends Controller
         return redirect()->back();
     }
 
+    public function query_store(Request $request)
+    {
+        $input = $request->all();
+        // return $input;
+        $random = Str::random(8);
+        Session::put('memberId', $random);
+        $memberSession = Session::get('memberId');
+        $input['member_id'] = $memberSession;
+
+        MemberQuery::create($input);
+        Toastr::success('Query submitted successfully');
+        return redirect()->route('members');
+    }
     public function signin(Request $request)
     {
         $request->validate([
             'phone' => 'required|digits:11',
             'password' => 'required',
         ]);
-        
+
         $user = Member::where('phone', $request->phone)->first();
 
         if ($user) {
@@ -244,7 +258,7 @@ class MemberController extends Controller
                 return redirect()->route('members');
             } else {
                 $credentials = ['phone' => $request->phone, 'password' => $request->password];
-                
+
                 if (Auth::guard('member')->attempt($credentials)) {
                     Toastr::success('আপনি লগিন সফল হয়েছে');
                     if (Cart::instance('wishlist')->count() > 0) {
@@ -599,8 +613,8 @@ class MemberController extends Controller
             return redirect()->back();
         }
     }
-    
-    
+
+
 
     public function sendRequest(Request $request)
     {
@@ -664,7 +678,7 @@ class MemberController extends Controller
     {
         return view('frontEnd.layouts.pages.requestpage', compact('id'));
     }
-    
+
     public function favorite_send(Request $request)
     {
         $member_id = Auth::guard('member')->user()->id;
@@ -694,11 +708,11 @@ class MemberController extends Controller
         Toastr::success('Proposal request sent.', 'Success');
         return redirect()->back();
     }
-    
+
     public function logout()
     {
         Auth::guard('member')->logout();
         return redirect()->route('member.login');
     }
-    
+
 }
