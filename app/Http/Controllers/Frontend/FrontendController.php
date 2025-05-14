@@ -311,7 +311,7 @@ class FrontendController extends Controller
                 'view_id' => $id,
             ]);
         }
-        return view('frontEnd.layouts.pages.details', compact('details'));
+        return view('frontEnd.member.details', compact('details'));
     }
 
     

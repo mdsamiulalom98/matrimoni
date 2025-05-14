@@ -48,8 +48,8 @@ class MemberController extends Controller
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
-
-        // return $request->all();
+        
+        return $request->all();
 
         // $request->validate([
         //     'first_name' => 'required',
@@ -227,7 +227,7 @@ class MemberController extends Controller
         Toastr::success('Your account has been registered');
         return redirect()->back();
     }
-
+    
     public function query_store(Request $request)
     {
         $input = $request->all();
@@ -241,13 +241,14 @@ class MemberController extends Controller
         Toastr::success('Query submitted successfully');
         return redirect()->route('members');
     }
+
     public function signin(Request $request)
     {
         $request->validate([
             'phone' => 'required|digits:11',
             'password' => 'required',
         ]);
-
+        
         $user = Member::where('phone', $request->phone)->first();
 
         if ($user) {
@@ -258,7 +259,7 @@ class MemberController extends Controller
                 return redirect()->route('members');
             } else {
                 $credentials = ['phone' => $request->phone, 'password' => $request->password];
-
+                
                 if (Auth::guard('member')->attempt($credentials)) {
                     Toastr::success('আপনি লগিন সফল হয়েছে');
                     if (Cart::instance('wishlist')->count() > 0) {
@@ -613,8 +614,8 @@ class MemberController extends Controller
             return redirect()->back();
         }
     }
-
-
+    
+    
 
     public function sendRequest(Request $request)
     {
@@ -678,7 +679,7 @@ class MemberController extends Controller
     {
         return view('frontEnd.layouts.pages.requestpage', compact('id'));
     }
-
+    
     public function favorite_send(Request $request)
     {
         $member_id = Auth::guard('member')->user()->id;
@@ -708,11 +709,11 @@ class MemberController extends Controller
         Toastr::success('Proposal request sent.', 'Success');
         return redirect()->back();
     }
-
+    
     public function logout()
     {
         Auth::guard('member')->logout();
         return redirect()->route('member.login');
     }
-
+    
 }

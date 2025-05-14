@@ -1763,6 +1763,10 @@ legend {
     border-radius: 5px;
 }
 
+.reg_score_bar {
+    margin-bottom: 4px;
+}
+
 .progress {
     background: green;
     width: 30%;
@@ -4023,6 +4027,16 @@ p.max-image-text {
     justify-content: center;
     align-items: center;
     z-index: 99999;
+    background: #0d0d0d33;
+}
+
+.popup-container .form-group label {
+    display: block;
+    margin-bottom: -1px;
+    font-weight: 600;
+    margin-top: 7px;
+    font-size: 14px;
+    color: #4c4c4c;
 }
 
 .popup {
@@ -4426,9 +4440,22 @@ button.search-btn {
 
 .title-wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
     text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+.title-wrapper h2{
+   
+}
+
+.title-wrapper span {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: -8px;
 }
 
 
@@ -4829,11 +4856,11 @@ span.help {
     padding-left: 20px;
   }
 
-  .agreement_box {
+.agreement_box {
     width: 472px;
-    background: #ffe7e7;
-    padding: 24px;
-    box-shadow: 1px 2px 4px 4px #c7c7c7bd;
+    background: #efefef;
+    padding: 11px;
+    box-shadow: 0px 0px 0px 0.5px #868686bd;
 }
 
 
@@ -4878,6 +4905,7 @@ span.help {
     margin-bottom: 19px;
 }
 
+
 .agreements_condi_box h3 {
     font-size: 18px;
     margin-bottom: 10px;
@@ -4903,8 +4931,17 @@ span.help {
     border-radius: 50px !important;
     height: 25px;
 }
-label.bn_lable {
+.bn_lable {
     font-size: 10px;
+}
+
+
+label.en_lable {
+    font-size: 12px;
+}
+
+.agreement_box span.radio-label {
+    font-size: 12px;
 }
   
 
@@ -5093,4 +5130,112 @@ section.register_content {
     left: 50%;
     transform: translateX(-50%);
     border-radius: 1px;
+}
+
+
+/* ============ member profile Details CSS  ============ */
+
+.details_profile_header {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 13px;
+    border: 1px solid #ddf;
+    justify-content: center;
+}
+
+.details-profile-photo {
+    width: 100%;
+    height: 192px;
+    position: relative;
+    margin-right: 30px;
+}
+
+.d_request_btn {
+    padding-top: 17px;
+}
+
+.d_request_btn a {
+    background: green;
+    padding: 9px 20px;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.verified-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #4CAF50;
+    background: white;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.d_profile_info {
+    flex-grow: 1;
+}
+
+
+
+.quick-stats {
+    list-style: none;
+    padding: 0;
+    color: #666;
+}
+
+.quick-stats li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.contact-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Sections */
+.info-head {
+    color: #ff5454;
+    border-bottom: 1.3px solid #d4d4d4;
+    padding-bottom: 3px;
+    margin-bottom: 15px;
+    font-size: 19px;
+    font-weight: 700;
+    text-align: start;
+}
+
+.member_details .info_card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.member_details .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Partner Preferences */
+.preferences {
+    background: #e8f5e9;
+    border-left: 4px solid #4CAF50;
+}
+
+/* Icons */
+.member_details .icon {
+    margin-right: 8px;
+   color: #00000080;
+}
+.info_card  span {
+    font-weight: 600;
+    line-height: 26px;
 }

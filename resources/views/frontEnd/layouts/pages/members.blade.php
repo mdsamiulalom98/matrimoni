@@ -306,37 +306,7 @@
     </div>
 </section>
 
-{{--
-<section class="member_section section-padding">
-    <div class="container">
-        <div class="member_gird">
-            @foreach ($members as $key => $value)
-            <div class="member_container">
-                @if ($value->profile_lock == 1)
-                <div class="member_image d-flex justify-content-center align-items-center">
-                    <i class="fa fa-user"></i>
-                </div>
-                @else
-                <div class="member_image">
-                    <img src="{{ asset($value->memberimage->image_one ?? '') }}" alt="Member Image" />
-                </div>
-                @endif
-                <div class="member_info">
-                    <p class="member_id">ID: {{ $value->member_id }}</p>
-                    <h3 class="member_name">{{ $value->name }}</h3>
-                    <p class="member_age">Age: {{ $value->memberinfo->age ?? '' }} years old</p>
-                    <p class="member_qualification">Qualification: {{ $value->membercareer->profession->title ?? '' }}</p>
-                    <div class="member_buttons">
-                        <button class="btn_details">View Details</button>
-                        <button class="btn_contact">Contact Now</button>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
---}} @if (!Auth::guard('member')->check())
+ @if (!Auth::guard('member')->check())
     <form action="{{ route('member_register') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- Popup 1: Basic Information -->
@@ -514,33 +484,7 @@
     });
 </script>
 <script>
-    // function enableButtonIfValid(containerSelector, buttonSelector) {
-    //     function check() {
-    //         let allFilled = true;
-
-    //         $(`${containerSelector} [required]`).each(function () {
-    //             if ($(this).is("select")) {
-    //                 if ($(this).val() === "") {
-    //                     allFilled = false;
-    //                     return false;
-    //                 }
-    //             } else {
-    //                 if ($.trim($(this).val()) === "") {
-    //                     allFilled = false;
-    //                     return false;
-    //                 }
-    //             }
-    //         });
-
-    //         $(buttonSelector).prop("disabled", !allFilled);
-    //     }
-
-    //     // Attach input and change events
-    //     $(`${containerSelector} [required]`).on("input change", check);
-
-    //     // Immediate check on load
-    //     check(); // <-- FIXED
-    // }
+   
 
     function enableButtonIfValid(containerSelector, buttonSelector) {
         function check() {
@@ -646,4 +590,40 @@
         });
     });
 </script>
+
+{{-- this for height select --}}
+
+<script>
+  const select = document.getElementById('height');
+
+  for (let feet = 5; feet <= 7; feet++) {
+    for (let inch = 0; inch < 12; inch++) {
+      // Stop at 7'0"
+      if (feet === 7 && inch > 0) break;
+
+      const heightText = `${feet} feet' ${inch} inch"`;
+      const heightValue = `${feet}'${inch}"`;
+      const option = new Option(heightText, heightValue);
+      select.add(option);
+    }
+  }
+</script>
+
+{{-- this for expections partner --}}
+
+<script>
+  const partnerHeightSelect = document.getElementById('partner_height');
+
+  for (let feet = 5; feet <= 7; feet++) {
+    for (let inch = 0; inch < 12; inch++) {
+      if (feet === 7 && inch > 0) break;
+
+      const heightText = `${feet} feet ${inch} inch`;
+      const heightValue = `${feet}'${inch}"`;
+      const option = new Option(heightText, heightValue);
+      partnerHeightSelect.add(option);
+    }
+  }
+</script>
+
 @endpush

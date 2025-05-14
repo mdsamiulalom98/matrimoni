@@ -55,10 +55,9 @@ Route::get('/cc', function () {
 });
 
 Route::get('/model', function () {
-    Artisan::call('make:model Appointment -m');
+    Artisan::call('make:model MemberQuery -m');
     return "Model Created";
 });
-
 
 Route::get('/migrate', function () {
     Artisan::call('migrate');

@@ -1,7 +1,8 @@
 <fieldset id="familyInfo">
     <div class="row">
         <div class="title-wrapper">
-            <h2>Family information ( পারিবারিক তথ্য )</h2>
+            <h2>Family information </h2>
+            <span class="mt-2">( পারিবারিক তথ্য )</span>
         </div>
         <div class="reg_score_bar">
             <div class="progress-bar">
@@ -11,21 +12,15 @@
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Father Name (বাবার নাম) *</label>
+                <label>Father Name <span class="bn_lable">(বাবার নাম)</span> *</label>
                 <input type="text" name="father_name" placeholder="Father Name" required>
             </div>
         </div>
 
-        <div class="col-sm-12" id="father_profession_field">
-            <div class="form-group">
-                <label>Father Profession (বাবার পেশা) *</label>
-                <input type="text" id="father_profession" name="father_profession" placeholder="Father Name">
-            </div>
-        </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Is your father alive (আপনার বাবা কি জীবিত)? *</label>
+                <label>Is your father alive <span class="bn_lable">(আপনার বাবা কি জীবিত)</span> *</label>
                 <select name="father_alive" id="father_alive" required>
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
@@ -34,23 +29,23 @@
             </div>
         </div>
 
+          <div class="col-sm-12">
+            <div class="form-group">
+                <label>Father Profession <span class="bn_lable">(বাবার পেশা)</span> *</label>
+                <input type="text" id="father_profession" name="father_profession" placeholder="Father Name">
+            </div>
+         </div>
+
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Mother Name (মায়ের নাম)*</label>
+                <label>Mother Name <span class="bn_lable">(মায়ের নাম)</span>*</label>
                 <input type="text" name="mother_name" placeholder="Mother Name" required>
             </div>
         </div>
 
-        <div class="col-sm-12" id="mother_profession_field">
-            <div class="form-group">
-                <label>Mother Profession (মায়ের পেশা) *</label>
-                <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Name">
-            </div>
-        </div>
-
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Is your mother alive (আপনার মা কি জীবিত)? *</label>
+                <label>Is your mother alive <span class="bn_lable">(আপনার মা কি জীবিত)</span> *</label>
                 <select name="mother_alive" id="mother_alive" required>
                     <option value="">Select</option>
                     <option value="yes">Yes</option>
@@ -59,27 +54,46 @@
             </div>
         </div>
 
+         <div class="col-sm-12">
+            <div class="form-group">
+                <label>Mother Profession <span class="bn_lable">(মায়ের পেশা)</span> *</label>
+                <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Name">
+            </div>
+        </div>
+
         <div class="col-sm-12">
             <div class="form-group">
-                <label>How many brothers do you have (আপনার কতজন ভাই আছে)? *</label>
-                <input type="number" name="brother_count" placeholder="How many Brothers" required>
+                <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই আছে)</span> *</label>
+                <input type="number" name="brother_count" placeholder="How many Brothers" >
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>How many sisters do you have (আপনার কতজন বোন আছে)? *</label>
-                <input type="number" name="sister_count" placeholder="How many Sisters" required>
+                <label>Married Brother <span class="bn_lable">(বিবাহিত ভাই)</span> *</label>
+                <input type="number" name="married_brother" placeholder="Married Brother">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Family financial situation ( পারিবারিক অর্থনৈতিক অবস্থা )? *</label>
+                <label>How many sisters do you have <span class="bn_lable">(আপনার কতজন বোন আছে)</span> *</label>
+                <input type="number" name="sister_count" placeholder="How many Sisters">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Sister married <span class="bn_lable">(বোনের বিয়ে হয়েছে)</span> *</label>
+                <input type="number" name="married_sister" placeholder="Sister married">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Family financial situation <span class="bn_lable">( পারিবারিক অর্থনৈতিক অবস্থা )</span> *</label>
                 <input type="text" name="financial_situation" placeholder="financial Situation" required>
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>What is the family religious environment like? ( পারিবারিক দ্বীনি পরিবেশ কেমন )? *</label>
+                <label>What is the family religious environment like? <span class="bn_lable">( পারিবারিক দ্বীনি পরিবেশ কেমন )</span> *</label>
                 <input type="text" name="guardian_profession" placeholder="Guardian's profession" required>
             </div>
         </div>

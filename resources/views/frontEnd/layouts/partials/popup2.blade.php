@@ -1,79 +1,64 @@
-{{-- প্রত্যাশিত জীবন সঙ্গী --}}
-
-<fieldset id="partnerExpectation">
+<fieldset id="educationInfo">
     <div class="row">
         <div class="title-wrapper">
-            <h2>Prospective life partner ( প্রত্যাশিত জীবন সঙ্গী )</h2>
+            <h2>Education Qualification</h2>
+            <span>(শিক্ষাগত যোগ্যতা)</span>
         </div>
+
         <div class="reg_score_bar">
             <div class="progress-bar">
                 <div class="progress2"></div>
             </div>
             <p>Your profile score 60%</p>
         </div>
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Age (বয়স) *</label>
-                <input type="text" name="age" placeholder="Age" required>
-            </div>
-        </div>
 
-        <div class="col-sm-12" id="father_profession_field">
-            <div class="form-group">
-                <label>Complexion ( গাত্রবর্ণ ) *</label>
-                <input type="text" id="complexion" name="complexion" placeholder="Complexion" required>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Height ( উচ্চতা ) *</label>
-                <input type="text" id="height" name="height" placeholder="Height" required>
-            </div>
-        </div>
+        <!--<div class="col-sm-12">-->
+        <!--    <div class="form-group">-->
+        <!--        <label>Your education medium (আপনার শিক্ষা মাধ্যম) *</label>-->
+        <!--        <select name="education_medium" required>-->
+        <!--            <option value="">Select Education Medium</option>-->
+        <!--            @foreach ($educations as $education)-->
+        <!--                <option value="{{ $education->id }}">{{ $education->title }}</option>-->
+        <!--            @endforeach-->
+        <!--        </select>-->
+        <!--    </div>-->
+        <!--</div>-->
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Education Qualification ( শিক্ষাগত যোগ্যতা )*</label>
-                <input type="text" id="education_qualification" name="education_qualification" placeholder="Education Qualification"
-                    required>
+                <label>In which year are you passing SSC (কত সালে এসএসসি পাস করছেন)*</label>
+                <input type="date" id="ssc_passing" name="ssc_passing" placeholder="Year of SSC Passing" required>
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>District ( জেলা ) *</label>
-                <input type="text" id="district" name="district" placeholder="District">
+                <label>What is the SSC result (এসএসসি এর ফলাফল কত)*</label>
+                <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" required>
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Marital Status ( বৈবাহিক অবস্থা )? *</label>
-                <select name="marital_status" id="marital_status" required>
-                    <option value="">Select</option>
-                    <option value="yes">Unmarried </option>
-                    <option value="no">Married</option>
+                <label>Highest educational qualification (সর্বোচ্চ শিক্ষাগত যোগ্যতা) *</label>
+                <select name="education_id" required>
+                    <option value="">Select Highest Education</option>
+                    @foreach ($educations as $education)
+                        <option value="{{ $education->id }}">{{ $education->title }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Profession ( পেশা )? *</label>
-                <select name="profession" id="profession" required>
-                    <option value="">Select</option>
-                    <option value="yes">Unmarried </option>
-                    <option value="no">Married</option>
+                <label>Latest Educational Qualification (সর্বশেষ শিক্ষাগত যোগ্যতা) *</label>
+                <select name="education_end_id" required>
+                    <option value="">Select Latest Qualification</option>
+                    @foreach ($educations as $education)
+                        <option value="{{ $education->id }}">{{ $education->title }}</option>
+                    @endforeach
                 </select>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Economic situation ( অর্থনৈতিক অবস্থা ) *</label>
-                <input type="text" id="economic_situation" name="economic_situation" placeholder="Economic situation"
-                    required>
             </div>
         </div>
     </div>
