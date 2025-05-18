@@ -1310,16 +1310,25 @@ legend {
 .submit-btn {
     background: #ff636a;
     color: #fff;
-    padding: 12px;
+    padding: 9px 0px;
     border: none;
     width: 100%;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 37px;
     font-size: 16px;
+}
+.create-your-biodata {
+    background: #009a1f;
+    color: #fff;
+    padding: 10px 0px;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    display: block;
 }
 
 .submit-btn:hover {
-    background: #0798ec;
+    background-color: #ffa2a2;
 }
 
 
@@ -2211,11 +2220,16 @@ li.nav-item {
 
 .auth-section {
     padding: 75px 0;
-    background: url(../images/reg_bg.png);
+    background: url('../images/reg_bg2.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
+.auth-title {
+    text-align: center!important;
+    font-size: 19px;
+}
+
 
 
 .toggle-btnsss {
@@ -2227,13 +2241,13 @@ li.nav-item {
 
 
 .login_container {
-    width: 400px;
     background: #ffffff;
     padding: 30px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     text-align: center;
     animation: slideIn 0.8s ease-in-out;
+    max-width: 400px;
 }
 
 @keyframes slideIn {
@@ -3567,6 +3581,27 @@ button.lets-begin-btn {
     margin-bottom: 1rem;
 }
 
+.address-toggle {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 5% 61%;
+    gap: 0px;
+    justify-content: start;
+    align-items: center;
+}
+
+.address-toggle input {
+    height: 18px;
+}
+
+.address-toggle label {
+    width: 99%;
+    margin-top: -5px;
+    font-weight: 500;
+    color: green;
+}
+
+
 @media (max-width: 768px) {
     .section-title {
         font-size: 2rem;
@@ -4137,12 +4172,6 @@ input, textarea {
 textarea {
     height: 100px;
     resize: none;
-}
-
-
-
-button:hover {
-    background: #0056b3;
 }
 
 
@@ -4767,11 +4796,15 @@ span.help {
     cursor: pointer;
     border-radius: 6px;
 }
+.dropdown-btn span {
+    font-size: 12px;
+    padding: 0 3px;
+}
 
-  .dropdown-btn i {
+.dropdown-btn i {
     color: #555;
-  }
-
+    font-size: 12px;
+}
   .dropdown-list {
     position: absolute;
     top: 100%;
@@ -4795,11 +4828,14 @@ span.help {
     background-color: #f0f0f0;
   }
 
-  .priv_flex {
-    display: flex;
-    gap: 10px;
+.priv_flex {
+    display: grid;
+    gap: 0px;
     padding-top: 14px;
     padding-bottom: 5px;
+    grid-template-columns: 70% 24%;
+    /* justify-content: center; */
+    align-items: center;
 }
 
 
@@ -4884,20 +4920,21 @@ span.help {
     margin-right: 10px;
   }
 
-  .btn {
-    margin-top: 20px;
-    padding: 12px 24px;
-    background-color: #00c853;
+.btn {
+    margin-top: 5px;
+    padding: 8px 21px;
+    background-color: #ffaeae;
     color: white;
     border: none;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
+    height: 38px;
+}
 
   .btn:hover {
-    background-color: #00b347;
+    background-color: #ffb8b8;
   }
 
   .agreements_condi_box {
@@ -4994,20 +5031,7 @@ label.en_lable {
     min-width: 200px;
   }
 
-  .submit-btn {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    align-self: flex-start;
-  }
 
-  .submit-btn:hover {
-    background-color: #45a049;
-  }
 
   .icon-title {
     text-align: center;

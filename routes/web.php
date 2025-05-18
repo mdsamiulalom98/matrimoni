@@ -112,6 +112,9 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('/get-appointment', [FrontendController::class, 'getAppointment'])->name('getappointment');
     Route::post('/store-appointment', [FrontendController::class, 'storeAppointment'])->name('appointment.store');
     Route::post('/user-login', [FrontendController::class, 'user_login'])->name('user.login');
+
+    Route::get('/get-upazilas', [FrontendController::class, 'getUpazilas']);
+
 });
 
 Route::group(['prefix' => 'customer', 'namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {

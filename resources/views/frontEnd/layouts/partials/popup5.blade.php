@@ -1,101 +1,192 @@
-<fieldset id="familyInfo">
+<fieldset id="partnerExpectation">
     <div class="row">
         <div class="title-wrapper">
-            <h2>Family information </h2>
-            <span class="mt-2">( পারিবারিক তথ্য )</span>
+            <h2>Prospective life partner</h2>
+            <span>(প্রত্যাশিত জীবন সঙ্গী)</span>
         </div>
+
         <div class="reg_score_bar">
             <div class="progress-bar">
                 <div class="progress2"></div>
             </div>
             <p>Your profile score 60%</p>
         </div>
+
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Father Name <span class="bn_lable">(বাবার নাম)</span> *</label>
-                <input type="text" name="father_name" placeholder="Father Name" required>
+                <label>Age <span class="bn_lable">(বয়স)</span> *</label>
+                <select id="partner_age" name="partner_age" required>
+                    <option value="any age">Any Age</option>
+                </select>
+                
             </div>
         </div>
 
-
+        <!--<div class="col-sm-12">-->
+        <!--    <div class="form-group">-->
+        <!--        <label>Complexion <span class="bn_lable">(গাত্রবর্ণ)</span> *</label>-->
+        <!--        <input type="text" id="complexion" name="complexion" placeholder="Complexion" required>-->
+        <!--    </div>-->
+        <!--</div>-->
+        
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Is your father alive <span class="bn_lable">(আপনার বাবা কি জীবিত)</span> *</label>
-                <select name="father_alive" id="father_alive" required>
-                    <option value="">Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label>Complexion <span class="bn_lable">(গাত্রবর্ণ)</span> *</label>
+                <select name="complexion" id="complexion" required>
+                    <option value="">Select Complexion</option>
+                    <option value="very_fair">Very Fair</option>
+                    <option value="fair">Fair</option>
+                    <option value="wheatish">Wheatish</option>
+                    <option value="dark">Dark</option>
                 </select>
             </div>
         </div>
 
-          <div class="col-sm-12">
-            <div class="form-group">
-                <label>Father Profession <span class="bn_lable">(বাবার পেশা)</span> *</label>
-                <input type="text" id="father_profession" name="father_profession" placeholder="Father Name">
-            </div>
-         </div>
-
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Mother Name <span class="bn_lable">(মায়ের নাম)</span>*</label>
-                <input type="text" name="mother_name" placeholder="Mother Name" required>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Is your mother alive <span class="bn_lable">(আপনার মা কি জীবিত)</span> *</label>
-                <select name="mother_alive" id="mother_alive" required>
-                    <option value="">Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label>Height <span class="bn_lable">(উচ্চতা)</span> *</label>
+                <select id="partner_height" name="partner_height" required>
+                    <option value="Any Height">Any Height</option>
                 </select>
             </div>
         </div>
 
-         <div class="col-sm-12">
+       
+        <div class="col-sm-12">
             <div class="form-group">
-                <label>Mother Profession <span class="bn_lable">(মায়ের পেশা)</span> *</label>
-                <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Name">
+                <label>Education Qualification <span class="bn_lable">(শিক্ষাগত যোগ্যতা)</span> *</label>
+                <select name="education_qualification" required>
+                    <option value="">Select</option>
+                    @foreach ($educations as $education)
+                        <option value="{{ $education->id }}">{{ $education->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+       <div class="col-sm-12">
+            <div class="form-group">
+            <label>SSC Passing Year <span class="bn_lable">(কত সালে এসএসসি পাস করেছেন)</span> *</label>
+           <select id="ssc_passing" name="ssc_passing" required>
+          <option value="">Select Year</option>
+          <option value="any age">Any Age</option>
+        </select>
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই আছে)</span> *</label>
-                <input type="number" name="brother_count" placeholder="How many Brothers" >
+                <label>SSC Result <span class="bn_lable">(এসএসসি এর ফলাফল কত)</span> *</label>
+                <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" required>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>District <span class="bn_lable">(জেলা)</span> *</label>
+                <select name="present_division" required>
+                    <option value="all_division">All Division</option>
+                    @foreach ($divisions as $division)
+                        <option value="{{ $division->id }}">{{ $division->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Citizenship <span class="bn_lable">(নাগরিকত্ব)</span> *</label>
+                <select name="pertner_citizenship" required>
+                    <option value="any">Any</option>
+                    @foreach ($countries as $countrie)
+                        <option value="{{ $countrie->id }}">{{ $countrie->nicename }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Marital Status <span class="bn_lable">(বৈবাহিক অবস্থা)</span> *</label>
+                <select name="marital_status" id="marital_status" required>
+                    <option value="">Select</option>
+                    <option value="unmarried">Unmarried</option>
+                    <option value="married">Married</option>
+                    <option value="divorced">Divorced</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Profession <span class="bn_lable">(পেশা)</span> *</label>
+                <select name="profession_ids" required>
+                    <option value="">Profession</option>
+                    <option value="not_required">প্রযোজ্য নয়</option>
+                    @foreach ($professions as $profession)
+                        <option value="{{ $profession->id }}">{{ $profession->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Economic Situation <span class="bn_lable">(অর্থনৈতিক অবস্থা)</span> *</label>
+                {{-- <input type="text" id="economic_situation" name="economic_situation" placeholder="Economic situation" required> --}}
+                <select name="pertner_eco_situation" id="pertner_eco_situation">
+                    <option value="">Select</option>
+                    <option value="Any">Any</option>
+                    <option value="Lower class">Lower class</option>
+                    <option value="Middle class">Middle class</option>
+                    <option value="Upper_class">Upper class</option>
+                </select>
+            </div>
+        </div>
+
+       <div class="col-sm-12">
+            <div class="form-group">
+                <label>Monthly Income <span class="bn_lable">(মাসিক আয়)</span> *</label>
+                <select name="montly_income" id="montly_income">
+                    <option value="">Select</option>
+                    <option value="Any">Any</option>
+                    <option value="20000 Up">20000 Up</option>
+                    <option value="25000 Up">25000 Up</option>
+                    <option value="30000 Up">30000 Up</option>
+                    <option value="40000 Up">40000 Up</option>
+                    <option value="50000 Up">50000 Up</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Drinking Habit <span class="bn_lable">(মদ্যপানের অভ্যাস)</span> *</label>
+                <select name="drinking_habbit" id="drinking_habbit" required>
+                    <option value="">Select</option>
+                    <option value="Doesent Matter">Doesn't Matter</option>
+                    <option value="Not Allow">Not Allow</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Smoking Habit <span class="bn_lable">(ধূমপানের অভ্যাস)</span> *</label>
+                <select name="smoking_habbit" id="smoking_habbit" required>
+                    <option value="">Select</option>
+                    <option value="Doesent Matter">Doesn't Matter</option>
+                    <option value="Not Allow">Not Allow</option>
+                </select>
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Married Brother <span class="bn_lable">(বিবাহিত ভাই)</span> *</label>
-                <input type="number" name="married_brother" placeholder="Married Brother">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>How many sisters do you have <span class="bn_lable">(আপনার কতজন বোন আছে)</span> *</label>
-                <input type="number" name="sister_count" placeholder="How many Sisters">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Sister married <span class="bn_lable">(বোনের বিয়ে হয়েছে)</span> *</label>
-                <input type="number" name="married_sister" placeholder="Sister married">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Family financial situation <span class="bn_lable">( পারিবারিক অর্থনৈতিক অবস্থা )</span> *</label>
-                <input type="text" name="financial_situation" placeholder="financial Situation" required>
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>What is the family religious environment like? <span class="bn_lable">( পারিবারিক দ্বীনি পরিবেশ কেমন )</span> *</label>
-                <input type="text" name="guardian_profession" placeholder="Guardian's profession" required>
+                <label>The qualities you expect in a life partner <span class="bn_lable">(জীবনসঙ্গীর যেসব গুণ প্রত্যাশা করেন)</span> *</label>
+                <textarea id="expect_lifepartner" name="expect_lifepartner" rows="4" cols="50"></textarea>
             </div>
         </div>
     </div>
 </fieldset>
+

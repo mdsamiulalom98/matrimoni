@@ -31,12 +31,12 @@
                                 ভুল তথ্য প্ৰদান করে প্রতারনা করলে হালাল বিবাহ সেবা, দুনিয়া ও আখিরাতের দায়ভার নিবে না।
                             </label>
                         </div>
-                        <button class="submit-btn mt-3">Create your biodata</button>
+                        <span class="create-your-biodata mt-3">Create your biodata</span>
                     </div>
 
                     <div class="gender-select">
-                        <button class="gender-btn" data-gender="men" onclick="showForm('men')">Men</button>
-                        <button class="gender-btn" data-gender="women" onclick="showForm('women')">Women</button>
+                        <button class="gender-btn" type="button" data-gender="men">Men</button>
+                        <button class="gender-btn" type="button" data-gender="women">Women</button>
                     </div>
                     <input type="hidden" name="gender" id="genderInput">
                     <!-- Men Form -->
@@ -47,12 +47,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="regular_salah" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="regular_salah" id="yes"
+                                    value="yes">
                                 <span class="radio-label">5 times (৫ বার)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="regular_salah" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="regular_salah" id="no"
+                                    value="no">
                                 <span class="radio-label">Sometimes (মাঝে মাঝে)</span>
                             </label>
                         </div>
@@ -64,12 +66,14 @@
 
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="have_beard" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="have_beard" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="have_beard" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="have_beard" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -81,12 +85,14 @@
 
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="is_religious" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="is_religious" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="is_religious" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="is_religious" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -98,12 +104,14 @@
 
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="hajj_intent" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="hajj_intent" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="hajj_intent" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="hajj_intent" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -116,12 +124,14 @@
 
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="sunnah_clothing" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="sunnah_clothing" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Always (সর্বদাই)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="sunnah_clothing" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="sunnah_clothing" id="no"
+                                    value="no">
                                 <span class="radio-label">Sometimes (মাঝে মাঝে)</span>
                             </label>
                         </div>
@@ -132,12 +142,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="read_quran" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="read_quran" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="read_quran" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="read_quran" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -147,16 +159,19 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="financial_status" id="heigh" value="heigh">
+                                <input type="radio" class="radio-input" required name="financial_status"
+                                    id="heigh" value="heigh">
                                 <span class="radio-label">Heigh (উচ্চবিও)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="financial_status" id="middle" value="middle">
+                                <input type="radio" class="radio-input" required name="financial_status"
+                                    id="middle" value="middle">
                                 <span class="radio-label">Middle (মধ্যবিও)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="financial_status" id="low" value="low">
+                                <input type="radio" class="radio-input" required name="financial_status"
+                                    id="low" value="low">
                                 <span class="radio-label">Lower middle class (নিম্ন মধ্যবিও)</span>
                             </label>
                         </div>
@@ -166,12 +181,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="halal_income" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="halal_income" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="halal_income" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="halal_income" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -181,11 +198,13 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="addiction_free" id="yes" value="yes">
+                                <input type="radio" class="radio-input" required name="addiction_free" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="addiction_free" id="no" value="no">
+                                <input type="radio" class="radio-input" required name="addiction_free" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -195,15 +214,18 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="personality_trait" id="good" value="good">
+                                <input type="radio" class="radio-input" required name="personality_trait"
+                                    id="good" value="good">
                                 <span class="radio-label">Good (ভাল)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="personality_trait" id="better" value="better">
+                                <input type="radio" class="radio-input" required name="personality_trait"
+                                    id="better" value="better">
                                 <span class="radio-label">Better (মধ্যম)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="personality_trait" id="best" value="best">
+                                <input type="radio" class="radio-input" required name="personality_trait"
+                                    id="best" value="best">
                                 <span class="radio-label">Best (উত্তম)</span>
                             </label>
                         </div>
@@ -215,12 +237,12 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="previous_marriage_problem"
+                                <input type="radio" class="radio-input" required name="previous_marriage_problem"
                                     id="yes" value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="previous_marriage_problem"
+                                <input type="radio" class="radio-input" required name="previous_marriage_problem"
                                     id="no" value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
@@ -235,12 +257,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="parental_permission" id="yes" value="yes">
+                                <input type="radio" class="radio-input"  name="parental_permission"
+                                    id="yes" value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="parental_permission" id="no" value="no">
+                                <input type="radio" class="radio-input"  name="parental_permission"
+                                    id="no" value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -250,12 +274,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="regular_salah" id="yes" value="yes">
+                                <input type="radio" class="radio-input"  name="regular_salah" id="yes"
+                                    value="yes">
                                 <span class="radio-label">5 times (৫ বার)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="regular_salah" id="no" value="no">
+                                <input type="radio" class="radio-input"  name="regular_salah" id="no"
+                                    value="no">
                                 <span class="radio-label">Sometimes (মাঝে মাঝে)</span>
                             </label>
                         </div>
@@ -265,12 +291,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="read_quran" id="yes" value="yes">
+                                <input type="radio" class="radio-input"  name="read_quran" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="read_quran" id="no" value="no">
+                                <input type="radio" class="radio-input"  name="read_quran" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -282,12 +310,14 @@
 
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="is_religious" id="yes" value="yes">
+                                <input type="radio" class="radio-input"  name="is_religious" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="is_religious" id="no" value="no">
+                                <input type="radio" class="radio-input"  name="is_religious" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -298,12 +328,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="inlaws_residence" id="yes" value="yes">
+                                <input type="radio" class="radio-input"  name="inlaws_residence"
+                                    id="yes" value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="inlaws_residence" id="no" value="no">
+                                <input type="radio" class="radio-input"  name="inlaws_residence"
+                                    id="no" value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -315,12 +347,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="post_marriage_job" id="yes" value="yes">
+                                <input type="radio" class="radio-input"  name="post_marriage_job"
+                                    id="yes" value="yes">
                                 <span class="radio-label">If says (যদি বলে)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="post_marriage_job" id="no" value="no">
+                                <input type="radio" class="radio-input"  name="post_marriage_job"
+                                    id="no" value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -330,12 +364,14 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="is_hijaban" id="yes" value="yes">
+                                <input type="radio" class="radio-input"  name="is_hijaban" id="yes"
+                                    value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="is_hijaban" id="no" value="no">
+                                <input type="radio" class="radio-input"  name="is_hijaban" id="no"
+                                    value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
@@ -346,16 +382,19 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="lineage" id="good" value="good">
+                                <input type="radio" class="radio-input"  name="lineage" id="good"
+                                    value="good">
                                 <span class="radio-label">Good (ভাল)</span>
                             </label>
 
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="lineage" id="better" value="better">
+                                <input type="radio" class="radio-input"  name="lineage" id="better"
+                                    value="better">
                                 <span class="radio-label">Better (মধ্যম)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="lineage" id="best" value="best">
+                                <input type="radio" class="radio-input"  name="lineage" id="best"
+                                    value="best">
                                 <span class="radio-label">Best (উত্তম)</span>
                             </label>
                         </div>
@@ -365,15 +404,18 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="personality_trait" id="good" value="good">
+                                <input type="radio" class="radio-input"  name="personality_trait"
+                                    id="good" value="good">
                                 <span class="radio-label">Good (ভাল)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="personality_trait" id="better" value="better">
+                                <input type="radio" class="radio-input"  name="personality_trait"
+                                    id="better" value="better">
                                 <span class="radio-label">Better (মধ্যম)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="personality_trait" id="best" value="best">
+                                <input type="radio" class="radio-input"  name="personality_trait"
+                                    id="best" value="best">
                                 <span class="radio-label">Best (উত্তম)</span>
                             </label>
                         </div>
@@ -385,18 +427,18 @@
                         </div>
                         <div class="option-group">
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="previous_marriage_problem"
+                                <input type="radio" class="radio-input"  name="previous_marriage_problem"
                                     id="yes" value="yes">
                                 <span class="radio-label">Yes (হ্যাঁ)</span>
                             </label>
                             <label class="radio-option">
-                                <input type="radio" class="radio-input" name="previous_marriage_problem"
+                                <input type="radio" class="radio-input"  name="previous_marriage_problem"
                                     id="no" value="no">
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="submit-btn mt-3">Next</button>
+                    <button disabled type="submit" class="submit-btn mt-3">Next</button>
                 </div>
             </form>
         </div>
@@ -412,6 +454,13 @@
             showForm('men'); // You can change to 'women' if needed
         });
 
+        document.querySelectorAll('.gender-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                showForm(button.dataset.gender);
+            });
+        });
+
         function showForm(gender) {
             // Remove 'active' class from all buttons and forms
             document.getElementById('genderInput').value = gender;
@@ -421,11 +470,105 @@
             // Add 'active' to the selected button and form
             if (gender === 'men') {
                 document.getElementById('menForm').classList.add('active');
+                var $tab = $('#menForm');
+                if (!$tab.hasClass('active')) {
+                    // Find all required inputs and disable them temporarily
+                    $tab.find('[required]').each(function() {
+                        $(this).data('was-required', true); // mark it
+                        $(this).prop('required', false); // disable validation
+                    });
+                } else {
+                    // Find all required inputs and enable them
+                    $tab.find('.radio-input').each(function() {
+                        $(this).prop('required', true); // enable validation
+                    });
+                }
                 document.querySelector('.gender-btn[data-gender="men"]').classList.add('active');
             } else if (gender === 'women') {
                 document.getElementById('womenForm').classList.add('active');
+                var $tab2 = $('#menForm');
+                if (!$tab2.hasClass('active')) {
+                    // Find all required inputs and disable them temporarily
+                    $tab2.find('[required]').each(function() {
+                        $(this).data('was-required', true); // mark it
+                        $(this).prop('required', false); // disable validation
+                    });
+                } else {
+                    // Find all required inputs and enable them
+                    $tab2.find('.radio-input').each(function() {
+                        $(this).prop('required', true); // enable validation
+                    });
+                }
                 document.querySelector('.gender-btn[data-gender="women"]').classList.add('active');
             }
         }
+    </script>
+    <script>
+        function enableButtonIfValid(containerSelector, buttonSelector) {
+            function check() {
+                let allFilled = true;
+
+                console.log('--- Validating Required Inputs ---');
+
+                const $requiredFields = $(`${containerSelector} [required]`);
+
+                // To track checked radio groups
+                const radioGroupsChecked = {};
+
+                $requiredFields.each(function(index) {
+                    const $input = $(this);
+                    const tag = $input.prop('tagName').toLowerCase();
+                    const type = $input.attr('type');
+                    const name = $input.attr('name');
+                    const value = $.trim($input.val());
+                    const identifier = name || $input.attr('id') || `Input ${index + 1}`;
+
+                    if (type === 'radio') {
+                        if (!radioGroupsChecked[name]) {
+                            const $group = $(`${containerSelector} input[type="radio"][name="${name}"]`);
+                            const oneChecked = $group.is(':checked');
+
+                            radioGroupsChecked[name] = true; // mark as handled
+
+                            console.log(`[radio] ${name}: ${oneChecked ? '✔ checked' : '❌ none checked'}`);
+
+                            if (!oneChecked) {
+                                allFilled = false;
+                                return false;
+                            }
+                        }
+                    } else if (type === 'checkbox') {
+                        const isChecked = $input.is(':checked');
+                        console.log(`[checkbox] ${identifier}: ${isChecked ? '✔ checked' : '❌ not checked'}`);
+
+                        if (!isChecked) {
+                            allFilled = false;
+                            return false;
+                        }
+                    } else if (tag === 'select' && value === "") {
+                        console.warn(`❌ Missing select: ${identifier}`);
+                        allFilled = false;
+                        return false;
+                    } else if (tag !== 'select' && value === "") {
+                        console.warn(`❌ Missing input: ${identifier}`);
+                        allFilled = false;
+                        return false;
+                    } else {
+                        console.log(`[${tag}] ${identifier}: "${value}" ✔`);
+                    }
+                });
+
+                $(buttonSelector).prop("disabled", !allFilled);
+                console.log(`Button ${allFilled ? 'ENABLED' : 'DISABLED'}`);
+            }
+
+            // Re-check when any required input changes
+            $(`${containerSelector} [required]`).on("input change", check);
+
+            check(); // Initial run
+        }
+
+
+        enableButtonIfValid("#form", ".submit-btn");
     </script>
 @endpush

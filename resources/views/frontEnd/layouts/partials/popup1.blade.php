@@ -1,7 +1,7 @@
 <fieldset id="basicInfo">
     <div class="title-wrapper">
         <h2>Basic Information</h2>
-        <span>(সাধারণ তথ্য)</span>
+        <span class="mt-2">(সাধারণ তথ্য)</span>
     </div>
 
     <div class="reg_score_bar">
@@ -13,7 +13,7 @@
 
     <div class="row">
     <div class="form-group">
-        <label>Profile Created By (প্রোফাইল তৈরি করেছেন) *</label>
+        <label>Profile Created By <span class="bn_lable">(প্রোফাইল তৈরি করেছেন)</span> *</label>
         <div class="col-sm-12">
             <div class="toggle-group" id="profileGroup">
                 <div class="toggle-btn" data-value="1">Myself</div>
@@ -29,7 +29,7 @@
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Looking For (খুঁজছি) *</label>
+                <label>Looking For <span class="bn_lable">(খুঁজছি)</span> *</label>
                 <div class="toggle-group" id="lookingForGroup">
                     <div class="toggle-btn" data-value="1">Bride</div>
                     <div class="toggle-btn" data-value="2">Groom</div>
@@ -40,7 +40,7 @@
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Religion (নিজের ধর্ম) *</label>
+                <label>Religion <span class="bn_lable">(নিজের ধর্ম)</span>*</label>
                 <div class="toggle-group" id="religionGroup">
                     @foreach ($religions as $religion)
                         <div class="toggle-btn" data-value="{{ $religion->id }}">
@@ -51,31 +51,19 @@
                 <input type="hidden" name="religion_id" id="selectedReligion" required>
             </div>
         </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Profession (পেশা) *</label>
-                <select name="profession_id" required>
-                    <option value="">Select Profession</option>
-                    @foreach ($professions as $profession)
-                        <option value="{{ $profession->id }}">{{ $profession->title }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Your Full Name (আপনার সম্পূর্ণ নাম) *</label>
+                <label>Your Full Name <span class="bn_lable">(আপনার সম্পূর্ণ নাম)</span> *</label>
                 <input type="text" name="first_name" placeholder="Full Name" required>
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Date of Birth (জন্ম তারিখ) *</label>
+                <label>Date of Birth <span class="bn_lable">(জন্ম তারিখ)</span> *</label>
                 <div class="dob-group">
                     <select name="year" required>
                         <option value="">Year</option>
@@ -109,14 +97,14 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Weight (ওজন) *</label>
+                <label>Weight <span class="bn_lable">(ওজন)</span> *</label>
                 <input type="number" name="Weight" placeholder="Weight in kg" required>
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Height (উচ্চতা) *</label>
+                <label>Height <span class="bn_lable">(উচ্চতা)</span> *</label>
                 <select id="height" name="height" required>
                     <option value="">Select Height</option>
                     {{-- Add height options dynamically here if needed --}}
@@ -126,7 +114,7 @@
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Blood Group (রক্তের গ্রুপ) *</label>
+                <label>Blood Group <span class="bn_lable">(রক্তের গ্রুপ)</span> *</label>
                 <select name="blood_group" required>
                     <option value="">Select</option>
                     <option value="A+">A+</option>

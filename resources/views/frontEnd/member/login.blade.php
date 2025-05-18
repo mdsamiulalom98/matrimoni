@@ -6,11 +6,11 @@
             <div class="row justify-content-center">
                 <div class="col-sm-5">
                     <div class="form-content shadow-lg p-4 rounded login_container">
-                        <p class="auth-title text-center mb-4">🔑 Member Login</p>
+                        <p class="auth-title text-center mb-4"> Member Login</p>
                         <form action="{{ route('member.signin') }}" method="POST" data-parsley-validate="">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="phone">📱 Mobile Number *</label>
+                                <label for="phone"> Mobile Number *</label>
                                 <input type="number" id="phone"
                                     class="form-control @error('phone') is-invalid @enderror"
                                     placeholder="Enter Your Mobile Number" name="phone" value="{{ old('phone') }}"
@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="password">🔒 Password *</label>
+                                <label for="password"> Password *</label>
                                 <div class="input-group">
                                     <input type="password" id="password"
                                         class="form-control @error('password') is-invalid @enderror"

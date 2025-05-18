@@ -1,162 +1,110 @@
-<fieldset id="partnerExpectation">
+<fieldset id="familyInfo">
     <div class="row">
         <div class="title-wrapper">
-            <h2>Prospective life partner</h2>
-            <span>(প্রত্যাশিত জীবন সঙ্গী)</span>
+            <h2>Family information </h2>
+            <span class="mt-2">( পারিবারিক তথ্য )</span>
         </div>
-
         <div class="reg_score_bar">
             <div class="progress-bar">
                 <div class="progress2"></div>
             </div>
             <p>Your profile score 60%</p>
         </div>
-
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Age <span class="bn_lable">(বয়স)</span> *</label>
-                <input type="number" name="age" placeholder="Age" required>
+                <label>Father Name <span class="bn_lable">(বাবার নাম)</span> *</label>
+                <input type="text" name="father_name" placeholder="Father Name" required>
             </div>
         </div>
 
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Complexion <span class="bn_lable">(গাত্রবর্ণ)</span> *</label>
-                <input type="text" id="complexion" name="complexion" placeholder="Complexion" required>
-            </div>
-        </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Height <span class="bn_lable">(উচ্চতা)</span> *</label>
-                <select id="partner_height" name="partner_height" required>
-                    <option value="">Select Partner Height</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Education Qualification <span class="bn_lable">(শিক্ষাগত যোগ্যতা)</span> *</label>
-                <input type="text" id="education_qua" name="education_qua" placeholder="Education Qualification" required>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>SSC Passing Year <span class="bn_lable">(কত সালে এসএসসি পাস করছেন)</span> *</label>
-                <input type="date" id="ssc_passing" name="ssc_passing" required>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>SSC Result <span class="bn_lable">(এসএসসি এর ফলাফল কত)</span> *</label>
-                <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" required>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>District <span class="bn_lable">(জেলা)</span> *</label>
-                <select name="present_division" required>
-                    <option value="all_division">All Division</option>
-                    @foreach ($divisions as $division)
-                        <option value="{{ $division->id }}">{{ $division->title }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Country <span class="bn_lable">(দেশ)</span> *</label>
-                <select name="pertner_country" required>
-                    <option value="any">Any</option>
-                    @foreach ($divisions as $division)
-                        <option value="{{ $division->id }}">{{ $division->title }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Citizenship <span class="bn_lable">(নাগরিকত্ব)</span> *</label>
-                <select name="pertner_citizenship" required>
-                    <option value="any">Any</option>
-                    @foreach ($countries as $countrie)
-                        <option value="{{ $countrie->id }}">{{ $countrie->title }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Marital Status <span class="bn_lable">(বৈবাহিক অবস্থা)</span> *</label>
-                <select name="marital_status" id="marital_status" required>
+                <label>Is your father alive <span class="bn_lable">(আপনার বাবা কি জীবিত)</span> *</label>
+                <select name="father_alive" id="father_alive" required>
                     <option value="">Select</option>
-                    <option value="unmarried">Unmarried</option>
-                    <option value="married">Married</option>
-                    <option value="divorced">Divorced</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
                 </select>
             </div>
         </div>
 
+          <div class="col-sm-12">
+            <div class="form-group">
+                <label>Father Profession <span class="bn_lable">(বাবার পেশা)</span> *</label>
+                <input type="text" id="father_profession" name="father_profession" placeholder="Father Name">
+            </div>
+         </div>
+
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Profession <span class="bn_lable">(পেশা)</span> *</label>
-                <select name="profession_ids" required>
-                    <option value="">Select Profession</option>
-                    @foreach ($professions as $profession)
-                        <option value="{{ $profession->id }}">{{ $profession->title }}</option>
-                    @endforeach
-                </select>
+                <label>Mother Name <span class="bn_lable">(মায়ের নাম)</span>*</label>
+                <input type="text" name="mother_name" placeholder="Mother Name" required>
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Economic Situation <span class="bn_lable">(অর্থনৈতিক অবস্থা)</span> *</label>
-                <input type="text" id="economic_situation" name="economic_situation" placeholder="Economic situation" required>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label>Annual Income <span class="bn_lable">(বার্ষিক আয়)</span> *</label>
-                <select name="annual_income" id="annual_income" required>
+                <label>Is your mother alive <span class="bn_lable">(আপনার মা কি জীবিত)</span> *</label>
+                <select name="mother_alive" id="mother_alive" required>
                     <option value="">Select</option>
-                    <option value="Any">Any</option>
-                    <option value="20k Up">20k Up</option>
-                    <option value="20k">25k Up</option>
-                    <option value="30k">30k Up</option>
-                    <option value="40k">40k Up</option>
-                    <option value="50k">50k Up</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
                 </select>
+            </div>
+        </div>
+
+         <div class="col-sm-12">
+            <div class="form-group">
+                <label>Mother Profession <span class="bn_lable">(মায়ের পেশা)</span> *</label>
+                <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Name">
             </div>
         </div>
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Drinking Habit <span class="bn_lable">(মদ্যপানের অভ্যাস)</span> *</label>
-                <select name="drinking_habbit" id="drinking_habbit" required>
-                    <option value="">Select</option>
-                    <option value="Doesent Matter">Doesn't Matter</option>
-                    <option value="Not Allow">Not Allow</option>
-                </select>
+                <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই আছে)</span> *</label>
+                <input type="number" name="brother_count" placeholder="How many Brothers" >
             </div>
         </div>
-
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Smoking Habit <span class="bn_lable">(ধূমপানের অভ্যাস)</span> *</label>
-                <select name="smoking_habbit" id="smoking_habbit" required>
-                    <option value="">Select</option>
-                    <option value="Doesent Matter">Doesn't Matter</option>
-                    <option value="Not Allow">Not Allow</option>
-                </select>
+                <label>Married Brother <span class="bn_lable">(বিবাহিত ভাই)</span> *</label>
+                <input type="number" name="married_brother" placeholder="Married Brother">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>How many sisters do you have <span class="bn_lable">(আপনার কতজন বোন আছে)</span> *</label>
+                <input type="number" name="sister_count" placeholder="How many Sisters">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Sister married <span class="bn_lable">(বোনের বিয়ে হয়েছে)</span> *</label>
+                <input type="number" name="married_sister" placeholder="Sister married">
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Guradian Phone <span class="bn_lable">(অভিভাকরে নাম্বার)</span> *</label>
+                <input type="number" name="guradian_phone" placeholder="Guradian Phone">
+            </div>
+        </div>
+       
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>What is the family religious environment like? <span class="bn_lable">( পারিবারিক দ্বীনি পরিবেশ কেমন )</span> *</label>
+                <input type="text" name="guardian_profession" placeholder="Guardian's profession" required>
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Description of economic situation<span class="bn_lable">( অর্থনৈতিক অবস্থার বিবরণ )</span> *</label>
+                <!--<input type="text" name="economic_situation" placeholder="Economic Situation" required>-->
+                <textarea id="economic_situation" name="economic_situation" rows="4" cols="50"></textarea>
             </div>
         </div>
     </div>

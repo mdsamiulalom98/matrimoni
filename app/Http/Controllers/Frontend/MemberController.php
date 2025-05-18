@@ -28,6 +28,8 @@ use App\Models\ProposalRequest;
 use App\Models\FavoriteMember;
 use App\Models\Agent;
 use App\Models\MemberQuery;
+use App\Models\PartnerExpectation;
+use App\Models\MemberFamily;
 use DateTime;
 
 class MemberController extends Controller
@@ -48,7 +50,7 @@ class MemberController extends Controller
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
-        
+
         return $request->all();
 
         // $request->validate([
@@ -113,13 +115,17 @@ class MemberController extends Controller
 
         // basic information
         $store_info = new MemberInfo();
+        // country_id
         $store_info->member_id = $memberId;
         $store_info->residency_id = $request->residency_id;
-        $store_info->country_id = $request->country_id;
+        // $store_info->country_id = $request->country_id;
         $store_info->religion_id = $request->religion_id;
         $store_info->guardian_phone = $request->guardian_phone;
         $store_info->dob = $dateofbirth;
         $store_info->age = $age;
+        $store_info->height = $request->height;
+        $store_info->weight = $request->weight;
+        $store_info->blood_group = $request->blood_group;
         $store_info->looking_for = $request->looking_for;
         $store_info->profile_created_by = $request->profile_created_by;
         $store_info->save();
@@ -128,21 +134,67 @@ class MemberController extends Controller
         $store_career = new MemberCareer();
         $store_career->member_id = $memberId;
         $store_career->profession_id = $request->profession_id;
+        $store_career->profession_name = $request->profession_name;
+        $store_career->job_permanent = $request->job_permanent;
+        $store_career->job_type = $request->job_type;
+        $store_career->is_student = $request->is_student;
+        $store_career->last_education = $request->last_education;
+        $store_career->job_duration = $request->job_duration;
         $store_career->save();
 
         $store_education = new MemberEducation();
         $store_education->member_id = $memberId;
         $store_education->education_id = $request->education_id;
+        $store_education->education_end_id = $request->education_end_id;
+        $store_education->ssc_gpa = $request->ssc_gpa;
+        $store_education->ssc_passing = $request->ssc_passing;
         $store_education->save();
 
         // member image information
         $store_location = new MemberLocation();
         $store_location->member_id = $memberId;
         $store_location->present_district = $request->present_district;
-        $store_location->present_upazila = $request->present_upazila;
+        // $store_location->present_upazila = $request->present_upazila;
         $store_location->present_division = $request->present_division;
         $store_location->present_area = $request->present_area;
         $store_location->save();
+
+        $store_expectation = new PartnerExpectation();
+        $store_expectation->member_id = $memberId;
+        $store_expectation->partner_height = $request->partner_height;
+        $store_expectation->partner_country = $request->partner_country;
+        $store_expectation->marital_status = $request->marital_status;
+        $store_expectation->partner_citizenship = $request->partner_citizenship;
+        $store_expectation->profession_ids = $request->profession_ids;
+        $store_expectation->education_qualification = $request->education_qualification;
+        $store_expectation->age = $request->age;
+        $store_expectation->complexion = $request->complexion;
+        $store_expectation->annual_income = $request->annual_income;
+        $store_expectation->economic_situation = $request->economic_situation;
+        $store_expectation->drinking_habbit = $request->drinking_habbit;
+        $store_expectation->smoking_habbit = $request->smoking_habbit;
+        $store_expectation->job_permanent = $request->job_permanent;
+        $store_expectation->job_type = $request->job_type;
+        $store_expectation->is_student = $request->is_student;
+        $store_expectation->last_education = $request->last_education;
+        $store_expectation->job_duration = $request->job_duration;
+        $store_expectation->save();
+
+        $store_family = new MemberFamily();
+        $store_family->member_id = $memberId;
+        $store_family->father_name = $request->father_name;
+        $store_family->father_profession = $request->father_profession;
+        $store_family->father_alive = $request->father_alive;
+        $store_family->mother_name = $request->mother_name;
+        $store_family->mother_profession = $request->mother_profession;
+        $store_family->mother_alive = $request->mother_alive;
+        $store_family->brother_count = $request->brother_count;
+        $store_family->married_brother = $request->married_brother;
+        $store_family->sister_count = $request->sister_count;
+        $store_family->married_sister = $request->married_sister;
+        $store_family->financial_situation = $request->financial_situation;
+        $store_family->guardian_profession = $request->guardian_profession;
+        $store_family->save();
 
         // member image information
         $imageUrl = 'public/uploads/member/default.webp';
@@ -226,8 +278,9 @@ class MemberController extends Controller
         Auth::guard('member')->loginUsingId($memberId);
         Toastr::success('Your account has been registered');
         return redirect()->back();
+
     }
-    
+
     public function query_store(Request $request)
     {
         $input = $request->all();
@@ -248,7 +301,7 @@ class MemberController extends Controller
             'phone' => 'required|digits:11',
             'password' => 'required',
         ]);
-        
+
         $user = Member::where('phone', $request->phone)->first();
 
         if ($user) {
@@ -259,7 +312,7 @@ class MemberController extends Controller
                 return redirect()->route('members');
             } else {
                 $credentials = ['phone' => $request->phone, 'password' => $request->password];
-                
+
                 if (Auth::guard('member')->attempt($credentials)) {
                     Toastr::success('আপনি লগিন সফল হয়েছে');
                     if (Cart::instance('wishlist')->count() > 0) {
@@ -614,8 +667,8 @@ class MemberController extends Controller
             return redirect()->back();
         }
     }
-    
-    
+
+
 
     public function sendRequest(Request $request)
     {
@@ -679,7 +732,7 @@ class MemberController extends Controller
     {
         return view('frontEnd.layouts.pages.requestpage', compact('id'));
     }
-    
+
     public function favorite_send(Request $request)
     {
         $member_id = Auth::guard('member')->user()->id;
@@ -709,11 +762,11 @@ class MemberController extends Controller
         Toastr::success('Proposal request sent.', 'Success');
         return redirect()->back();
     }
-    
+
     public function logout()
     {
         Auth::guard('member')->logout();
         return redirect()->route('member.login');
     }
-    
+
 }
