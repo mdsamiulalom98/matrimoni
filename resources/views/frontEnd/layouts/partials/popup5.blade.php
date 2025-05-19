@@ -15,10 +15,10 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Age <span class="bn_lable">(বয়স)</span> *</label>
-                <select id="partner_age" name="partner_age" required>
+                <select id="age" name="age" required>
                     <option value="any age">Any Age</option>
                 </select>
-                
+
             </div>
         </div>
 
@@ -28,7 +28,7 @@
         <!--        <input type="text" id="complexion" name="complexion" placeholder="Complexion" required>-->
         <!--    </div>-->
         <!--</div>-->
-        
+
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Complexion <span class="bn_lable">(গাত্রবর্ণ)</span> *</label>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-       
+
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Education Qualification <span class="bn_lable">(শিক্ষাগত যোগ্যতা)</span> *</label>
@@ -64,13 +64,13 @@
             </div>
         </div>
 
-       <div class="col-sm-12">
+        <div class="col-sm-12">
             <div class="form-group">
-            <label>SSC Passing Year <span class="bn_lable">(কত সালে এসএসসি পাস করেছেন)</span> *</label>
-           <select id="ssc_passing" name="ssc_passing" required>
-          <option value="">Select Year</option>
-          <option value="any age">Any Age</option>
-        </select>
+                <label>SSC Passing Year <span class="bn_lable">(কত সালে এসএসসি পাস করেছেন)</span> *</label>
+                <select id="ssc_passing" name="ssc_passing" required>
+                    <option value="">Select Year</option>
+                    <option value="any age">Any Age</option>
+                </select>
             </div>
         </div>
 
@@ -85,7 +85,7 @@
             <div class="form-group">
                 <label>District <span class="bn_lable">(জেলা)</span> *</label>
                 <select name="present_division" required>
-                    <option value="all_division">All Division</option>
+                    <option value="0">All Division</option>
                     @foreach ($divisions as $division)
                         <option value="{{ $division->id }}">{{ $division->name }}</option>
                     @endforeach
@@ -97,8 +97,8 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Citizenship <span class="bn_lable">(নাগরিকত্ব)</span> *</label>
-                <select name="pertner_citizenship" required>
-                    <option value="any">Any</option>
+                <select name="partner_citizenship" required>
+                    <option value="0">Any</option>
                     @foreach ($countries as $countrie)
                         <option value="{{ $countrie->id }}">{{ $countrie->nicename }}</option>
                     @endforeach
@@ -123,7 +123,7 @@
                 <label>Profession <span class="bn_lable">(পেশা)</span> *</label>
                 <select name="profession_ids" required>
                     <option value="">Profession</option>
-                    <option value="not_required">প্রযোজ্য নয়</option>
+                    <option value="0">প্রযোজ্য নয়</option>
                     @foreach ($professions as $profession)
                         <option value="{{ $profession->id }}">{{ $profession->title }}</option>
                     @endforeach
@@ -135,7 +135,7 @@
             <div class="form-group">
                 <label>Economic Situation <span class="bn_lable">(অর্থনৈতিক অবস্থা)</span> *</label>
                 {{-- <input type="text" id="economic_situation" name="economic_situation" placeholder="Economic situation" required> --}}
-                <select name="pertner_eco_situation" id="pertner_eco_situation">
+                <select name="economic_situation" id="economic_situation">
                     <option value="">Select</option>
                     <option value="Any">Any</option>
                     <option value="Lower class">Lower class</option>
@@ -145,10 +145,10 @@
             </div>
         </div>
 
-       <div class="col-sm-12">
+        <div class="col-sm-12">
             <div class="form-group">
                 <label>Monthly Income <span class="bn_lable">(মাসিক আয়)</span> *</label>
-                <select name="montly_income" id="montly_income">
+                <select name="monthly_income" id="monthly_income">
                     <option value="">Select</option>
                     <option value="Any">Any</option>
                     <option value="20000 Up">20000 Up</option>
@@ -183,10 +183,14 @@
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>The qualities you expect in a life partner <span class="bn_lable">(জীবনসঙ্গীর যেসব গুণ প্রত্যাশা করেন)</span> *</label>
+                <label>The qualities you expect in a life partner <span class="bn_lable">(জীবনসঙ্গীর যেসব গুণ প্রত্যাশা
+                        করেন)</span> *</label>
                 <textarea id="expect_lifepartner" name="expect_lifepartner" rows="4" cols="50"></textarea>
             </div>
         </div>
     </div>
 </fieldset>
 
+
+<button id="partnerNext" disabled type="button" onclick="nextPopup(6, 7)">Next</button>
+<button type="button" onclick="prevPopup(6, 5)">Back</button>

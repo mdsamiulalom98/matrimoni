@@ -51,7 +51,7 @@ class MemberController extends Controller
             return redirect()->back();
         }
 
-        return $request->all();
+        // return $request->all();
 
         // $request->validate([
         //     'first_name' => 'required',
@@ -134,7 +134,7 @@ class MemberController extends Controller
         $store_career = new MemberCareer();
         $store_career->member_id = $memberId;
         $store_career->profession_id = $request->profession_id;
-        $store_career->profession_name = $request->profession_name;
+        // $store_career->profession_name = $request->profession_name;
         $store_career->job_permanent = $request->job_permanent;
         $store_career->job_type = $request->job_type;
         $store_career->is_student = $request->is_student;
@@ -154,22 +154,22 @@ class MemberController extends Controller
         $store_location = new MemberLocation();
         $store_location->member_id = $memberId;
         $store_location->present_district = $request->present_district;
-        // $store_location->present_upazila = $request->present_upazila;
+        $store_location->present_upazila = $request->present_upazila;
         $store_location->present_division = $request->present_division;
         $store_location->present_area = $request->present_area;
+        $store_location->grow_up = $request->grow_up;
         $store_location->save();
 
         $store_expectation = new PartnerExpectation();
         $store_expectation->member_id = $memberId;
         $store_expectation->partner_height = $request->partner_height;
-        $store_expectation->partner_country = $request->partner_country;
         $store_expectation->marital_status = $request->marital_status;
         $store_expectation->partner_citizenship = $request->partner_citizenship;
         $store_expectation->profession_ids = $request->profession_ids;
         $store_expectation->education_qualification = $request->education_qualification;
         $store_expectation->age = $request->age;
         $store_expectation->complexion = $request->complexion;
-        $store_expectation->annual_income = $request->annual_income;
+        $store_expectation->monthly_income = $request->monthly_income;
         $store_expectation->economic_situation = $request->economic_situation;
         $store_expectation->drinking_habbit = $request->drinking_habbit;
         $store_expectation->smoking_habbit = $request->smoking_habbit;
@@ -178,6 +178,7 @@ class MemberController extends Controller
         $store_expectation->is_student = $request->is_student;
         $store_expectation->last_education = $request->last_education;
         $store_expectation->job_duration = $request->job_duration;
+        $store_expectation->present_division = $request->present_division;
         $store_expectation->save();
 
         $store_family = new MemberFamily();
@@ -193,7 +194,7 @@ class MemberController extends Controller
         $store_family->sister_count = $request->sister_count;
         $store_family->married_sister = $request->married_sister;
         $store_family->financial_situation = $request->financial_situation;
-        $store_family->guardian_profession = $request->guardian_profession;
+        $store_family->religious_status = $request->religious_status;
         $store_family->save();
 
         // member image information

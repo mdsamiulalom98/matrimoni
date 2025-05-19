@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             <!-- col-end -->
-                            
+
                             <!-- col-end -->
                             <div class="col-sm-12">
                                 <div class="form-group mb-3">
@@ -113,28 +113,6 @@
     </script>
 
     <script>
-        $('.district').on('change', function() {
-            var id = $(this).val();
-            $.ajax({
-                type: "GET",
-                data: {
-                    'id': id
-                },
-                url: "{{ route('districts') }}",
-                success: function(res) {
-                    if (res) {
-                        $(".area").empty();
-                        $(".area").append('<option value="">Select..</option>');
-                        $.each(res, function(key, value) {
-                            $(".area").append('<option value="' + key + '" >' + value +
-                                '</option>');
-                        });
-
-                    } else {
-                        $(".area").empty();
-                    }
-                }
-            });
-        });
+        
     </script>
 @endpush

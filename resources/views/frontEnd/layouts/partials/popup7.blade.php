@@ -75,3 +75,5 @@
 
     </div>
 </fieldset>
+<button id="professionNext" disabled type="button" onclick="nextPopup(3, 4)">Next</button>
+<button type="button" onclick="prevPopup(3, 2)">Back</button>

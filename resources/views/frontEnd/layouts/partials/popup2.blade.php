@@ -11,10 +11,11 @@
             </div>
             <p>Your profile score 60%</p>
         </div>
-        
+
         <div class="col-sm-12">
             <div class="form-group">
-                <label>In which year are you passing SSC <span class="bn_lable">(কত সালে এসএসসি পাস করছেন)</span> *</label>
+                <label>In which year are you passing SSC <span class="bn_lable">(কত সালে এসএসসি পাস করছেন)</span>
+                    *</label>
                 <select name="ssc_passing" required>
                     <option value="">Year</option>
                     @php
@@ -37,7 +38,8 @@
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Highest educational qualification <span class="bn_lable">(সর্বোচ্চ শিক্ষাগত যোগ্যতা)</span> *</label>
+                <label>Highest educational qualification <span class="bn_lable">(সর্বোচ্চ শিক্ষাগত যোগ্যতা)</span>
+                    *</label>
                 <select name="education_id" required>
                     <option value="">Select Highest Education</option>
                     @foreach ($educations as $education)
@@ -49,7 +51,8 @@
 
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত যোগ্যতা)</span> *</label>
+                <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত যোগ্যতা)</span>
+                    *</label>
                 <select name="education_end_id" required>
                     <option value="">Select Latest Qualification</option>
                     @foreach ($educations as $education)
@@ -60,3 +63,5 @@
         </div>
     </div>
 </fieldset>
+<button id="educationNext" disabled type="button" onclick="nextPopup(2, 3)">Next</button>
+<button type="button" onclick="prevPopup(2, 1)">Back</button>

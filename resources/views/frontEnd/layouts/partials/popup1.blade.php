@@ -12,18 +12,18 @@
     </div>
 
     <div class="row">
-    <div class="form-group">
-        <label>Profile Created By <span class="bn_lable">(প্রোফাইল তৈরি করেছেন)</span> *</label>
-        <div class="col-sm-12">
-            <div class="toggle-group" id="profileGroup">
-                <div class="toggle-btn" data-value="1">Myself</div>
-                <div class="toggle-btn" data-value="2">Parent</div>
-                <div class="toggle-btn" data-value="3">Guardian</div>
-                <div class="toggle-btn" data-value="4">Relatives</div>
-                <div class="toggle-btn" data-value="5">Friend</div>
-                <div class="toggle-btn" data-value="6">Others</div>
-            </div>
-            <input type="hidden" name="profile_created_by" id="selectedProfile" required>
+        <div class="form-group">
+            <label>Profile Created By <span class="bn_lable">(প্রোফাইল তৈরি করেছেন)</span> *</label>
+            <div class="col-sm-12">
+                <div class="toggle-group" id="profileGroup">
+                    <div class="toggle-btn" data-value="1">Myself</div>
+                    <div class="toggle-btn" data-value="2">Parent</div>
+                    <div class="toggle-btn" data-value="3">Guardian</div>
+                    <div class="toggle-btn" data-value="4">Relatives</div>
+                    <div class="toggle-btn" data-value="5">Friend</div>
+                    <div class="toggle-btn" data-value="6">Others</div>
+                </div>
+                <input type="hidden" name="profile_created_by" id="selectedProfile" required>
             </div>
         </div>
 
@@ -98,7 +98,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Weight <span class="bn_lable">(ওজন)</span> *</label>
-                <input type="number" name="Weight" placeholder="Weight in kg" required>
+                <input type="number" name="weight" placeholder="Weight in kg" required>
             </div>
         </div>
 
@@ -130,3 +130,5 @@
         </div>
     </div>
 </fieldset>
+
+<button type="button" disabled id="basicNext" onclick="nextPopup(1, 2)">Next</button>

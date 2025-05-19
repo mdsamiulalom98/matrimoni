@@ -17,7 +17,6 @@
             </div>
         </div>
 
-
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Is your father alive <span class="bn_lable">(আপনার বাবা কি জীবিত)</span> *</label>
@@ -29,12 +28,12 @@
             </div>
         </div>
 
-          <div class="col-sm-12">
+        <div class="col-sm-12">
             <div class="form-group">
                 <label>Father Profession <span class="bn_lable">(বাবার পেশা)</span> *</label>
                 <input type="text" id="father_profession" name="father_profession" placeholder="Father Name">
             </div>
-         </div>
+        </div>
 
         <div class="col-sm-12">
             <div class="form-group">
@@ -54,7 +53,7 @@
             </div>
         </div>
 
-         <div class="col-sm-12">
+        <div class="col-sm-12">
             <div class="form-group">
                 <label>Mother Profession <span class="bn_lable">(মায়ের পেশা)</span> *</label>
                 <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Name">
@@ -64,7 +63,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই আছে)</span> *</label>
-                <input type="number" name="brother_count" placeholder="How many Brothers" >
+                <input type="number" name="brother_count" placeholder="How many Brothers">
             </div>
         </div>
         <div class="col-sm-12">
@@ -85,27 +84,31 @@
                 <input type="number" name="married_sister" placeholder="Sister married">
             </div>
         </div>
-        
+
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Guradian Phone <span class="bn_lable">(অভিভাকরে নাম্বার)</span> *</label>
-                <input type="number" name="guradian_phone" placeholder="Guradian Phone">
+                <input type="number" name="guardian_phone" placeholder="Guardian Phone">
             </div>
         </div>
-       
+
         <div class="col-sm-12">
             <div class="form-group">
-                <label>What is the family religious environment like? <span class="bn_lable">( পারিবারিক দ্বীনি পরিবেশ কেমন )</span> *</label>
-                <input type="text" name="guardian_profession" placeholder="Guardian's profession" required>
+                <label>What is the family religious environment like? <span class="bn_lable">( পারিবারিক দ্বীনি পরিবেশ
+                        কেমন )</span> *</label>
+                <input type="text" name="religious_status" placeholder="Guardian's profession" required>
             </div>
         </div>
-        
+
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Description of economic situation<span class="bn_lable">( অর্থনৈতিক অবস্থার বিবরণ )</span> *</label>
-                <!--<input type="text" name="economic_situation" placeholder="Economic Situation" required>-->
-                <textarea id="economic_situation" name="economic_situation" rows="4" cols="50"></textarea>
+                <label>Description of economic situation<span class="bn_lable">( অর্থনৈতিক অবস্থার বিবরণ )</span>
+                    *</label>
+                <!--<input type="text" name="financial_situation" placeholder="Economic Situation" required>-->
+                <textarea id="financial_situation" name="financial_situation" rows="4" cols="50"></textarea>
             </div>
         </div>
     </div>
 </fieldset>
+<button id="familyNext" disabled type="button" onclick="nextPopup(4, 5)">Next</button>
+<button type="button" onclick="prevPopup(4, 3)">Back</button>

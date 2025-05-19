@@ -30,7 +30,7 @@
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label>Password <span class="bn_lable">(পাসওয়ার্ড)</span></label>   
+                <label>Password <span class="bn_lable">(পাসওয়ার্ড)</span></label>
                 <input name="password" type="password" placeholder="Enter password" required />
             </div>
         </div>
@@ -75,3 +75,5 @@
         </div>
     </div>
 </fieldset>
+<button type="button" onclick="prevPopup(7, 6)">Back</button>
+<button disabled id="registerButton" type="submit" onclick="submitForm()">Register</button>

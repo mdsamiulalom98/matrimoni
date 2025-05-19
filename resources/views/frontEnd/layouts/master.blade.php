@@ -316,29 +316,8 @@
             });
         </script>
         <!-- search js start -->
-        <script></script>
-        <script></script>
-        <script>
-            $(".district").on("change", function () {
-                var id = $(this).val();
-                $.ajax({
-                    type: "GET",
-                    data: { id: id },
-                    url: "{{route('districts')}}",
-                    success: function (res) {
-                        if (res) {
-                            $(".area").empty();
-                            $(".area").append('<option value="">Select..</option>');
-                            $.each(res, function (key, value) {
-                                $(".area").append('<option value="' + key + '" >' + value + "</option>");
-                            });
-                        } else {
-                            $(".area").empty();
-                        }
-                    },
-                });
-            });
-        </script>
+
+        
         <script>
             $(".toggle").on("click", function () {
                 $("#page-overlay").show();

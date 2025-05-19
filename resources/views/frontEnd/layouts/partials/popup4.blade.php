@@ -11,11 +11,11 @@
             <p>Your profile score 60%</p>
         </div>
 
-        <div class="rows" id="presentAddress"> 
+        <div class="rows" id="presentAddress">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Own District <span class="bn_lable">(নিজ জেলা)</span> *</label>
-                    <select name="present_district" id="present_district" required>
+                    <select class="district" name="present_district" id="present_district" required>
                         <option value="">Select District</option>
                         @foreach ($districts as $district)
                             <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -27,7 +27,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Own Upazila <span class="bn_lable">(নিজ উপজেলা)</span> *</label>
-                    <select name="present_upazila" id="present_upazila" required>
+                    <select class="upazila" name="present_upazila" id="present_upazila" required>
                         <option value="">Select Upazila</option>
                     </select>
                 </div>
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-         <div class="address-toggle">
+        <div class="address-toggle">
             <input type="checkbox" id="sameAsPresent" name="sameAsPresent" onchange="togglePermanentAddress()">
             <label for="sameAsPresent">বৰ্তমান ও স্থায়ী ঠিকানা একই </label>
         </div>
@@ -51,7 +51,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Own District <span class="bn_lable">(নিজ জেলা)</span> *</label>
-                    <select name="present_district" id="present_district" required>
+                    <select name="present_district" class="district" id="present_district" required>
                         <option value="">Select District</option>
                         @foreach ($districts as $district)
                             <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -63,7 +63,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Own Upazila <span class="bn_lable">(নিজ উপজেলা)</span> *</label>
-                    <select name="present_upazila" id="present_upazila" required>
+                    <select name="present_upazila" id="present_upazila" class="upazila" required>
                         <option value="">Select Upazila</option>
                     </select>
                 </div>
@@ -85,3 +85,5 @@
         </div>
     </div>
 </fieldset>
+<button id="locationNext" disabled type="button" onclick="nextPopup(5, 6)">Next</button>
+<button type="button" onclick="prevPopup(5, 4)">Back</button>

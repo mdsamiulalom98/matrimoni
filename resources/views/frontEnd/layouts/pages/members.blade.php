@@ -306,14 +306,13 @@
     </div>
 </section>
 
- @if (!Auth::guard('member')->check())
+@if (!Auth::guard('member')->check())
     <form action="{{ route('member_register') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- Popup 1: Basic Information -->
         <div id="popup1" class="popup-container">
             <div class="popup">
                 @include('frontEnd.layouts.partials.popup1')
-                <button type="button" disabled id="basicNext" onclick="nextPopup(1, 2)">Next</button>
             </div>
         </div>
 
@@ -323,8 +322,6 @@
                 <span class="close-btn" onclick="closePopup(2)"><i class="fa-solid fa-arrow-left"></i></span>
                 <!-- Present Location -->
                 @include('frontEnd.layouts.partials.popup2')
-                <button id="educationNext" disabled type="button" onclick="nextPopup(2, 3)">Next</button>
-                <button type="button" onclick="prevPopup(2, 1)">Back</button>
             </div>
         </div>
 
@@ -334,8 +331,6 @@
                 <span class="close-btn" onclick="closePopup(3)"><i class="fa-solid fa-arrow-left"></i></span>
                 <!-- Present Location -->
                 @include('frontEnd.layouts.partials.popup7')
-                <button id="professionNext" disabled type="button" onclick="nextPopup(3, 4)">Next</button>
-                <button type="button" onclick="prevPopup(3, 2)">Back</button>
             </div>
 
         </div>
@@ -346,8 +341,7 @@
                 <span class="close-btn" onclick="closePopup(4)"><i class="fa-solid fa-arrow-left"></i></span>
                 <!-- Present Location -->
                 @include('frontEnd.layouts.partials.popup3')
-                <button id="partnerNext" disabled type="button" onclick="nextPopup(4, 5)">Next</button>
-                <button type="button" onclick="prevPopup(4, 3)">Back</button>
+
             </div>
         </div>
         <!-- Popup 2: Educational Qualification -->
@@ -356,8 +350,7 @@
                 <span class="close-btn" onclick="closePopup(5)"><i class="fa-solid fa-arrow-left"></i></span>
                 <!-- Present Location -->
                 @include('frontEnd.layouts.partials.popup4')
-                <button id="locationNext" disabled type="button" onclick="nextPopup(5, 6)">Next</button>
-                <button type="button" onclick="prevPopup(5, 4)">Back</button>
+
             </div>
         </div>
         <!-- Popup 2: Educational Qualification -->
@@ -366,8 +359,7 @@
                 <span class="close-btn" onclick="closePopup(6)"><i class="fa-solid fa-arrow-left"></i></span>
                 <!-- Present Location -->
                 @include('frontEnd.layouts.partials.popup5')
-                <button id="familyNext" disabled type="button" onclick="nextPopup(6, 7)">Next</button>
-                <button type="button" onclick="prevPopup(6, 5)">Back</button>
+
             </div>
         </div>
 
@@ -376,14 +368,9 @@
             <div class="popup">
                 <span class="close-btn" onclick="closePopup(7)"><i class="fa-solid fa-arrow-left"></i></span>
                 @include('frontEnd.layouts.partials.popup6')
-                <button type="button" onclick="prevPopup(7, 6)">Back</button>
-                <button disabled id="registerButton" type="submit" onclick="submitForm()">Register</button>
             </div>
         </div>
     </form>
-
-
-
 @endif
 @endsection @push('script')
 <script>
@@ -496,8 +483,6 @@
     });
 </script>
 <script>
-   
-
     function enableButtonIfValid(containerSelector, buttonSelector) {
         function check() {
             let allFilled = true;
@@ -608,119 +593,120 @@
 
 <!-- Actual height dropdown (like 5'0", 5'1", ..., 7'0") -->
 <script>
-  const select = document.getElementById('height');
+    const select = document.getElementById('height');
 
-  for (let feet = 5; feet <= 7; feet++) {
-    for (let inch = 0; inch < 12; inch++) {
-      if (feet === 7 && inch > 0) break;
+    for (let feet = 5; feet <= 7; feet++) {
+        for (let inch = 0; inch < 12; inch++) {
+            if (feet === 7 && inch > 0) break;
 
-      const heightText = `${feet} feet ${inch} inch`;
-      const heightValue = `${feet}'${inch}"`;
-      const option = new Option(heightText, heightValue);
-      select.add(option);
+            const heightText = `${feet} feet ${inch} inch`;
+            const heightValue = `${feet}'${inch}"`;
+            const option = new Option(heightText, heightValue);
+            select.add(option);
+        }
     }
-  }
 </script>
 
 <!-- SSC Passing Year -->
 <script>
-  const yearSelect = document.getElementById('ssc_passing');
-  const startYear = 1998;
-  const endYear = 2025;
+    const yearSelect = document.getElementById('ssc_passing');
+    const startYear = 1998;
+    const endYear = 2025;
 
-  for (let year = startYear; year <= endYear; year++) {
-    const option = new Option(year, year);
-    yearSelect.add(option);
-  }
+    for (let year = startYear; year <= endYear; year++) {
+        const option = new Option(year, year);
+        yearSelect.add(option);
+    }
 </script>
 
 <!-- Partner Age Ranges -->
 <script>
-  const partnerAgeSelect = document.getElementById('partner_age');
+    const partnerAgeSelect = document.getElementById('partner_age');
 
-  const ageRanges = [
-    [18, 20],
-    [20, 25],
-    [25, 30],
-    [30, 35],
-    [35, 40],
-    [40, 45],
-    [45, 50]
-  ];
+    const ageRanges = [
+        [18, 20],
+        [20, 25],
+        [25, 30],
+        [30, 35],
+        [35, 40],
+        [40, 45],
+        [45, 50]
+    ];
 
-  ageRanges.forEach(([start, end]) => {
-    const text = `${start} - ${end}`;
-    const value = `${start}-${end}`;
-    const option = new Option(text, value);
-    partnerAgeSelect.add(option);
-  });
+    ageRanges.forEach(([start, end]) => {
+        const text = `${start} - ${end}`;
+        const value = `${start}-${end}`;
+        const option = new Option(text, value);
+        partnerAgeSelect.add(option);
+    });
 </script>
 
 <!-- Partner Height Ranges (5 - 7 feet in 0.5 steps) -->
 <script>
-  const partnerHeightSelect = document.getElementById('partner_height');
+    const partnerHeightSelect = document.getElementById('partner_height');
 
-  const startFeet = 5;
-  const endFeet = 7;
-  const increment = 0.5;
+    const startFeet = 5;
+    const endFeet = 7;
+    const increment = 0.5;
 
-  for (let height = startFeet; height < endFeet; height += increment) {
-    let nextHeight = height + increment;
-    if (nextHeight > endFeet) break;
+    for (let height = startFeet; height < endFeet; height += increment) {
+        let nextHeight = height + increment;
+        if (nextHeight > endFeet) break;
 
-    const format = h => {
-      const feet = Math.floor(h);
-      const inch = (h % 1 === 0.5) ? 6 : 0;
-      return `${feet} feet${inch ? ' ' + inch + ' inch' : ''}`;
-    };
+        const format = h => {
+            const feet = Math.floor(h);
+            const inch = (h % 1 === 0.5) ? 6 : 0;
+            return `${feet} feet${inch ? ' ' + inch + ' inch' : ''}`;
+        };
 
-    const text = `${format(height)} - ${format(nextHeight)}`;
-    const value = `${height}-${nextHeight}`;
-    const option = new Option(text, value);
-    partnerHeightSelect.add(option);
-  }
+        const text = `${format(height)} - ${format(nextHeight)}`;
+        const value = `${height}-${nextHeight}`;
+        const option = new Option(text, value);
+        partnerHeightSelect.add(option);
+    }
 </script>
 
 
 {{-- this for district and upazila --}}
 
 <script>
-  $('#present_district').on('change', function () {
-    const districtId = $(this).val();
-
-    if (districtId) {
-      $.ajax({
-        url: `{{ url('get-upazilas') }}?id=${districtId}`,
-        type: 'GET',
-        success: function (data) {
-          $('#present_upazila').empty().append('<option value="">Select Upazila</option>');
-          data.forEach(function (upazila) {
-            $('#present_upazila').append(`<option value="${upazila.id}">${upazila.name}</option>`);
-          });
-        },
-        error: function () {
-          alert('Failed to fetch upazilas');
+    $('.district').on('change', function() {
+        const districtId = $(this).val();
+        let upazilaSelect = $(this).closest('.rows').find('.upazila');
+        console.log(upazilaSelect);
+        if (districtId) {
+            $.ajax({
+                url: `{{ url('get-upazilas') }}?id=${districtId}`,
+                type: 'GET',
+                success: function(data) {
+                    upazilaSelect.empty().append(
+                    '<option value="">Select Upazila</option>');
+                    data.forEach(function(upazila) {
+                        upazilaSelect.append(
+                            `<option value="${upazila.id}">${upazila.name}</option>`);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch upazilas');
+                }
+            });
+        } else {
+            upazilaSelect.html('<option value="">Select Upazila</option>');
         }
-      });
-    } else {
-      $('#present_upazila').html('<option value="">Select Upazila</option>');
-    }
-  });
+    });
 </script>
 
 <script>
     function togglePermanentAddress() {
-      var checkbox = document.getElementById("sameAsPresent");
-      var permSection = document.getElementById("permanentAddress");
-      if (checkbox.checked) {
-        // Hide the Permanent Address section
-        permSection.style.display = "none";
-      } else {
-        // Show the Permanent Address section
-        permSection.style.display = "block";
-      }
+        var checkbox = document.getElementById("sameAsPresent");
+        var permSection = document.getElementById("permanentAddress");
+        if (checkbox.checked) {
+            // Hide the Permanent Address section
+            permSection.style.display = "none";
+        } else {
+            // Show the Permanent Address section
+            permSection.style.display = "block";
+        }
     }
-  </script>
-
-
+</script>
 @endpush
