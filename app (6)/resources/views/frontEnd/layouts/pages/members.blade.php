@@ -38,8 +38,8 @@
     </div>
     <div class="popup_menu">
         <ul>
-            <li><a href="#"><i class="fa-solid fa-user-pen"></i> Profile Edit</a></li>
-            <li><a href="#"><i class="fa-solid fa-heart-pulse"></i> Favorit List</a></li>
+            <li><a href="{{route('member.editprofile')}}"><i class="fa-solid fa-user-pen"></i> Profile Edit</a></li>
+            <li><a href="{{route('favorites')}}"><i class="fa-solid fa-heart-pulse"></i> Favorit List</a></li>
             <li><a href="#"><i class="fa-solid fa-database"></i>My Package</a></li>
             <li><a href="#"><i class="fa-regular fa-handshake"></i> Appointment</a></li>
             <li><a href="#"><i class="fa-solid fa-people-group"></i> Proposal List</a></li>

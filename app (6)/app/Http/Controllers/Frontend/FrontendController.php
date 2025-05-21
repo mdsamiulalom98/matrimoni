@@ -161,37 +161,32 @@ class FrontendController extends Controller
         return view('frontEnd.layouts.pages.childcategory', compact('childcategory', 'products'));
     }
 
-    public function searchMember()
-    {
+    public function searchMember() {
         return view('frontEnd.layouts.pages.search');
     }
 
-    public function affiliate_policy()
-    {
+    public function affiliate_policy() {
         return view('frontEnd.layouts.pages.affiliate_policy');
     }
 
-    public function notification()
-    {
+    public function notification() {
         return view('frontEnd.layouts.pages.notification');
     }
 
-    public function getAppointment()
-    {
+    public function getAppointment() {
         return view('frontEnd.layouts.pages.appointment');
     }
-
-    public function storeAppointment(Request $request)
-    {
-        $store = new Appointment();
-        $store->name = $request->name;
-        $store->phone = $request->phone;
-        $store->email = $request->email;
-        $store->preferred_date = $request->date;
-        $store->preferred_time = $request->time;
-        $store->message = $request->message;
-        $store->address = $request->address;
-        $store->status = 'pending';
+    
+    public function storeAppointment(Request $request) {
+        $store                     = new Appointment();
+        $store->name               = $request->name;
+        $store->phone              = $request->phone;
+        $store->email              = $request->email;
+        $store->preferred_date     = $request->date;
+        $store->preferred_time     = $request->time;
+        $store->message            = $request->message;
+        $store->address            = $request->address;
+        $store->status             = 'pending';
         $store->save();
         Toastr::success('Appointment Stored Successfully');
         return redirect()->back();
@@ -252,6 +247,7 @@ class FrontendController extends Controller
         $divisions = Division::where('status', 1)->get();
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
+        // return $divisions;
         return view('frontEnd.layouts.pages.members', compact('members', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
     }
 
@@ -314,7 +310,7 @@ class FrontendController extends Controller
         }
         // Check if the view already exists
         $alreadyViewed = MemberView::where('member_id', $memberId)->where('view_id', $id)->exists();
-
+    
         if (!$alreadyViewed) {
             // Store new view
             MemberView::create([
@@ -325,9 +321,9 @@ class FrontendController extends Controller
         return view('frontEnd.member.details', compact('details'));
     }
 
+    
 
-
-
+  
     public function livesearch(Request $request)
     {
         $products = Product::select('id', 'name', 'slug', 'new_price', 'old_price', 'type')
@@ -454,7 +450,7 @@ class FrontendController extends Controller
 
 
     }
-
+    
 
     public function payment_success(Request $request)
     {
@@ -559,7 +555,7 @@ class FrontendController extends Controller
         $divisions = Division::where('status', 1)->get();
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
-        return view('frontEnd.member.register', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+        return view('frontEnd.member.register',compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
     }
 
     public function agent_login()
@@ -607,9 +603,8 @@ class FrontendController extends Controller
         // return $members;
         return view('frontEnd.layouts.pages.myProfileViews', compact('members'));
     }
-
-    public function favorites()
-    {
+    
+    public function favorites() {
         $favorites = FavoriteMember::where('member_id', Auth::guard('member')->user()->id)
             ->pluck('favorite_id')
             ->toArray();
@@ -621,12 +616,11 @@ class FrontendController extends Controller
 
         $members = $members->limit(18)->get();
         // return $members;
-
+        
         return view('frontEnd.layouts.pages.favorite', compact('members'));
-
-    }
-    public function proposals()
-    {
+    
+    }    
+    public function proposals() {
         $proposals = ProposalRequest::where('sender_id', Auth::guard('member')->user()->id)
             ->pluck('receiver_id')
             ->toArray();
@@ -637,7 +631,7 @@ class FrontendController extends Controller
 
         $members = $members->limit(18)->get();
         // return $members;
-
+        
         return view('frontEnd.layouts.pages.proposal', compact('members'));
     }
     public function user_login(Request $request)
@@ -660,7 +654,7 @@ class FrontendController extends Controller
                 return redirect()->route($redirectRoute);
             } else {
                 $credentials = ['phone' => $request->phone, 'password' => $request->password];
-
+                
                 if (Auth::guard($guard)->attempt($credentials)) {
                     Toastr::success('আপনি লগিন সফল হয়েছে');
                     if (Cart::instance('wishlist')->count() > 0) {
@@ -678,5 +672,5 @@ class FrontendController extends Controller
             return redirect()->back();
         }
     }
-
+    
 }

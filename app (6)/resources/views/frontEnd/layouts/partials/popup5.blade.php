@@ -15,12 +15,24 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Age <span class="bn_lable">(বয়স)</span> *</label>
-                <select id="age" name="age" required>
-                    <option value="any age">Any Age</option>
-                </select>
+                <!--<select id="age" name="age" required>-->
+                <!--    <option value="any age">Any Age</option>-->
+                <!--</select>-->
+                <select name="age">
+                    <option value="">Select..</option>
+                    <option value="Any Age">Any Age</option>
+                    @php
+                        $startAge = 60;
+                        $endAge = 18;
+                    @endphp
 
+                    @for ($i = $startAge; $i >= $endAge; $i--)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                </select>
             </div>
         </div>
+        
 
         <!--<div class="col-sm-12">-->
         <!--    <div class="form-group">-->

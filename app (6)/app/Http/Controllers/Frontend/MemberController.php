@@ -32,12 +32,14 @@ use App\Models\PartnerExpectation;
 use App\Models\MemberFamily;
 use DateTime;
 
+
 class MemberController extends Controller
 {
     function __construct()
     {
         $this->middleware('member', ['except' => ['register', 'signin', 'query_store']]);
     }
+    
     public function account()
     {
         return view('frontEnd.member.account');
@@ -45,6 +47,7 @@ class MemberController extends Controller
 
     public function register(Request $request)
     {
+        // return $request->all();
         $memberPhone = Member::where('phone', $request->phone)->first();
         if ($memberPhone) {
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
