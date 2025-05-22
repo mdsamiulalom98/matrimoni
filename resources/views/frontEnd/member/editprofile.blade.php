@@ -37,14 +37,14 @@
                                             *</label>
 
                                         <div class="toggle-group" id="profileGroup">
-                                            <div class="toggle-btn" data-value="1">Myself</div>
-                                            <div class="toggle-btn" data-value="2">Parent</div>
-                                            <div class="toggle-btn" data-value="3">Guardian</div>
-                                            <div class="toggle-btn" data-value="4">Relatives</div>
-                                            <div class="toggle-btn" data-value="5">Friend</div>
-                                            <div class="toggle-btn" data-value="6">Others</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 1 ? 'active' : '' }}" data-value="1">Myself</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 2 ? 'active' : '' }}" data-value="2">Parent</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 3 ? 'active' : '' }}" data-value="3">Guardian</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 4 ? 'active' : '' }}" data-value="4">Relatives</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 5 ? 'active' : '' }}" data-value="5">Friend</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 6 ? 'active' : '' }}" data-value="6">Others</div>
                                         </div>
-                                        <input type="hidden" name="profile_created_by" id="selectedProfile" required>
+                                        <input type="hidden" value="{{ $memberInfo->profile_created_by }}" name="profile_created_by" id="selectedProfile" required>
 
                                     </div>
                                 </div>
@@ -53,16 +53,19 @@
                                     <div class="form-group mt-2">
                                         <label>Looking For <span class="bn_lable">(খুঁজছি)</span> *</label>
                                         <div class="toggle-group" id="lookingForGroup">
-                                            <div class="toggle-btn" data-value="1">Bride</div>
-                                            <div class="toggle-btn" data-value="2">Groom</div>
+                                            <div class="toggle-btn {{ $memberInfo->looking_for == 1 ? 'active' : '' }}"
+                                                data-value="1">Bride</div>
+                                            <div class="toggle-btn {{ $memberInfo->looking_for == 2 ? 'active' : '' }}"
+                                                data-value="2">Groom</div>
                                         </div>
-                                        <input type="hidden" name="looking_for" id="selectedLookingFor" required>
+                                        <input type="hidden" value="{{ $memberInfo->looking_for }}" name="looking_for" id="selectedLookingFor" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Your Full Name <span class="bn_lable">(আপনার সম্পূর্ণ নাম)</span> *</label>
-                                        <input type="text" name="first_name" placeholder="Full Name" required>
+                                        <input type="text" value="{{ $member->name }}" name="full_name"
+                                            placeholder="Full Name" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -114,14 +117,14 @@
                                 <div class="col-sm-4">
                                     <div class="form-group mt-2">
                                         <label>Weight <span class="bn_lable">(ওজন)</span> *</label>
-                                        <input type="number" name="Weight" placeholder="Weight in kg" required>
+                                        <input type="number" value="{{ $memberInfo->weight }}" name="weight" placeholder="Weight in kg" required>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-4">
                                     <div class="form-group mt-2">
                                         <label>Height <span class="bn_lable">(উচ্চতা)</span> *</label>
-                                        <select id="height" name="height" required>
+                                        <select id="height" value="{{ $memberInfo->height }}" name="height" required>
                                             <option value="">Select Height</option>
                                             {{-- Add height options dynamically here if needed --}}
                                         </select>
@@ -150,10 +153,11 @@
                         <!-- Education Qualification -->
                         <fieldset id="educationInfo">
                             <div class="row">
-                                 <legend>Education Qualification (শিক্ষাগত যোগ্যতা)</legend>
+                                <legend>Education Qualification (শিক্ষাগত যোগ্যতা)</legend>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>In which year are you passing SSC <span class="bn_lable">(কত সালে এসএসসি পাস করছেন)</span> *</label>
+                                        <label>In which year are you passing SSC <span class="bn_lable">(কত সালে এসএসসি পাস
+                                                করছেন)</span> *</label>
                                         <select name="ssc_passing" required>
                                             <option value="">Year</option>
                                             @php
@@ -169,14 +173,17 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>What is the SSC result <span class="bn_lable">(এসএসসি এর ফলাফল কত)</span>*</label>
-                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" required>
+                                        <label>What is the SSC result <span class="bn_lable">(এসএসসি এর ফলাফল
+                                                কত)</span>*</label>
+                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result"
+                                            required>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Highest educational qualification <span class="bn_lable">(সর্বোচ্চ শিক্ষাগত যোগ্যতা)</span> *</label>
+                                        <label>Highest educational qualification <span class="bn_lable">(সর্বোচ্চ শিক্ষাগত
+                                                যোগ্যতা)</span> *</label>
                                         <select name="education_id" required>
                                             <option value="">Select Highest Education</option>
                                             @foreach ($educations as $education)
@@ -188,7 +195,8 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত যোগ্যতা)</span> *</label>
+                                        <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত
+                                                যোগ্যতা)</span> *</label>
                                         <select name="education_end_id" required>
                                             <option value="">Select Latest Qualification</option>
                                             @foreach ($educations as $education)
@@ -201,7 +209,7 @@
                         </fieldset>
 
 
-                        
+
 
                         <fieldset id="familyInfo">
                             <div class="row">
@@ -215,7 +223,8 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Is your father alive <span class="bn_lable">(আপনার বাবা কি জীবিত)</span> *</label>
+                                        <label>Is your father alive <span class="bn_lable">(আপনার বাবা কি জীবিত)</span>
+                                            *</label>
                                         <select name="father_alive" id="father_alive" required>
                                             <option value="">Select</option>
                                             <option value="yes">Yes</option>
@@ -227,7 +236,8 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Father Profession <span class="bn_lable">(বাবার পেশা)</span> *</label>
-                                        <input type="text" id="father_profession" name="father_profession" placeholder="Father Name">
+                                        <input type="text" id="father_profession" name="father_profession"
+                                            placeholder="Father Name">
                                     </div>
                                 </div>
 
@@ -240,7 +250,8 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Is your mother alive <span class="bn_lable">(আপনার মা কি জীবিত)</span> *</label>
+                                        <label>Is your mother alive <span class="bn_lable">(আপনার মা কি জীবিত)</span>
+                                            *</label>
                                         <select name="mother_alive" id="mother_alive" required>
                                             <option value="">Select</option>
                                             <option value="yes">Yes</option>
@@ -252,14 +263,16 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Mother Profession <span class="bn_lable">(মায়ের পেশা)</span> *</label>
-                                        <input type="text" id="mother_profession" name="mother_profession" placeholder="Mother Name">
+                                        <input type="text" id="mother_profession" name="mother_profession"
+                                            placeholder="Mother Name">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই আছে)</span> *</label>
-                                        <input type="number" name="brother_count" placeholder="How many Brothers" >
+                                        <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই
+                                                আছে)</span> *</label>
+                                        <input type="number" name="brother_count" placeholder="How many Brothers">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -270,7 +283,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>How many sisters do you have <span class="bn_lable">(আপনার কতজন বোন আছে)</span> *</label>
+                                        <label>How many sisters do you have <span class="bn_lable">(আপনার কতজন বোন
+                                                আছে)</span> *</label>
                                         <input type="number" name="sister_count" placeholder="How many Sisters">
                                     </div>
                                 </div>
@@ -280,24 +294,27 @@
                                         <input type="number" name="married_sister" placeholder="Sister married">
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Guradian Phone <span class="bn_lable">(অভিভাকরে নাম্বার)</span> *</label>
                                         <input type="number" name="guradian_phone" placeholder="Guradian Phone">
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>What is the family religious environment like? <span class="bn_lable">( পারিবারিক দ্বীনি পরিবেশ কেমন )</span> *</label>
-                                        <input type="text" name="guardian_profession" placeholder="Guardian's profession" required>
+                                        <label>What is the family religious environment like? <span class="bn_lable">(
+                                                পারিবারিক দ্বীনি পরিবেশ কেমন )</span> *</label>
+                                        <input type="text" name="guardian_profession"
+                                            placeholder="Guardian's profession" required>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-12">
                                     <div class="form-group mt-2">
-                                        <label>Description of economic situation<span class="bn_lable">( অর্থনৈতিক অবস্থার বিবরণ )</span> *</label>
+                                        <label>Description of economic situation<span class="bn_lable">( অর্থনৈতিক অবস্থার
+                                                বিবরণ )</span> *</label>
                                         <!--<input type="text" name="economic_situation" placeholder="Economic Situation" required>-->
                                         <textarea id="economic_situation" name="economic_situation" rows="3" cols="50"></textarea>
                                     </div>
@@ -309,8 +326,8 @@
 
                         <fieldset id="locationInfo">
                             <div class="row" style="margin: 0px;padding: 0px;">
-                                 <legend>Location (অবস্থান)</legend>
-                                <div class="rows" id="presentAddress"> 
+                                <legend>Location (অবস্থান)</legend>
+                                <div class="rows" id="presentAddress">
                                     <div class="col-sm-6">
                                         <div class="form-group mt-2">
                                             <label>Own District <span class="bn_lable">(নিজ জেলা)</span> *</label>
@@ -335,13 +352,15 @@
                                     <div class="col-sm-6">
                                         <div class="form-group mt-2">
                                             <label>Village <span class="bn_lable">(গ্রাম)</span> *</label>
-                                            <input type="text" name="present_area" placeholder="Enter area name" required />
+                                            <input type="text" name="present_area" placeholder="Enter area name"
+                                                required />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="address-toggle">
-                                    <input type="checkbox" id="sameAsPresent" name="sameAsPresent" onchange="togglePermanentAddress()">
+                                    <input type="checkbox" id="sameAsPresent" name="sameAsPresent"
+                                        onchange="togglePermanentAddress()">
                                     <label for="sameAsPresent">বৰ্তমান ও স্থায়ী ঠিকানা একই </label>
                                 </div>
 
@@ -371,20 +390,23 @@
                                     <div class="col-sm-6">
                                         <div class="form-group mt-2">
                                             <label>Village <span class="bn_lable">(গ্রাম)</span> *</label>
-                                            <input type="text" name="present_area" placeholder="Enter area name" required />
+                                            <input type="text" name="present_area" placeholder="Enter area name"
+                                                required />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12">
                                     <div class="form-group mt-2">
-                                        <label>Where did you grow up? <span class="bn_lable">(কোথায় বড় হয়েছেন)</span> *</label>
-                                        <input type="text" name="grow_up" placeholder="Where did you grow up" required />
+                                        <label>Where did you grow up? <span class="bn_lable">(কোথায় বড় হয়েছেন)</span>
+                                            *</label>
+                                        <input type="text" name="grow_up" placeholder="Where did you grow up"
+                                            required />
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
-                        
+
                         {{-- <fieldset>
                             <legend>Present Location</legend>
                             <div class="form-group mt-2">
@@ -445,7 +467,7 @@
 
                         <!-- Account Information -->
 
-                        
+
 
                         <fieldset id="partnerExpectation">
                             <div class="row">
@@ -459,7 +481,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Complexion <span class="bn_lable">(গাত্রবর্ণ)</span> *</label>
@@ -482,10 +504,11 @@
                                     </div>
                                 </div>
 
-                            
+
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Education Qualification <span class="bn_lable">(শিক্ষাগত যোগ্যতা)</span> *</label>
+                                        <label>Education Qualification <span class="bn_lable">(শিক্ষাগত যোগ্যতা)</span>
+                                            *</label>
                                         <select name="education_qualification" required>
                                             <option value="">Select</option>
                                             @foreach ($educations as $education)
@@ -495,20 +518,22 @@
                                     </div>
                                 </div>
 
-                            <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                    <label>SSC Passing Year <span class="bn_lable">(কত সালে এসএসসি পাস করেছেন)</span> *</label>
-                                <select id="ssc_passing" name="ssc_passing" required>
-                                <option value="">Select Year</option>
-                                <option value="any age">Any Age</option>
-                                </select>
+                                        <label>SSC Passing Year <span class="bn_lable">(কত সালে এসএসসি পাস করেছেন)</span>
+                                            *</label>
+                                        <select id="ssc_passing" name="ssc_passing" required>
+                                            <option value="">Select Year</option>
+                                            <option value="any age">Any Age</option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>SSC Result <span class="bn_lable">(এসএসসি এর ফলাফল কত)</span> *</label>
-                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" required>
+                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result"
+                                            required>
                                     </div>
                                 </div>
 
@@ -564,7 +589,8 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Economic Situation <span class="bn_lable">(অর্থনৈতিক অবস্থা)</span> *</label>
+                                        <label>Economic Situation <span class="bn_lable">(অর্থনৈতিক অবস্থা)</span>
+                                            *</label>
                                         {{-- <input type="text" id="economic_situation" name="economic_situation" placeholder="Economic situation" required> --}}
                                         <select name="pertner_eco_situation" id="pertner_eco_situation">
                                             <option value="">Select</option>
@@ -576,7 +602,7 @@
                                     </div>
                                 </div>
 
-                            <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Monthly Income <span class="bn_lable">(মাসিক আয়)</span> *</label>
                                         <select name="montly_income" id="montly_income">
@@ -614,7 +640,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group mt-2">
-                                        <label>The qualities you expect in a life partner <span class="bn_lable">(জীবনসঙ্গীর যেসব গুণ প্রত্যাশা করেন)</span> *</label>
+                                        <label>The qualities you expect in a life partner <span
+                                                class="bn_lable">(জীবনসঙ্গীর যেসব গুণ প্রত্যাশা করেন)</span> *</label>
                                         <textarea id="expect_lifepartner" name="expect_lifepartner" rows="3" cols="50"></textarea>
                                     </div>
                                 </div>
@@ -623,7 +650,7 @@
 
                         <fieldset id="careerInfo">
                             <legend>Career Information (ক্যারিয়ার তথ্য)</legend>
-                            
+
                             <div class="row">
                                 <div class="form-group mt-2">
                                     <div class="col-sm-6">
@@ -632,7 +659,8 @@
                                             <select name="profession_id" required>
                                                 <option value="">Select Profession</option>
                                                 @foreach ($professions as $profession)
-                                                    <option value="{{ $profession->id }}">{{ $profession->title }}</option>
+                                                    <option value="{{ $profession->id }}">{{ $profession->title }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -650,7 +678,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Government or Private <span class="bn_lable">(সরকারি নাকি প্রাইভেট)</span> *</label>
+                                        <label>Government or Private <span class="bn_lable">(সরকারি নাকি প্রাইভেট)</span>
+                                            *</label>
                                         <select name="job_type" id="job_type" required>
                                             <option value="">Select</option>
                                             <option value="government">Government</option>
@@ -671,17 +700,20 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত যোগ্যতা)</span>
+                                        <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত
+                                                যোগ্যতা)</span>
                                             *</label>
-                                        <input type="text" id="last_education" name="last_education" placeholder="Economic situation"
-                                            required>
+                                        <input type="text" id="last_education" name="last_education"
+                                            placeholder="Economic situation" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>How long have you been in your current job? <span class="bn_lable">(বর্তমান চাকরি কতদিন ধরে
+                                        <label>How long have you been in your current job? <span class="bn_lable">(বর্তমান
+                                                চাকরি কতদিন ধরে
                                                 করছেন)</span> *</label>
-                                        <input type="text" id="job_duration" name="job_duration" placeholder="Economic situation" required>
+                                        <input type="text" id="job_duration" name="job_duration"
+                                            placeholder="Economic situation" required>
                                     </div>
                                 </div>
 
@@ -692,37 +724,41 @@
 
                         <fieldset id="accountInfo">
                             <div class="row">
-                                 <legend>Account Information (অ্যাকাউন্ট তথ্য)</legend>
+                                <legend>Account Information (অ্যাকাউন্ট তথ্য)</legend>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Email Address <span class="bn_lable">(ইমেইল দিন)</span> *</label>
-                                        <input name="email" type="email" placeholder="Email address" required />
+                                        <input name="email" value="{{ $member->email }}" type="email"
+                                            placeholder="Email address" required />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Your Phone Number <span class="bn_lable">(নিজের মোবাইল নম্বর)</span></label>
-                                        <input name="phone" type="tel" placeholder="Phone number" required />
+                                        <input name="phone" value="{{ $member->phone }}" type="tel"
+                                            placeholder="Phone number" required />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Guardian Phone Number <span class="bn_lable">(অভিভাবকের মোবাইল নম্বর)</span> *</label>
-                                        <input name="guardian_phone" type="tel" placeholder="Guardian phone number" required />
+                                        <label>Guardian Phone Number <span class="bn_lable">(অভিভাবকের মোবাইল নম্বর)</span>
+                                            *</label>
+                                        <input name="guardian_phone" type="tel" placeholder="Guardian phone number"
+                                            required />
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                {{-- <div class="col-sm-6">
                                     <div class="form-group mt-2">
-                                        <label>Password <span class="bn_lable">(পাসওয়ার্ড)</span></label>   
+                                        <label>Password <span class="bn_lable">(পাসওয়ার্ড)</span></label>
                                         <input name="password" type="password" placeholder="Enter password" required />
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
+                                </div> --}}
+                                {{-- <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Confirm Password <span class="bn_lable">(পাসওয়ার্ড নিশ্চিতা)</span></label>
                                         <input name="confirm_password" type="password" placeholder="Confirm password" required />
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </fieldset>
 
@@ -731,8 +767,10 @@
                                 <div class="register-image-wrapper">
                                     <div class='col-sm-12'>
                                         <span class="priv_flex">
-                                            <h6 class="my-1" style="text-align: start; font-size: 14px; font-weight: bold;">
-                                                Upload Your Profile Picture <span class="bn_lable">(আপনার প্রোফাইল ছবি আপলোড করুন)</span> *</h6>
+                                            <h6 class="my-1"
+                                                style="text-align: start; font-size: 14px; font-weight: bold;">
+                                                Upload Your Profile Picture <span class="bn_lable">(আপনার প্রোফাইল ছবি
+                                                    আপলোড করুন)</span> *</h6>
                                             <div class="dropdown" id="customDropdown">
                                                 <div class="dropdown-btn" id="dropdownButton">
                                                     <i class="fa-solid fa-earth-americas"></i>
@@ -746,14 +784,34 @@
                                                     <div data-value="blur">Blur</div>
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="dropdownInput" name="profile_lock">
                                         </span>
-                                        <input type="hidden" id="dropdownInput" name="profile_lock">
-                                        <input type="file" name="image_one" placeholder="Add Photo" required />
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <input type="file" name="image_one" placeholder="Add Photo"
+                                                    required />
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <img src="{{ asset($memberImage->image_one) }}"
+                                                    style="height: 70px; width: auto;">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <h6 class="my-1" style="text-align: start; font-size: 14px; font-weight: bold;">
-                                            Upload Your Cover Photo <span class="bn_lable">(আপনার কভার ছবি আপলোড করুন)</span> *</h6>
-                                        <input type="file" name="image_two" placeholder="Upload Your Cover Photo" required />
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <h6 class="my-1"
+                                                    style="text-align: start; font-size: 14px; font-weight: bold;">
+                                                    Upload Your Cover Photo <span class="bn_lable">(আপনার কভার ছবি আপলোড
+                                                        করুন)</span> *</h6>
+                                                <input type="file" name="image_two"
+                                                    placeholder="Upload Your Cover Photo" required />
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <img src="{{ asset($memberImage->image_two) }}"
+                                                    style="height: 70px; width: auto;">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -866,5 +924,24 @@
         document.forms['editForm'].elements['month'].value = "{{ $month }}";
         document.forms['editForm'].elements['year'].value = "{{ $year }}";
     </script>
+    <script>
+        document.querySelectorAll(".toggle-group").forEach((group) => {
+            group.addEventListener("click", function(event) {
+                let btn = event.target;
+                if (!btn.classList.contains("toggle-btn")) return;
 
+                // Remove active class from all buttons in this group
+                group.querySelectorAll(".toggle-btn").forEach((b) => b.classList.remove("active"));
+
+                // Add active class to clicked button
+                btn.classList.add("active");
+
+                // Find the associated hidden input and update its value
+                let inputField = group.nextElementSibling;
+                if (inputField) {
+                    inputField.value = btn.getAttribute("data-value");
+                }
+            });
+        });
+    </script>
 @endpush

@@ -39,7 +39,7 @@ class MemberController extends Controller
     {
         $this->middleware('member', ['except' => ['register', 'signin', 'query_store']]);
     }
-    
+
     public function account()
     {
         return view('frontEnd.member.account');
@@ -88,9 +88,10 @@ class MemberController extends Controller
         $full_name = $request->first_name . ' ' . $request->last_name;
         $store_data = new Member();
         $store_data->name = $full_name;
+        $store_data->email = $request->email;
         $store_data->member_id = Str::random(16);
         $store_data->phone = $request->phone;
-        $store_data->gender = $request->gender;
+        $store_data->gender = $request->looking_for == 2 ? 1 : 2;
         $store_data->verifyToken = $verifyToken;
         $store_data->status = 0;
         $store_data->publish = 0;

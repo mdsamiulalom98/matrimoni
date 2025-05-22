@@ -51,7 +51,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Own District <span class="bn_lable">(নিজ জেলা)</span> *</label>
-                    <select name="present_district" class="district" id="present_district" required>
+                    <select name="present_district" class="district" id="present_district" >
                         <option value="">Select District</option>
                         @foreach ($districts as $district)
                             <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -63,7 +63,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Own Upazila <span class="bn_lable">(নিজ উপজেলা)</span> *</label>
-                    <select name="present_upazila" id="present_upazila" class="upazila" required>
+                    <select name="present_upazila" id="present_upazila" class="upazila" >
                         <option value="">Select Upazila</option>
                     </select>
                 </div>
@@ -72,7 +72,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Village <span class="bn_lable">(গ্রাম)</span> *</label>
-                    <input type="text" name="present_area" placeholder="Enter area name" required />
+                    <input type="text" name="present_area" placeholder="Enter area name"  />
                 </div>
             </div>
         </div>
