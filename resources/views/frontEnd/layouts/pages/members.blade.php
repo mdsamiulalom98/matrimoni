@@ -600,7 +600,7 @@
             if (feet === 7 && inch > 0) break;
 
             const heightText = `${feet} feet ${inch} inch`;
-            const heightValue = `${feet}'${inch}"`;
+            const heightValue = `${feet}'${inch}`;
             const option = new Option(heightText, heightValue);
             select.add(option);
         }

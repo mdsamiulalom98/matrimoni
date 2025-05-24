@@ -430,6 +430,46 @@ class MemberController extends Controller
                 'present_area' => ''
             ]
         );
+        $memberFamily = MemberFamily::firstOrCreate(
+            ['member_id' => $member->id],
+            [
+                'member_id' => $member->id,
+                'father_name' => 1,
+                'father_profession' => 1,
+                'father_alive' => 1,
+                'mother_name' => 1,
+                'mother_profession' => 1,
+                'mother_alive' => 1,
+                'brother_count' => 1,
+                'married_brother' => 1,
+                'sister_count' => 1,
+                'married_sister' => 1,
+                'financial_situation' => 1,
+                'religious_status' => 1
+            ]
+        );
+        $memberExpectation = PartnerExpectation::firstOrCreate(
+            ['member_id' => $member->id],
+            [
+                'partner_height' => 1,
+                'marital_status' => 1,
+                'partner_citizenship' => 1,
+                'profession_ids' => 1,
+                'education_qualification' => 1,
+                'age' => 1,
+                'complexion' => 1,
+                'monthly_income' => 1,
+                'economic_situation' => 1,
+                'drinking_habbit' => 1,
+                'smoking_habbit' => 1,
+                'job_permanent' => 1,
+                'job_type' => 1,
+                'is_student' => 1,
+                'last_education' => 1,
+                'job_duration' => 1,
+                'present_division' => 1,
+            ]
+        );
         $memberImage = MemberImage::firstOrCreate(
             ['member_id' => $member->id],
             [
@@ -448,7 +488,7 @@ class MemberController extends Controller
         $divisions = Division::where('status', 1)->get();
         $districts = District::where('status', 1)->get();
         $upazilas = Upazila::where('status', 1)->get();
-        return view('frontEnd.member.editprofile', compact('member', 'memberInfo', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas', 'memberInfo', 'memberCareer', 'memberEducation', 'memberLocation', 'memberImage'));
+        return view('frontEnd.member.editprofile', compact('member', 'memberInfo', 'months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas', 'memberInfo', 'memberCareer', 'memberEducation', 'memberLocation', 'memberImage', 'memberFamily', 'memberExpectation'));
     }
 
     public function updateProfile(Request $request)

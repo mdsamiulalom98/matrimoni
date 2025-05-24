@@ -1,5 +1,5 @@
 @extends('frontEnd.layouts.master')
-@section('title', 'Customer Register')
+@section('title', 'Member Edit')
 @section('content')
     <section class="auth-section">
         <div class="container">
@@ -27,6 +27,12 @@
                         @isset($memberImage)
                             <input type="hidden" name="memberimage" value="{{ $memberImage->id }}" />
                         @endisset
+                        @isset($memberFamily)
+                            <input type="hidden" name="memberfamily" value="{{ $memberFamily->id }}" />
+                        @endisset
+                        @isset($memberExpectation)
+                            <input type="hidden" name="memberexpectation" value="{{ $memberExpectation->id }}" />
+                        @endisset
 
                         <fieldset>
                             <legend>Basic Information</legend>
@@ -37,14 +43,21 @@
                                             *</label>
 
                                         <div class="toggle-group" id="profileGroup">
-                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 1 ? 'active' : '' }}" data-value="1">Myself</div>
-                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 2 ? 'active' : '' }}" data-value="2">Parent</div>
-                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 3 ? 'active' : '' }}" data-value="3">Guardian</div>
-                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 4 ? 'active' : '' }}" data-value="4">Relatives</div>
-                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 5 ? 'active' : '' }}" data-value="5">Friend</div>
-                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 6 ? 'active' : '' }}" data-value="6">Others</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 1 ? 'active' : '' }}"
+                                                data-value="1">Myself</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 2 ? 'active' : '' }}"
+                                                data-value="2">Parent</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 3 ? 'active' : '' }}"
+                                                data-value="3">Guardian</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 4 ? 'active' : '' }}"
+                                                data-value="4">Relatives</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 5 ? 'active' : '' }}"
+                                                data-value="5">Friend</div>
+                                            <div class="toggle-btn {{ $memberInfo->profile_created_by == 6 ? 'active' : '' }}"
+                                                data-value="6">Others</div>
                                         </div>
-                                        <input type="hidden" value="{{ $memberInfo->profile_created_by }}" name="profile_created_by" id="selectedProfile" required>
+                                        <input type="hidden" value="{{ $memberInfo->profile_created_by }}"
+                                            name="profile_created_by" id="selectedProfile" required>
 
                                     </div>
                                 </div>
@@ -58,7 +71,8 @@
                                             <div class="toggle-btn {{ $memberInfo->looking_for == 2 ? 'active' : '' }}"
                                                 data-value="2">Groom</div>
                                         </div>
-                                        <input type="hidden" value="{{ $memberInfo->looking_for }}" name="looking_for" id="selectedLookingFor" required>
+                                        <input type="hidden" value="{{ $memberInfo->looking_for }}" name="looking_for"
+                                            id="selectedLookingFor" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -117,7 +131,8 @@
                                 <div class="col-sm-4">
                                     <div class="form-group mt-2">
                                         <label>Weight <span class="bn_lable">(ওজন)</span> *</label>
-                                        <input type="number" value="{{ $memberInfo->weight }}" name="weight" placeholder="Weight in kg" required>
+                                        <input type="number" value="{{ $memberInfo->weight }}" name="weight"
+                                            placeholder="Weight in kg" required>
                                     </div>
                                 </div>
 
@@ -165,7 +180,8 @@
                                                 $looplimits = $currentYears - 1;
                                             @endphp
                                             @for ($i = $looplimits; $i >= 1920; $i--)
-                                                <option value="{{ $i }}">{{ $i }}</option>
+                                                <option {{ $memberEducation->ssc_passing == $i ? 'selected' : '' }}
+                                                    value="{{ $i }}">{{ $i }}</option>
                                             @endfor
                                         </select>
                                     </div>
@@ -175,7 +191,7 @@
                                     <div class="form-group mt-2">
                                         <label>What is the SSC result <span class="bn_lable">(এসএসসি এর ফলাফল
                                                 কত)</span>*</label>
-                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result"
+                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" value="{{ $memberEducation->ssc_gpa }}"
                                             required>
                                     </div>
                                 </div>
@@ -187,7 +203,7 @@
                                         <select name="education_id" required>
                                             <option value="">Select Highest Education</option>
                                             @foreach ($educations as $education)
-                                                <option value="{{ $education->id }}">{{ $education->title }}</option>
+                                                <option {{ $education->id == $memberEducation->education_id ? 'selected' : '' }} value="{{ $education->id }}">{{ $education->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -200,7 +216,7 @@
                                         <select name="education_end_id" required>
                                             <option value="">Select Latest Qualification</option>
                                             @foreach ($educations as $education)
-                                                <option value="{{ $education->id }}">{{ $education->title }}</option>
+                                                <option {{ $education->id == $memberEducation->education_end_id ? 'selected' : '' }} value="{{ $education->id }}">{{ $education->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -217,7 +233,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Father Name <span class="bn_lable">(বাবার নাম)</span> *</label>
-                                        <input type="text" name="father_name" placeholder="Father Name" required>
+                                        <input type="text" name="father_name" placeholder="Father Name" value="{{ $memberFamily->father_name }}" required>
                                     </div>
                                 </div>
 
@@ -236,7 +252,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Father Profession <span class="bn_lable">(বাবার পেশা)</span> *</label>
-                                        <input type="text" id="father_profession" name="father_profession"
+                                        <input type="text" id="father_profession" name="father_profession" value="{{ $memberFamily->father_profession }}"
                                             placeholder="Father Name">
                                     </div>
                                 </div>
@@ -244,7 +260,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Mother Name <span class="bn_lable">(মায়ের নাম)</span>*</label>
-                                        <input type="text" name="mother_name" placeholder="Mother Name" required>
+                                        <input type="text"  value="{{ $memberFamily->mother_name }}" name="mother_name" placeholder="Mother Name" required>
                                     </div>
                                 </div>
 
@@ -263,7 +279,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Mother Profession <span class="bn_lable">(মায়ের পেশা)</span> *</label>
-                                        <input type="text" id="mother_profession" name="mother_profession"
+                                        <input type="text" id="mother_profession" name="mother_profession" value="{{ $memberFamily->mother_profession }}"
                                             placeholder="Mother Name">
                                     </div>
                                 </div>
@@ -272,35 +288,30 @@
                                     <div class="form-group mt-2">
                                         <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই
                                                 আছে)</span> *</label>
-                                        <input type="number" name="brother_count" placeholder="How many Brothers">
+                                        <input type="number" name="brother_count" value="{{ $memberFamily->brother_count }}" placeholder="How many Brothers">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Married Brother <span class="bn_lable">(বিবাহিত ভাই)</span> *</label>
-                                        <input type="number" name="married_brother" placeholder="Married Brother">
+                                        <input type="number" name="married_brother" value="{{ $memberFamily->married_brother }}" placeholder="Married Brother">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>How many sisters do you have <span class="bn_lable">(আপনার কতজন বোন
                                                 আছে)</span> *</label>
-                                        <input type="number" name="sister_count" placeholder="How many Sisters">
+                                        <input type="number" name="sister_count" value="{{ $memberFamily->sister_count }}" placeholder="How many Sisters">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Sister married <span class="bn_lable">(বোনের বিয়ে হয়েছে)</span> *</label>
-                                        <input type="number" name="married_sister" placeholder="Sister married">
+                                        <input type="number" name="married_sister" value="{{ $memberFamily->married_sister }}" placeholder="Sister married">
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group mt-2">
-                                        <label>Guradian Phone <span class="bn_lable">(অভিভাকরে নাম্বার)</span> *</label>
-                                        <input type="number" name="guradian_phone" placeholder="Guradian Phone">
-                                    </div>
-                                </div>
+
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
@@ -553,7 +564,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Citizenship <span class="bn_lable">(নাগরিকত্ব)</span> *</label>
-                                        <select name="pertner_citizenship" required>
+                                        <select name="partner_citizenship" required>
                                             <option value="any">Any</option>
                                             @foreach ($countries as $countrie)
                                                 <option value="{{ $countrie->id }}">{{ $countrie->nicename }}</option>
@@ -743,7 +754,7 @@
                                     <div class="form-group mt-2">
                                         <label>Guardian Phone Number <span class="bn_lable">(অভিভাবকের মোবাইল নম্বর)</span>
                                             *</label>
-                                        <input name="guardian_phone" type="tel" placeholder="Guardian phone number"
+                                        <input name="guardian_phone" value="{{ $memberInfo->guardian_phone }}" type="tel" placeholder="Guardian phone number"
                                             required />
                                     </div>
                                 </div>
@@ -923,6 +934,10 @@
         document.forms['editForm'].elements['day'].value = "{{ $day }}";
         document.forms['editForm'].elements['month'].value = "{{ $month }}";
         document.forms['editForm'].elements['year'].value = "{{ $year }}";
+        document.forms['editForm'].elements['blood_group'].value = "{{ $memberInfo->blood_group }}";
+        document.forms['editForm'].elements['ssc_passing'].value = {{ $memberEducation->ssc_passing }};
+        document.forms['editForm'].elements['father_alive'].value = {{ $memberFamily->father_alive }};
+        document.forms['editForm'].elements['mother_alive'].value = {{ $memberFamily->mother_alive }};
     </script>
     <script>
         document.querySelectorAll(".toggle-group").forEach((group) => {
@@ -943,5 +958,25 @@
                 }
             });
         });
+    </script>
+    <script>
+        const select = document.getElementById('height');
+        const selectedHeight = @json(old('height', $memberInfo->height ?? ''));
+        for (let feet = 5; feet <= 7; feet++) {
+            for (let inch = 0; inch < 12; inch++) {
+                if (feet === 7 && inch > 0) break;
+
+                const heightText = `${feet} feet ${inch} inch`;
+                const heightValue = `${feet}'${inch}`;
+                const option = new Option(heightText, heightValue);
+
+                if (heightValue === selectedHeight) {
+                    option.selected = true;
+                }
+                console.log('true inner: ' + selectedHeight);
+                console.log('false out: ' + heightValue);
+                select.add(option);
+            }
+        }
     </script>
 @endpush
