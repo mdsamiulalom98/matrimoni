@@ -173,7 +173,7 @@
                                     <div class="form-group mt-2">
                                         <label>In which year are you passing SSC <span class="bn_lable">(কত সালে এসএসসি পাস
                                                 করছেন)</span> *</label>
-                                        <select name="ssc_passing" required>
+                                        <select name="ssc_passing" class="ssc_passing" required>
                                             <option value="">Year</option>
                                             @php
                                                 $currentYears = date('Y');
@@ -191,8 +191,8 @@
                                     <div class="form-group mt-2">
                                         <label>What is the SSC result <span class="bn_lable">(এসএসসি এর ফলাফল
                                                 কত)</span>*</label>
-                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" value="{{ $memberEducation->ssc_gpa }}"
-                                            required>
+                                        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result"
+                                            value="{{ $memberEducation->ssc_gpa }}" required>
                                     </div>
                                 </div>
 
@@ -203,7 +203,9 @@
                                         <select name="education_id" required>
                                             <option value="">Select Highest Education</option>
                                             @foreach ($educations as $education)
-                                                <option {{ $education->id == $memberEducation->education_id ? 'selected' : '' }} value="{{ $education->id }}">{{ $education->title }}</option>
+                                                <option
+                                                    {{ $education->id == $memberEducation->education_id ? 'selected' : '' }}
+                                                    value="{{ $education->id }}">{{ $education->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -216,7 +218,9 @@
                                         <select name="education_end_id" required>
                                             <option value="">Select Latest Qualification</option>
                                             @foreach ($educations as $education)
-                                                <option {{ $education->id == $memberEducation->education_end_id ? 'selected' : '' }} value="{{ $education->id }}">{{ $education->title }}</option>
+                                                <option
+                                                    {{ $education->id == $memberEducation->education_end_id ? 'selected' : '' }}
+                                                    value="{{ $education->id }}">{{ $education->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -233,7 +237,8 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Father Name <span class="bn_lable">(বাবার নাম)</span> *</label>
-                                        <input type="text" name="father_name" placeholder="Father Name" value="{{ $memberFamily->father_name }}" required>
+                                        <input type="text" name="father_name" placeholder="Father Name"
+                                            value="{{ $memberFamily->father_name }}" required>
                                     </div>
                                 </div>
 
@@ -252,15 +257,16 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Father Profession <span class="bn_lable">(বাবার পেশা)</span> *</label>
-                                        <input type="text" id="father_profession" name="father_profession" value="{{ $memberFamily->father_profession }}"
-                                            placeholder="Father Name">
+                                        <input type="text" id="father_profession" name="father_profession"
+                                            value="{{ $memberFamily->father_profession }}" placeholder="Father Name">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Mother Name <span class="bn_lable">(মায়ের নাম)</span>*</label>
-                                        <input type="text"  value="{{ $memberFamily->mother_name }}" name="mother_name" placeholder="Mother Name" required>
+                                        <input type="text" value="{{ $memberFamily->mother_name }}"
+                                            name="mother_name" placeholder="Mother Name" required>
                                     </div>
                                 </div>
 
@@ -279,8 +285,8 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Mother Profession <span class="bn_lable">(মায়ের পেশা)</span> *</label>
-                                        <input type="text" id="mother_profession" name="mother_profession" value="{{ $memberFamily->mother_profession }}"
-                                            placeholder="Mother Name">
+                                        <input type="text" id="mother_profession" name="mother_profession"
+                                            value="{{ $memberFamily->mother_profession }}" placeholder="Mother Name">
                                     </div>
                                 </div>
 
@@ -288,26 +294,30 @@
                                     <div class="form-group mt-2">
                                         <label>How many brothers do you have <span class="bn_lable">(আপনার কতজন ভাই
                                                 আছে)</span> *</label>
-                                        <input type="number" name="brother_count" value="{{ $memberFamily->brother_count }}" placeholder="How many Brothers">
+                                        <input type="number" name="brother_count"
+                                            value="{{ $memberFamily->brother_count }}" placeholder="How many Brothers">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Married Brother <span class="bn_lable">(বিবাহিত ভাই)</span> *</label>
-                                        <input type="number" name="married_brother" value="{{ $memberFamily->married_brother }}" placeholder="Married Brother">
+                                        <input type="number" name="married_brother"
+                                            value="{{ $memberFamily->married_brother }}" placeholder="Married Brother">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>How many sisters do you have <span class="bn_lable">(আপনার কতজন বোন
                                                 আছে)</span> *</label>
-                                        <input type="number" name="sister_count" value="{{ $memberFamily->sister_count }}" placeholder="How many Sisters">
+                                        <input type="number" name="sister_count"
+                                            value="{{ $memberFamily->sister_count }}" placeholder="How many Sisters">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Sister married <span class="bn_lable">(বোনের বিয়ে হয়েছে)</span> *</label>
-                                        <input type="number" name="married_sister" value="{{ $memberFamily->married_sister }}" placeholder="Sister married">
+                                        <input type="number" name="married_sister"
+                                            value="{{ $memberFamily->married_sister }}" placeholder="Sister married">
                                     </div>
                                 </div>
 
@@ -317,7 +327,8 @@
                                     <div class="form-group mt-2">
                                         <label>What is the family religious environment like? <span class="bn_lable">(
                                                 পারিবারিক দ্বীনি পরিবেশ কেমন )</span> *</label>
-                                        <input type="text" name="guardian_profession"
+                                        <input type="text" name="religious_status"
+                                            value="{{ $memberFamily->religious_status }}"
                                             placeholder="Guardian's profession" required>
                                     </div>
                                 </div>
@@ -327,7 +338,7 @@
                                         <label>Description of economic situation<span class="bn_lable">( অর্থনৈতিক অবস্থার
                                                 বিবরণ )</span> *</label>
                                         <!--<input type="text" name="economic_situation" placeholder="Economic Situation" required>-->
-                                        <textarea id="economic_situation" name="economic_situation" rows="3" cols="50"></textarea>
+                                        <textarea id="economic_situation" name="economic_situation" rows="3" cols="50">{{ $memberFamily->financial_situation }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -342,7 +353,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group mt-2">
                                             <label>Own District <span class="bn_lable">(নিজ জেলা)</span> *</label>
-                                            <select name="present_district" id="present_district" required>
+                                            <select name="present_district" class="district" id="present_district"
+                                                required>
                                                 <option value="">Select District</option>
                                                 @foreach ($districts as $district)
                                                     <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -354,7 +366,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group mt-2">
                                             <label>Own Upazila <span class="bn_lable">(নিজ উপজেলা)</span> *</label>
-                                            <select name="present_upazila" id="present_upazila" required>
+                                            <select name="present_upazila" class="upazila" id="present_upazila" required>
                                                 <option value="">Select Upazila</option>
                                             </select>
                                         </div>
@@ -380,7 +392,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group mt-2">
                                             <label>Own District <span class="bn_lable">(নিজ জেলা)</span> *</label>
-                                            <select name="present_district" id="present_district" required>
+                                            <select name="present_district" class="district" id="present_district"
+                                                required>
                                                 <option value="">Select District</option>
                                                 @foreach ($districts as $district)
                                                     <option value="{{ $district->id }}">{{ $district->name }}</option>
@@ -392,7 +405,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group mt-2">
                                             <label>Own Upazila <span class="bn_lable">(নিজ উপজেলা)</span> *</label>
-                                            <select name="present_upazila" id="present_upazila" required>
+                                            <select name="present_upazila" class="upazila" id="present_upazila" required>
                                                 <option value="">Select Upazila</option>
                                             </select>
                                         </div>
@@ -535,7 +548,14 @@
                                             *</label>
                                         <select id="ssc_passing" name="ssc_passing" required>
                                             <option value="">Select Year</option>
-                                            <option value="any age">Any Age</option>
+                                            @php
+                                                $currentYears = date('Y');
+                                                $looplimits = $currentYears - 1;
+                                            @endphp
+                                            @for ($i = $looplimits; $i >= 1920; $i--)
+                                                <option {{ $memberExpectation->ssc_passing == $i ? 'selected' : '' }}
+                                                    value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
                                         </select>
                                     </div>
                                 </div>
@@ -544,7 +564,7 @@
                                     <div class="form-group mt-2">
                                         <label>SSC Result <span class="bn_lable">(এসএসসি এর ফলাফল কত)</span> *</label>
                                         <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result"
-                                            required>
+                                            value="{{ $memberExpectation->expect_lifepartner }}" required>
                                     </div>
                                 </div>
 
@@ -616,7 +636,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group mt-2">
                                         <label>Monthly Income <span class="bn_lable">(মাসিক আয়)</span> *</label>
-                                        <select name="montly_income" id="montly_income">
+                                        <select name="monthly_income" id="monthly_income">
                                             <option value="">Select</option>
                                             <option value="Any">Any</option>
                                             <option value="20000 Up">20000 Up</option>
@@ -653,7 +673,8 @@
                                     <div class="form-group mt-2">
                                         <label>The qualities you expect in a life partner <span
                                                 class="bn_lable">(জীবনসঙ্গীর যেসব গুণ প্রত্যাশা করেন)</span> *</label>
-                                        <textarea id="expect_lifepartner" name="expect_lifepartner" rows="3" cols="50"></textarea>
+                                        <textarea id="expect_lifepartner" name="expect_lifepartner" value="{{ $memberExpectation->expect_lifepartner }}"
+                                            rows="3" cols="50"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -714,7 +735,8 @@
                                         <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত
                                                 যোগ্যতা)</span>
                                             *</label>
-                                        <input type="text" id="last_education" name="last_education"
+                                        <input type="text" id="last_education"
+                                            value="{{ $memberCareer->last_education }}" name="last_education"
                                             placeholder="Economic situation" required>
                                     </div>
                                 </div>
@@ -724,7 +746,8 @@
                                                 চাকরি কতদিন ধরে
                                                 করছেন)</span> *</label>
                                         <input type="text" id="job_duration" name="job_duration"
-                                            placeholder="Economic situation" required>
+                                            value="{{ $memberCareer->job_duration }}" placeholder="Economic situation"
+                                            required>
                                     </div>
                                 </div>
 
@@ -754,8 +777,8 @@
                                     <div class="form-group mt-2">
                                         <label>Guardian Phone Number <span class="bn_lable">(অভিভাবকের মোবাইল নম্বর)</span>
                                             *</label>
-                                        <input name="guardian_phone" value="{{ $memberInfo->guardian_phone }}" type="tel" placeholder="Guardian phone number"
-                                            required />
+                                        <input name="guardian_phone" value="{{ $memberInfo->guardian_phone }}"
+                                            type="tel" placeholder="Guardian phone number" required />
                                     </div>
                                 </div>
                                 {{-- <div class="col-sm-6">
@@ -799,8 +822,7 @@
                                         </span>
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <input type="file" name="image_one" placeholder="Add Photo"
-                                                    required />
+                                                <input type="file" name="image_one" placeholder="Add Photo" />
                                             </div>
                                             <div class="col-sm-4">
                                                 <img src="{{ asset($memberImage->image_one) }}"
@@ -816,7 +838,7 @@
                                                     Upload Your Cover Photo <span class="bn_lable">(আপনার কভার ছবি আপলোড
                                                         করুন)</span> *</h6>
                                                 <input type="file" name="image_two"
-                                                    placeholder="Upload Your Cover Photo" required />
+                                                    placeholder="Upload Your Cover Photo" />
                                             </div>
                                             <div class="col-sm-4">
                                                 <img src="{{ asset($memberImage->image_two) }}"
@@ -938,6 +960,25 @@
         document.forms['editForm'].elements['ssc_passing'].value = {{ $memberEducation->ssc_passing }};
         document.forms['editForm'].elements['father_alive'].value = {{ $memberFamily->father_alive }};
         document.forms['editForm'].elements['mother_alive'].value = {{ $memberFamily->mother_alive }};
+        document.forms['editForm'].elements['profession_id'].value = {{ $memberCareer->profession_id }};
+        document.forms['editForm'].elements['job_permanent'].value = "{{ $memberCareer->job_permanent }}";
+        document.forms['editForm'].elements['job_type'].value = "{{ $memberCareer->job_type }}";
+        document.forms['editForm'].elements['is_student'].value = "{{ $memberCareer->is_student }}";
+        document.forms['editForm'].elements['complexion'].value = "{{ $memberExpectation->complexion }}";
+        document.forms['editForm'].elements['partner_age'].value = "{{ $memberExpectation->partner_age }}";
+        document.forms['editForm'].elements['partner_height'].value = "{{ $memberExpectation->partner_height }}";
+        document.forms['editForm'].elements['ssc_passing'].value = "{{ $memberExpectation->ssc_passing }}";
+        document.forms['editForm'].elements['education_qualification'].value =
+            "{{ $memberExpectation->education_qualification }}";
+        document.forms['editForm'].elements['present_division'].value = "{{ $memberExpectation->present_division }}";
+        document.forms['editForm'].elements['partner_citizenship'].value = "{{ $memberExpectation->partner_citizenship }}";
+        document.forms['editForm'].elements['marital_status'].value = "{{ $memberExpectation->marital_status }}";
+        document.forms['editForm'].elements['profession_ids'].value = "{{ $memberExpectation->profession_ids }}";
+        document.forms['editForm'].elements['pertner_eco_situation'].value =
+            "{{ $memberExpectation->economic_situation }}";
+        document.forms['editForm'].elements['monthly_income'].value = "{{ $memberExpectation->monthly_income }}";
+        document.forms['editForm'].elements['drinking_habbit'].value = "{{ $memberExpectation->drinking_habbit }}";
+        document.forms['editForm'].elements['smoking_habbit'].value = "{{ $memberExpectation->smoking_habbit }}";
     </script>
     <script>
         document.querySelectorAll(".toggle-group").forEach((group) => {
@@ -978,5 +1019,112 @@
                 select.add(option);
             }
         }
+    </script>
+    <script>
+        const partnerAgeSelect = document.getElementById('partner_age');
+
+        const ageRanges = [
+            [18, 20],
+            [20, 25],
+            [25, 30],
+            [30, 35],
+            [35, 40],
+            [40, 45],
+            [45, 50]
+        ];
+
+        ageRanges.forEach(([start, end]) => {
+            const text = `${start} - ${end}`;
+            const value = `${start}-${end}`;
+            const option = new Option(text, value);
+            partnerAgeSelect.add(option);
+        });
+    </script>
+    <script>
+        $('.district').on('change', function() {
+            const districtId = $(this).val();
+            let upazilaSelect = $(this).closest('.rows').find('.upazila');
+            console.log(upazilaSelect);
+            if (districtId) {
+                $.ajax({
+                    url: `{{ url('get-upazilas') }}?id=${districtId}`,
+                    type: 'GET',
+                    success: function(data) {
+                        upazilaSelect.empty().append(
+                            '<option value="">Select Upazila</option>');
+                        data.forEach(function(upazila) {
+                            upazilaSelect.append(
+                                `<option value="${upazila.id}">${upazila.name}</option>`);
+                        });
+                    },
+                    error: function() {
+                        alert('Failed to fetch upazilas');
+                    }
+                });
+            } else {
+                upazilaSelect.html('<option value="">Select Upazila</option>');
+            }
+        });
+    </script>
+
+    <script>
+        function togglePermanentAddress() {
+            var checkbox = document.getElementById("sameAsPresent");
+            var permSection = document.getElementById("permanentAddress");
+            if (checkbox.checked) {
+                // Hide the Permanent Address section
+                permSection.style.display = "none";
+            } else {
+                // Show the Permanent Address section
+                permSection.style.display = "block";
+            }
+        }
+    </script>
+    <script>
+        const partnerHeightSelect = document.getElementById('partner_height');
+
+        const startFeet = 5;
+        const endFeet = 7;
+        const increment = 0.5;
+
+        for (let height = startFeet; height < endFeet; height += increment) {
+            let nextHeight = height + increment;
+            if (nextHeight > endFeet) break;
+
+            const format = h => {
+                const feet = Math.floor(h);
+                const inch = (h % 1 === 0.5) ? 6 : 0;
+                return `${feet} feet${inch ? ' ' + inch + ' inch' : ''}`;
+            };
+
+            const text = `${format(height)} - ${format(nextHeight)}`;
+            const value = `${height}-${nextHeight}`;
+            const option = new Option(text, value);
+            partnerHeightSelect.add(option);
+        }
+    </script>
+    <script>
+        const dropdownBtn = document.getElementById('dropdownButton');
+        const selectedText = document.getElementById('selectedText');
+        const hiddenInput = document.querySelector('#dropdownInput'); // Your input element
+        const dropdownList = document.getElementById('dropdownOptions');
+
+        dropdownBtn.addEventListener('click', () => {
+            dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
+        });
+
+        dropdownList.addEventListener('click', (e) => {
+            if (e.target.dataset.value) {
+                selectedText.textContent = e.target.textContent;
+                hiddenInput.value = e.target.dataset.value;
+                dropdownList.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('click', (e) => {
+            if (!document.getElementById('customDropdown').contains(e.target)) {
+                dropdownList.style.display = 'none';
+            }
+        });
     </script>
 @endpush

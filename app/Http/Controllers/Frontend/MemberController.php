@@ -525,10 +525,12 @@ class MemberController extends Controller
         $memberId = Auth::guard('member')->user()->id;
 
         $memberInfo = Member::where('id', $memberId)->first();
-        $memberInfo->name = $request->name;
+        $memberInfo->name = $request->full_name;
         $memberInfo->phone = $request->phone;
         $memberInfo->email = $request->email;
         $memberInfo->profile_lock = $request->profile_lock ?? 0;
+        $memberInfo->gender = $request->looking_for == 2 ? 1 : 2;
+        $memberInfo->profile_lock = $request->profile_lock ?? 'only-me';
         $memberInfo->save();
 
         $bdate = $request->day;
@@ -552,6 +554,12 @@ class MemberController extends Controller
         } else {
             $update_memberinfo = new MemberInfo();
         }
+        // country_id
+        $update_memberinfo->height = $request->height;
+        $update_memberinfo->weight = $request->weight;
+        $update_memberinfo->blood_group = $request->blood_group;
+        $update_memberinfo->looking_for = $request->looking_for;
+        $update_memberinfo->profile_created_by = $request->profile_created_by;
         $update_memberinfo->member_id = $memberId;
         $update_memberinfo->residency_id = $request->residency_id;
         $update_memberinfo->country_id = $request->country_id;
@@ -569,6 +577,11 @@ class MemberController extends Controller
         }
         $update_membercareer->member_id = $memberId;
         $update_membercareer->profession_id = $request->profession_id;
+        $update_membercareer->job_permanent = $request->job_permanent;
+        $update_membercareer->job_type = $request->job_type;
+        $update_membercareer->is_student = $request->is_student;
+        $update_membercareer->last_education = $request->last_education;
+        $update_membercareer->job_duration = $request->job_duration;
         $update_membercareer->save();
 
         if (!empty($request->membereducation) && is_numeric($request->membereducation)) {
@@ -578,6 +591,9 @@ class MemberController extends Controller
         }
         $update_membereducation->member_id = $memberId;
         $update_membereducation->education_id = $request->education_id;
+        $update_membereducation->education_end_id = $request->education_end_id;
+        $update_membereducation->ssc_gpa = $request->ssc_gpa;
+        $update_membereducation->ssc_passing = $request->ssc_passing;
         $update_membereducation->save();
 
         // member image information
@@ -591,7 +607,56 @@ class MemberController extends Controller
         $update_memberlocation->present_upazila = $request->present_upazila;
         $update_memberlocation->present_division = $request->present_division;
         $update_memberlocation->present_area = $request->present_area;
+        $update_memberlocation->grow_up = $request->grow_up;
         $update_memberlocation->save();
+
+        if (!empty($request->memberexpectation) && is_numeric($request->memberexpectation)) {
+            $update_expectation = PartnerExpectation::find($request->memberexpectation);
+        } else {
+            $update_expectation = new PartnerExpectation();
+        }
+
+        $update_expectation->member_id = $memberId;
+        $update_expectation->partner_height = $request->partner_height;
+        $update_expectation->marital_status = $request->marital_status;
+        $update_expectation->partner_citizenship = $request->partner_citizenship;
+        $update_expectation->profession_ids = $request->profession_ids;
+        $update_expectation->education_qualification = $request->education_qualification;
+        $update_expectation->age = $request->age;
+        $update_expectation->complexion = $request->complexion;
+        $update_expectation->monthly_income = $request->monthly_income;
+        $update_expectation->economic_situation = $request->economic_situation;
+        $update_expectation->drinking_habbit = $request->drinking_habbit;
+        $update_expectation->smoking_habbit = $request->smoking_habbit;
+        $update_expectation->job_permanent = $request->job_permanent;
+        $update_expectation->job_type = $request->job_type;
+        $update_expectation->is_student = $request->is_student;
+        $update_expectation->last_education = $request->last_education;
+        $update_expectation->job_duration = $request->job_duration;
+        $update_expectation->present_division = $request->present_division;
+        $update_expectation->save();
+
+        if (!empty($request->memberfamily) && is_numeric($request->memberfamily)) {
+            $update_family = MemberFamily::find($request->memberfamily);
+        } else {
+            $update_family = new MemberFamily();
+        }
+
+        $update_family = new MemberFamily();
+        $update_family->member_id = $memberId;
+        $update_family->father_name = $request->father_name;
+        $update_family->father_profession = $request->father_profession;
+        $update_family->father_alive = $request->father_alive;
+        $update_family->mother_name = $request->mother_name;
+        $update_family->mother_profession = $request->mother_profession;
+        $update_family->mother_alive = $request->mother_alive;
+        $update_family->brother_count = $request->brother_count;
+        $update_family->married_brother = $request->married_brother;
+        $update_family->sister_count = $request->sister_count;
+        $update_family->married_sister = $request->married_sister;
+        $update_family->financial_situation = $request->financial_situation;
+        $update_family->religious_status = $request->religious_status;
+        $update_family->save();
 
         if (!empty($request->memberimage) && is_numeric($request->memberimage)) {
             $update_memberimage = MemberImage::find($request->memberimage);
