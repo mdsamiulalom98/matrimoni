@@ -173,14 +173,14 @@
                             <i class="fa fa-user"></i>
                         </div>
                     @else
-                        <div class="member_image">
+                        <div class="member_image {{ $value->profile_lock == 'blur' ? 'blur-image' : '' }}">
                             <a href="{{ route('details', $value->id) }}">
                                 <img src="{{ asset($value->memberimage->image_one ?? '') }}" alt="Member Image" />
                             </a>
                             <div class="post-caption">
                                 {{--
-                        <p class="member_id">ID: {{ $value->member_id }}</p>
-                        --}}
+                                    <p class="member_id">ID: {{ $value->member_id }}</p>
+                                --}}
                                 <div class="member_post_flex">
                                     <span class="member_age">
                                         Age :
