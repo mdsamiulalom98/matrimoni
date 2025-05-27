@@ -162,7 +162,16 @@ class FrontendController extends Controller
     }
 
     public function searchMember() {
-        return view('frontEnd.layouts.pages.search');
+        $months = Monthname::all();
+        $religions = Religion::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $professions = Profession::where('status', 1)->get();
+        $countries = Country::where('status', 1)->get();
+        $divisions = Division::where('status', 1)->get();
+        $districts = District::where('status', 1)->get();
+        $upazilas = Upazila::where('status', 1)->get();
+        // return $educations;
+        return view('frontEnd.layouts.pages.search',compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
     }
 
     public function affiliate_policy() {

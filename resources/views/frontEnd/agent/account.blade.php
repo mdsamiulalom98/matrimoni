@@ -17,9 +17,13 @@
             </div>
              <nav class="sidebar-nav">
                 <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
-                <a href="#"><i class="fa-solid fa-person-breastfeeding"></i>My Members</a>
-                <a href="#"><i class="fa-solid fa-pen-to-square"></i> Profile edit</a>
-                <a href="#"><i class="fa-solid fa-lock"></i> Password Change</a>
+                <a href="{{route('agent.my_members')}}"><i class="fa-solid fa-person-breastfeeding"></i>My Members</a>
+                <a href="{{route('agent.profile_edit')}}"><i class="fa-solid fa-pen-to-square"></i> Profile edit</a>
+                <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Password Change</a>
+                <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Withdraw</a>
+                <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Transection Histroy</a>
+                <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Terms & Conditions</a>
+                <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Logout</a>
             </nav>
         </div>
 
@@ -60,294 +64,34 @@
         <div class="modal-content">
             <button class="form_close" onclick="hideModal()"><i class="fa-solid fa-xmark"></i></button>
             <h3 style="margin-bottom: 20px;">New Member Registration</h3>
-            <section class="registration_form section-padding">
+            <section class="registration_form">
                 <div class="form_container">
                     <form action="{{ route('agent.member_store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Basic Information -->
-                        <fieldset>
-                            <h2>Basic Information</h2>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Profile Created By *</label>
-                                        <select>
-                                            <option>Select One</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Looking For *</label>
-                                        <select>
-                                            <option>Select One</option>
-                                        </select>
-                                    </div>
-                                </div>
+                        <div class="input_field_group">
+                            @include('frontEnd.layouts.agentpartials.popup1')
+                        </div>
 
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Candidate First Name *</label>
-                                        <input type="text" name="first_name" placeholder="First Name" required>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Candidate Last Name *</label>
-                                        <input type="text" name="last_name" placeholder="Last Name" required>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="input_field_group">
+                            @include('frontEnd.layouts.agentpartials.popup2')
+                        </div>
 
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Community / Religion *</label>
-                                        <select name="religion_id">
-                                            <option value="">Select Religion</option>
-                                            @foreach ($religions as $religion)
-                                                <option value="{{ $religion->id }}">{{ $religion->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Date of Birth *</label>
-                                        <div class="dob-group">
-                                            <select name="year">
-                                                <option value="">Year</option>
-                                                @php
-                                                    $currentYear = date('Y');
-                                                    $looplimit = $currentYear - 18;
-                                                @endphp
-                                                @for ($i = $looplimit; $i >= 1920; $i--)
-                                                    <option value="{{ $i }}">{{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                            <select name="month">
-                                                <option value="">Month</option>
-                                                @foreach ($months as $month)
-                                                    <option value="{{ $month->month }}">{{ $month->title }}</option>
-                                                @endforeach
-                                            </select>
-                                            <select name="day">
-                                                <option value="">Day</option>
-                                                @for ($i = 1; $i <= 31; $i++)
-                                                    <option
-                                                        @if ($i < 10) value="0{{ $i }}" @else value="{{ $i }}" @endif
-                                                        value="{{ $i }}">
-                                                        {{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Profession *</label>
-                                        <select name="profession_id">
-                                            <option value="">Select Profession</option>
-                                            @foreach ($professions as $profession)
-                                            <option value="{{ $profession->id }}">{{ $profession->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>Education *</label>
-                                        <select name="education_id">
-                                            <option value="">Select Education</option>
-                                            @foreach ($educations as $education)
-                                                <option value="{{ $education->id }}">{{ $education->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
+                        <div class="input_field_group">
+                            @include('frontEnd.layouts.agentpartials.popup3')
+                        </div>
+                        <div class="input_field_group">
+                            @include('frontEnd.layouts.agentpartials.popup4')
+                        </div>
+                        <div class="input_field_group">
+                            @include('frontEnd.layouts.agentpartials.popup5')
+                        </div>
+                        <div class="input_field_group">
+                            @include('frontEnd.layouts.agentpartials.popup6')
+                        </div>
 
                         <!-- Present Location -->
-                        <fieldset>
-                           <div class="row">
-                            <h2>Present Location</h2>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Country *</label>
-                                    <select name="country_id">
-                                        @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Present Division *</label>
-                                    <select name="present_division">
-                                        <option value="">Select Division</option>
-                                        @foreach ($divisions as $division)
-                                            <option value="{{ $division->id }}">{{ $division->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                          <div class="col-sm-3">
-                            <div class="form-group">
-                                <label>Present District *</label>
-                                <select name="present_district">
-                                    <option value="">Select District</option>
-                                    @foreach ($districts as $district)
-                                        <option value="{{ $district->id }}">{{ $district->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                          </div>
-                           <div class="col-sm-3">
-                            <div class="form-group">
-                                <label>Present Upazila *</label>
-                                <select name="present_upazila">
-                                    <option value="">Select Upazila</option>
-                                    @foreach ($upazilas as $upazila)
-                                        <option value="{{ $upazila->id }}">{{ $upazila->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                           </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Village / Area *</label>
-                                <input type="text" name="present_area" placeholder="Enter area name" required>
-                            </div>
-                          </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Residency Status *</label>
-                                    <select name="residency_id">
-                                        <option value="">Select Residency</option>
-                                        @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                           </div>
-                        </fieldset>
-
-                        <!-- Account Information -->
-                        <fieldset>
-                            <div class="row">
-                            <h2>Account Information</h2>
-                           <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Email Address *</label>
-                                <input name="email" type="email" placeholder="Email address" required>
-                            </div>
-                           </div>
-                           <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Confirm Email Address *</label>
-                                <input name="confirm_email" type="email" placeholder="Confirm email address" required>
-                            </div>
-                           </div>
-                           <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Candidate Phone Number *</label>
-                                <input name="phone" type="tel" placeholder="Phone number" required>
-                            </div>
-                           </div>
-                           <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Guardian Phone Number *</label>
-                                <input name="guardian_phone" type="tel" placeholder="Guardian phone number" required>
-                            </div>
-                           </div>
-                           <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Password *</label>
-                                <input name="password" type="password" placeholder="Enter password" required>
-                            </div>
-                           </div>
-                           <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Confirm Password *</label>
-                                <input name="confirm_password" type="password" placeholder="Confirm password" required>
-                            </div>
-                           </div>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="position-relative">
-                                <div class="profile-lock-toggle">
-                                    <input type="checkbox" name="profile_lock" id="lock_profile" value="1" />
-                                    <label for="lock_profile"></label>
-                                    <p>Lock Your Photo</p>
-                                </div>
-                                <p class="max-image-text">Upload your 3 Photos</p>
-                                <div class="register-image-wrapper">
-                                    <div class="addphoto-flex" id="editPhotos">
-
-                                        <div class="image-div">
-
-                                            <img id="preview_one" src="{{ asset($memberImage->image_one ?? '') }}" />
-
-                                            <label for="" class="upload-btn member-image">
-                                                Change
-                                                <input type="file" name="image_one" id="image_one"
-                                                    class="file-input @error('image_one') is-invalid @enderror" />
-                                            </label>
-                                            @error('image_one')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="image-div">
-                                            <img id="preview_two" src="{{ asset($memberImage->image_two ?? '') }}" />
-                                            <label for="" class="upload-btn member-image">
-                                                Change
-                                                <input type="file" name="image_two" id="image_two"
-                                                    class="file-input @error('image_two') is-invalid @enderror" />
-                                            </label>
-
-                                            @error('image_two')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="image-div">
-                                            <img id="preview_three" src="{{ asset($memberImage->image_three ?? '') }}" />
-                                            <label for="" class="upload-btn member-image">
-                                                Change
-                                                <input type="file" name="image_three" id="image_three"
-                                                    class="file-input @error('image_three') is-invalid @enderror" />
-                                            </label>
-                                            @error('image_three')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ./ col -->
-                        </fieldset>
-
-                        <div class="form-group terms">
-                            <input type="checkbox" required>
-                            <label>I affirm that I have read and agreed to the <a href="#">Privacy Policy</a> and <a
-                                    href="#">Terms & Conditions</a>.</label>
-                        </div>
+                       
 
                         <button type="submit" class="submit-btn">Submit</button>
 
@@ -399,5 +143,342 @@
             previewImage(this, "#preview_three");
         });
     </script>
+
+    <script>
+    $(".toggle2").on("click", function() {
+        $("#page-overlay").show();
+        $(".profile-popup").addClass("active");
+    });
+
+    $("#page-overlay").on("click", function() {
+        $("#page-overlay").hide();
+        $(".profile-popup").removeClass("active");
+        $(".feature-products").removeClass("active");
+    });
+
+    $(".profile-popup-close").on("click", function() {
+        $("#page-overlay").hide();
+        $(".profile-popup").removeClass("active");
+    });
+</script>
+
+<script>
+    $(".toggle3").on("click", function() {
+        $("#page-overlay").show();
+        $(".image-popup").addClass("active");
+    });
+
+    $("#page-overlay").on("click", function() {
+        $("#page-overlay").hide();
+        $(".image-popup").removeClass("active");
+        $(".feature-products").removeClass("active");
+    });
+
+    $(".image-popup-close").on("click", function() {
+        $("#page-overlay").hide();
+        $(".image-popup").removeClass("active");
+    });
+</script>
+
+<script>
+    // Gender selection functionality
+    const genderButtons = document.querySelectorAll(".gender-btn");
+    genderButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            genderButtons.forEach((btn) => btn.classList.remove("active"));
+            const displayElement = document.getElementById("selectedGender");
+            button.classList.add("active");
+            // Get the selected value from data attribute
+            const selectedValue = button.dataset.gender;
+
+            // Update hidden input value (for form submission)
+            displayElement.value = selectedValue;
+        });
+    });
+
+    // Form submission
+    // document.querySelector(".lets-begin-btn").addEventListener("click", () => {
+    //     const gender = document.querySelector(".gender-btn.active").textContent;
+    //     const minAge = document.querySelector(".age-input:first-child").value;
+    //     const maxAge = document.querySelector(".age-input:last-child").value;
+    //     const religion = document.querySelectorAll("select")[0].value;
+    //     const country = document.querySelectorAll("select")[1].value;
+
+    //     alert(`Searching for:
+    //     Gender: ${gender}
+    //     Age: ${minAge} to ${maxAge}
+    //     Religion: ${religion}
+    //     Country: ${country}`);
+    // });
+</script>
+<script>
+    function previewImage(input, previewId) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $(previewId).attr("src", e.target.result).show();
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#image_one").change(function() {
+        previewImage(this, "#preview_one");
+    });
+    $("#image_two").change(function() {
+        previewImage(this, "#preview_two");
+    });
+    $("#image_three").change(function() {
+        previewImage(this, "#preview_three");
+    });
+</script>
+
+<script>
+    document.querySelectorAll(".toggle-group").forEach((group) => {
+        group.addEventListener("click", function(event) {
+            let btn = event.target;
+            if (!btn.classList.contains("toggle-btn")) return;
+
+            // Remove active class from all buttons in this group
+            group.querySelectorAll(".toggle-btn").forEach((b) => b.classList.remove("active"));
+
+            // Add active class to clicked button
+            btn.classList.add("active");
+
+            // Find the associated hidden input and update its value
+            let inputField = group.nextElementSibling;
+            if (inputField) {
+                inputField.value = btn.getAttribute("data-value");
+            }
+        });
+    });
+</script>
+<script>
+    function enableButtonIfValid(containerSelector, buttonSelector) {
+        function check() {
+            let allFilled = true;
+
+            console.log('--- Validating Required Inputs ---');
+
+            $(`${containerSelector} [required]`).each(function(index) {
+                const $input = $(this);
+                const tag = $input.prop('tagName').toLowerCase();
+                const value = $.trim($input.val());
+                const name = $input.attr('name') || $input.attr('id') || `Input ${index + 1}`;
+
+                console.log(`[${tag}] ${name}: "${value}"`);
+
+                if (tag === "select" && value === "") {
+                    console.warn(`❌ Missing select: ${name}`);
+                    allFilled = false;
+                    return false;
+                } else if (tag !== "select" && value === "") {
+                    console.warn(`❌ Missing input: ${name}`);
+                    allFilled = false;
+                    return false;
+                }
+            });
+
+            $(buttonSelector).prop("disabled", !allFilled);
+            console.log(`Button ${allFilled ? 'ENABLED' : 'DISABLED'}`);
+        }
+
+        $(`${containerSelector} [required]`).on("input change", check);
+
+        check(); // Run immediately on load
+    }
+
+    enableButtonIfValid("#basicInfo", "#basicNext");
+    enableButtonIfValid("#partnerExpectation", "#partnerNext");
+    enableButtonIfValid("#educationInfo", "#educationNext");
+    enableButtonIfValid("#familyInfo", "#familyNext");
+    enableButtonIfValid("#locationInfo", "#locationNext");
+    enableButtonIfValid("#professionInfo", "#professionNext");
+    enableButtonIfValid("#personalInfo", "#personalNext");
+    enableButtonIfValid("#careerInfo", "#professionNext");
+    enableButtonIfValid("#accountInfo", "#registerButton");
+</script>
+
+<script>
+    const dropdownBtn = document.getElementById('dropdownButton');
+    const selectedText = document.getElementById('selectedText');
+    const hiddenInput = document.querySelector('#dropdownInput'); // Your input element
+    const dropdownList = document.getElementById('dropdownOptions');
+
+    dropdownBtn.addEventListener('click', () => {
+        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
+    });
+
+    dropdownList.addEventListener('click', (e) => {
+        if (e.target.dataset.value) {
+            selectedText.textContent = e.target.textContent;
+            hiddenInput.value = e.target.dataset.value;
+            dropdownList.style.display = 'none';
+        }
+    });
+
+    window.addEventListener('click', (e) => {
+        if (!document.getElementById('customDropdown').contains(e.target)) {
+            dropdownList.style.display = 'none';
+        }
+    });
+</script>
+
+<!--hide and show input field-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fatherAliveSelect = document.getElementById('father_alive');
+        const professionField = document.getElementById('father_profession_field');
+        const fatherNameInput = document.getElementById('father_name');
+
+        fatherAliveSelect.addEventListener('change', function() {
+            if (fatherAliveSelect.value === 'yes') {
+                professionField.style.display = 'block';
+                fatherNameInput.setAttribute('required', 'required');
+            } else {
+                professionField.style.display = 'none';
+                fatherNameInput.removeAttribute('required');
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const motherAliveSelect = document.getElementById('mother_alive');
+        const professionField = document.getElementById('mother_profession_field');
+        const motherProfessionInput = document.getElementById('mother_profession');
+
+        motherAliveSelect.addEventListener('change', function() {
+            if (this.value === 'yes') {
+                professionField.style.display = 'block';
+                motherProfessionInput.setAttribute('required', 'required');
+            } else {
+                professionField.style.display = 'none';
+                motherProfessionInput.removeAttribute('required');
+            }
+        });
+    });
+</script>
+
+{{-- this for height select --}}
+
+<!-- Actual height dropdown (like 5'0", 5'1", ..., 7'0") -->
+<script>
+    const select = document.getElementById('height');
+
+    for (let feet = 5; feet <= 7; feet++) {
+        for (let inch = 0; inch < 12; inch++) {
+            if (feet === 7 && inch > 0) break;
+
+            const heightText = `${feet} feet ${inch} inch`;
+            const heightValue = `${feet}'${inch}`;
+            const option = new Option(heightText, heightValue);
+            select.add(option);
+        }
+    }
+</script>
+
+<!-- SSC Passing Year -->
+<script>
+    const yearSelect = document.getElementById('ssc_passing');
+    const startYear = 1998;
+    const endYear = 2025;
+
+    for (let year = startYear; year <= endYear; year++) {
+        const option = new Option(year, year);
+        yearSelect.add(option);
+    }
+</script>
+
+<!-- Partner Age Ranges -->
+<script>
+    const partnerAgeSelect = document.getElementById('partner_age');
+
+    const ageRanges = [
+        [18, 20],
+        [20, 25],
+        [25, 30],
+        [30, 35],
+        [35, 40],
+        [40, 45],
+        [45, 50]
+    ];
+
+    ageRanges.forEach(([start, end]) => {
+        const text = `${start} - ${end}`;
+        const value = `${start}-${end}`;
+        const option = new Option(text, value);
+        partnerAgeSelect.add(option);
+    });
+</script>
+
+<!-- Partner Height Ranges (5 - 7 feet in 0.5 steps) -->
+<script>
+    const partnerHeightSelect = document.getElementById('partner_height');
+
+    const startFeet = 5;
+    const endFeet = 7;
+    const increment = 0.5;
+
+    for (let height = startFeet; height < endFeet; height += increment) {
+        let nextHeight = height + increment;
+        if (nextHeight > endFeet) break;
+
+        const format = h => {
+            const feet = Math.floor(h);
+            const inch = (h % 1 === 0.5) ? 6 : 0;
+            return `${feet} feet${inch ? ' ' + inch + ' inch' : ''}`;
+        };
+
+        const text = `${format(height)} - ${format(nextHeight)}`;
+        const value = `${height}-${nextHeight}`;
+        const option = new Option(text, value);
+        partnerHeightSelect.add(option);
+    }
+</script>
+
+
+{{-- this for district and upazila --}}
+
+<script>
+    $('.district').on('change', function() {
+        const districtId = $(this).val();
+        let upazilaSelect = $(this).closest('.rows').find('.upazila');
+        console.log(upazilaSelect);
+        if (districtId) {
+            $.ajax({
+                url: `{{ url('get-upazilas') }}?id=${districtId}`,
+                type: 'GET',
+                success: function(data) {
+                    upazilaSelect.empty().append(
+                        '<option value="">Select Upazila</option>');
+                    data.forEach(function(upazila) {
+                        upazilaSelect.append(
+                            `<option value="${upazila.id}">${upazila.name}</option>`);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch upazilas');
+                }
+            });
+        } else {
+            upazilaSelect.html('<option value="">Select Upazila</option>');
+        }
+    });
+</script>
+
+<script>
+    function togglePermanentAddress() {
+        var checkbox = document.getElementById("sameAsPresent");
+        var permSection = document.getElementById("permanentAddress");
+        if (checkbox.checked) {
+            // Hide the Permanent Address section
+            permSection.style.display = "none";
+        } else {
+            // Show the Permanent Address section
+            permSection.style.display = "block";
+        }
+    }
+</script>
 
 @endpush

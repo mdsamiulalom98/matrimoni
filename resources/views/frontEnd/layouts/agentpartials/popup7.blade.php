@@ -1,14 +1,7 @@
 <fieldset id="careerInfo">
-    <div class="title-wrapper">
+    <div class="titlewrapper">
         <h2>Career Information</h2>
         <span>(ক্যারিয়ার তথ্য)</span>
-    </div>
-
-    <div class="reg_score_bar">
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-        <p>Your profile score 30%</p>
     </div>
 
     <div class="row">
@@ -45,26 +38,6 @@
                 </select>
             </div>
         </div>
-        <!--<div class="col-sm-12">-->
-        <!--    <div class="form-group">-->
-        <!--        <label>Are You Studying <span class="bn_lable">(আপনি কি অধ্যয়নরত)</span> *</label>-->
-        <!--        <select name="is_student" id="is_student" required>-->
-        <!--            <option value="">Select</option>-->
-        <!--            <option value="yes">Yes</option>-->
-        <!--            <option value="no">No</option>-->
-        <!--        </select>-->
-        <!--    </div>-->
-        <!--</div>-->
-        
-        <!--<div class="col-sm-12">-->
-        <!--    <div class="form-group">-->
-        <!--        <label>Latest Educational Qualification <span class="bn_lable">(সর্বশেষ শিক্ষাগত যোগ্যতা)</span>-->
-        <!--            *</label>-->
-        <!--        <input type="text" id="last_education" name="last_education" placeholder="Economic situation"-->
-        <!--            required>-->
-        <!--    </div>-->
-        <!--</div>-->
-        
        
         
         <div class="col-sm-12">
@@ -96,9 +69,6 @@
                 <textarea id="profession_des" placeholder="Profession Description" name="profession_des" rows="4" cols="50"></textarea>
             </div>
         </div>
-
-
     </div>
 </fieldset>
-<button id="professionNext" disabled type="button" onclick="nextPopup(3, 4)">Next</button>
-<button type="button" onclick="prevPopup(3, 2)">Back</button>
+

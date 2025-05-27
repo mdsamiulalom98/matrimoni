@@ -1,15 +1,8 @@
 <fieldset id="partnerExpectation">
     <div class="row">
-        <div class="title-wrapper">
+        <div class="titlewrapper">
             <h2>Prospective life partner</h2>
             <span>(প্রত্যাশিত জীবন সঙ্গী)</span>
-        </div>
-
-        <div class="reg_score_bar">
-            <div class="progress-bar">
-                <div class="progress2"></div>
-            </div>
-            <p>Your profile score 60%</p>
         </div>
 
         <div class="col-sm-12">
@@ -64,23 +57,6 @@
                 </select>
             </div>
         </div>
-
-        <!--<div class="col-sm-12">-->
-        <!--    <div class="form-group">-->
-        <!--        <label>SSC Passing Year <span class="bn_lable">(কত সালে এসএসসি পাস করেছেন)</span> *</label>-->
-        <!--        <select id="ssc_passing" name="ssc_passing" required>-->
-        <!--            <option value="">Select Year</option>-->
-        <!--            <option value="any age">Any Age</option>-->
-        <!--        </select>-->
-        <!--    </div>-->
-        <!--</div>-->
-
-        <!--<div class="col-sm-12">-->
-        <!--    <div class="form-group">-->
-        <!--        <label>SSC Result <span class="bn_lable">(এসএসসি এর ফলাফল কত)</span> *</label>-->
-        <!--        <input type="text" id="ssc_gpa" name="ssc_gpa" placeholder="SSC Result" required>-->
-        <!--    </div>-->
-        <!--</div>-->
 
         <div class="col-sm-12">
             <div class="form-group">
@@ -190,7 +166,3 @@
         </div>
     </div>
 </fieldset>
-
-
-<button id="partnerNext" disabled type="button" onclick="nextPopup(6, 7)">Next</button>
-<button type="button" onclick="prevPopup(6, 5)">Back</button>

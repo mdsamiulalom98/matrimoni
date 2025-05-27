@@ -199,6 +199,7 @@ Route::group(['prefix' => 'agent', 'namespace' => 'Frontend', 'middleware' => ['
     Route::get('/member-edit/{id}', [AgentController::class, 'member_edit'])->name('agent.member_edit');
     Route::post('/member-update', [AgentController::class, 'member_update'])->name('agent.member_update');
     Route::get('/my-members', [AgentController::class, 'my_members'])->name('agent.my_members');
+    Route::get('/passresetpage', [AgentController::class, 'passresetpage'])->name('passresetpage');
 });
 
 Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {

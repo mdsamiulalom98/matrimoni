@@ -1,14 +1,8 @@
 <fieldset id="locationInfo">
     <div class="row" style="margin: 0px;padding: 0px;">
-        <div class="title-wrapper">
+        <div class="titlewrapper">
             <h2>Location</h2>
-            <span class="mt-2">( অবস্থান )</span>
-        </div>
-        <div class="reg_score_bar">
-            <div class="progress-bar">
-                <div class="progress2"></div>
-            </div>
-            <p>Your profile score 60%</p>
+            <span class="mt-1">( অবস্থান )</span>
         </div>
 
         <div class="rows" id="presentAddress">
@@ -91,5 +85,3 @@
         </div>
     </div>
 </fieldset>
-<button id="locationNext" disabled type="button" onclick="nextPopup(5, 6)">Next</button>
-<button type="button" onclick="prevPopup(5, 4)">Back</button>

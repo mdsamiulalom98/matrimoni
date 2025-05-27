@@ -1283,9 +1283,8 @@ legend {
 }
 
 .form-group input, .form-group select {
-    width: 100%;
+    width: 100% !important;
     padding: 10px;
-    border: 1px solid #ddd;
     border-radius: 5px;
 }
 
@@ -1711,11 +1710,11 @@ legend {
     border-radius: 4px;
 }
 .member_logout a {
-  color: #fff;
+  color: #fff; 
 }
 
 .member_logout a i {
-  color: #fff;
+  color: #fff; 
 }
 
 .profile-img {
@@ -1747,7 +1746,7 @@ legend {
 }
 
 .edit_icon a{
-
+   
 }
 
 /*.profile-img i {*/
@@ -1848,17 +1847,6 @@ legend {
     position: relative;
 }
 
-.member_image.blur-image::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-}
-
 .discount_box {
     background: #8080804a;
     display: flex;
@@ -1913,7 +1901,7 @@ p.discount_pkg {
 }
 
 .online_text {
-
+    
 }
 
 .veri_text {
@@ -1982,7 +1970,7 @@ p.discount_pkg {
 
 
 .popup_menu ul {
-
+    
 }
 .popup_menu ul li {
     display: block;
@@ -3105,7 +3093,7 @@ select {
     text-align: center;
 }
 
-
+ 
 .how-works-regfree a {
     background: #000 !important;
 }
@@ -4076,6 +4064,23 @@ p.max-image-text {
     background: #0d0d0d33;
 }
 
+ .form-check{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+ .form-check-input[type=checkbox]{
+
+    border-radius: .25em;
+    padding: 0px 9px !important;
+    width: 22px;
+    height: 22px;
+    border-radius: 50% !important;
+    border: 1px solid;
+}
+
 .popup-container .form-group label {
     display: block;
     margin-bottom: -1px;
@@ -4345,6 +4350,10 @@ textarea {
     align-items: center;
 }
 
+div#addMemberModal {
+    z-index: 9999;
+}
+
 button.form_close {
     background: red;
     color: white;
@@ -4488,10 +4497,35 @@ button.search-btn {
     margin-bottom: 8px;
 }
 .title-wrapper h2{
-
+   
 }
 
 .title-wrapper span {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: -8px;
+}
+
+.titlewrapper {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+    background: #ff6367;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.titlewrapper h2 {
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+.titlewrapper span {
     text-align: center;
     font-size: 14px;
     font-weight: 600;
@@ -4966,7 +5000,7 @@ span.help {
     padding-left: 1.5em;
     margin-bottom: .125rem;
 }
-
+  
 .agreements_condi_box .form-check {
     display: inline-flex;
     min-height: 1.5rem;
@@ -4991,7 +5025,7 @@ label.en_lable {
 .agreement_box span.radio-label {
     font-size: 12px;
 }
-
+  
 
   .gender-select {
     display: flex;
@@ -5069,12 +5103,27 @@ label.en_lable {
     border-radius: 50% !important;
     position: relative;
     cursor: pointer;
+    padding: 11px;
 }
 .radio-input:checked {
     border-color: #ff636a;
     border-radius: 50%;
     height: 27px;
 }
+.whataddress {
+    text-align: start;
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+}
+.whataddressbn {
+    text-align: start;
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
 
 .radio-input:checked::after {
     content: '';
@@ -5086,6 +5135,7 @@ label.en_lable {
     height: 80%;
     background: #ff636a;
     border-radius: 50%;
+    padding: 11px;
 }
 
 /* ====== reg content css ====== */

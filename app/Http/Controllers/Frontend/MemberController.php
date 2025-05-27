@@ -92,6 +92,7 @@ class MemberController extends Controller
         $store_data->member_id = Str::random(16);
         $store_data->phone = $request->phone;
         $store_data->gender = $request->looking_for == 2 ? 1 : 2;
+        $store_data->about_hobby = $request->about_hobby;
         $store_data->verifyToken = $verifyToken;
         $store_data->status = 0;
         $store_data->publish = 0;
@@ -148,7 +149,7 @@ class MemberController extends Controller
 
         $store_education = new MemberEducation();
         $store_education->member_id = $memberId;
-        $store_education->education_id = $request->education_id;
+        $store_education->is_student_member = $request->is_student_member;
         $store_education->education_end_id = $request->education_end_id;
         $store_education->ssc_gpa = $request->ssc_gpa;
         $store_education->ssc_passing = $request->ssc_passing;
@@ -197,7 +198,8 @@ class MemberController extends Controller
         $store_family->married_brother = $request->married_brother;
         $store_family->sister_count = $request->sister_count;
         $store_family->married_sister = $request->married_sister;
-        $store_family->financial_situation = $request->financial_situation;
+        // $store_family->financial_situation = $request->financial_situation;
+        $store_family->about_family = $request->about_family;
         $store_family->religious_status = $request->religious_status;
         $store_family->save();
 
@@ -582,6 +584,7 @@ class MemberController extends Controller
         $update_membercareer->is_student = $request->is_student;
         $update_membercareer->last_education = $request->last_education;
         $update_membercareer->job_duration = $request->job_duration;
+        $update_membercareer->profession_des = $request->profession_des;
         $update_membercareer->save();
 
         if (!empty($request->membereducation) && is_numeric($request->membereducation)) {
@@ -634,6 +637,7 @@ class MemberController extends Controller
         $update_expectation->last_education = $request->last_education;
         $update_expectation->job_duration = $request->job_duration;
         $update_expectation->present_division = $request->present_division;
+        $update_expectation->expect_lifepartner = $request->expect_lifepartner;
         $update_expectation->save();
 
         if (!empty($request->memberfamily) && is_numeric($request->memberfamily)) {

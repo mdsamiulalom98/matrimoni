@@ -1,14 +1,7 @@
 <fieldset id="basicInfo">
-    <div class="title-wrapper">
+    <div class="titlewrapper">
         <h2>Basic Information</h2>
-        <span class="mt-2">(সাধারণ তথ্য)</span>
-    </div>
-
-    <div class="reg_score_bar">
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-        <p>Your profile score 30%</p>
+        <span class="mt-1">(সাধারণ তথ্য)</span>
     </div>
 
     <div class="row">
@@ -136,5 +129,3 @@
         </div>
     </div>
 </fieldset>
-
-<button type="button" disabled id="basicNext" onclick="nextPopup(1, 2)">Next</button>

@@ -1,15 +1,10 @@
 <fieldset id="familyInfo">
     <div class="row">
-        <div class="title-wrapper">
+        <div class="titlewrapper">
             <h2>Family information </h2>
-            <span class="mt-2">( পারিবারিক তথ্য )</span>
+            <span class="mt-1">( পারিবারিক তথ্য )</span>
         </div>
-        <div class="reg_score_bar">
-            <div class="progress-bar">
-                <div class="progress2"></div>
-            </div>
-            <p>Your profile score 60%</p>
-        </div>
+        
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Father Name <span class="bn_lable">(বাবার নাম)</span> *</label>
@@ -109,5 +104,4 @@
         </div>
     </div>
 </fieldset>
-<button id="familyNext" disabled type="button" onclick="nextPopup(4, 5)">Next</button>
-<button type="button" onclick="prevPopup(4, 3)">Back</button>
+

@@ -24,13 +24,6 @@
                 <div class="agreement_box">
                     <div class="agreements_condi_box">
                         <h3>You need to make some real commitments</h3>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label style="font-size: 11px" class="form-check-label" for="flexCheckDefault">
-                                আমি আল্লাহর নামে শপথ করতেছি যে , সকল তথ্য সঠিক ভাবে প্ৰদান করবো,<br>
-                                ভুল তথ্য প্ৰদান করে প্রতারনা করলে হালাল বিবাহ সেবা, দুনিয়া ও আখিরাতের দায়ভার নিবে না।
-                            </label>
-                        </div>
                         <span class="create-your-biodata mt-3">Create your biodata</span>
                     </div>
 
@@ -153,6 +146,81 @@
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
+
+                        <div class="en_bn_lable">
+                            <label class="en_lable">Do your parents agree to your marriage</label>
+                            <label class="bn_lable">(অভিভাবক আপনার বিয়েতে রাজি কি না)</label>
+                        </div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="parents_agree"
+                                    id="heigh" value="heigh">
+                                <span class="radio-label">Yes (হ্যাঁ)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="parents_agree"
+                                    id="no" value="no">
+                                <span class="radio-label">No (না)</span>
+                            </label>
+                        </div>
+
+                        <div class="en_bn_lable">
+                            <label class="en_lable">Should you keep your wife on screen after marriage</label>
+                            <label class="bn_lable">(বিয়ের পর স্ত্রীকে পর্দায় রাখবেন কি না)</label>
+                        </div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="keep_hijab"
+                                    id="heigh" value="heigh">
+                                <span class="radio-label">Yes (হ্যাঁ)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="keep_hijab"
+                                    id="no" value="no">
+                                <span class="radio-label">No (না)</span>
+                            </label>
+                        </div>
+
+
+                        <div class="en_bn_lable">
+                            <label class="en_lable">Do you want to let your wife work after marriage</label>
+                            <label class="bn_lable">(বিয়ের পর স্ত্রীকে চাকরি করতে দিতে চান কি না)</label>
+                        </div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="wife_job_permission"
+                                    id="heigh" value="heigh">
+                                <span class="radio-label">Yes (হ্যাঁ)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="wife_job_permission"
+                                    id="no" value="no">
+                                <span class="radio-label">No (না)</span>
+                            </label>
+                        </div>
+
+                        <div class="en_bn_lable">
+                            <label class="en_lable">Do you want to let your wife work after marriage</label>
+                            <label class="bn_lable">(বিয়ের পর স্ত্রীকে নিয়ে কোথায় থাকবেন)</label>
+                        </div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="after_marriage_live"
+                                    id="with_parents" value="With Parents">
+                                <span class="radio-label">With parents (বাবা মায়ের সাথে)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="after_marriage_live"
+                                    id="separate" value="Separate">
+                                <span class="radio-label">Separate (আলাদা)</span>
+                            </label>
+                        </div>
+
+
                         <div class="en_bn_lable">
                             <label class="en_lable">How is your financial situation</label>
                             <label class="bn_lable">(আপনার আর্থিক অবস্থা কেমন)</label>
@@ -251,9 +319,28 @@
 
                     <!-- Women Form -->
                     <div id="womenForm" class="form-section">
+                        
+                       <div class="en_bn_lable">
+                            <label class="en_lable">Do your parents agree to your marriage</label>
+                            <label class="bn_lable">(অভিভাবক আপনার বিয়েতে রাজি কি না)</label>
+                        </div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="parents_agree"
+                                    id="heigh" value="heigh">
+                                <span class="radio-label">Yes (হ্যাঁ)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input" required name="parents_agree"
+                                    id="no" value="no">
+                                <span class="radio-label">No (না)</span>
+                            </label>
+                        </div>
+
                         <div class="en_bn_lable">
-                            <label class="en_lable">Do you have parental permission? Yes No</label>
-                            <label class="bn_lable">(আপনি অভিবাবক এর অনুমতি নিয়েছেন)</label>
+                            <label class="en_lable">Got parental permission to create account</label>
+                            <label class="bn_lable">(অ্যাকাউন্ট তৈরি করার জন্য অভিভাবকের অনুমতি নিয়েছেন)</label>
                         </div>
                         <div class="option-group">
                             <label class="radio-option">

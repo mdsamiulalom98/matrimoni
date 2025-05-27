@@ -1,17 +1,10 @@
 <fieldset id="educationInfo">
     <div class="row">
-        <div class="title-wrapper">
+        <div class="titlewrapper">
             <h2>Education Qualification</h2>
             <span>(শিক্ষাগত যোগ্যতা)</span>
         </div>
-
-        <div class="reg_score_bar">
-            <div class="progress-bar">
-                <div class="progress2"></div>
-            </div>
-            <p>Your profile score 60%</p>
-        </div>
-
+        
         <div class="col-sm-12">
             <div class="form-group">
                 <label>In which year are you passing SSC <span class="bn_lable">(কত সালে এসএসসি পাস করছেন)</span>
@@ -64,5 +57,4 @@
         
     </div>
 </fieldset>
-<button id="educationNext" disabled type="button" onclick="nextPopup(2, 3)">Next</button>
-<button type="button" onclick="prevPopup(2, 1)">Back</button>
+

@@ -1,15 +1,10 @@
 <fieldset id="accountInfo">
     <div class="row">
-        <div class="title-wrapper">
+        <div class="titlewrapper">
             <h2>Account Information</h2>
             <span>অ্যাকাউন্ট তথ্য</span>
         </div>
-        <div class="reg_score_bar">
-            <div class="progress-bar">
-                <div class="progress3"></div>
-            </div>
-            <p>Your profile score 100%</p>
-        </div>
+
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Email Address <span class="bn_lable">(ইমেইল দিন)</span> *</label>
@@ -89,5 +84,3 @@
    
 </fieldset>
 
-<button type="button" onclick="prevPopup(7, 6)">Back</button>
-<button disabled id="registerButton" type="submit" onclick="submitForm()">Register</button>
