@@ -92,7 +92,7 @@ class MemberController extends Controller
         $store_data->member_id = Str::random(16);
         $store_data->phone = $request->phone;
         $store_data->gender = $request->looking_for == 2 ? 1 : 2;
-        $store_data->about_hobby = $request->about_hobby;
+        $store_data->about_dream = $request->about_hobby;
         $store_data->verifyToken = $verifyToken;
         $store_data->status = 0;
         $store_data->publish = 0;
@@ -593,7 +593,7 @@ class MemberController extends Controller
             $update_membereducation = new MemberEducation();
         }
         $update_membereducation->member_id = $memberId;
-        $update_membereducation->education_id = $request->education_id;
+        $update_membereducation->is_student_member = $request->is_student_member;
         $update_membereducation->education_end_id = $request->education_end_id;
         $update_membereducation->ssc_gpa = $request->ssc_gpa;
         $update_membereducation->ssc_passing = $request->ssc_passing;
@@ -645,8 +645,6 @@ class MemberController extends Controller
         } else {
             $update_family = new MemberFamily();
         }
-
-        $update_family = new MemberFamily();
         $update_family->member_id = $memberId;
         $update_family->father_name = $request->father_name;
         $update_family->father_profession = $request->father_profession;

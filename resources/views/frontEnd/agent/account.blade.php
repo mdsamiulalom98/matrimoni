@@ -19,7 +19,7 @@
                 <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
                 <a href="{{route('agent.my_members')}}"><i class="fa-solid fa-person-breastfeeding"></i>My Members</a>
                 <a href="{{route('agent.profile_edit')}}"><i class="fa-solid fa-pen-to-square"></i> Profile edit</a>
-                <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Password Change</a>
+                <a href="{{route('agent.change_pass')}}"><i class="fa-solid fa-lock"></i> Password Change</a>
                 <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Withdraw</a>
                 <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Transection Histroy</a>
                 <a href="{{route('passresetpage')}}"><i class="fa-solid fa-lock"></i> Terms & Conditions</a>
@@ -78,6 +78,10 @@
                         </div>
 
                         <div class="input_field_group">
+                            @include('frontEnd.layouts.agentpartials.popup7')
+                        </div>
+
+                        <div class="input_field_group">
                             @include('frontEnd.layouts.agentpartials.popup3')
                         </div>
                         <div class="input_field_group">
@@ -91,7 +95,7 @@
                         </div>
 
                         <!-- Present Location -->
-                       
+
 
                         <button type="submit" class="submit-btn">Submit</button>
 

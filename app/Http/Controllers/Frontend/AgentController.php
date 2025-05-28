@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Brian2694\Toastr\Facades\Toastr;
@@ -24,6 +25,8 @@ use App\Models\Country;
 use App\Models\Division;
 use App\Models\District;
 use App\Models\Upazila;
+use App\Models\PartnerExpectation;
+use App\Models\MemberFamily;
 use DateTime;
 
 class AgentController extends Controller
@@ -217,8 +220,6 @@ class AgentController extends Controller
         $update_data->phone = $request->phone;
         $update_data->email = $request->email;
         $update_data->address = $request->address;
-        $update_data->district = $request->district;
-        $update_data->area = $request->area;
         $update_data->image = $imageUrl;
         $update_data->save();
 
@@ -272,13 +273,13 @@ class AgentController extends Controller
 
     public function member_store(Request $request)
     {
+        // return $request->all();
         $memberPhone = Member::where('phone', $request->phone)->first();
         if ($memberPhone) {
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
 
-        // return $request->all();
 
         // $request->validate([
         //     'first_name' => 'required',
@@ -315,14 +316,16 @@ class AgentController extends Controller
         $store_data->member_id = Str::random(16);
         $store_data->agent_id = Auth::guard('agent')->user()->id;
         $store_data->phone = $request->phone;
-        $store_data->gender = $request->gender;
+        $store_data->email = $request->email;
+        $store_data->gender = $request->looking_for == 2 ? 1 : 2;
         $store_data->verifyToken = $verifyToken;
         $store_data->status = 0;
         $store_data->publish = 0;
         $store_data->premium = 0;
         $store_data->premium_date = 0;
-        $store_data->profile_lock = $request->profile_lock ?? 0;
+        $store_data->profile_lock = $request->profile_lock ?? 'only-me';
         $store_data->password = bcrypt(request('password'));
+        $store_data->about_dream = $request->about_hobby;
         $store_data->save();
         $memberId = $store_data->id;
 
@@ -352,17 +355,28 @@ class AgentController extends Controller
         $store_info->age = $age;
         $store_info->looking_for = $request->looking_for;
         $store_info->profile_created_by = $request->profile_created_by;
+        $store_info->blood_group = $request->blood_group;
+        $store_info->height = $request->height;
+        $store_info->weight = $request->weight;
         $store_info->save();
 
         // eduction and career information
         $store_career = new MemberCareer();
         $store_career->member_id = $memberId;
         $store_career->profession_id = $request->profession_id;
+        $store_career->job_permanent = $request->job_permanent;
+        $store_career->job_type = $request->job_type;
+        $store_career->is_student = $request->is_student;
+        $store_career->last_education = $request->last_education;
+        $store_career->job_duration = $request->job_duration;
         $store_career->save();
 
         $store_education = new MemberEducation();
         $store_education->member_id = $memberId;
-        $store_education->education_id = $request->education_id;
+        $store_education->is_student_member = $request->is_student_member;
+        $store_education->education_end_id = $request->education_end_id;
+        $store_education->ssc_gpa = $request->ssc_gpa;
+        $store_education->ssc_passing = $request->ssc_passing;
         $store_education->save();
 
         // member image information
@@ -372,7 +386,45 @@ class AgentController extends Controller
         $store_location->present_upazila = $request->present_upazila;
         $store_location->present_division = $request->present_division;
         $store_location->present_area = $request->present_area;
+        $store_location->grow_up = $request->grow_up;
         $store_location->save();
+
+        $store_expectation = new PartnerExpectation();
+        $store_expectation->member_id = $memberId;
+        $store_expectation->partner_height = $request->partner_height;
+        $store_expectation->marital_status = $request->marital_status;
+        $store_expectation->partner_citizenship = $request->partner_citizenship;
+        $store_expectation->profession_ids = $request->profession_ids;
+        $store_expectation->education_qualification = $request->education_qualification;
+        $store_expectation->age = $request->age;
+        $store_expectation->complexion = $request->complexion;
+        $store_expectation->monthly_income = $request->monthly_income;
+        $store_expectation->economic_situation = $request->economic_situation;
+        $store_expectation->drinking_habbit = $request->drinking_habbit;
+        $store_expectation->smoking_habbit = $request->smoking_habbit;
+        $store_expectation->job_permanent = $request->job_permanent;
+        $store_expectation->job_type = $request->job_type;
+        $store_expectation->is_student = $request->is_student;
+        $store_expectation->last_education = $request->last_education;
+        $store_expectation->job_duration = $request->job_duration;
+        $store_expectation->present_division = $request->present_division;
+        $store_expectation->save();
+
+        $store_family = new MemberFamily();
+        $store_family->member_id = $memberId;
+        $store_family->father_name = $request->father_name;
+        $store_family->father_profession = $request->father_profession;
+        $store_family->father_alive = $request->father_alive;
+        $store_family->mother_name = $request->mother_name;
+        $store_family->mother_profession = $request->mother_profession;
+        $store_family->mother_alive = $request->mother_alive;
+        $store_family->brother_count = $request->brother_count;
+        $store_family->married_brother = $request->married_brother;
+        $store_family->sister_count = $request->sister_count;
+        $store_family->married_sister = $request->married_sister;
+        $store_family->about_family = $request->about_family;
+        $store_family->religious_status = $request->religious_status;
+        $store_family->save();
 
         // member image information
         $imageUrl = 'public/uploads/member/default.webp';
@@ -461,6 +513,34 @@ class AgentController extends Controller
         Auth::guard('agent')->logout();
         Toastr::success('You are logout successfully', 'success!');
         return redirect()->route('agent.login');
+    }
+
+    public function change_pass(){
+        return view('frontEnd.agent.change_password');
+    }
+
+    public function password_update(Request $request)
+    {
+        $this->validate($request, [
+            'old_password'=>'required',
+            'new_password'=>'required',
+        ]);
+
+        $agent = Agent::find(Auth::guard('agent')->user()->id);
+        $hashPass = $agent->password;
+
+        if (Hash::check($request->old_password, $hashPass)) {
+
+            $agent->fill([
+                'password' => Hash::make($request->new_password)
+            ])->save();
+
+            Toastr::success('Success', 'Password changed successfully!');
+            return redirect()->route('agent.account');
+        }else{
+            Toastr::error('Failed', 'Old password not match!');
+            return redirect()->back();
+        }
     }
 }
 

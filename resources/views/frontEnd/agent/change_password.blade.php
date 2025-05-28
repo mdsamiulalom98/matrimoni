@@ -31,19 +31,19 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="customer-content checkout-shipping">
-                <h5 class="account-title">Profile Update</h5>
-                <form action="{{ route('agent.profile_update') }}" method="POST" class="row"
+                <h5 class="account-title">Change Password</h5>
+                <form action="{{ route('agent.password_update') }}" method="POST" class="row"
                     enctype="multipart/form-data" data-parsley-validate="">
                     @csrf
                     <div class="row">
 
                         <div class="col-sm-6">
                             <div class="form-group mb-3">
-                                <label for="name">Full Name *</label>
-                                <input type="text" id="name"
-                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ $profile_edit->name }}" required>
-                                @error('name')
+                                <label for="old_password">Old Password *</label>
+                                <input type="password" id="old_password"
+                                    class="form-control @error('old_password') is-invalid @enderror" name="old_password"
+                                    value="" required>
+                                @error('old_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -53,39 +53,11 @@
                         <!-- col-end -->
                         <div class="col-sm-6">
                             <div class="form-group mb-3">
-                                <label for="phone">Phone Number *</label>
-                                <input type="number" id="phone"
-                                    class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                    value="{{ $profile_edit->phone }}" required>
-                                @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email"
-                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ $profile_edit->email }}" required>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="address">Address *</label>
-                                <input type="text" id="address"
-                                    class="form-control @error('address') is-invalid @enderror" name="address"
-                                    value="{{ $profile_edit->address }}" required>
-                                @error('address')
+                                <label for="new_password">New Password *</label>
+                                <input type="password" id="new_password"
+                                    class="form-control @error('new_password') is-invalid @enderror" name="new_password"
+                                    value="" required>
+                                @error('new_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -94,28 +66,8 @@
                         </div>
                         <!-- col-end -->
 
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="image">Image *</label>
-                                <input type="file" id="image"
-                                    class="form-control @error('image') is-invalid @enderror" name="image"
-                                    value="{{ Auth::guard('agent')->user()->image }}">
 
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <img src="{{ asset($profile_edit->image) }}" class="rounded-circle m-1" width="50px"
-                                    alt="">
-                            </div>
-                        </div>
+
                         <!-- col-end -->
                         <div class="col-sm-12">
                             <div class="form-group mb-3">

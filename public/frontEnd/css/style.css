@@ -1710,11 +1710,11 @@ legend {
     border-radius: 4px;
 }
 .member_logout a {
-  color: #fff; 
+  color: #fff;
 }
 
 .member_logout a i {
-  color: #fff; 
+  color: #fff;
 }
 
 .profile-img {
@@ -1746,7 +1746,7 @@ legend {
 }
 
 .edit_icon a{
-   
+
 }
 
 /*.profile-img i {*/
@@ -1901,7 +1901,7 @@ p.discount_pkg {
 }
 
 .online_text {
-    
+
 }
 
 .veri_text {
@@ -1970,7 +1970,7 @@ p.discount_pkg {
 
 
 .popup_menu ul {
-    
+
 }
 .popup_menu ul li {
     display: block;
@@ -3093,7 +3093,7 @@ select {
     text-align: center;
 }
 
- 
+
 .how-works-regfree a {
     background: #000 !important;
 }
@@ -4497,7 +4497,7 @@ button.search-btn {
     margin-bottom: 8px;
 }
 .title-wrapper h2{
-   
+
 }
 
 .title-wrapper span {
@@ -5000,7 +5000,7 @@ span.help {
     padding-left: 1.5em;
     margin-bottom: .125rem;
 }
-  
+
 .agreements_condi_box .form-check {
     display: inline-flex;
     min-height: 1.5rem;
@@ -5025,7 +5025,7 @@ label.en_lable {
 .agreement_box span.radio-label {
     font-size: 12px;
 }
-  
+
 
   .gender-select {
     display: flex;
