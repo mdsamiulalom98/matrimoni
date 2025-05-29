@@ -304,6 +304,26 @@
                             </div>
                         </li>
                         <!-- nav items -->
+                         <li>
+                            <a href="#sidebar-packages" data-bs-toggle="collapse">
+                                <i data-feather="user"></i>
+                                <span> Package </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebar-packages">
+                                <ul class="nav-second-level">
+
+                                    <li>
+                                        <a href="{{ route('packages.index') }}">
+                                            <i data-feather="minus"></i>
+                                            Packages
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- nav items -->
                         <!-- nav items -->
                         <li>
                             <a href="#siebar-sitesetting" data-bs-toggle="collapse">

@@ -43,6 +43,8 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\PackageInfoController;
 
 Auth::routes();
 
@@ -355,10 +357,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('review/destroy', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
     // district routes
-    Route::get('district/manage', [DistrictController::class,'index'])->name('districts.index');
-    Route::get('district/{id}/edit', [DistrictController::class,'edit'])->name('districts.edit');
-    Route::post('district/update', [DistrictController::class,'update'])->name('districts.update');
-    Route::post('district/charge-update', [DistrictController::class,'district_charge'])->name('districts.charge');
+    Route::get('district/manage', [DistrictController::class, 'index'])->name('districts.index');
+    Route::get('district/{id}/edit', [DistrictController::class, 'edit'])->name('districts.edit');
+    Route::post('district/update', [DistrictController::class, 'update'])->name('districts.update');
+    Route::post('district/charge-update', [DistrictController::class, 'district_charge'])->name('districts.charge');
 
     // member manage routes
     Route::get('member/manage', [MemberManageController::class, 'index'])->name('members.index');
@@ -377,4 +379,15 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('agent/inactive', [AgentManageController::class, 'inactive'])->name('agents.inactive');
     Route::post('agent/active', [AgentManageController::class, 'active'])->name('agents.active');
     Route::post('agent/adminlog', [AgentManageController::class, 'adminlog'])->name('agents.adminlog');
+
+    // package route
+    Route::get('package/manage', [PackageController::class, 'index'])->name('packages.index');
+    Route::get('package/create', [PackageController::class, 'create'])->name('packages.create');
+    Route::post('package/save', [PackageController::class, 'store'])->name('packages.store');
+    Route::get('package/{id}/edit', [PackageController::class, 'edit'])->name('packages.edit');
+    Route::post('package/update', [PackageController::class, 'update'])->name('packages.update');
+    Route::post('package/inactive', [PackageController::class, 'inactive'])->name('packages.inactive');
+    Route::post('package/active', [PackageController::class, 'active'])->name('packages.active');
+    Route::post('package/destroy', [PackageController::class, 'destroy'])->name('packages.destroy');
+
 });
