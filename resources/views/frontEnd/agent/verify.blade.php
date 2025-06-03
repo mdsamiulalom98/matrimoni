@@ -1,38 +1,25 @@
 @extends('frontEnd.layouts.master')
-@section('title', 'Member Login')
+@section('title', 'Agent Verify')
 @section('content')
     <section class="auth-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-5">
                     <div class="form-content shadow-lg p-4 rounded login_container">
-                        <p class="auth-title text-center mb-4">🔑 Member Login</p>
-                        <form action="{{ route('member.signin') }}" method="POST" data-parsley-validate="">
+                        <p class="auth-title text-center mb-4">🔑 Agent Verify</p>
+                        <form action="{{ route('agent.account.verify') }}" method="POST" data-parsley-validate="">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="phone">📱 Mobile Number *</label>
-                                <input type="number" id="phone"
-                                    class="form-control @error('phone') is-invalid @enderror"
-                                    placeholder="Enter Your Mobile Number" name="phone" value="{{ old('phone') }}"
-                                    required>
-                                @error('phone')
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label for="password">🔒 Password *</label>
+                                <label for="verifyPin">🔒 Your OTP *</label>
                                 <div class="input-group">
-                                    <input type="password" id="password"
-                                        class="form-control @error('password') is-invalid @enderror"
-                                        placeholder="Enter Your Password" name="password" required>
+                                    <input type="verifyPin" id="verifyPin"
+                                        class="form-control @error('verifyPin') is-invalid @enderror"
+                                        placeholder="Enter Your Password" name="verifyPin" required>
                                     <button type="button" class="btn btn-outline-secondary toggle-password">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
                                 </div>
-                                @error('password')
+                                @error('verifyPin')
                                     <span class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </span>

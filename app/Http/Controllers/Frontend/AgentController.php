@@ -35,7 +35,7 @@ class AgentController extends Controller
 {
     function __construct()
     {
-        $this->middleware('agent', ['except' => ['register', 'signin', 'store']]);
+        $this->middleware('agent', ['except' => ['register', 'signin', 'store', 'agentVerifyForm', 'agentVerify']]);
     }
     public function account()
     {
@@ -70,7 +70,7 @@ class AgentController extends Controller
         ]);
 
         $imageUrl = 'public/uploads/agent/default.webp';
-
+        $verifyToken = rand(1111, 9999);
         $image = $request->file('nid_image');
         if ($image) {
             $name = time() . '-' . $image->getClientOriginalName();
@@ -98,20 +98,20 @@ class AgentController extends Controller
         $store->email = $request->email;
         $store->address = $request->address;
         $store->password = bcrypt($request->password);
-        $store->verifyToken = rand(1111, 9999);
+        $store->verifyToken = $verifyToken;
         $store->agent_type = $request->agent_type;
         $store->nid_passport = $request->nid_passport;
         $store->nid_image = $imageUrl;
         $store->status = 'pending';
         $store->save();
-        
+
         $site_setting = GeneralSetting::where('status', 1)->first();
         $sms_gateway = SmsGateway::where(['status' => 1])->first();
         if ($sms_gateway) {
             $url = "$sms_gateway->url";
             $data = [
                 "api_key" => "$sms_gateway->api_key",
-                "number" => $request->phone,
+                "number" => '88' . $request->phone,
                 "type" => 'text',
                 "senderid" => "$sms_gateway->serderid",
                 "message" => "Your account verify OTP is $verifyToken \r\nThank you for using $site_setting->name",
@@ -126,8 +126,10 @@ class AgentController extends Controller
             curl_close($ch);
         }
 
+        Session::put('phoneverify', $request->phone);
+
         Toastr::success('Success', 'Account Create Successfully');
-        return redirect()->route('agent.login');
+        return redirect()->route('agent.verify');
     }
 
     public function signin(Request $request)
@@ -169,10 +171,10 @@ class AgentController extends Controller
     public function forgotsubmit(Request $request)
     {
         $this->validate($request, [
-            'phoneNumber' => 'required',
+            'phone' => 'required',
         ]);
 
-        $verified = Agent::where('phoneNumber', $request->phoneNumber)->first();
+        $verified = Agent::where('phone', $request->phone)->first();
         if (!$verified) {
             Toastr::error('Your phone number is not in our database.');
             return redirect()->back();
@@ -184,13 +186,13 @@ class AgentController extends Controller
             $store_verify->passResetToken = $verifyToken;
             $store_verify->save();
 
-            Session::put('phoneverify', $request->phoneNumber);
+            Session::put('phoneverify', $request->phone);
 
             return redirect()->route('agent.passresetpage');
         }
     }
 
-    public function passresetpage()
+    public function forgot_reset()
     {
         return view('frontEnd.agent.passwordreset');
     }
@@ -202,7 +204,7 @@ class AgentController extends Controller
             'password' => 'required',
         ]);
 
-        $verified = Agent::where('phoneNumber', Session::get('phoneverify'))->first();
+        $verified = Agent::where('phone', Session::get('phoneverify'))->first();
         $verifydbtoken = $verified->passResetToken;
         $verifyformtoken = $request->passResetToken;
         if ($verifydbtoken == $verifyformtoken) {
@@ -268,7 +270,7 @@ class AgentController extends Controller
             'verifyPin' => 'required',
         ]);
 
-        $verified = Agent::where('phoneNumber', Session::get('phoneverify'))->first();
+        $verified = Agent::where('phone', Session::get('phoneverify'))->first();
         $verifydbtoken = $verified->verifyToken;
         $verifyformtoken = $request->verifyPin;
         if ($verifydbtoken == $verifyformtoken) {
@@ -276,10 +278,10 @@ class AgentController extends Controller
             $verified->status = 1;
             $verified->save();
             Toastr::success('আপনার একাউন্ট ভেরিফাই হয়েছে');
-            $credentials = ['phoneNumber' => $verified->phoneNumber, 'password' => Session::get('initpassword')];
+            $credentials = ['phone' => $verified->phone, 'password' => Session::get('initpassword')];
             if (Auth::guard('agent')->attempt($credentials)) {
                 Toastr::error('রেজিস্ট্রেশন ফি প্রদান করুন');
-                return redirect()->route('agent.editprofile');
+                return redirect()->route('agent.account');
             }
         } else {
             Toastr::error('আপনার ভেরিফিকেশন কোড ভুল হয়েছে।');
@@ -388,7 +390,7 @@ class AgentController extends Controller
         // eduction and career information
         $store_career = new MemberCareer();
         $store_career->member_id = $memberId;
-        $store_career->profession_id = $request->profession_id;        
+        $store_career->profession_id = $request->profession_id;
         $store_career->job_permanent = $request->job_permanent;
         $store_career->job_type = $request->job_type;
         $store_career->is_student = $request->is_student;
@@ -532,7 +534,7 @@ class AgentController extends Controller
         $members = Member::where('agent_id', Auth::guard('agent')->user()->id)->get();
         return view('frontEnd.agent.members', compact('members'));
     }
-    
+
 
     public function change_pass(){
         return view('frontEnd.agent.change_password');

@@ -26,7 +26,6 @@ use App\Models\District;
 use App\Models\Upazila;
 use App\Models\ProposalRequest;
 use App\Models\FavoriteMember;
-use App\Models\Agent;
 use App\Models\MemberQuery;
 use App\Models\PartnerExpectation;
 use App\Models\MemberFamily;
@@ -38,7 +37,7 @@ class MemberController extends Controller
 {
     function __construct()
     {
-        $this->middleware('member', ['except' => ['register', 'signin', 'query_store', 'resendcode', 'memberVerifyForm']]);
+        $this->middleware('member', ['except' => ['register', 'signin', 'query_store', 'resendcode', 'memberVerifyForm', 'memberVerify', 'forgot_password', 'forgot_verify', 'forgot_reset', 'forgot_store', 'forgot_store']]);
     }
 
     public function account()
@@ -286,7 +285,7 @@ class MemberController extends Controller
             $url = "$sms_gateway->url";
             $data = [
                 "api_key" => "$sms_gateway->api_key",
-                "number" => $request->phone,
+                "number" => '88' . $request->phone,
                 "type" => 'text',
                 "senderid" => "$sms_gateway->serderid",
                 "message" => "Your account verify OTP is $verifyToken \r\nThank you for using $site_setting->name",
@@ -358,12 +357,12 @@ class MemberController extends Controller
         }
     }
 
-    public function forgotpassword()
+    public function forgot_password()
     {
         return view('frontEnd.member.forgotpassword');
     }
 
-    public function forgotsubmit(Request $request)
+    public function forgot_verify(Request $request)
     {
         $this->validate($request, [
             'phone' => 'required',
@@ -382,17 +381,38 @@ class MemberController extends Controller
             $store_verify->save();
 
             Session::put('phoneverify', $request->phone);
-
-            return redirect()->route('member.passresetpage');
+            $site_setting = GeneralSetting::where('status', 1)->first();
+            $sms_gateway = SmsGateway::where(['status' => 1])->first();
+            // return $sms_gateway;
+            if ($sms_gateway) {
+                $url = "$sms_gateway->url";
+                $data = [
+                    "api_key" => "$sms_gateway->api_key",
+                    "number" => '88' . $request->phone,
+                    "type" => 'text',
+                    "senderid" => "$sms_gateway->serderid",
+                    "message" => "Your account forget verify OTP is $verifyToken \r\nThank you for using $site_setting->name",
+                ];
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $response = curl_exec($ch);
+                // return $response;
+                curl_close($ch);
+            }
+            return redirect()->route('member.forgot.reset');
         }
     }
 
-    public function passresetpage()
+    public function forgot_reset()
     {
         return view('frontEnd.member.passwordreset');
     }
 
-    public function passResetVerify(Request $request)
+    public function forgot_store(Request $request)
     {
         $this->validate($request, [
             'passResetToken' => 'required',
@@ -802,13 +822,13 @@ class MemberController extends Controller
             return redirect()->back();
         }
     }
-    
+
     public function nid_verify_form()
     {
 
         return view('frontEnd.member.nidverify');
     }
-    
+
     public function nid_verify(Request $request)
     {
         $this->validate($request, [
@@ -928,7 +948,7 @@ class MemberController extends Controller
         Toastr::success('Proposal request sent.', 'Success');
         return redirect()->back();
     }
-    
+
     public function resendcode(Request $request)
     {
         $verifyToken = rand(1111, 9999);
@@ -944,7 +964,7 @@ class MemberController extends Controller
             $url = "$sms_gateway->url";
             $data = [
                 "api_key" => "$sms_gateway->api_key",
-                "number" => $request->phone,
+                "number" => '88' . $request->phone,
                 "type" => 'text',
                 "senderid" => "$sms_gateway->serderid",
                 "message" => "Your account verify OTP is $verifyToken \r\nThank you for using $site_setting->name",

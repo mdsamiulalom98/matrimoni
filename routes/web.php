@@ -83,7 +83,7 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('my-profile-views', [FrontendController::class, 'myProfileViews'])->name('myProfileViews');
     Route::get('details/{id}', [FrontendController::class, 'details'])->name('details');
     Route::get('about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
-    
+
     Route::get('member/register-online', [FrontendController::class, 'register_online'])->name('member.registerOnline');
     Route::get('member/register-ofline', [FrontendController::class, 'register_ofline'])->name('member.registerOfline');
     Route::get('livesearch', [FrontendController::class, 'livesearch'])->name('livesearch');
@@ -101,11 +101,11 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('member/register', [FrontendController::class, 'register'])->name('member.register');
     Route::get('member/login', [FrontendController::class, 'login'])->name('member.login');
     Route::get('agent/login', [FrontendController::class, 'agent_login'])->name('agent.login');
-    
+
     Route::get('agent/register', [FrontendController::class, 'agent_register'])->name('agent.register');
     Route::post('/member/register-post', [MemberController::class, 'register'])->name('member_register');
-    Route::post('/member/query-store', [MemberController::class, 'query_store'])->name('member_query');
-    Route::get('/member/verify', [MemberController::class, 'memberVerifyForm'])->name('verify_form');
+    Route::post('member/query-store', [MemberController::class, 'query_store'])->name('member_query');
+    Route::get('member/verify', [MemberController::class, 'memberVerifyForm'])->name('verify_form');
     Route::post('member/verify-submit', [MemberController::class, 'memberVerify'])->name('verify_submit');
     Route::get('/member/search', [FrontendController::class, 'searchMember'])->name('searchMember');
     Route::get('/affiliate/policy', [FrontendController::class, 'affiliate_policy'])->name('affiliate.policy');
@@ -113,9 +113,7 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('/get-appointment', [FrontendController::class, 'getAppointment'])->name('getappointment');
     Route::post('/store-appointment', [FrontendController::class, 'storeAppointment'])->name('appointment.store');
     Route::post('/user-login', [FrontendController::class, 'user_login'])->name('user.login');
-    
     Route::get('/get-upazilas', [FrontendController::class, 'getUpazilas']);
-    
     Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
     Route::get('/buypackage', [FrontendController::class, 'buypackage'])->name('buypackage');
     Route::get('/howtoearn', [FrontendController::class, 'howtoearn'])->name('howtoearn');
@@ -147,7 +145,6 @@ Route::group(['prefix' => 'customer', 'namespace' => 'Frontend', 'middleware' =>
 Route::group(['prefix' => 'member', 'namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {
     Route::post('/signin', [MemberController::class, 'signin'])->name('member.signin');
     Route::post('/store', [MemberController::class, 'store'])->name('member.store');
-    Route::get('/verify', [MemberController::class, 'verify'])->name('member.verify');
     Route::post('/verify-account', [MemberController::class, 'account_verify'])->name('member.account.verify');
     Route::get('/nidverify', [MemberController::class, 'nid_verify_form'])->name('nidverify.form');
     Route::post('/nid-verify', [MemberController::class, 'nid_verify'])->name('nid.verify');
@@ -157,6 +154,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'Frontend', 'middleware' => [
     Route::get('/forgot-password', [MemberController::class, 'forgot_password'])->name('member.forgot.password');
     Route::post('/forgot-verify', [MemberController::class, 'forgot_verify'])->name('member.forgot.verify');
     Route::get('/forgot-password/reset', [MemberController::class, 'forgot_reset'])->name('member.forgot.reset');
+
     Route::post('/forgot-password/store', [MemberController::class, 'forgot_store'])->name('member.forgot.store');
     Route::post('/forgot-password/resendotp', [MemberController::class, 'forgot_resend'])->name('member.forgot.resendotp');
 });
@@ -179,8 +177,8 @@ Route::group(['prefix' => 'agent', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('/signin', [AgentController::class, 'signin'])->name('agent.signin');
     Route::get('agent-register', [AgentController::class, 'register'])->name('agent.register');
     Route::post('/store', [AgentController::class, 'store'])->name('agent.store');
-    Route::get('/verify', [AgentController::class, 'verify'])->name('agent.verify');
-    Route::post('/verify-account', [AgentController::class, 'account_verify'])->name('agent.account.verify');
+    Route::get('/verify', [AgentController::class, 'agentVerifyForm'])->name('agent.verify');
+    Route::post('/verify-account', [AgentController::class, 'agentVerify'])->name('agent.account.verify');
     Route::post('/resend-otp', [AgentController::class, 'resendotp'])->name('agent.resendotp');
     Route::post('/logout', [AgentController::class, 'logout'])->name('agent.logout');
     Route::post('/post/review', [AgentController::class, 'review'])->name('agent.review');
@@ -386,7 +384,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('agent/inactive', [AgentManageController::class, 'inactive'])->name('agents.inactive');
     Route::post('agent/active', [AgentManageController::class, 'active'])->name('agents.active');
     Route::post('agent/adminlog', [AgentManageController::class, 'adminlog'])->name('agents.adminlog');
-    
+
     // package route
     Route::get('package/manage', [PackageController::class, 'index'])->name('packages.index');
     Route::get('package/create', [PackageController::class, 'create'])->name('packages.create');
@@ -396,8 +394,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('package/inactive', [PackageController::class, 'inactive'])->name('packages.inactive');
     Route::post('package/active', [PackageController::class, 'active'])->name('packages.active');
     Route::post('package/destroy', [PackageController::class, 'destroy'])->name('packages.destroy');
-    
-    
+
+
     // package route
     Route::get('appointment/manage', [AppointmentController::class, 'index'])->name('appointments.index');
     Route::get('appointment/create', [AppointmentController::class, 'create'])->name('appointments.create');
