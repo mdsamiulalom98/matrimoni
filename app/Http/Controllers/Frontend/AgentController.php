@@ -27,6 +27,8 @@ use App\Models\District;
 use App\Models\Upazila;
 use App\Models\PartnerExpectation;
 use App\Models\MemberFamily;
+use App\Models\SmsGateway;
+use App\Models\GeneralSetting;
 use DateTime;
 
 class AgentController extends Controller
@@ -51,6 +53,12 @@ class AgentController extends Controller
             $agent->save();
         }
         return view('frontEnd.agent.account', compact('months', 'religions', 'educations', 'professions', 'countries', 'divisions', 'districts', 'upazilas'));
+    }
+
+
+    public function register()
+    {
+        return view('frontEnd.agent.agentform');
     }
 
     public function store(Request $request)
@@ -96,6 +104,27 @@ class AgentController extends Controller
         $store->nid_image = $imageUrl;
         $store->status = 'pending';
         $store->save();
+        
+        $site_setting = GeneralSetting::where('status', 1)->first();
+        $sms_gateway = SmsGateway::where(['status' => 1])->first();
+        if ($sms_gateway) {
+            $url = "$sms_gateway->url";
+            $data = [
+                "api_key" => "$sms_gateway->api_key",
+                "number" => $request->phone,
+                "type" => 'text',
+                "senderid" => "$sms_gateway->serderid",
+                "message" => "Your account verify OTP is $verifyToken \r\nThank you for using $site_setting->name",
+            ];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response = curl_exec($ch);
+            curl_close($ch);
+        }
 
         Toastr::success('Success', 'Account Create Successfully');
         return redirect()->route('agent.login');
@@ -273,13 +302,11 @@ class AgentController extends Controller
 
     public function member_store(Request $request)
     {
-        // return $request->all();
         $memberPhone = Member::where('phone', $request->phone)->first();
         if ($memberPhone) {
             Toastr::error('ফোন নম্বর আগে থেকেই আছে', 'Error');
             return redirect()->back();
         }
-
 
         // $request->validate([
         //     'first_name' => 'required',
@@ -318,6 +345,7 @@ class AgentController extends Controller
         $store_data->phone = $request->phone;
         $store_data->email = $request->email;
         $store_data->gender = $request->looking_for == 2 ? 1 : 2;
+        $store_data->gender = $request->gender;
         $store_data->verifyToken = $verifyToken;
         $store_data->status = 0;
         $store_data->publish = 0;
@@ -355,15 +383,12 @@ class AgentController extends Controller
         $store_info->age = $age;
         $store_info->looking_for = $request->looking_for;
         $store_info->profile_created_by = $request->profile_created_by;
-        $store_info->blood_group = $request->blood_group;
-        $store_info->height = $request->height;
-        $store_info->weight = $request->weight;
         $store_info->save();
 
         // eduction and career information
         $store_career = new MemberCareer();
         $store_career->member_id = $memberId;
-        $store_career->profession_id = $request->profession_id;
+        $store_career->profession_id = $request->profession_id;        
         $store_career->job_permanent = $request->job_permanent;
         $store_career->job_type = $request->job_type;
         $store_career->is_student = $request->is_student;
@@ -507,13 +532,7 @@ class AgentController extends Controller
         $members = Member::where('agent_id', Auth::guard('agent')->user()->id)->get();
         return view('frontEnd.agent.members', compact('members'));
     }
-
-    public function logout(Request $request)
-    {
-        Auth::guard('agent')->logout();
-        Toastr::success('You are logout successfully', 'success!');
-        return redirect()->route('agent.login');
-    }
+    
 
     public function change_pass(){
         return view('frontEnd.agent.change_password');
@@ -541,6 +560,19 @@ class AgentController extends Controller
             Toastr::error('Failed', 'Old password not match!');
             return redirect()->back();
         }
+    }
+
+    public function transection()
+    {
+        return view('frontEnd.agent.transection');
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::guard('agent')->logout();
+        Toastr::success('You are logout successfully', 'success!');
+        return redirect()->route('agent.login');
     }
 }
 

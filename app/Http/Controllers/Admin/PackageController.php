@@ -37,6 +37,7 @@ class PackageController extends Controller
 
         $input['status'] = $request->status ? 1 : 0;
         $input['popular'] = $request->popular ? 1 : 0;
+        $input['free'] = $request->free ? 1 : 0;
 
         $save_data = Package::create($input);
 
@@ -82,6 +83,7 @@ class PackageController extends Controller
 
         $input['status'] = $request->status ? 1 : 0;
         $input['popular'] = $request->popular ? 1 : 0;
+        $input['free'] = $request->free ? 1 : 0;
         $update_data->update($input);
 
 

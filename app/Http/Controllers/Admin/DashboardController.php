@@ -218,4 +218,8 @@ class DashboardController extends Controller
         Toastr::success('Success', 'Data sent successfully');
         return redirect()->route('admin.send_sms');
     }
+
+    public function setSMS_key() {
+        return view('backEnd.apiintegration.sms_manage');
+    }
 }

@@ -50,7 +50,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <div class="age-range">
+                                <div class="age-range home-age">
                                     <input type="number" name="from" class="age-input" value="22">
                                     <span style="color: #fff">to</span>
                                     <input type="number" name="to" class="age-input" value="27">
@@ -63,7 +63,7 @@
                                 <select class="filter-select" name="country_id">
                                     <option>Select Living Country</option>
                                     @foreach ($countries as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->title }}</option>
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -148,7 +148,7 @@
       <span class="close"></span>
       <span class="help">Up To 70% Discount if Verified After Profile Completed</span>
     </div>
-<form action="{{ route('user.login') }}" method="POST">
+    <form action="{{ route('user.login') }}" method="POST">
     @csrf
     <div class="login-box">
           <div class="input-group">
@@ -244,7 +244,7 @@
             <h2 class="how-works-slogan title_pd">Join Our Affiliate Program Now</h2>
             <p class="how-works-slogan2">Create your agent account to earn money</p>
             <div class="register_btn_section how-works-regfree">
-                <a href="{{ route('joinAgent') }}">
+                <a href="{{ route('agent.login') }}">
                     Register Free <i class="fa-solid fa-arrow-right-long"></i>
                 </a>
             </div>
@@ -308,12 +308,12 @@
         </div>
     </section>
 
-    <section class="safety-security-tips section-padding">
+    <section class="safety-security-tips">
         <div class="container">
             <div class="safety-container">
                 <h2 class="section_title">Safety & Security Tips</h2>
                 <div class="tips-wrapper">
-                    <div class="tip-item">
+                    <div class="tip-item  wow fadeInRight">
                         <div class="tip-icon">
                             <i class="fas fa-user-shield"></i>
                         </div>
@@ -322,7 +322,7 @@
                             <p>Never share personal information like passwords or bank details with strangers.</p>
                         </div>
                     </div>
-                    <div class="tip-item">
+                    <div class="tip-item  wow fadeInRight">
                         <div class="tip-icon">
                             <i class="fas fa-lock"></i>
                         </div>
@@ -331,7 +331,7 @@
                             <p>Always use strong and unique passwords to secure your online accounts.</p>
                         </div>
                     </div>
-                    <div class="tip-item">
+                    <div class="tip-item  wow fadeInRight">
                         <div class="tip-icon">
                             <i class="fas fa-eye"></i>
                         </div>
@@ -340,7 +340,7 @@
                             <p>Ensure to verify identities before engaging in any personal or business conversations.</p>
                         </div>
                     </div>
-                    <div class="tip-item">
+                    <div class="tip-item  wow fadeInRight">
                         <div class="tip-icon">
                             <i class="fas fa-phone-alt"></i>
                         </div>

@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\AgentController;
 use App\Http\Controllers\Frontend\BkashController;
 use App\Http\Controllers\Admin\ExpenseCategoriesController;
 use App\Http\Controllers\Admin\ApiIntegrationController;
+use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\BannerCategoryController;
 use App\Http\Controllers\Admin\CustomerManageController;
@@ -44,7 +45,6 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\PackageController;
-use App\Http\Controllers\Admin\PackageInfoController;
 
 Auth::routes();
 
@@ -82,15 +82,13 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('recently-views', [FrontendController::class, 'recentlyViews'])->name('recentlyViews');
     Route::get('my-profile-views', [FrontendController::class, 'myProfileViews'])->name('myProfileViews');
     Route::get('details/{id}', [FrontendController::class, 'details'])->name('details');
-    Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
     Route::get('about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
-
+    
     Route::get('member/register-online', [FrontendController::class, 'register_online'])->name('member.registerOnline');
     Route::get('member/register-ofline', [FrontendController::class, 'register_ofline'])->name('member.registerOfline');
     Route::get('livesearch', [FrontendController::class, 'livesearch'])->name('livesearch');
     Route::get('search', [FrontendController::class, 'search'])->name('search');
     Route::get('site/contact-us', [FrontendController::class, 'contact'])->name('contact');
-    Route::get('join-agent', [FrontendController::class, 'joinAgent'])->name('joinAgent');
     Route::get('/page/{slug}', [FrontendController::class, 'page'])->name('page');
     Route::get('districts', [FrontendController::class, 'districts'])->name('districts');
     Route::get('/coupon', [FrontendController::class, 'coupon_show'])->name('coupon.view');
@@ -103,19 +101,24 @@ Route::group(['namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refe
     Route::get('member/register', [FrontendController::class, 'register'])->name('member.register');
     Route::get('member/login', [FrontendController::class, 'login'])->name('member.login');
     Route::get('agent/login', [FrontendController::class, 'agent_login'])->name('agent.login');
-
+    
     Route::get('agent/register', [FrontendController::class, 'agent_register'])->name('agent.register');
     Route::post('/member/register-post', [MemberController::class, 'register'])->name('member_register');
     Route::post('/member/query-store', [MemberController::class, 'query_store'])->name('member_query');
     Route::get('/member/verify', [MemberController::class, 'memberVerifyForm'])->name('verify_form');
+    Route::post('member/verify-submit', [MemberController::class, 'memberVerify'])->name('verify_submit');
     Route::get('/member/search', [FrontendController::class, 'searchMember'])->name('searchMember');
     Route::get('/affiliate/policy', [FrontendController::class, 'affiliate_policy'])->name('affiliate.policy');
     Route::get('/notification', [FrontendController::class, 'notification'])->name('notification');
     Route::get('/get-appointment', [FrontendController::class, 'getAppointment'])->name('getappointment');
     Route::post('/store-appointment', [FrontendController::class, 'storeAppointment'])->name('appointment.store');
     Route::post('/user-login', [FrontendController::class, 'user_login'])->name('user.login');
-
+    
     Route::get('/get-upazilas', [FrontendController::class, 'getUpazilas']);
+    
+    Route::get('packages', [FrontendController::class, 'packages'])->name('packages');
+    Route::get('/buypackage', [FrontendController::class, 'buypackage'])->name('buypackage');
+    Route::get('/howtoearn', [FrontendController::class, 'howtoearn'])->name('howtoearn');
 
 });
 
@@ -146,6 +149,8 @@ Route::group(['prefix' => 'member', 'namespace' => 'Frontend', 'middleware' => [
     Route::post('/store', [MemberController::class, 'store'])->name('member.store');
     Route::get('/verify', [MemberController::class, 'verify'])->name('member.verify');
     Route::post('/verify-account', [MemberController::class, 'account_verify'])->name('member.account.verify');
+    Route::get('/nidverify', [MemberController::class, 'nid_verify_form'])->name('nidverify.form');
+    Route::post('/nid-verify', [MemberController::class, 'nid_verify'])->name('nid.verify');
     Route::post('/resend-otp', [MemberController::class, 'resendotp'])->name('member.resendotp');
     Route::post('/logout', [MemberController::class, 'logout'])->name('member.logout');
     Route::post('/post/review', [MemberController::class, 'review'])->name('member.review');
@@ -172,6 +177,7 @@ Route::group(['prefix' => 'customer', 'namespace' => 'Frontend', 'middleware' =>
 // agent normal routes
 Route::group(['prefix' => 'agent', 'namespace' => 'Frontend', 'middleware' => ['ipcheck', 'check_refer']], function () {
     Route::post('/signin', [AgentController::class, 'signin'])->name('agent.signin');
+    Route::get('agent-register', [AgentController::class, 'register'])->name('agent.register');
     Route::post('/store', [AgentController::class, 'store'])->name('agent.store');
     Route::get('/verify', [AgentController::class, 'verify'])->name('agent.verify');
     Route::post('/verify-account', [AgentController::class, 'account_verify'])->name('agent.account.verify');
@@ -190,6 +196,7 @@ Route::group(['prefix' => 'agent', 'namespace' => 'Frontend', 'middleware' => ['
     Route::get('/account', [AgentController::class, 'account'])->name('agent.account');
     Route::get('/orders', [AgentController::class, 'orders'])->name('agent.orders');
     Route::get('/invoice', [AgentController::class, 'invoice'])->name('agent.invoice');
+    Route::get('/transection', [AgentController::class, 'transection'])->name('agent.transection');
     Route::get('/invoice/order-note', [AgentController::class, 'order_note'])->name('agent.order_note');
     Route::get('/profile-edit', [AgentController::class, 'profile_edit'])->name('agent.profile_edit');
     Route::post('/profile-update', [AgentController::class, 'profile_update'])->name('agent.profile_update');
@@ -357,10 +364,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('review/destroy', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
     // district routes
-    Route::get('district/manage', [DistrictController::class, 'index'])->name('districts.index');
-    Route::get('district/{id}/edit', [DistrictController::class, 'edit'])->name('districts.edit');
-    Route::post('district/update', [DistrictController::class, 'update'])->name('districts.update');
-    Route::post('district/charge-update', [DistrictController::class, 'district_charge'])->name('districts.charge');
+    Route::get('district/manage', [DistrictController::class,'index'])->name('districts.index');
+    Route::get('district/{id}/edit', [DistrictController::class,'edit'])->name('districts.edit');
+    Route::post('district/update', [DistrictController::class,'update'])->name('districts.update');
+    Route::post('district/charge-update', [DistrictController::class,'district_charge'])->name('districts.charge');
 
     // member manage routes
     Route::get('member/manage', [MemberManageController::class, 'index'])->name('members.index');
@@ -379,7 +386,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('agent/inactive', [AgentManageController::class, 'inactive'])->name('agents.inactive');
     Route::post('agent/active', [AgentManageController::class, 'active'])->name('agents.active');
     Route::post('agent/adminlog', [AgentManageController::class, 'adminlog'])->name('agents.adminlog');
-
+    
     // package route
     Route::get('package/manage', [PackageController::class, 'index'])->name('packages.index');
     Route::get('package/create', [PackageController::class, 'create'])->name('packages.create');
@@ -389,5 +396,19 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('package/inactive', [PackageController::class, 'inactive'])->name('packages.inactive');
     Route::post('package/active', [PackageController::class, 'active'])->name('packages.active');
     Route::post('package/destroy', [PackageController::class, 'destroy'])->name('packages.destroy');
+    
+    
+    // package route
+    Route::get('appointment/manage', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('appointment/create', [AppointmentController::class, 'create'])->name('appointments.create');
+    Route::post('appointment/save', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('appointment/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
+    Route::post('appointment/update', [AppointmentController::class, 'update'])->name('appointments.update');
+    Route::post('appointment/inactive', [AppointmentController::class, 'inactive'])->name('appointments.inactive');
+    Route::post('appointment/active', [AppointmentController::class, 'active'])->name('appointments.active');
+    Route::post('appointment/destroy', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
+    Route::get('appointment/view/{id}', [AppointmentController::class, 'view'])->name('appointments.view');
 
+    Route::get('smsgeteway/manage', [ApiIntegrationController::class, 'sms_manage'])->name('smsgeteway.manage');
+    Route::post('smsgeteway/save', [ApiIntegrationController::class, 'sms_update'])->name('smsgeteway.update');
 });

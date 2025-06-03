@@ -1,133 +1,129 @@
 @extends('frontEnd.layouts.master')
 @section('title', 'Agent Account')
 @section('content')
-    <div class="dashboard">
-        <!-- Sidebar -->
-        <div class="sidebar">
+    <section class="agent_auth section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <div class="agent_auth_box">
+                        <h5 class="agent-auth-title">Profile Update</h5>
+                        <form action="{{ route('agent.profile_update') }}" method="POST" class="row"
+                            enctype="multipart/form-data" data-parsley-validate="">
+                            @csrf
+                            <div class="row">
 
-            <div class="profile_image">
-                <img src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
-                    alt="Profile Photo" class="profile-photo">
-            </div>
-            <div class="agent-profile-header">
-                <div class="agent-profile-info">
-                    <h2 style="color: #fff">{{ Auth::guard('agent')->user()->name }}</h2>
-                    <p>Agent Id : {{ Auth::guard('agent')->user()->agent_id }}</p>
-                    <p>My Blance : 2585Tk</p>
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-3">
+                                        <label for="name">Full Name *</label>
+                                        <input type="text" id="name"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
+                                            value="{{ $profile_edit->name }}" required>
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- col-end -->
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-3">
+                                        <label for="phone">Phone Number *</label>
+                                        <input type="number" id="phone"
+                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                            value="{{ $profile_edit->phone }}" required>
+                                        @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- col-end -->
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-3">
+                                        <label for="email">Email Address *</label>
+                                        <input type="email" id="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ $profile_edit->email }}" required>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- col-end -->
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-3">
+                                        <label for="address">Address *</label>
+                                        <input type="text" id="address"
+                                            class="form-control @error('address') is-invalid @enderror" name="address"
+                                            value="{{ $profile_edit->address }}" required>
+                                        @error('address')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- col-end -->
+
+                                <!-- col-end -->
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label for="image">Image *</label>
+                                        <input type="file" id="image"
+                                            class="form-control @error('image') is-invalid @enderror" name="image"
+                                            value="{{ Auth::guard('agent')->user()->image }}">
+
+                                        @error('image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- col-end -->
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-3">
+                                        <img src="{{ asset($profile_edit->image) }}" class="rounded-circle m-1"
+                                            width="50px" alt="">
+                                    </div>
+                                </div>
+                                 <div class="col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label>Upload NID/Passport Image *</label>
+                                        <input type="file" id="image"
+                                            class="form-control @error('image') is-invalid @enderror" name="image"
+                                            value="{{ Auth::guard('agent')->user()->image }}">
+
+                                        @error('image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-3">
+                                        <img src="{{ asset($profile_edit->nid_image) }}" class="rounded-circle m-1"
+                                            width="50px" alt="">
+                                    </div>
+                                </div>
+                                <!-- col-end -->
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <button type="submit" class="submit-btn">Update</button>
+                                    </div>
+                                </div>
+                                <!-- col-end -->
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <nav class="sidebar-nav">
-                <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
-                <a href="{{ route('agent.my_members') }}"><i class="fa-solid fa-person-breastfeeding"></i>My Members</a>
-                <a href="{{ route('agent.profile_edit') }}"><i class="fa-solid fa-pen-to-square"></i> Profile edit</a>
-                <a href="{{ route('passresetpage') }}"><i class="fa-solid fa-lock"></i> Password Change</a>
-                <a href="{{ route('passresetpage') }}"><i class="fa-solid fa-lock"></i> Withdraw</a>
-                <a href="{{ route('passresetpage') }}"><i class="fa-solid fa-lock"></i> Transection Histroy</a>
-                <a href="{{ route('passresetpage') }}"><i class="fa-solid fa-lock"></i> Terms & Conditions</a>
-                <a href="{{ route('passresetpage') }}"><i class="fa-solid fa-lock"></i> Logout</a>
-            </nav>
         </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="customer-content checkout-shipping">
-                <h5 class="account-title">Profile Update</h5>
-                <form action="{{ route('agent.profile_update') }}" method="POST" class="row"
-                    enctype="multipart/form-data" data-parsley-validate="">
-                    @csrf
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="name">Full Name *</label>
-                                <input type="text" id="name"
-                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ $profile_edit->name }}" required>
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="phone">Phone Number *</label>
-                                <input type="number" id="phone"
-                                    class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                    value="{{ $profile_edit->phone }}" required>
-                                @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email"
-                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ $profile_edit->email }}" required>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="address">Address *</label>
-                                <input type="text" id="address"
-                                    class="form-control @error('address') is-invalid @enderror" name="address"
-                                    value="{{ $profile_edit->address }}" required>
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <label for="image">Image *</label>
-                                <input type="file" id="image"
-                                    class="form-control @error('image') is-invalid @enderror" name="image"
-                                    value="{{ Auth::guard('agent')->user()->image }}">
-
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-3">
-                                <img src="{{ asset($profile_edit->image) }}" class="rounded-circle m-1" width="50px"
-                                    alt="">
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                        <div class="col-sm-12">
-                            <div class="form-group mb-3">
-                                <button type="submit" class="submit-btn">Update</button>
-                            </div>
-                        </div>
-                        <!-- col-end -->
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     </section>
 @endsection
 @push('script')

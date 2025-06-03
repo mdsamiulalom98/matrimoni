@@ -20,8 +20,8 @@
         <!-- toastr css -->
         <link rel="stylesheet" href="{{asset('public/backEnd/')}}/assets/css/toastr.min.css" />
         <link rel="stylesheet" href="{{asset('public/frontEnd/css/wsit-menu.css')}}" />
-        <link rel="stylesheet" href="{{asset('public/frontEnd/css/style.css?v=1.0.3')}}" />
-        <link rel="stylesheet" href="{{asset('public/frontEnd/css/responsive.css?v=1.0.2')}}" />
+        <link rel="stylesheet" href="{{asset('public/frontEnd/css/style.css?v=1.0.4')}}" />
+        <link rel="stylesheet" href="{{asset('public/frontEnd/css/responsive.css?v=1.0.3')}}" />
         <script src="{{asset('public/frontEnd/js/jquery-3.7.1.min.js')}}"></script>
         @foreach($pixels as $pixel)
         <!-- Facebook Pixel Code -->
@@ -70,8 +70,8 @@
         <div class="mobile-menu">
             <div class="mobile-menu-logo">
                 <div class="logo-image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" />
-                    {{-- <img src="{{asset($generalsetting->dark_logo)}}" alt="" /> --}}
+                    {{-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbu4iYKmGIVfk6MYPuiklZP4DEy_BA2DjVDA&s" alt="" /> --}}
+                    <img src="{{asset($generalsetting->dark_logo)}}" alt="" />
                 </div>
                 <div class="mobile-menu-close">
                     <i class="fa fa-times"></i>
@@ -151,7 +151,15 @@
                                     </div>
                                     <div class="header_righ">
                                         <a class="btn_comm2" href="{{route('member.login')}}"><i class="fa-solid fa-user"></i> Login now</a>
-                                        <a class="btn_comm" href="{{route('agent.account')}}"><i class="fa-solid fa-handshake-angle"></i> Join as Agent</a>
+                                        @if(Auth::guard('agent')->check())
+                                            <a class="btn_comm" href="{{route('agent.account')}}">
+                                                <i class="fa-solid fa-user"></i> {{ Auth::guard('agent')->user()->name }}
+                                            </a>
+                                        @else
+                                            <a class="btn_comm" href="{{route('agent.account')}}">
+                                                <i class="fa-solid fa-handshake-angle"></i> Join as Agent
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -241,9 +249,11 @@
             </div>
         </footer>
         <!--=====-->
-        <div class="fixed_whats">
-            <a href="https://api.whatsapp.com/send?phone={{$contact->whatsapp}}" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-        </div>
+        <div class="suuprt_button">
+             <a class="whatsapp-support" href="https://api.whatsapp.com/send?phone={{$contact->whatsapp}}" target="_blank">
+                <span class="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></span> Support
+            </a>
+         </div>
 
         <div class="scrolltop" style="">
             <div class="scroll">

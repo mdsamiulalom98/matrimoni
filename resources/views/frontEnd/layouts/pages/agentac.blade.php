@@ -16,13 +16,11 @@
                     <p>Agent Id : 2585</p>
                     <p>ID: AGT-12345</p>
                 </div>
+                 <div class="section-header">
+                    <h3 class="agent_member_add_title">Add New Member</h3>
+                    <button class="agent_member_add_btn" onclick="showAddMemberModal()">+ Add Member</button>
+                </div>
             </div>
-            {{-- <nav class="sidebar-nav">
-                <a href="#">Dashboard</a>
-                <a href="#">Members</a>
-                <a href="#">Reports</a>
-                <a href="#">Settings</a>
-            </nav> --}}
         </div>
 
         <!-- Main Content -->
@@ -37,7 +35,7 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-value">$12,450</div>
-                        <div class="stat-label">Total Commission</div>
+                        <div class="stat-label">Total Earning</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value">94%</div>

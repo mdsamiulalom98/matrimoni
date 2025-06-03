@@ -304,7 +304,28 @@
                             </div>
                         </li>
                         <!-- nav items -->
-                         <li>
+                        <li>
+                            <a href="#sidebar-appointments" data-bs-toggle="collapse">
+                                <i data-feather="user"></i>
+                                <span> Appointments </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebar-appointments">
+                                <ul class="nav-second-level">
+
+                                    <li>
+                                        <a href="{{ route('appointments.index') }}">
+                                            <i data-feather="minus"></i>
+                                            Appointments Mennage
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <!-- nav items -->
+                        <li>
                             <a href="#sidebar-packages" data-bs-toggle="collapse">
                                 <i data-feather="user"></i>
                                 <span> Package </span>
@@ -323,7 +344,6 @@
                                 </ul>
                             </div>
                         </li>
-                        <!-- nav items -->
                         <!-- nav items -->
                         <li>
                             <a href="#siebar-sitesetting" data-bs-toggle="collapse">
@@ -354,7 +374,30 @@
                             </div>
                         </li>
                         <!-- nav items end -->
-
+                        <li>
+                            <a href="#sidebar-api-integration" data-bs-toggle="collapse">
+                                <i data-feather="save"></i>
+                                <span> API Integration </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebar-api-integration">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="#"><i
+                                                data-feather="file-plus"></i> Payment Gateway</a>
+                                    </li>
+                                    {{-- <li>
+                                        <a href="{{ route('paymentgeteway.manage') }}"><i
+                                                data-feather="file-plus"></i> Payment Gateway</a>
+                                    </li> --}}
+                                    <li>
+                                        <a href="{{ route('smsgeteway.manage') }}"><i data-feather="file-plus"></i>
+                                            SMS Gateway</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
                         <!-- nav items end -->
                         <li>
                             <a href="#siebar-banner" data-bs-toggle="collapse">

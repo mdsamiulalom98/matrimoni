@@ -28,6 +28,14 @@
                 <input name="guardian_phone" type="tel" placeholder="Guardian phone number" required />
             </div>
         </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label>Is there a referral code?<span class="bn_lable">(রেফারেল কোড আছে কি)</span></label>
+                <input name="referral_code" type="tel" placeholder="Do you have referral coder" />
+            </div>
+        </div>
+
         <div class="col-sm-12">
             <div class="form-group">
                 <label>Password <span class="bn_lable">(পাসওয়ার্ড)</span></label>

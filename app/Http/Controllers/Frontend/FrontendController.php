@@ -38,6 +38,7 @@ use App\Models\FavoriteMember;
 use App\Models\ProposalRequest;
 use App\Models\MemberView;
 use App\Models\Appointment;
+use App\Models\Package;
 use Cache;
 use DB;
 use Log;
@@ -182,6 +183,10 @@ class FrontendController extends Controller
         return view('frontEnd.layouts.pages.notification');
     }
 
+    public function howtoearn() {
+        return view('frontEnd.layouts.pages.howtoearn');
+    }
+
     public function getAppointment() {
         return view('frontEnd.layouts.pages.appointment');
     }
@@ -262,16 +267,19 @@ class FrontendController extends Controller
 
     public function packages()
     {
-        $products = Product::where(['status' => 1])->limit(10)->get();
-
-        return view('frontEnd.layouts.pages.packages', compact('products'));
+        $packages = Package::where(['status' => 1])->limit(3)->get();
+        return view('frontEnd.layouts.pages.packages', compact('packages'));
     }
-    public function joinAgent()
+
+    public function buypackage()
     {
-        $products = Product::where(['status' => 1])->limit(10)->get();
 
-        return view('frontEnd.layouts.pages.agentform', compact('products'));
+        return view('frontEnd.layouts.pages.buypackage');
     }
+
+
+
+
     public function aboutUs()
     {
         return view('frontEnd.layouts.pages.about');
@@ -401,6 +409,7 @@ class FrontendController extends Controller
         $areas = District::where(['district' => $request->id])->pluck('name', 'id');
         return response()->json($areas);
     }
+
     public function campaign($slug, Request $request)
     {
 

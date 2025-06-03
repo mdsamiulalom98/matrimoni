@@ -185,7 +185,7 @@
                                 <div class="form-group">
                                     <label for="status" class="d-block">Status</label>
                                     <label class="switch">
-                                        <input type="checkbox" value="1" name="status" checked />
+                                        <input type="checkbox" value="1" name="status" {{ $edit_data->status == 1 ? 'checked' : '' }} />
                                         <span class="slider round"></span>
                                     </label>
                                     @error('status')
@@ -199,7 +199,7 @@
                                 <div class="form-group">
                                     <label for="popular" class="d-block">Popular</label>
                                     <label class="switch">
-                                        <input type="checkbox" value="1" name="popular" checked />
+                                        <input type="checkbox" value="1" name="popular" {{ $edit_data->popular == 1 ? 'checked' : '' }} />
                                         <span class="slider round"></span>
                                     </label>
                                     @error('popular')
@@ -209,10 +209,21 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <!-- col end -->
-
-
+                            <div class="col-sm-3 mb-3">
+                                <div class="form-group">
+                                    <label for="free" class="d-block">Free Pacakge</label>
+                                    <label class="switch">
+                                        <input type="checkbox" value="1" name="free" {{ $edit_data->free == 1 ? 'checked' : '' }} />
+                                        <span class="slider round"></span>
+                                    </label>
+                                    @error('free')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <!-- col end -->
 
                             <div>

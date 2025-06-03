@@ -8,9 +8,6 @@
             margin-bottom: 10px;
         }
 
-        /*
-                 title	amount	timespan	button_text	popular
-                        */
     </style>
     <link href="{{ asset('public/backEnd') }}/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/backEnd') }}/assets/libs/summernote/summernote-lite.min.css" rel="stylesheet"
@@ -175,6 +172,22 @@
                                         <span class="slider round"></span>
                                     </label>
                                     @error('popular')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- col end -->
+                            <div class="col-sm-3 mb-3">
+                                <div class="form-group">
+                                    <label for="free" class="d-block">Free Pacakge</label>
+                                    <label class="switch">
+                                        <input type="checkbox" value="1" name="free" checked />
+                                        <span class="slider round"></span>
+                                    </label>
+                                    @error('free')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

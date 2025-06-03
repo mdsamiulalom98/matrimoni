@@ -44,6 +44,7 @@
             <li><a href="#"><i class="fa-regular fa-handshake"></i> Appointment</a></li>
             <li><a href="#"><i class="fa-solid fa-people-group"></i> Proposal List</a></li>
             <li><a href="#"><i class="fa-solid fa-gear"></i> Buy Package</a></li>
+            <li><a href="{{route('nidverify.form')}}"><i class="fa-solid fa-gear"></i>Account Verify</a></li>
             <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
         </ul>
     </div>

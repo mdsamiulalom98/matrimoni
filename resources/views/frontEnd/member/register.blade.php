@@ -221,10 +221,55 @@
                         </div>
 
 
+                         <div class="en_bn_lable">
+                            <label class="en_lable">Should you educate your wife after marriage</label>
+                            <label class="bn_lable">(বিয়ের পর বউকে পড়াশোনা  করাবেন কি)</label>
+                        </div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input"  name="edu_permission"
+                                    id="yes" value="yes">
+                                <span class="radio-label">Yes (হ্যাঁ)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input"  name="edu_permission"
+                                    id="no" value="no">
+                                <span class="radio-label">No (না)</span>
+                            </label>
+                        </div>
+
+
+                         <div class="en_bn_lable">
+                            <label class="en_lable">When will you pay the cabin fee?</label>
+                            <label class="bn_lable">(কাবিন এর টাকা কখন পরিশোধ করবেন)</label>
+                        </div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input"  name="cabinfee"
+                                    id="yes" value="yes">
+                                <span class="radio-label">Complete before marriage (বিয়ের আগে সম্পূর্ণ)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input"  name="cabinfee"
+                                    id="no" value="no">
+                                <span class="radio-label">Partial before marriage (বিয়ের আগে আংশিক)</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" class="radio-input"  name="cabinfee"
+                                    id="no" value="no">
+                                <span class="radio-label">Negotiable (আলোচনা সাপেক্ষে)</span>
+                            </label>
+                        </div>
+
+
                         <div class="en_bn_lable">
                             <label class="en_lable">How is your financial situation</label>
                             <label class="bn_lable">(আপনার আর্থিক অবস্থা কেমন)</label>
                         </div>
+
                         <div class="option-group">
                             <label class="radio-option">
                                 <input type="radio" class="radio-input" required name="financial_status"
@@ -243,6 +288,7 @@
                                 <span class="radio-label">Lower middle class (নিম্ন মধ্যবিও)</span>
                             </label>
                         </div>
+
                         <div class="en_bn_lable">
                             <label class="en_lable">Is your income from a halal source</label>
                             <label class="bn_lable">(আপনার আয় কি হালাল উৎস থেকে)</label>
@@ -260,6 +306,7 @@
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
+
                         <div class="en_bn_lable">
                             <label class="en_lable">Are you free from addictions</label>
                             <label class="bn_lable">(আপনি কি নেশা থেকে মুক্ত)</label>
@@ -276,6 +323,7 @@
                                 <span class="radio-label">No (না)</span>
                             </label>
                         </div>
+
                         <div class="en_bn_lable">
                             <label class="en_lable">What are your personality traits</label>
                             <label class="bn_lable">(আপনার চারিত্রিক বৈশিষ্ট্য কেমন)</label>
@@ -297,6 +345,7 @@
                                 <span class="radio-label">Best (উত্তম)</span>
                             </label>
                         </div>
+
                         <div class="en_bn_lable">
                             <label class="en_lable">You may have had a past relationship with someone who is against Islam,
                                 which could have a negative impact on your future marital relationship.</label>

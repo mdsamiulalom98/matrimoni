@@ -30,14 +30,15 @@ use App\Models\Agent;
 use App\Models\MemberQuery;
 use App\Models\PartnerExpectation;
 use App\Models\MemberFamily;
+use App\Models\SmsGateway;
+use App\Models\GeneralSetting;
 use DateTime;
-
 
 class MemberController extends Controller
 {
     function __construct()
     {
-        $this->middleware('member', ['except' => ['register', 'signin', 'query_store']]);
+        $this->middleware('member', ['except' => ['register', 'signin', 'query_store', 'resendcode', 'memberVerifyForm']]);
     }
 
     public function account()
@@ -279,12 +280,32 @@ class MemberController extends Controller
         Session::put('initpassword', $request->password);
         Session::put('phoneverify', $request->phone);
         Session::put('memberId', $memberId);
+        $site_setting = GeneralSetting::where('status', 1)->first();
+        $sms_gateway = SmsGateway::where(['status' => 1])->first();
+        if ($sms_gateway) {
+            $url = "$sms_gateway->url";
+            $data = [
+                "api_key" => "$sms_gateway->api_key",
+                "number" => $request->phone,
+                "type" => 'text',
+                "senderid" => "$sms_gateway->serderid",
+                "message" => "Your account verify OTP is $verifyToken \r\nThank you for using $site_setting->name",
+            ];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response = curl_exec($ch);
+            curl_close($ch);
+        }
 
         // Toastr::success('মোবাইল নাম্বারে কোড (ওটিপি)পাঠানো হয়েছে');
         // return redirect()->route('verify_form');
-        Auth::guard('member')->loginUsingId($memberId);
+        // Auth::guard('member')->loginUsingId($memberId);
         Toastr::success('Your account has been registered');
-        return redirect()->back();
+        return redirect()->route('verify_form');
 
     }
 
@@ -345,10 +366,10 @@ class MemberController extends Controller
     public function forgotsubmit(Request $request)
     {
         $this->validate($request, [
-            'phoneNumber' => 'required',
+            'phone' => 'required',
         ]);
 
-        $verified = Member::where('phoneNumber', $request->phoneNumber)->first();
+        $verified = Member::where('phone', $request->phone)->first();
         if (!$verified) {
             Toastr::error('আপনার ফোন নম্বর আমাদের ডাটাবেসে নেই');
             return redirect()->back();
@@ -360,7 +381,7 @@ class MemberController extends Controller
             $store_verify->passResetToken = $verifyToken;
             $store_verify->save();
 
-            Session::put('phoneverify', $request->phoneNumber);
+            Session::put('phoneverify', $request->phone);
 
             return redirect()->route('member.passresetpage');
         }
@@ -378,7 +399,7 @@ class MemberController extends Controller
             'password' => 'required',
         ]);
 
-        $verified = Member::where('phoneNumber', Session::get('phoneverify'))->first();
+        $verified = Member::where('phone', Session::get('phoneverify'))->first();
         $verifydbtoken = $verified->passResetToken;
         $verifyformtoken = $request->passResetToken;
         if ($verifydbtoken == $verifyformtoken) {
@@ -593,7 +614,7 @@ class MemberController extends Controller
             $update_membereducation = new MemberEducation();
         }
         $update_membereducation->member_id = $memberId;
-        $update_membereducation->is_student_member = $request->is_student_member;
+        $update_membereducation->education_id = $request->education_id;
         $update_membereducation->education_end_id = $request->education_end_id;
         $update_membereducation->ssc_gpa = $request->ssc_gpa;
         $update_membereducation->ssc_passing = $request->ssc_passing;
@@ -645,6 +666,8 @@ class MemberController extends Controller
         } else {
             $update_family = new MemberFamily();
         }
+
+        $update_family = new MemberFamily();
         $update_family->member_id = $memberId;
         $update_family->father_name = $request->father_name;
         $update_family->father_profession = $request->father_profession;
@@ -751,7 +774,7 @@ class MemberController extends Controller
 
     public function memberVerifyForm()
     {
-        $member = Member::where('phoneNumber', Session::get('phoneverify'))->select('phoneNumber', 'id', 'verifyToken')->first();
+        $member = Member::where('phone', Session::get('phoneverify'))->select('phone', 'id', 'verifyToken')->first();
         return view('frontEnd.member.verify', compact('member'));
     }
 
@@ -761,7 +784,7 @@ class MemberController extends Controller
             'verifyPin' => 'required',
         ]);
 
-        $verified = Member::where('phoneNumber', Session::get('phoneverify'))->first();
+        $verified = Member::where('phone', Session::get('phoneverify'))->first();
         $verifydbtoken = $verified->verifyToken;
         $verifyformtoken = $request->verifyPin;
         if ($verifydbtoken == $verifyformtoken) {
@@ -769,7 +792,38 @@ class MemberController extends Controller
             $verified->status = 1;
             $verified->save();
             Toastr::success('আপনার একাউন্ট ভেরিফাই হয়েছে');
-            $credentials = ['phoneNumber' => $verified->phoneNumber, 'password' => Session::get('initpassword')];
+            $credentials = ['phone' => $verified->phone, 'password' => Session::get('initpassword')];
+            if (Auth::guard('member')->attempt($credentials)) {
+                Toastr::error('রেজিস্ট্রেশন ফি প্রদান করুন');
+                return redirect()->route('member.editprofile');
+            }
+        } else {
+            Toastr::error('আপনার ভেরিফিকেশন কোড ভুল হয়েছে।');
+            return redirect()->back();
+        }
+    }
+    
+    public function nid_verify_form()
+    {
+
+        return view('frontEnd.member.nidverify');
+    }
+    
+    public function nid_verify(Request $request)
+    {
+        $this->validate($request, [
+            'verifyPin' => 'required',
+        ]);
+
+        $verified = Member::where('phone', Session::get('phoneverify'))->first();
+        $verifydbtoken = $verified->verifyToken;
+        $verifyformtoken = $request->verifyPin;
+        if ($verifydbtoken == $verifyformtoken) {
+            $verified->verifyToken = 1;
+            $verified->status = 1;
+            $verified->save();
+            Toastr::success('আপনার একাউন্ট ভেরিফাই হয়েছে');
+            $credentials = ['phone' => $verified->phone, 'password' => Session::get('initpassword')];
             if (Auth::guard('member')->attempt($credentials)) {
                 Toastr::error('রেজিস্ট্রেশন ফি প্রদান করুন');
                 return redirect()->route('member.editprofile');
@@ -874,6 +928,41 @@ class MemberController extends Controller
         Toastr::success('Proposal request sent.', 'Success');
         return redirect()->back();
     }
+    
+    public function resendcode(Request $request)
+    {
+        $verifyToken = rand(1111, 9999);
+        $findmember = Member::where('phone', Session::get('phoneverify'))->first();
+        $findmember->verifyToken = $verifyToken;
+        $findmember->save();
+
+        $phoneNumber = Session::get('phoneverify');
+
+        $site_setting = GeneralSetting::where('status', 1)->first();
+        $sms_gateway = SmsGateway::where(['status' => 1])->first();
+        if ($sms_gateway) {
+            $url = "$sms_gateway->url";
+            $data = [
+                "api_key" => "$sms_gateway->api_key",
+                "number" => $request->phone,
+                "type" => 'text',
+                "senderid" => "$sms_gateway->serderid",
+                "message" => "Your account verify OTP is $verifyToken \r\nThank you for using $site_setting->name",
+            ];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response = curl_exec($ch);
+            curl_close($ch);
+        }
+
+        Toastr::error('আপনার ওটিপি টোকেন আবার পাঠানো হয়েছে!');
+        return redirect()->route('verify_form');
+    }
+
 
     public function logout()
     {

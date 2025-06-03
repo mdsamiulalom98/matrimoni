@@ -22,7 +22,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-3">
+                            {{-- <div class="form-group mb-3">
                                 <label for="password"> Password *</label>
                                 <div class="input-group">
                                     <input type="password" id="password"
@@ -37,6 +37,18 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div> --}}
+
+                             <div class="mb-3">
+                                <label for="password" class="form-label">Password *</label>
+                                <div class="input-group">
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="Enter your password" required>
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                        <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                                    </button>
+                                    
+                                </div>
                             </div>
 
                             <div class="d-flex justify-content-between">
@@ -46,7 +58,7 @@
                             </div>
 
                             <div class="form-group text-center">
-                                <button class="submit-btn w-100 mt-3">🚪 Login</button>
+                                <button class="submit-btn w-100 mt-3">Login</button>
                             </div>
                         </form>
 
@@ -67,4 +79,18 @@
 @push('script')
     <script src="{{ asset('public/frontEnd/') }}/js/parsley.min.js"></script>
     <script src="{{ asset('public/frontEnd/') }}/js/form-validation.init.js"></script>
+
+    <script>
+        const toggleBtn = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eyeIcon");
+
+        toggleBtn.addEventListener("click", function() {
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+            eyeIcon.classList.toggle("fa-eye");
+            eyeIcon.classList.toggle("fa-eye-slash");
+        });
+    </script>
+   
 @endpush
