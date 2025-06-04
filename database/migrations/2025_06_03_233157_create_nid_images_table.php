@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('packages', function (Blueprint $table) {
+        Schema::create('nid_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('value');
-            $table->string('features');
+            $table->string('member_id');
+            $table->string('nid_image');
             $table->tinyInteger('status');
             $table->timestamps();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('nid_images');
     }
 };

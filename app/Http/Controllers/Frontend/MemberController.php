@@ -374,7 +374,6 @@ class MemberController extends Controller
             return redirect()->back();
         } else {
             $verifyToken = rand(1111, 9999);
-            // member id put
 
             $store_verify = Member::where('id', $verified->id)->first();
             $store_verify->passResetToken = $verifyToken;
@@ -822,13 +821,13 @@ class MemberController extends Controller
             return redirect()->back();
         }
     }
-
+    
     public function nid_verify_form()
     {
 
         return view('frontEnd.member.nidverify');
     }
-
+    
     public function nid_verify(Request $request)
     {
         $this->validate($request, [
@@ -836,21 +835,24 @@ class MemberController extends Controller
         ]);
 
         $verified = Member::where('phone', Session::get('phoneverify'))->first();
-        $verifydbtoken = $verified->verifyToken;
-        $verifyformtoken = $request->verifyPin;
-        if ($verifydbtoken == $verifyformtoken) {
-            $verified->verifyToken = 1;
-            $verified->status = 1;
-            $verified->save();
-            Toastr::success('আপনার একাউন্ট ভেরিফাই হয়েছে');
-            $credentials = ['phone' => $verified->phone, 'password' => Session::get('initpassword')];
-            if (Auth::guard('member')->attempt($credentials)) {
-                Toastr::error('রেজিস্ট্রেশন ফি প্রদান করুন');
-                return redirect()->route('member.editprofile');
-            }
-        } else {
-            Toastr::error('আপনার ভেরিফিকেশন কোড ভুল হয়েছে।');
-            return redirect()->back();
+        $image = $request->file('nid_image');
+        if ($image) {
+            $name = time() . '-' . $image->getClientOriginalName();
+            $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+            $name = strtolower(preg_replace('/\s+/', '-', $name));
+            $uploadpath = 'public/uploads/member/';
+            $imageUrl = $uploadpath . $name;
+            $img = Image::make($image->getRealPath());
+            $img->encode('webp', 90);
+            $width = 300;
+            $height = 300;
+
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img->resizeCanvas($width, $height, 'center', false, '#ffffff');
+            $img->save($imageUrl);
         }
     }
 
@@ -948,7 +950,7 @@ class MemberController extends Controller
         Toastr::success('Proposal request sent.', 'Success');
         return redirect()->back();
     }
-
+    
     public function resendcode(Request $request)
     {
         $verifyToken = rand(1111, 9999);
